@@ -1,0 +1,35 @@
+/* button {
+	background-color: #ed1c24;
+} */
+
+.filter-button {
+	display: inline-block;
+	border: none;
+	border-radius: 5px;
+	padding: 0.5rem 2rem;
+	margin: 0 0.25rem;
+	text-decoration: none;
+	background: #ed1c24;
+	color: #ffffff;
+	font-family: inherit;
+	font-size: 1rem;
+	cursor: pointer;
+	text-align: center;
+	transition: background 250ms ease-in-out, transform 150ms ease;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+
+.filter-button:hover,
+.filter-button:focus {
+	background: #bf161c;
+}
+
+.filter-button:focus {
+	outline: 1px solid #fff;
+	outline-offset: -4px;
+}
+
+.filter-button:active {
+	transform: scale(0.99);
+}

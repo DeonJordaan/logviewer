@@ -1,0 +1,51 @@
+.arrow-button {
+	width: 80px;
+	height: 30px;
+	display: inline-block;
+	border: none;
+	outline: slategrey solid 1px;
+	border-radius: 3px;
+	padding: 0.5rem 2rem;
+	margin: 0 0.25rem;
+	text-decoration: none;
+	cursor: pointer;
+	text-align: center;
+	transition: background 250ms ease-in-out, transform 150ms ease;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+
+.arrow-button:hover,
+.arrow-button:focus {
+	background-color: #d1cfcf;
+}
+
+.arrow-button:focus {
+	outline: 1px solid #fff;
+	outline-offset: -4px;
+}
+
+.arrow-button:active {
+	transform: scale(0.99);
+}
+
+.left-arrow {
+	background: url('../svg/leftArrow.svg') left top no-repeat;
+	background-size: 80px 30px;
+	background-color: #ededed;
+}
+.right-arrow {
+	background: url('../svg/rightArrow.svg');
+	background-size: 80px 30px;
+	background-color: #ededed;
+}
+.double-left-arrow {
+	background: url('../svg/dblLeftArrow.svg');
+	background-size: 80px 30px;
+	background-color: #ededed;
+}
+.double-right-arrow {
+	background: url('../svg/dblRightArrow.svg');
+	background-size: 80px 30px;
+	background-color: #ededed;
+}

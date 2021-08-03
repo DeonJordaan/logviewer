@@ -1,0 +1,13 @@
+.search-wrapper {
+	display: flex;
+	flex-direction: row;
+}
+
+.search-input {
+	display: flex;
+	flex-direction: row;
+}
+
+label {
+	padding: 0 0.25rem 0 1rem;
+}

@@ -1,0 +1,82 @@
+.push-button {
+	position: relative;
+	border: none;
+	background: transparent;
+	margin: 0 2rem;
+	padding: 0;
+	cursor: pointer;
+	outline-offset: 4px;
+	transition: filter 250ms;
+	/* //FIXME */
+	-webkit-tap-highlight-color: transparent;
+	user-select: none;
+}
+
+.shadow {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 7.5px;
+	background: hsla(0, 0%, 0%, 0.25);
+	will-change: transform;
+	transform: translateY(2px);
+	transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+
+.edge {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 7.5px;
+	background: linear-gradient(
+		to left,
+		hsl(220, 2%, 30%) 0%,
+		hsl(223, 3%, 57%) 8%,
+		hsl(223, 3%, 57%) 92%,
+		hsl(220, 2%, 30%) 100%
+	);
+}
+
+.front {
+	display: block;
+	position: relative;
+	padding: 5px 60px;
+	border-radius: 7.5px;
+	font-size: 1rem;
+	color: black;
+	/* background: hsl(220, 1%, 45%); */
+	background: #87cde1;
+	will-change: transform;
+	transform: translateY(-4px);
+	transition: transform 600ms cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+
+.push-button:hover {
+	filter: brightness(105%);
+}
+
+.push-button:hover .front {
+	transform: translateY(-5px);
+	transition: treansform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.25);
+}
+
+.push-button:hover .shadow {
+	transform: translateY(3px);
+	transition: treansform 250ms cubic-bezier(0.3, 0.7, 0.4, 1.25);
+}
+.push-button:active .front {
+	transform: translateY(-2px);
+	transition: transform 34ms;
+}
+.push-button:active .shadow {
+	transform: translateY(1px);
+	transition: transform 34ms;
+}
+
+.push-button:focus:not(:focus-visible) {
+	outline: none;
+}

@@ -1,0 +1,13 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+	margin: 0.25rem 10rem 0.5rem 10rem;
+}
+
+.logo {
+	object-fit: contain;
+}
+
+p {
+	font-size: 1.6rem;
+}
