@@ -9,7 +9,7 @@ const PushButton = () => {
 		>
 			<span class="shadow"></span>
 			<span class="edge"></span>
-			<span class="front">Git some data!</span>
+			<span class="front">Git Some Data!</span>
 		</button>
 	);
 };

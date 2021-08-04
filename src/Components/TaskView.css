@@ -1,0 +1,9 @@
+.task-view {
+	list-style: none;
+	background-color: #ededed;
+	padding: 0.25rem 10rem;
+	margin: 0.25rem 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
