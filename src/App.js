@@ -54,7 +54,7 @@ const TASK_DATA = [
 function App() {
 	const [tasks, setTasks] = useState(TASK_DATA);
 
-	const addTaskHandler = (task) => {
+	const getTaskHandler = (task) => {
 		setTasks((prevTasks) => {
 			return [task, ...prevTasks];
 		});
@@ -65,7 +65,7 @@ function App() {
 			<Header />
 			<FilterMenuBar />
 			<SearchBar />
-			<ButtonBar onGetData={addTaskHandler} />
+			<ButtonBar onGetData={getTaskHandler} />
 			<TaskView taskItems={tasks} />
 		</div>
 	);

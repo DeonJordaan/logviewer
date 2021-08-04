@@ -6,7 +6,7 @@ const TaskView = (props) => {
 	return (
 		<ul className="task-view">
 			{props.taskItems.map((task) => (
-				<TaskViewItem taskItem={props.taskItems} />
+				<TaskViewItem taskItem={props.taskItems.taskData} />
 			))}
 		</ul>
 	);

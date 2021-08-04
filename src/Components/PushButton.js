@@ -5,11 +5,11 @@ const PushButton = () => {
 		<button
 			id="submitbutton"
 			type="button"
-			class="btn push-button" //background-scale <removed class, not sure what it does
+			className="btn push-button" //background-scale <removed class, not sure what it does
 		>
-			<span class="shadow"></span>
-			<span class="edge"></span>
-			<span class="front">Git Some Data!</span>
+			<span className="shadow"></span>
+			<span className="edge"></span>
+			<span className="front">Git Some Data!</span>
 		</button>
 	);
 };
