@@ -6,14 +6,16 @@ const TaskView = (props) => {
 	return (
 		<ul className="task-view">
 			{props.taskItems.map((task) => (
-				<TaskViewItem taskItem={props.taskItems.taskData} />
+				<TaskViewItem
+					id={task.id}
+					app={task.App}
+					taskCode={task.taskCode}
+					startTime={task.startTime}
+					endTime={task.endTime}
+				/>
 			))}
 		</ul>
 	);
-
-	// <ul className="task-view">{props.taskItems}</ul>;
 };
 
 export default TaskView;
-
-// props.taskItem.map((task) => task.taskData);

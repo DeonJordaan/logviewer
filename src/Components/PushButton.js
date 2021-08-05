@@ -1,8 +1,9 @@
 import './PushButton.css';
 
-const PushButton = () => {
+const PushButton = (props) => {
 	return (
 		<button
+			onClick={props.onClick}
 			id="submitbutton"
 			type="button"
 			className="btn push-button" //background-scale <removed class, not sure what it does
