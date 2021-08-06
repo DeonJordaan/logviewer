@@ -1,7 +1,7 @@
 .searchbar {
 	background-color: #ededed;
 	margin: 0.5rem 10rem 0.5rem 10rem;
-	padding: 1rem 10rem;
+	padding: 1rem 10vw;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;

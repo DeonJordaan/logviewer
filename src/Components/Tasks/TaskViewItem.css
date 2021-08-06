@@ -1,0 +1,32 @@
+.task-item {
+	font-size: 0.9rem;
+	display: flex;
+	justify-content: left;
+	margin: 0.25rem 0 0.25rem 0;
+	padding: 0.25rem 0 0.25rem 0;
+	background-color: #ededed;
+}
+
+.task {
+	/* min-width: 13vw; */
+	/* border: 0.25px solid black; */
+}
+
+.id {
+	min-width: 5vw;
+}
+.app {
+	min-width: 16vw;
+}
+.code {
+	min-width: 16vw;
+}
+.start-time {
+	min-width: 16vw;
+}
+.end-time {
+	min-width: 16vw;
+}
+.sub-events {
+	min-width: 5vw;
+}

@@ -6,7 +6,7 @@ const PushButton = (props) => {
 			onClick={props.onClick}
 			id="submitbutton"
 			type="button"
-			className="btn push-button" //background-scale <removed class, not sure what it does
+			className="btn push-button"
 		>
 			<span className="shadow"></span>
 			<span className="edge"></span>

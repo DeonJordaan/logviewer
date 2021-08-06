@@ -12,6 +12,7 @@ const TaskView = (props) => {
 					taskCode={task.taskCode}
 					startTime={task.startTime}
 					endTime={task.endTime}
+					subEvents={task.subEvents}
 				/>
 			))}
 		</ul>

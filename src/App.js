@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 
 import './App.css';
 
-import Header from './Components/Header';
-import FilterMenuBar from './Components/FilterMenuBar';
-import SearchBar from './Components/SearchBar';
-import ButtonBar from './Components/ButtonBar';
-import TaskView from './Components/TaskView';
+import Header from './Components/UI/Header';
+import FilterMenuBar from './Components/Filter/FilterMenuBar';
+import SearchBar from './Components/SearchBar/SearchBar';
+import ButtonBar from './Components/ButtonBar/ButtonBar';
+import TaskView from './Components/Tasks/TaskView';
 
 function App() {
 	const [tasks, setTasks] = useState([]);
@@ -27,6 +27,7 @@ function App() {
 				taskCode: taskData.Code,
 				startTime: taskData.Started,
 				endTime: taskData.Completed,
+				subEvents: taskData.SubEventCount,
 			};
 		});
 
@@ -40,8 +41,8 @@ function App() {
 			<Header />
 			<FilterMenuBar />
 			<SearchBar />
-			<ButtonBar onGetData={gitSomeData} />
 			<TaskView taskItems={tasks} />
+			<ButtonBar onGetData={gitSomeData} />
 		</div>
 	);
 }
