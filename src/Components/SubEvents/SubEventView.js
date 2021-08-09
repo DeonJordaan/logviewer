@@ -1,13 +1,13 @@
-import './TaskView.css';
+import './SubEventView.css';
 
-import TaskViewItem from './TaskViewItem';
-import TaskViewHeader from './TaskViewHeader';
+import TaskViewItem from '../Tasks/TaskViewItem';
+import TaskViewHeader from '../Tasks/TaskViewHeader';
 
-const TaskView = (props) => {
+const SubEventView = (props) => {
 	return (
 		<ul className="task-view">
 			<TaskViewHeader headers={props.taskItems} />
-			{props.taskItems.map((task) => (
+			{props.subEventItems.map((task) => (
 				<TaskViewItem
 					host={task.host}
 					id={task.id}
@@ -22,4 +22,4 @@ const TaskView = (props) => {
 	);
 };
 
-export default TaskView;
+export default SubEventView;

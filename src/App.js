@@ -7,13 +7,47 @@ import FilterMenuBar from './Components/Filter/FilterMenuBar';
 import SearchBar from './Components/SearchBar/SearchBar';
 import ButtonBar from './Components/ButtonBar/ButtonBar';
 import TaskView from './Components/Tasks/TaskView';
+import SubEventView from './Components/SubEvents/SubEventView';
 
 function App() {
 	const [tasks, setTasks] = useState([]);
 
-	async function gitSomeData() {
+	async function getEventData() {
 		const response = await fetch(
 			'http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=1&pageSize=10&hostname='
+		);
+
+		const data = await response.json();
+
+		const { Data: allData, TotalRecordCount: recordCount } = data;
+
+		const allTasks = allData.map((taskData) => {
+			return {
+				id: taskData.Id,
+				App: taskData.AppName,
+				taskCode: taskData.Code,
+				startTime: taskData.Started,
+				endTime: taskData.Completed,
+				subEvents: taskData.SubEventCount,
+				host: taskData.Host,
+				message: taskData.Message,
+				status: taskData.Status,
+			};
+		});
+
+		setTasks(allTasks);
+		// console.log(data); // CHECK DATA
+		console.log(allData); // CHECK DATA
+		console.log(allTasks);
+		// console.log(tasks);
+		console.log(recordCount); // CHECK DATA
+	}
+
+	const [subEvents, setSubEvents] = useState([]);
+
+	async function getSubEventData() {
+		const response = await fetch(
+			'http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=15000'
 		);
 
 		const data = await response.json();
@@ -28,12 +62,12 @@ function App() {
 				startTime: taskData.Started,
 				endTime: taskData.Completed,
 				subEvents: taskData.SubEventCount,
+				host: taskData.Host,
+				message: taskData.Message,
+				status: taskData.Status,
 			};
 		});
-
-		setTasks(allTasks);
-		console.log(data); // CHECK DATA
-		console.log(allData); // CHECK DATA
+		setSubEvents(allTasks);
 	}
 
 	return (
@@ -41,8 +75,9 @@ function App() {
 			<Header />
 			<FilterMenuBar />
 			<SearchBar />
-			<TaskView taskItems={tasks} />
-			<ButtonBar onGetData={gitSomeData} />
+			<ButtonBar onGetData={getEventData} />
+			<TaskView taskItems={tasks} onGetSubEvents={getSubEventData} />
+			<SubEventView subEventItems={subEvents} />
 		</div>
 	);
 }

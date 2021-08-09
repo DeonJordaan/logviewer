@@ -7,11 +7,9 @@
 	background-color: #ededed;
 }
 
-.task {
-	/* min-width: 13vw; */
-	/* border: 0.25px solid black; */
+.host {
+	min-width: 5vw;
 }
-
 .id {
 	min-width: 5vw;
 }
