@@ -11,6 +11,7 @@ const TaskViewItem = (props) => {
 			<div className="task start-time">{props.startTime}</div>
 			<div className="task end-time">{props.endTime}</div>
 			<div className="task sub-events">{props.subEvents}</div>
+			<div className="task message">{props.message}</div>
 		</li>
 	);
 };

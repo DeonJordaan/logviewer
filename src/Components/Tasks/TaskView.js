@@ -12,10 +12,11 @@ const TaskView = (props) => {
 					host={task.host}
 					id={task.id}
 					app={task.App}
+					subEvents={task.subEvents}
 					taskCode={task.taskCode}
 					startTime={task.startTime}
 					endTime={task.endTime}
-					subEvents={task.subEvents}
+					message={task.message}
 				/>
 			))}
 		</ul>

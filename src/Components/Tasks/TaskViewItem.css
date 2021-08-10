@@ -28,3 +28,7 @@
 .sub-events {
 	min-width: 5vw;
 }
+
+.message {
+	min-width: none;
+}

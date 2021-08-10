@@ -4,7 +4,7 @@ import './TaskViewHeader.css';
 
 const TaskViewHeader = () => {
 	return (
-		<div>
+		<div className="task-header">
 			<div>'host'</div>
 			<div>'id'</div>
 			<div>'app'</div>
