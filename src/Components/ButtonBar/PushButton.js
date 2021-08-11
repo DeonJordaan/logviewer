@@ -10,7 +10,7 @@ const PushButton = (props) => {
 		>
 			<span className="shadow"></span>
 			<span className="edge"></span>
-			<span className="front">Git Some Data!</span>
+			<span className="front">Fetch Data!</span>
 		</button>
 	);
 };

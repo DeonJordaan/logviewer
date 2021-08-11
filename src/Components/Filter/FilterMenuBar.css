@@ -1,7 +1,6 @@
 .filter-menu-bar {
-	background-color: #ededed;
-	padding: 1rem 10rem;
+	padding: 0.5rem 0;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: center;
 }

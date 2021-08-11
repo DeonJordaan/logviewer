@@ -1,12 +1,12 @@
 import './SubEventView.css';
 
 import TaskViewItem from '../Tasks/TaskViewItem';
-import TaskViewHeader from '../Tasks/TaskViewHeader';
+import SubEventViewHeader from './SubEventViewHeader';
 
 const SubEventView = (props) => {
 	return (
 		<ul className="task-view">
-			<TaskViewHeader headers={props.taskItems} />
+			<SubEventViewHeader headers={props.taskItems} />
 			{props.subEventItems.map((task) => (
 				<TaskViewItem
 					host={task.host}

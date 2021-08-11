@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 import './App.css';
 
 import Header from './Components/UI/Header';
-import FilterMenuBar from './Components/Filter/FilterMenuBar';
-import SearchBar from './Components/SearchBar/SearchBar';
+// import Card from './Components/UI/Card';
+import FilterBoard from './Components/Filter/FilterBoard';
+// import FilterMenuBar from './Components/Filter/FilterMenuBar';
+// import SearchBar from './Components/SearchBar/SearchBar';
 import ButtonBar from './Components/ButtonBar/ButtonBar';
 import TaskView from './Components/Tasks/TaskView';
 import SubEventView from './Components/SubEvents/SubEventView';
@@ -73,11 +75,17 @@ function App() {
 	return (
 		<div className="App">
 			<Header />
-			<FilterMenuBar />
-			<SearchBar />
-			<ButtonBar onGetData={getEventData} />
-			<TaskView taskItems={tasks} onGetSubEvents={getSubEventData} />
-			<SubEventView subEventItems={subEvents} />
+			<div className="display">
+				<FilterBoard onGetData={getEventData} />
+				<div>
+					<TaskView
+						taskItems={tasks}
+						onGetSubEvents={getSubEventData}
+					/>
+					<ButtonBar />
+					<SubEventView subEventItems={subEvents} />
+				</div>
+			</div>
 		</div>
 	);
 }

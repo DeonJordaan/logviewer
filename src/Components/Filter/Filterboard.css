@@ -1,0 +1,6 @@
+.filter-board {
+	background-color: #ededed;
+	border: 0.1rem solid lightgray;
+	border-radius: 3px;
+	max-width: 15vw;
+}

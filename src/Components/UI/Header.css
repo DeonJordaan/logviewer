@@ -1,7 +1,7 @@
 .header {
 	display: flex;
 	justify-content: space-between;
-	margin: 0.25rem 10vw 0.5rem 10vw;
+	margin: 0.25rem 5vw 0.5rem 2vw;
 }
 
 .logo {

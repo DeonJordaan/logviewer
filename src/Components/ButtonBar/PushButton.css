@@ -5,10 +5,10 @@
 .push-button {
 	position: relative;
 	border: none;
-	min-width: 320px;
+	/* min-width: 320px; */
 	/* min-height: 40px; */
 	background: transparent;
-	margin: 0 0.5rem;
+	margin: 1rem 0.5rem;
 	padding: 0;
 	cursor: pointer;
 	outline-offset: 4px;

@@ -5,13 +5,14 @@ import './TaskViewHeader.css';
 const TaskViewHeader = () => {
 	return (
 		<div className="task-header">
-			<div>'host'</div>
-			<div>'id'</div>
-			<div>'app'</div>
-			<div>'taskCode'</div>
-			<div>'startTime'</div>
-			<div>'endTime'</div>
-			<div>'subEvents'</div>
+			<div>Host</div>
+			{/* <div>Task ID</div> */}
+			<div>Application</div>
+			<div>Task Code</div>
+			<div>Started</div>
+			<div>Completed</div>
+			<div>Sub-Events</div>
+			<div>Message</div>
 		</div>
 	);
 };

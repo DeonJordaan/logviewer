@@ -1,13 +1,18 @@
 .search-wrapper {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
+	margin: 0.5rem 0;
 }
 
 .search-input {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
+	margin: 0 0.25rem;
 }
 
-label {
-	padding: 0 0.25rem 0 1rem;
+.search-input label {
+	margin: 0.25rem 0.25rem;
 }
+/*  {
+	padding: 0 0.25rem 0 1rem;
+} */
