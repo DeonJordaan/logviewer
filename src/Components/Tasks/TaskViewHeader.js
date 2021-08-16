@@ -12,6 +12,7 @@ const TaskViewHeader = () => {
 			<div>Started</div>
 			<div>Completed</div>
 			<div>Sub-Events</div>
+			<div>Event ID</div>
 			<div>Message</div>
 		</div>
 	);

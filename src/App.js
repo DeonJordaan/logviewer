@@ -3,16 +3,15 @@ import React, { useState } from 'react';
 import './App.css';
 
 import Header from './Components/UI/Header';
-// import Card from './Components/UI/Card';
 import FilterBoard from './Components/Filter/FilterBoard';
-// import FilterMenuBar from './Components/Filter/FilterMenuBar';
-// import SearchBar from './Components/SearchBar/SearchBar';
 import ButtonBar from './Components/ButtonBar/ButtonBar';
 import TaskView from './Components/Tasks/TaskView';
 import SubEventView from './Components/SubEvents/SubEventView';
 
 function App() {
 	const [tasks, setTasks] = useState([]);
+
+	const [totalRecordCount, setTotalRecordCount] = useState([]);
 
 	async function getEventData() {
 		const response = await fetch(
@@ -21,6 +20,9 @@ function App() {
 
 		const data = await response.json();
 
+		// totalRecordCount = data.TotalRecordCount;
+
+		// const { Data: allData } = data;
 		const { Data: allData, TotalRecordCount: recordCount } = data;
 
 		const allTasks = allData.map((taskData) => {
@@ -37,19 +39,26 @@ function App() {
 			};
 		});
 
+		// let recordCount = totalRecordCount
+
 		setTasks(allTasks);
-		// console.log(data); // CHECK DATA
-		console.log(allData); // CHECK DATA
-		console.log(allTasks);
-		// console.log(tasks);
-		console.log(recordCount); // CHECK DATA
+		setTotalRecordCount(recordCount);
+
+		console.log(data);
+		console.log(recordCount);
+		console.log(totalRecordCount);
+		// console.log(allTasks);
+		// console.log(recordCount);
 	}
 
 	const [subEvents, setSubEvents] = useState([]);
 
-	async function getSubEventData() {
+	async function getSubEventData(e) {
+		const parentId = e.target.nextElementSibling.innerText; //FIXME: I really don't like this solution of fetching the id from the sibling. How can I extract it from the data received?
+		console.log(typeof parentId);
+
 		const response = await fetch(
-			'http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=15000'
+			`http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=${parentId}`
 		);
 
 		const data = await response.json();
@@ -76,7 +85,10 @@ function App() {
 		<div className="App">
 			<Header />
 			<div className="display">
-				<FilterBoard onGetData={getEventData} />
+				<FilterBoard
+					onGetData={getEventData}
+					totalRecords={totalRecordCount}
+				/>
 				<div>
 					<TaskView
 						taskItems={tasks}
@@ -91,70 +103,3 @@ function App() {
 }
 
 export default App;
-
-// NOTE Default task data as Array
-// const tasks = [
-// 	'WRSSyncMaster.AgentIQ WRSSynchroniser started: 2021-7-14 15:47:53.0 completed: 2021-7-14 15:48:0.0 Starting WRS Synchroniser Sub Events: 11',
-
-// 	'WRSSyncMaster.PropIQ WRSSynchroniser started: 2021-7-14 15:48:0.0 completed: 2021-7-14 15:48:1.0 Starting WRS Synchroniser Sub Events: 3',
-
-// 	'WRSSyncMaster.AgentIQ WRSSynchroniser started: 2021-7-14 15:52:38.0 completed: 2021-7-14 15:52:41.0 Starting WRS Synchroniser Sub Events: 9',
-
-// 	'WRSSyncMaster.PropIQ WRSSynchroniser started: 2021-7-14 15:52:42.0 completed: 2021-7-14 15:52:43.0 Starting WRS Synchroniser Sub Events: 3',
-
-// 	'WRSSyncMaster.SACompany WRSSynchroniser started: 2021-7-14 15:52:43.0 completed: 2021-7-14 15:55:16.0 Starting WRS Synchroniser Sub Events: 50',
-
-// 	'WRSSyncMaster.SACompany WRSSynchroniser started: 2021-7-14 15:55:17.0 completed: 2021-7-14 15:55:17.0 Starting WRS Synchroniser Sub Events: 3',
-
-// 	'WRSSyncMaster.MetroIQ WRSSynchroniser started: 2021-7-14 15:55:18.0 completed: 2021-7-14 15:55:18.0 Starting WRS Synchroniser Sub Events: 3',
-
-// 	'WRSSyncMaster.AgentIQ WRSSynchroniser started: 2021-7-14 15:57:41.0 completed: 2021-7-14 15:57:43.0 Starting WRS Synchroniser Sub Events: 3',
-
-// 	'WRSSyncMaster.PropIQ WRSSynchroniser started: 2021-7-14 15:57:43.0 completed: 2021-7-14 15:57:44.0 Starting WRS Synchroniser Sub Events: 3',
-
-// 	'WRSSyncMaster.SACompany WRSSynchroniser started: 2021-7-14 15:57:44.0 completed: 2021-7-14 15:58:47.0 Starting WRS Synchroniser Sub Events: 11',
-// ];
-
-// NOTE Default task data as Object
-// const TASK_DATA = [
-// 	{
-// 		taskData:
-// 			'WRSSyncMaster.AgentIQ WRSSynchroniser started: 2021-7-14 15:47:53.0 completed: 2021-7-14 15:48:0.0 Starting WRS Synchroniser Sub Events: 11',
-// 	},
-// 	{
-// 		taskData:
-// 			'WRSSyncMaster.PropIQ WRSSynchroniser started: 2021-7-14 15:48:0.0 completed: 2021-7-14 15:48:1.0 Starting WRS Synchroniser Sub Events: 3',
-// 	},
-// 	{
-// 		taskData:
-// 			'WRSSyncMaster.AgentIQ WRSSynchroniser started: 2021-7-14 15:52:38.0 completed: 2021-7-14 15:52:41.0 Starting WRS Synchroniser Sub Events: 9',
-// 	},
-// 	{
-// 		taskData:
-// 			'WRSSyncMaster.PropIQ WRSSynchroniser started: 2021-7-14 15:52:42.0 completed: 2021-7-14 15:52:43.0 Starting WRS Synchroniser Sub Events: 3',
-// 	},
-// 	{
-// 		taskData:
-// 			'WRSSyncMaster.SACompany WRSSynchroniser started: 2021-7-14 15:52:43.0 completed: 2021-7-14 15:55:16.0 Starting WRS Synchroniser Sub Events: 50',
-// 	},
-// 	{
-// 		taskData:
-// 			'WRSSyncMaster.SACompany WRSSynchroniser started: 2021-7-14 15:55:17.0 completed: 2021-7-14 15:55:17.0 Starting WRS Synchroniser Sub Events: 3',
-// 	},
-// 	{
-// 		taskData:
-// 			'WRSSyncMaster.MetroIQ WRSSynchroniser started: 2021-7-14 15:55:18.0 completed: 2021-7-14 15:55:18.0 Starting WRS Synchroniser Sub Events: 3',
-// 	},
-// 	{
-// 		taskData:
-// 			'WRSSyncMaster.AgentIQ WRSSynchroniser started: 2021-7-14 15:57:41.0 completed: 2021-7-14 15:57:43.0 Starting WRS Synchroniser Sub Events: 3',
-// 	},
-// 	{
-// 		taskData:
-// 			'WRSSyncMaster.PropIQ WRSSynchroniser started: 2021-7-14 15:57:43.0 completed: 2021-7-14 15:57:44.0 Starting WRS Synchroniser Sub Events: 3',
-// 	},
-// 	{
-// 		taskData:
-// 			'WRSSyncMaster.SACompany WRSSynchroniser started: 2021-7-14 15:57:44.0 completed: 2021-7-14 15:58:47.0 Starting WRS Synchroniser Sub Events: 11',
-// 	},
-// ];

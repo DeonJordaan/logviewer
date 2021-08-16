@@ -1,0 +1,57 @@
+/* .expand-subevent button {
+	background-color: rgb(43, 186, 43);
+	width: 4rem;
+	border-radius: 5px;
+} */
+
+.sub-events {
+	display: inline-block;
+	border: none;
+	/* padding: 1rem 2rem; */
+	margin: 0;
+	width: 4rem;
+	border-radius: 5px;
+	text-decoration: none;
+	background: rgb(43, 186, 43);
+	color: #ffffff;
+	font-family: inherit;
+	font-size: 0.9rem;
+	cursor: pointer;
+	text-align: center;
+	transition: background 250ms ease-in-out, transform 150ms ease;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+
+.sub-events:hover,
+.sub-events:focus {
+	background: #009ddb;
+}
+
+.sub-events:focus {
+	outline: 1px solid #fff;
+	outline-offset: -4px;
+}
+
+.sub-events:active {
+	transform: scale(0.99);
+}
+
+.no-sub-events {
+	display: inline-block;
+	border: none;
+	/* padding: 1rem 2rem; */
+	margin: 0;
+	width: 4rem;
+	border-radius: 5px;
+	text-decoration: none;
+	background: #ffffff;
+	color: black;
+	font-family: inherit;
+	font-size: 0.9rem;
+	/* cursor: pointer; */
+	text-align: center;
+	/* transition: background 250ms ease-in-out, transform 150ms ease; */
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
