@@ -1,4 +1,5 @@
 import ExpandSubEvents from '../SubEvents/ExpandSubEvents';
+import TaskTime from './TaskTime';
 import './TaskViewItem.css';
 
 const TaskViewItem = (props) => {
@@ -9,7 +10,8 @@ const TaskViewItem = (props) => {
 			{/* <div className="task id">{props.id}</div> */}
 			<div className="app">{props.app}</div>
 			<div className="code">{props.taskCode}</div>
-			<div className="start-time">{props.startTime}</div>
+			<TaskTime time={props.startTime} />
+			{/* <div className="start-time">{props.startTime}</div> */}
 			<div className="end-time">{props.endTime}</div>
 			<ExpandSubEvents
 				className="sub-events"
