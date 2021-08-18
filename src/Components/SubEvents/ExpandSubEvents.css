@@ -6,11 +6,12 @@
 
 .sub-events {
 	display: inline-block;
-	border: none;
+	/* border: none; */
 	/* padding: 1rem 2rem; */
 	margin: 0;
 	width: 4rem;
 	border-radius: 5px;
+	border: 0.1rem solid lightgray;
 	text-decoration: none;
 	background: rgb(43, 186, 43);
 	color: #ffffff;
@@ -39,7 +40,8 @@
 
 .no-sub-events {
 	display: inline-block;
-	border: none;
+	border: 0.1rem solid lightgray;
+	/* border: none; */
 	/* padding: 1rem 2rem; */
 	margin: 0;
 	width: 4rem;

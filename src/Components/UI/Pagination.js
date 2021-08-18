@@ -1,9 +1,11 @@
+// import React, { useState } from 'react';
+
 import './Pagination.css';
 
-const Pagination = () => {
-	const totalPageCount = 5;
+const Pagination = (props) => {
+	const totalPageCount = Math.ceil(props.totalRecordCount / 10);
 
-	const currentPage = 3;
+	const currentPage = props.pageNumber;
 
 	return (
 		<div className="current-page">

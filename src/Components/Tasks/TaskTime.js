@@ -1,15 +1,11 @@
 const TaskTime = (props) => {
-	// const taskTime = props.time + 'Z';
-
 	const [date, time] = props.time.split('T');
 
-	// const roundedTime = parseInt(time);
-	console.log(Number(time));
+	const roundedTime = time.substring(0, 8);
 
 	return (
 		<div>
-			{date} {time}
-			{/* {taskTime} */}
+			{date} at {roundedTime}
 		</div>
 	);
 };

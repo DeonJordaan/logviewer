@@ -1,6 +1,7 @@
 .task-header {
 	font-size: 1rem;
 	display: grid;
+	/* text-align: start; */
 	/* grid-template-columns: 8rem 3rem 12rem 10rem 10rem 12rem 2rem 18rem; */
 	grid-template-columns: 8rem 12rem 12rem 12rem 12rem 5rem 5rem 18rem;
 	/* grid-template-rows: 1.2rem; */

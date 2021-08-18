@@ -6,7 +6,6 @@ const ExpandSubEvents = (props) => {
 	if (props.subEvents === 0) {
 		classes = 'no-sub-events';
 	}
-	// console.log(classes);
 
 	return <button className={classes}>{props.subEvents}</button>;
 };

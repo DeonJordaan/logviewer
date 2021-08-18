@@ -4,21 +4,19 @@ import './TaskViewItem.css';
 
 const TaskViewItem = (props) => {
 	return (
-		// <li className="task-item" onClick={getSubEvents}>
 		<li className="task-item" onClick={props.getSubEvents}>
 			<div className="task host">{props.host}</div>
 			{/* <div className="task id">{props.id}</div> */}
-			<div className="app">{props.app}</div>
-			<div className="code">{props.taskCode}</div>
-			<TaskTime time={props.startTime} />
-			{/* <div className="start-time">{props.startTime}</div> */}
-			<div className="end-time">{props.endTime}</div>
+			<div className="task app">{props.app}</div>
+			<div className="task code">{props.taskCode}</div>
+			<TaskTime className="task" time={props.startTime} />
+			<TaskTime className="task" time={props.endTime} />
 			<ExpandSubEvents
 				className="sub-events"
 				subEvents={props.subEvents}
 			/>
-			<div className="id">{props.id}</div>
-			<div className="message">{props.message}</div>
+			<div className="task id">{props.id}</div>
+			<div className="task message">{props.message}</div>
 		</li>
 	);
 };
