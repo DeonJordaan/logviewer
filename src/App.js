@@ -4,14 +4,13 @@ import './App.css';
 
 import Header from './Components/UI/Header';
 import FilterBoard from './Components/Filter/FilterBoard';
-// import ButtonBar from './Components/ButtonBar/ButtonBar';
-import PaginationNew from './Components/UI/PaginationNew';
+import Pagination from './Components/UI/Pagination';
 import TaskView from './Components/Tasks/TaskView';
 import SubEventView from './Components/SubEvents/SubEventView';
 
 function App() {
 	useEffect(() => {
-		window.addEventListener('DOMContentLoaded', (event) => {
+		window.addEventListener('load', (event) => {
 			getEventData();
 		});
 	});
@@ -21,12 +20,36 @@ function App() {
 	const [totalRecordCount, setTotalRecordCount] = useState([]);
 
 	const [pageNumber, setPageNumber] = useState(1);
+
 	// let pageNumber = 1;
+
+	const totalPageCount = Math.ceil(totalRecordCount / 10);
+
+	const getNextPage = () => {
+		setPageNumber((page) => page + 1);
+	};
+
+	const getPrevPage = () => {
+		setPageNumber((page) => page - 1);
+	};
+
+	const goToFirstPage = () => {
+		setPageNumber((page) => (page = 1));
+	};
+
+	const goToLastPage = () => {
+		setPageNumber((page) => (page = totalPageCount));
+	};
+
+	useEffect(() => getEventData(), [pageNumber]);
 
 	async function getEventData() {
 		const response = await fetch(
 			`http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=${pageNumber}&pageSize=10&hostname=`
+			// `http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=2&pageSize=10&hostname=`
 		);
+
+		console.log(pageNumber);
 
 		const data = await response.json();
 
@@ -51,11 +74,11 @@ function App() {
 		// console.log(allData);
 	}
 
-	const getNextPage = () => {
-		console.log(pageNumber);
-		setPageNumber((page) => page + 1);
-		getEventData();
-	};
+	// const getNextPage = () => {
+	// console.log(pageNumber);
+	// 	setPageNumber((page) => page + 1);
+	// 	getEventData();
+	// };
 
 	const [subEvents, setSubEvents] = useState([]);
 
@@ -100,12 +123,13 @@ function App() {
 						taskItems={tasks}
 						onGetSubEvents={getSubEventData}
 					/>
-					{/* <ButtonBar */}
-					<PaginationNew
-						getData={getEventData}
+					<Pagination
 						nextPage={getNextPage}
+						prevPage={getPrevPage}
+						firstPage={goToFirstPage}
+						lastPage={goToLastPage}
 						pageNumber={pageNumber}
-						totalRecordCount={totalRecordCount}
+						totalPageCount={totalPageCount}
 					/>
 					<SubEventView subEventItems={subEvents} />
 				</div>
