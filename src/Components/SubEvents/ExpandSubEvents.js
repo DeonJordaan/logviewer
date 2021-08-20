@@ -7,7 +7,11 @@ const ExpandSubEvents = (props) => {
 		classes = 'no-sub-events';
 	}
 
-	return <button className={classes}>{props.subEvents}</button>;
+	return (
+		<button onClick={props.onClick} className={classes}>
+			{props.subEvents}
+		</button>
+	);
 };
 
 export default ExpandSubEvents;

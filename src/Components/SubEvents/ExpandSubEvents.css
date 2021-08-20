@@ -29,14 +29,14 @@
 	background: #009ddb;
 }
 
-.sub-events:focus {
+/* .sub-events:focus {
 	outline: 1px solid #fff;
 	outline-offset: -4px;
-}
+} */
 
-.sub-events:active {
+/* .sub-events:active {
 	transform: scale(0.99);
-}
+} */
 
 .no-sub-events {
 	display: inline-block;

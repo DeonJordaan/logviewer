@@ -6,6 +6,7 @@ import Header from './Components/UI/Header';
 import FilterBoard from './Components/Filter/FilterBoard';
 import Pagination from './Components/UI/Pagination';
 import TaskView from './Components/Tasks/TaskView';
+import HierarchyDisplay from './Components/UI/HierarchyDisplay';
 import SubEventView from './Components/SubEvents/SubEventView';
 
 function App() {
@@ -49,7 +50,7 @@ function App() {
 			// `http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=2&pageSize=10&hostname=`
 		);
 
-		console.log(pageNumber);
+		// console.log(pageNumber);
 
 		const data = await response.json();
 
@@ -83,8 +84,10 @@ function App() {
 	const [subEvents, setSubEvents] = useState([]);
 
 	async function getSubEventData(e) {
-		const parentId = e.target.nextElementSibling.innerText; //FIXME: I really don't like this solution of fetching the id from the sibling. How can I extract it from the data received?
-		console.log(typeof parentId);
+		const getParentId = e.target.parentNode.getElementsByClassName('id');
+		const parentId = getParentId.item(0).innerText;
+		console.log(getParentId);
+		console.log(parentId);
 
 		const response = await fetch(
 			`http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=${parentId}`
@@ -119,6 +122,14 @@ function App() {
 					totalRecords={totalRecordCount}
 				/>
 				<div>
+					{/* <Pagination
+						nextPage={getNextPage}
+						prevPage={getPrevPage}
+						firstPage={goToFirstPage}
+						lastPage={goToLastPage}
+						pageNumber={pageNumber}
+						totalPageCount={totalPageCount}
+					/> */}
 					<TaskView
 						taskItems={tasks}
 						onGetSubEvents={getSubEventData}
@@ -131,6 +142,7 @@ function App() {
 						pageNumber={pageNumber}
 						totalPageCount={totalPageCount}
 					/>
+					<HierarchyDisplay />
 					<SubEventView subEventItems={subEvents} />
 				</div>
 			</div>
