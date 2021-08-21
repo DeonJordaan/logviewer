@@ -1,43 +1,19 @@
-.task-item {
+.sub-event-item {
 	font-size: 0.8rem;
 	display: grid;
 	/* grid-template-columns: 8rem 3rem 12rem 10rem 10rem 12rem 2rem 18rem; */
-	grid-template-columns: 8rem 12rem 12rem 12rem 12rem 5rem 5rem 18rem;
-	grid-template-rows: 1.2rem;
+	grid-template-columns: 8rem 8rem 12rem 12rem minmax(auto, max-content);
+	/* grid-template-rows: 1.2rem; */
+	grid-template-rows: minmax(1.2rem, auto);
 	gap: 0.5rem;
 	margin: 0.25rem 0 0.25rem 0;
 	padding: 0.25rem 0 0.25rem 0;
 	background-color: #ededed;
 	border: 0.1rem solid lightgray;
 	border-radius: 3px;
+	align-items: center;
 }
 
-.task {
+/* .task {
 	text-align: start;
-}
-
-/* .host {
-	min-width: 5vw;
-}
-.id {
-	min-width: 5vw;
-}
-.app {
-	min-width: 16vw;
-}
-.code {
-	min-width: 16vw;
-}
-.start-time {
-	min-width: 16vw;
-}
-.end-time {
-	min-width: 16vw;
-}
-.sub-events {
-	min-width: 5vw;
-}
-
-.message {
-	min-width: none;
 } */

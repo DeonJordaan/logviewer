@@ -1,15 +1,10 @@
-/* .expand-subevent button {
-	background-color: rgb(43, 186, 43);
-	width: 4rem;
-	border-radius: 5px;
-} */
-
-.sub-events {
+.sub-event-button {
 	display: inline-block;
 	/* border: none; */
 	/* padding: 1rem 2rem; */
 	margin: 0;
-	width: 4rem;
+	width: auto;
+	max-height: 1.2rem;
 	border-radius: 5px;
 	border: 0.1rem solid lightgray;
 	text-decoration: none;
@@ -24,8 +19,8 @@
 	-moz-appearance: none;
 }
 
-.sub-events:hover,
-.sub-events:focus {
+.sub-event-button:hover,
+.sub-event-button:focus {
 	background: #009ddb;
 }
 
@@ -44,7 +39,8 @@
 	/* border: none; */
 	/* padding: 1rem 2rem; */
 	margin: 0;
-	width: 4rem;
+	width: auto;
+	max-height: 1.2rem;
 	border-radius: 5px;
 	text-decoration: none;
 	background: #ffffff;

@@ -1,7 +1,7 @@
-.sub-event-header {
+.sub-event-column-header {
 	font-size: 1rem;
 	display: grid;
-	grid-template-columns: 8rem 3rem 12rem 10rem 10rem 12rem 2rem 18rem;
+	grid-template-columns: 8rem 8rem 12rem 12rem 20rem;
 	/* grid-template-rows: 1.2rem; */
 	gap: 0.5rem;
 	margin: 0.25rem 0 0.25rem 0;
@@ -9,4 +9,5 @@
 	background-color: #ededed;
 	border: 0.1rem solid lightgray;
 	border-radius: 3px;
+	align-items: center;
 }

@@ -1,7 +1,9 @@
 .task-view {
-	flex-direction: column;
-	justify-content: center;
-	list-style: none;
+	/* flex-direction: column; */
+	/* justify-content: center; */
+	/* list-style: none; */
 	margin: 0;
-	padding: 0 0 0 2rem;
+	padding: 0 1.5rem 0 1.5rem;
+	max-width: 85vw;
+	/* width: ; */
 }

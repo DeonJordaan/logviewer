@@ -6,7 +6,7 @@ import Header from './Components/UI/Header';
 import FilterBoard from './Components/Filter/FilterBoard';
 import Pagination from './Components/UI/Pagination';
 import TaskView from './Components/Tasks/TaskView';
-import HierarchyDisplay from './Components/UI/HierarchyDisplay';
+import HierarchyView from './Components/Hierarchy/HierarchyView';
 import SubEventView from './Components/SubEvents/SubEventView';
 
 function App() {
@@ -50,8 +50,6 @@ function App() {
 			// `http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=2&pageSize=10&hostname=`
 		);
 
-		// console.log(pageNumber);
-
 		const data = await response.json();
 
 		const { Data: allData, TotalRecordCount: recordCount } = data;
@@ -72,22 +70,40 @@ function App() {
 
 		setTasks(allTasks);
 		setTotalRecordCount(recordCount);
-		// console.log(allData);
+		console.log(allTasks);
 	}
-
-	// const getNextPage = () => {
-	// console.log(pageNumber);
-	// 	setPageNumber((page) => page + 1);
-	// 	getEventData();
-	// };
 
 	const [subEvents, setSubEvents] = useState([]);
 
+	const [Hierarchy, setHierarchy] = useState({});
+
 	async function getSubEventData(e) {
-		const getParentId = e.target.parentNode.getElementsByClassName('id');
-		const parentId = getParentId.item(0).innerText;
-		console.log(getParentId);
-		console.log(parentId);
+		const parentData = e.target.parentElement.childNodes;
+
+		const parentDataArray = [...parentData];
+
+		let parentDataTextArray = [];
+		for (let item of parentDataArray) {
+			parentDataTextArray.push(item.innerText);
+		}
+
+		console.log(parentDataArray);
+		console.log(parentDataTextArray);
+
+		const parentObject = {
+			host: parentDataTextArray[0],
+			id: parentDataTextArray[6],
+			app: parentDataTextArray[1],
+			subEvents: parentDataTextArray[5],
+			taskCode: parentDataTextArray[2],
+			startTime: parentDataTextArray[3],
+			endTime: parentDataTextArray[4],
+			message: parentDataTextArray[7],
+		};
+
+		setHierarchy(parentObject);
+
+		let parentId = parentObject.id;
 
 		const response = await fetch(
 			`http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=${parentId}`
@@ -100,7 +116,7 @@ function App() {
 		const allTasks = allData.map((taskData) => {
 			return {
 				id: taskData.Id,
-				App: taskData.AppName,
+				app: taskData.AppName,
 				taskCode: taskData.Code,
 				startTime: taskData.Started,
 				endTime: taskData.Completed,
@@ -122,14 +138,6 @@ function App() {
 					totalRecords={totalRecordCount}
 				/>
 				<div>
-					{/* <Pagination
-						nextPage={getNextPage}
-						prevPage={getPrevPage}
-						firstPage={goToFirstPage}
-						lastPage={goToLastPage}
-						pageNumber={pageNumber}
-						totalPageCount={totalPageCount}
-					/> */}
 					<TaskView
 						taskItems={tasks}
 						onGetSubEvents={getSubEventData}
@@ -142,7 +150,7 @@ function App() {
 						pageNumber={pageNumber}
 						totalPageCount={totalPageCount}
 					/>
-					<HierarchyDisplay />
+					<HierarchyView hierarchyData={Hierarchy} />
 					<SubEventView subEventItems={subEvents} />
 				</div>
 			</div>

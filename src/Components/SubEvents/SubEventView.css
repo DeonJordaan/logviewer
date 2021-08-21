@@ -1,0 +1,18 @@
+.sub-event-view {
+	/* flex-direction: column; */
+	justify-content: center;
+	/* list-style: none; */
+	margin: 0 0 3rem 0;
+	padding: 0 1.5rem 0 1.5rem;
+	max-width: 85vw;
+}
+
+.sub-event-header {
+	text-align: start;
+	margin: 2rem 0 0.25rem 0;
+	padding: 0.25rem 0 0.25rem 1.5rem;
+	background-color: #ededed;
+	border: 0.1rem solid lightgray;
+	border-radius: 3px;
+	max-width: 85vw;
+}
