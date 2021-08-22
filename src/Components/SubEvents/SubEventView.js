@@ -10,11 +10,12 @@ const SubEventView = (props) => {
 			<SubEventViewColumnHeader headers={props.taskItems} />
 			{props.subEventItems.map((task) => (
 				<SubEventViewItem
-					status={task.status}
+					status={props.setStatus(task.status)}
 					subEvents={task.subEvents}
 					startTime={task.startTime}
 					endTime={task.endTime}
 					message={task.message}
+					getSubEvents={props.onGetSubEvents}
 				/>
 			))}
 		</ul>

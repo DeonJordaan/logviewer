@@ -22,8 +22,6 @@ function App() {
 
 	const [pageNumber, setPageNumber] = useState(1);
 
-	// let pageNumber = 1;
-
 	const totalPageCount = Math.ceil(totalRecordCount / 10);
 
 	const getNextPage = () => {
@@ -70,7 +68,7 @@ function App() {
 
 		setTasks(allTasks);
 		setTotalRecordCount(recordCount);
-		console.log(allTasks);
+		// console.log(allTasks);
 	}
 
 	const [subEvents, setSubEvents] = useState([]);
@@ -87,31 +85,51 @@ function App() {
 			parentDataTextArray.push(item.innerText);
 		}
 
-		console.log(parentDataArray);
-		console.log(parentDataTextArray);
+		// console.log(parentDataArray);
+		// console.log(parentDataTextArray);
 
+		//FIXME This is shit.
 		const parentObject = {
 			host: parentDataTextArray[0],
-			id: parentDataTextArray[6],
+			id: parentDataTextArray[7],
 			app: parentDataTextArray[1],
-			subEvents: parentDataTextArray[5],
-			taskCode: parentDataTextArray[2],
-			startTime: parentDataTextArray[3],
-			endTime: parentDataTextArray[4],
-			message: parentDataTextArray[7],
+			subEvents: parentDataTextArray[6],
+			taskCode: parentDataTextArray[3],
+			startTime: parentDataTextArray[4],
+			endTime: parentDataTextArray[5],
+			message: parentDataTextArray[8],
+			status: parentDataTextArray[2],
 		};
 
 		setHierarchy(parentObject);
 
 		let parentId = parentObject.id;
 
+		console.log(parentId);
+
+		// if (tasks.includes((task) => task.id === parentId)) {
+		// 	console.log('got it');
+		// }
+
+		const findId = (task) => {
+			//FIXME TRYING TO EXTRACT THE TASK FROM THE 'tasks' STATE VIA ITS ID, A THAT IS A MORE ROBUST WAY OF PROCESSING IT FOR THE HIERARCHY DISPLAY THAN THE METHOD ABOVE
+			if (task.id === parentId) {
+				return task;
+			}
+		};
+
+		const theTask = tasks.filter(findId);
+		console.log(theTask);
+
 		const response = await fetch(
 			`http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=${parentId}`
 		);
 
 		const data = await response.json();
+		// console.log(data);
 
 		const allData = data.Data;
+		// console.log(allData);
 
 		const allTasks = allData.map((taskData) => {
 			return {
@@ -129,6 +147,17 @@ function App() {
 		setSubEvents(allTasks);
 	}
 
+	const setStatusHandler = (statusCode) => {
+		const status = {
+			0: 'NotSet',
+			1: 'Started',
+			2: 'Completed',
+			3: 'Aborted',
+			4: 'Failed',
+		};
+		return status[statusCode];
+	};
+
 	return (
 		<div className="App">
 			<Header />
@@ -141,6 +170,7 @@ function App() {
 					<TaskView
 						taskItems={tasks}
 						onGetSubEvents={getSubEventData}
+						setStatus={setStatusHandler}
 					/>
 					<Pagination
 						nextPage={getNextPage}
@@ -151,7 +181,11 @@ function App() {
 						totalPageCount={totalPageCount}
 					/>
 					<HierarchyView hierarchyData={Hierarchy} />
-					<SubEventView subEventItems={subEvents} />
+					<SubEventView
+						subEventItems={subEvents}
+						setStatus={setStatusHandler}
+						onGetSubEvents={getSubEventData}
+					/>
 				</div>
 			</div>
 		</div>
