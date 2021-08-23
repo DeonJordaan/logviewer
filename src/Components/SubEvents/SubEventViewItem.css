@@ -2,7 +2,7 @@
 	font-size: 0.8rem;
 	display: grid;
 	/* grid-template-columns: 8rem 3rem 12rem 10rem 10rem 12rem 2rem 18rem; */
-	grid-template-columns: 8rem 8rem 12rem 12rem minmax(auto, max-content);
+	grid-template-columns: 8rem 8rem 12rem 12rem 5rem minmax(auto, max-content);
 	/* grid-template-rows: 1.2rem; */
 	grid-template-rows: minmax(1.2rem, auto);
 	gap: 0.5rem;

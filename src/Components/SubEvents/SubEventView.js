@@ -14,6 +14,7 @@ const SubEventView = (props) => {
 					subEvents={task.subEvents}
 					startTime={task.startTime}
 					endTime={task.endTime}
+					id={task.id}
 					message={task.message}
 					getSubEvents={props.onGetSubEvents}
 				/>

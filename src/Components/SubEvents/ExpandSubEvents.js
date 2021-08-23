@@ -10,9 +10,11 @@ const ExpandSubEvents = (props) => {
 	// console.log(props.subEvents);
 
 	return (
+		// <div>
 		<button onClick={props.onGetSubEvents} className={classes}>
 			{props.subEvents}
 		</button>
+		// </div>
 	);
 };
 

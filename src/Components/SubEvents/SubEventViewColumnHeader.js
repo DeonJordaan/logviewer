@@ -7,6 +7,7 @@ const SubEventViewColumnHeader = () => {
 			<div>Sub-Events</div>
 			<div>Started</div>
 			<div>Completed</div>
+			<div>ID</div>
 			<div>Message</div>
 		</div>
 	);

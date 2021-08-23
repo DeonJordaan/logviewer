@@ -10,6 +10,7 @@ import HierarchyView from './Components/Hierarchy/HierarchyView';
 import SubEventView from './Components/SubEvents/SubEventView';
 
 function App() {
+	// Listen for page load event and fetch first page data
 	useEffect(() => {
 		window.addEventListener('load', (event) => {
 			getEventData();
@@ -22,6 +23,7 @@ function App() {
 
 	const [pageNumber, setPageNumber] = useState(1);
 
+	// Pagination control
 	const totalPageCount = Math.ceil(totalRecordCount / 10);
 
 	const getNextPage = () => {
@@ -42,6 +44,7 @@ function App() {
 
 	useEffect(() => getEventData(), [pageNumber]);
 
+	// Fetch data and sort and set tasks
 	async function getEventData() {
 		const response = await fetch(
 			`http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=${pageNumber}&pageSize=10&hostname=`
@@ -68,68 +71,41 @@ function App() {
 
 		setTasks(allTasks);
 		setTotalRecordCount(recordCount);
-		// console.log(allTasks);
 	}
 
 	const [subEvents, setSubEvents] = useState([]);
 
 	const [Hierarchy, setHierarchy] = useState({});
 
+	// Fetch sub-event data and extract selected event data to insert in hierarchy view
 	async function getSubEventData(e) {
-		const parentData = e.target.parentElement.childNodes;
+		const parentData = e.target.parentElement;
+		console.log(parentData);
+		const parentElement = parentData.closest('.task-item');
+		// const parentElement = parentData.closest('.sub-event-item');
+		console.log(parentElement);
+		const parentIdElement = parentElement.querySelector('.id');
+		const parentId = parentIdElement.innerText;
 
-		const parentDataArray = [...parentData];
+		const selectedTask = tasks.filter(
+			(task) => task.id === parseInt(parentId)
+		);
 
-		let parentDataTextArray = [];
-		for (let item of parentDataArray) {
-			parentDataTextArray.push(item.innerText);
-		}
+		// console.log(tasks);
 
-		// console.log(parentDataArray);
-		// console.log(parentDataTextArray);
+		console.log(selectedTask[0]);
 
-		//FIXME This is shit.
-		const parentObject = {
-			host: parentDataTextArray[0],
-			id: parentDataTextArray[7],
-			app: parentDataTextArray[1],
-			subEvents: parentDataTextArray[6],
-			taskCode: parentDataTextArray[3],
-			startTime: parentDataTextArray[4],
-			endTime: parentDataTextArray[5],
-			message: parentDataTextArray[8],
-			status: parentDataTextArray[2],
-		};
+		setHierarchy(selectedTask[0]);
 
-		setHierarchy(parentObject);
-
-		let parentId = parentObject.id;
-
-		console.log(parentId);
-
-		// if (tasks.includes((task) => task.id === parentId)) {
-		// 	console.log('got it');
-		// }
-
-		const findId = (task) => {
-			//FIXME TRYING TO EXTRACT THE TASK FROM THE 'tasks' STATE VIA ITS ID, A THAT IS A MORE ROBUST WAY OF PROCESSING IT FOR THE HIERARCHY DISPLAY THAN THE METHOD ABOVE
-			if (task.id === parentId) {
-				return task;
-			}
-		};
-
-		const theTask = tasks.filter(findId);
-		console.log(theTask);
+		console.log(Hierarchy);
 
 		const response = await fetch(
 			`http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=${parentId}`
 		);
 
 		const data = await response.json();
-		// console.log(data);
 
 		const allData = data.Data;
-		// console.log(allData);
 
 		const allTasks = allData.map((taskData) => {
 			return {
@@ -149,7 +125,7 @@ function App() {
 
 	const setStatusHandler = (statusCode) => {
 		const status = {
-			0: 'NotSet',
+			0: 'Not Set',
 			1: 'Started',
 			2: 'Completed',
 			3: 'Aborted',

@@ -4,7 +4,7 @@ import HierarchyViewItem from './HierarchyViewItem';
 import './HierarchyView.css';
 
 const HierarchyView = (props) => {
-	const app = props.hierarchyData.app;
+	const app = props.hierarchyData.App;
 	const host = props.hierarchyData.host;
 
 	return (
