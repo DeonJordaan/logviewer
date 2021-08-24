@@ -6,6 +6,7 @@ import './HierarchyView.css';
 const HierarchyView = (props) => {
 	const app = props.hierarchyData.App;
 	const host = props.hierarchyData.host;
+	// const status =
 
 	return (
 		<div className="hierarchy-view">
@@ -17,7 +18,16 @@ const HierarchyView = (props) => {
 				{/* Event Hierarchy Application: {app} running on Host: {host} */}
 			</h3>
 			<HierarchyViewColumnHeader />
-			<HierarchyViewItem eventDetails={props.hierarchyData} />
+			<HierarchyViewItem
+				// status={props.setStatus(props.hierarchyData.status)}
+				// subEvent={props.hierarchyData}
+				// startTime={props.hierarchyData.startTime}
+				// endTime={props.hierarchyData.endTime}
+				// id={props.hierarchyData.id}
+				// message={props.hierarchyData.message}
+				eventDetails={props.hierarchyData}
+				setStatus={props.setStatus}
+			/>
 		</div>
 	);
 };

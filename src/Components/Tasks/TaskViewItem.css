@@ -18,9 +18,38 @@
 	background-color: lightgray;
 }
 
-/* .task { */
-/* text-align: center; */
-/* border: 0.1rem solid lightgray;
-	border-radius: 3px; */
-/* padding: 0 0.25rem; */
-/* } */
+.Not-Set {
+	background: rgba(36, 193, 228);
+	border: 0.1rem solid lightgray;
+	border-radius: 5px;
+	/* color: #ededed; */
+}
+
+.Started {
+	background: rgb(35, 12, 187);
+	border: 0.1rem solid lightgray;
+	border-radius: 5px;
+	/* color: #ededed; */
+}
+
+.Completed {
+	background: rgba(43, 186, 43);
+	/* opacity: 0.75; */
+	border: 0.1rem solid lightgray;
+	border-radius: 5px;
+	/* color: #ededed; */
+}
+
+.Aborted {
+	background: rgb(242, 129, 24);
+	border: 0.1rem solid lightgray;
+	border-radius: 5px;
+	/* color: #ededed; */
+}
+
+.Failed {
+	background: rgb(206, 64, 32);
+	border: 0.1rem solid lightgray;
+	border-radius: 5px;
+	/* color: #ededed; */
+}

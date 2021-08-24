@@ -3,11 +3,13 @@ import TaskTime from './TaskTime';
 import './TaskViewItem.css';
 
 const TaskViewItem = (props) => {
+	const classes = 'task status ' + props.status;
+
 	return (
 		<li className="task-item">
 			<div className="task host">{props.host}</div>
 			<div className="task app">{props.app}</div>
-			<div className="task status">{props.status}</div>
+			<div className={classes}>{props.status}</div>
 			<div className="task code">{props.taskCode}</div>
 			<TaskTime className="task" time={props.startTime} />
 			<TaskTime className="task" time={props.endTime} />

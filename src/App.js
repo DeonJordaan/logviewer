@@ -14,6 +14,7 @@ function App() {
 	useEffect(() => {
 		window.addEventListener('load', (event) => {
 			getEventData();
+			// setHierarchy();
 		});
 	});
 
@@ -77,13 +78,21 @@ function App() {
 
 	const [Hierarchy, setHierarchy] = useState({});
 
+	// FIXME Trying to get setHierarchy to work via useMemo
+	// let selectedTask = useMemo(() => {
+	// 	return [];
+	// }, []);
+
+	// useEffect(() => setHierarchy(selectedTask), [selectedTask]);
+
+	/////////////////////////
 	// Fetch sub-event data and extract selected event data to insert in hierarchy view
 	async function getSubEventData(e) {
 		const parentData = e.target.parentElement;
-		console.log(parentData);
+		// console.log(parentData);
 		const parentElement = parentData.closest('.task-item');
 		// const parentElement = parentData.closest('.sub-event-item');
-		console.log(parentElement);
+		// console.log(parentElement);
 		const parentIdElement = parentElement.querySelector('.id');
 		const parentId = parentIdElement.innerText;
 
@@ -91,13 +100,11 @@ function App() {
 			(task) => task.id === parseInt(parentId)
 		);
 
-		// console.log(tasks);
-
-		console.log(selectedTask[0]);
+		// console.log(selectedTask[0]);
 
 		setHierarchy(selectedTask[0]);
 
-		console.log(Hierarchy);
+		// console.log(Hierarchy);
 
 		const response = await fetch(
 			`http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=${parentId}`
@@ -125,7 +132,7 @@ function App() {
 
 	const setStatusHandler = (statusCode) => {
 		const status = {
-			0: 'Not Set',
+			0: 'Not-Set',
 			1: 'Started',
 			2: 'Completed',
 			3: 'Aborted',
@@ -156,7 +163,10 @@ function App() {
 						pageNumber={pageNumber}
 						totalPageCount={totalPageCount}
 					/>
-					<HierarchyView hierarchyData={Hierarchy} />
+					<HierarchyView
+						hierarchyData={Hierarchy}
+						setStatus={setStatusHandler}
+					/>
 					<SubEventView
 						subEventItems={subEvents}
 						setStatus={setStatusHandler}

@@ -3,10 +3,12 @@ import ExpandSubEvents from './ExpandSubEvents';
 import './SubEventViewItem.css';
 
 const TaskViewItem = (props) => {
+	const classes = 'sub-events status ' + props.status;
+
 	return (
 		// <li className="sub-event-item" onClick={props.getSubEvents}>
-		<li className="task-item" onClick={props.getSubEvents}>
-			<div className="sub-events status">{props.status}</div>
+		<li className="sub-event-item" onClick={props.getSubEvents}>
+			<div className={classes}>{props.status}</div>
 			<ExpandSubEvents
 				className="sub-events"
 				subEvents={props.subEvents}

@@ -2,7 +2,7 @@
 	font-size: 0.8rem;
 	display: grid;
 	/* grid-template-columns: 8rem 3rem 12rem 10rem 10rem 12rem 2rem 18rem; */
-	grid-template-columns: 8rem 8rem 12rem 12rem 5rem minmax(auto, max-content);
+	grid-template-columns: 8rem 5rem 12rem 12rem 5rem minmax(auto, max-content);
 	/* grid-template-rows: 1.2rem; */
 	grid-template-rows: minmax(1.2rem, auto);
 	gap: 0.5rem;
@@ -14,6 +14,42 @@
 	align-items: center;
 }
 
-/* .task {
-	text-align: start;
-} */
+.sub-event-item:focus-within {
+	border: 1px solid black;
+	background-color: lightgray;
+}
+
+.Not-Set {
+	background: rgb(36, 193, 228);
+	border: 0.1rem solid lightgray;
+	border-radius: 5px;
+	/* color: #ededed; */
+}
+
+.Started {
+	background: rgb(35, 12, 187);
+	border: 0.1rem solid lightgray;
+	border-radius: 5px;
+	/* color: #ededed; */
+}
+
+.Completed {
+	background: rgb(43, 186, 43);
+	border: 0.1rem solid lightgray;
+	border-radius: 5px;
+	/* color: #ededed; */
+}
+
+.Aborted {
+	background: rgb(242, 129, 24);
+	border: 0.1rem solid lightgray;
+	border-radius: 5px;
+	/* color: #ededed; */
+}
+
+.Failed {
+	background: rgb(206, 64, 32);
+	border: 0.1rem solid lightgray;
+	border-radius: 5px;
+	/* color: #ededed; */
+}

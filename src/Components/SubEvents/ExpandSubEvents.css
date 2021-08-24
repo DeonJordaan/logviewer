@@ -3,13 +3,14 @@
 	/* border: none; */
 	/* padding: 1rem 2rem; */
 	margin: 0;
-	width: auto;
+	/* width: auto; */
 	max-height: 1.2rem;
 	border-radius: 5px;
 	border: 0.1rem solid lightgray;
 	text-decoration: none;
-	background: rgb(43, 186, 43);
-	color: #ffffff;
+	background: rgba(204, 183, 20);
+	opacity: 0.75;
+	color: black;
 	font-family: inherit;
 	font-size: 0.9rem;
 	cursor: pointer;
