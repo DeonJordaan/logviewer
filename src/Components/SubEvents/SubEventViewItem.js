@@ -6,10 +6,10 @@ const TaskViewItem = (props) => {
 	const classes = 'sub-events status ' + props.status;
 
 	return (
-		// <li className="sub-event-item" onClick={props.getSubEvents}>
 		<li className="sub-event-item" onClick={props.getSubEvents}>
 			<div className={classes}>{props.status}</div>
 			<ExpandSubEvents
+				id={props.id}
 				className="sub-events"
 				subEvents={props.subEvents}
 				onGetSubEvents={props.getSubEvents}

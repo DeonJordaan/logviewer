@@ -87,48 +87,47 @@ function App() {
 
 	/////////////////////////
 	// Fetch sub-event data and extract selected event data to insert in hierarchy view
-	async function getSubEventData(e) {
-		const parentData = e.target.parentElement;
-		// console.log(parentData);
-		const parentElement = parentData.closest('.task-item');
-		// const parentElement = parentData.closest('.sub-event-item');
-		// console.log(parentElement);
-		const parentIdElement = parentElement.querySelector('.id');
-		const parentId = parentIdElement.innerText;
-
-		const selectedTask = tasks.filter(
-			(task) => task.id === parseInt(parentId)
-		);
-
-		// console.log(selectedTask[0]);
-
-		setHierarchy(selectedTask[0]);
-
-		// console.log(Hierarchy);
+	const getSubEventData = async (id) => {
+		const parentId = id;
 
 		const response = await fetch(
 			`http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=${parentId}`
 		);
 
 		const data = await response.json();
-
+		console.log(data);
 		const allData = data.Data;
+		console.log(allData);
+		return allData;
+	};
 
-		const allTasks = allData.map((taskData) => {
-			return {
-				id: taskData.Id,
-				app: taskData.AppName,
-				taskCode: taskData.Code,
-				startTime: taskData.Started,
-				endTime: taskData.Completed,
-				subEvents: taskData.SubEventCount,
-				host: taskData.Host,
-				message: taskData.Message,
-				status: taskData.Status,
-			};
-		});
-		setSubEvents(allTasks);
-	}
+	// const allTasks = async () => {
+	// const allData = await getSubEventData();
+	const allTasks = async () => {
+		const result = await getSubEventData();
+		return result;
+	};
+
+	const subEventtasks = response.map((taskData) => {
+		return {
+			id: taskData.Id,
+			app: taskData.AppName,
+			taskCode: taskData.Code,
+			startTime: taskData.Started,
+			endTime: taskData.Completed,
+			subEvents: taskData.SubEventCount,
+			host: taskData.Host,
+			message: taskData.Message,
+			status: taskData.Status,
+		};
+	});
+
+	// setSubEvents(allData);
+	useEffect(() => setSubEvents(subEventTasks), [allTasks]);
+
+	// const selectedTask = tasks.filter(
+	// 	(task) => task.id === parseInt(parentId)
+	// );
 
 	const setStatusHandler = (statusCode) => {
 		const status = {
@@ -152,7 +151,7 @@ function App() {
 				<div>
 					<TaskView
 						taskItems={tasks}
-						onGetSubEvents={getSubEventData}
+						onGetSubEvents={allTasks}
 						setStatus={setStatusHandler}
 					/>
 					<Pagination
@@ -179,3 +178,48 @@ function App() {
 }
 
 export default App;
+
+/////////////////////////
+// Fetch sub-event data and extract selected event data to insert in hierarchy view
+// async function getSubEventData(e) {
+// 	const parentData = e.target.parentElement;
+// 	// console.log(parentData);
+// 	const parentElement = parentData.closest('.task-item');
+// 	// const parentElement = parentData.closest('.sub-event-item');
+// 	// console.log(parentElement);
+// 	const parentIdElement = parentElement.querySelector('.id');
+// 	const parentId = parentIdElement.innerText;
+
+// 	const selectedTask = tasks.filter(
+// 		(task) => task.id === parseInt(parentId)
+// 	);
+
+// 	// console.log(selectedTask[0]);
+
+// 	setHierarchy(selectedTask[0]);
+
+// 	// console.log(Hierarchy);
+
+// 	const response = await fetch(
+// 		`http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=${parentId}`
+// 	);
+
+// 	const data = await response.json();
+
+// 	const allData = data.Data;
+
+// 	const allTasks = allData.map((taskData) => {
+// 		return {
+// 			id: taskData.Id,
+// 			app: taskData.AppName,
+// 			taskCode: taskData.Code,
+// 			startTime: taskData.Started,
+// 			endTime: taskData.Completed,
+// 			subEvents: taskData.SubEventCount,
+// 			host: taskData.Host,
+// 			message: taskData.Message,
+// 			status: taskData.Status,
+// 		};
+// 	});
+// 	setSubEvents(allTasks);
+// }

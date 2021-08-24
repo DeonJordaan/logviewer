@@ -15,6 +15,7 @@ const TaskViewItem = (props) => {
 			<TaskTime className="task" time={props.endTime} />
 			{/* <div className="sub-event-div"> */}
 			<ExpandSubEvents
+				id={props.id}
 				className="task"
 				subEvents={props.subEvents}
 				onGetSubEvents={props.getSubEvents}

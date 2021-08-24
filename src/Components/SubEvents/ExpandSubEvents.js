@@ -7,11 +7,14 @@ const ExpandSubEvents = (props) => {
 		classes = 'no-sub-events';
 	}
 
+	const findParentId = () => {
+		props.onGetSubEvents(props.id);
+	};
 	// console.log(props.subEvents);
 
 	return (
 		// <div>
-		<button onClick={props.onGetSubEvents} className={classes}>
+		<button onClick={findParentId} className={classes}>
 			{props.subEvents}
 		</button>
 		// </div>
