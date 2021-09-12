@@ -13,14 +13,12 @@ const TaskViewItem = (props) => {
 			<div className="task code">{props.taskCode}</div>
 			<TaskTime className="task" time={props.startTime} />
 			<TaskTime className="task" time={props.endTime} />
-			{/* <div className="sub-event-div"> */}
 			<ExpandSubEvents
 				id={props.id}
 				className="task"
 				subEvents={props.subEvents}
 				onGetSubEvents={props.getSubEvents}
 			/>
-			{/* </div> */}
 			<div className="task id">{props.id}</div>
 			<div className="task message">{props.message}</div>
 		</li>

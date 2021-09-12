@@ -12,11 +12,8 @@ import SubEventView from './Components/SubEvents/SubEventView';
 function App() {
 	// Listen for page load event and fetch first page data
 	useEffect(() => {
-		window.addEventListener('load', (event) => {
-			getEventData();
-			// setHierarchy();
-		});
-	});
+		getEventData();
+	}, []);
 
 	const [tasks, setTasks] = useState([]);
 
@@ -43,10 +40,12 @@ function App() {
 		setPageNumber((page) => (page = totalPageCount));
 	};
 
-	useEffect(() => getEventData(), [pageNumber]);
+	useEffect(() => {
+		getEventData();
+	}, [pageNumber]);
 
 	// Fetch data and sort and set tasks
-	async function getEventData() {
+	const getEventData = async () => {
 		const response = await fetch(
 			`http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=${pageNumber}&pageSize=10&hostname=`
 			// `http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=2&pageSize=10&hostname=`
@@ -58,6 +57,7 @@ function App() {
 
 		const allTasks = allData.map((taskData) => {
 			return {
+				key: taskData.Id,
 				id: taskData.Id,
 				App: taskData.AppName,
 				taskCode: taskData.Code,
@@ -72,7 +72,7 @@ function App() {
 
 		setTasks(allTasks);
 		setTotalRecordCount(recordCount);
-	}
+	};
 
 	const [subEvents, setSubEvents] = useState([]);
 
@@ -87,43 +87,40 @@ function App() {
 
 	/////////////////////////
 	// Fetch sub-event data and extract selected event data to insert in hierarchy view
+
 	const getSubEventData = async (id) => {
+		console.log(id);
 		const parentId = id;
+		// const parentId = id.toString();
 
 		const response = await fetch(
+			// `http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=15001`
 			`http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=${parentId}`
 		);
 
 		const data = await response.json();
-		console.log(data);
 		const allData = data.Data;
-		console.log(allData);
-		return allData;
-	};
 
-	// const allTasks = async () => {
-	// const allData = await getSubEventData();
-	const allTasks = async () => {
-		const result = await getSubEventData();
-		return result;
-	};
+		const subEventTasks = allData.map((taskData) => {
+			return {
+				key: taskData.Id,
+				id: taskData.Id,
+				app: taskData.AppName,
+				taskCode: taskData.Code,
+				startTime: taskData.Started,
+				endTime: taskData.Completed,
+				subEvents: taskData.SubEventCount,
+				host: taskData.Host,
+				message: taskData.Message,
+				status: taskData.Status,
+			};
+		});
 
-	const subEventtasks = response.map((taskData) => {
-		return {
-			id: taskData.Id,
-			app: taskData.AppName,
-			taskCode: taskData.Code,
-			startTime: taskData.Started,
-			endTime: taskData.Completed,
-			subEvents: taskData.SubEventCount,
-			host: taskData.Host,
-			message: taskData.Message,
-			status: taskData.Status,
-		};
-	});
+		setSubEvents(subEventTasks);
+	};
 
 	// setSubEvents(allData);
-	useEffect(() => setSubEvents(subEventTasks), [allTasks]);
+	// useEffect(() => setSubEvents(subEventTasks), [subEventTasks]);
 
 	// const selectedTask = tasks.filter(
 	// 	(task) => task.id === parseInt(parentId)
@@ -151,8 +148,8 @@ function App() {
 				<div>
 					<TaskView
 						taskItems={tasks}
-						onGetSubEvents={allTasks}
 						setStatus={setStatusHandler}
+						onGetSubEvents={getSubEventData}
 					/>
 					<Pagination
 						nextPage={getNextPage}
@@ -222,4 +219,3 @@ export default App;
 // 		};
 // 	});
 // 	setSubEvents(allTasks);
-// }

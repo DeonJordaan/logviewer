@@ -2,11 +2,11 @@ import TaskTime from '../Tasks/TaskTime';
 import ExpandSubEvents from './ExpandSubEvents';
 import './SubEventViewItem.css';
 
-const TaskViewItem = (props) => {
+const SubEventViewItem = (props) => {
 	const classes = 'sub-events status ' + props.status;
 
 	return (
-		<li className="sub-event-item" onClick={props.getSubEvents}>
+		<li className="sub-event-item">
 			<div className={classes}>{props.status}</div>
 			<ExpandSubEvents
 				id={props.id}
@@ -22,4 +22,4 @@ const TaskViewItem = (props) => {
 	);
 };
 
-export default TaskViewItem;
+export default SubEventViewItem;

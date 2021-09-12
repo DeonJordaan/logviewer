@@ -9,6 +9,7 @@ const TaskView = (props) => {
 			<TaskViewHeader headers={props.taskItems} />
 			{props.taskItems.map((task) => (
 				<TaskViewItem
+					key={task.key}
 					host={task.host}
 					id={task.id}
 					app={task.App}

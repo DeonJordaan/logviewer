@@ -8,6 +8,7 @@ const ExpandSubEvents = (props) => {
 	}
 
 	const findParentId = () => {
+		console.log(props.id);
 		props.onGetSubEvents(props.id);
 	};
 	// console.log(props.subEvents);
