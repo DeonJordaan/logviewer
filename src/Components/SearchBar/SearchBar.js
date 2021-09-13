@@ -1,9 +1,10 @@
-import './SearchBar.css';
 import SearchInput from './SearchInput';
+
+import classes from './SearchBar.module.css';
 
 const SearchBar = () => {
 	return (
-		<div className="searchbar">
+		<div className={classes.searchbar}>
 			<SearchInput />
 		</div>
 	);

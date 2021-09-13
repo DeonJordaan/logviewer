@@ -1,8 +1,8 @@
-import './HierarchyViewColumnHeader.css';
+import classes from './HierarchyViewColumnHeader.module.css';
 
 const HierarchyViewColumnHeader = () => {
 	return (
-		<div className="hierarchy-column-header">
+		<div className={classes['hierarchy-column-header']}>
 			<div>Status</div>
 			<div>Sub-Events</div>
 			<div>Started</div>

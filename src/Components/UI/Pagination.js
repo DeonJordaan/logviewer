@@ -1,7 +1,8 @@
 import React from 'react';
 
 import Button from '../ButtonBar/Button';
-import './Pagination.css';
+
+import classes from './Pagination.module.css';
 
 const ButtonBar = (props) => {
 	// const totalPageCount = Math.ceil(props.totalRecordCount / 10);
@@ -20,9 +21,15 @@ const ButtonBar = (props) => {
 	// };
 
 	return (
-		<div className="button-bar">
-			<Button onClick={props.firstPage} className="double-left-arrow" />
-			<Button onClick={props.prevPage} className="left-arrow" />
+		<div className={classes['button-bar']}>
+			<Button
+				onClick={props.firstPage}
+				className={classes['double-left-arrow']}
+			/>
+			<Button
+				onClick={props.prevPage}
+				className={classes['left-arrow']}
+			/>
 			{/* <Pagination
 				pageNumber={pageNumber}
 				totalRecordCount={props.totalRecordCount}
@@ -30,8 +37,14 @@ const ButtonBar = (props) => {
 			<div className="current-page">
 				Page {props.pageNumber} of {props.totalPageCount}
 			</div>
-			<Button onClick={props.nextPage} className="right-arrow" />
-			<Button onClick={props.lastPage} className="double-right-arrow" />
+			<Button
+				onClick={props.nextPage}
+				className={classes['right-arrow']}
+			/>
+			<Button
+				onClick={props.lastPage}
+				className={classes['double-right-arrow']}
+			/>
 		</div>
 	);
 };

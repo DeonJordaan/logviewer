@@ -1,10 +1,10 @@
-import './TaskViewHeader.css';
+import classes from './TaskViewHeader.module.css';
 
 // import GridHeader from '../UI/GridHeader';
 
 const TaskViewHeader = () => {
 	return (
-		<div className="task-header">
+		<div className={classes['task-header']}>
 			<div>Host</div>
 			<div>Application</div>
 			<div>Status</div>

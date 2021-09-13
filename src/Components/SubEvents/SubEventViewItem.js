@@ -1,25 +1,85 @@
 import TaskTime from '../Tasks/TaskTime';
 import ExpandSubEvents from './ExpandSubEvents';
-import './SubEventViewItem.css';
+
+import classes from './SubEventViewItem.module.css';
 
 const SubEventViewItem = (props) => {
-	const classes = 'sub-events status ' + props.status;
+	//Combine status classname with the status to define what style class should be applied. CSS classes are identical to status description
+	const status = props.status;
+
+	const statusClass = () => {
+		const statusThing = {
+			'Not-Set': classes['Not-Set'],
+			Started: classes.Started,
+			Completed: classes.Completed,
+			Aborted: classes.Aborted,
+			Failed: classes.Failed,
+		};
+		return classes[statusCode];
+	};
 
 	return (
-		<li className="sub-event-item">
-			<div className={classes}>{props.status}</div>
+		<li className={classes['sub-event-item']}>
+			<div className={statusClass}>{props.status}</div>
+			{/* <div className={statusClass}>{props.status}</div> */}
 			<ExpandSubEvents
 				id={props.id}
-				className="sub-events"
 				subEvents={props.subEvents}
 				onGetSubEvents={props.getSubEvents}
 			/>
-			<TaskTime className="sub-events" time={props.startTime} />
-			<TaskTime className="sub-events" time={props.endTime} />
-			<div className="sub-events id">{props.id}</div>
-			<div className="sub-events message">{props.message}</div>
+			<TaskTime time={props.startTime} />
+			<TaskTime time={props.endTime} />
+			<div className="id">{props.id}</div>
+			<div className="message">{props.message}</div>
 		</li>
 	);
 };
 
 export default SubEventViewItem;
+
+// NOTE EXAMPLE className={`${styles.description} ${styles.yellow}`}
+
+//NOTE Alternate return statement with more classNames
+// return (
+// 	<li className={classes['sub-event-item']}>
+// 		<div className={combinedClasses}>{props.status}</div>
+// 		<ExpandSubEvents
+// 			id={props.id}
+// 			className={classes['sub-events']}
+// 			subEvents={props.subEvents}
+// 			onGetSubEvents={props.getSubEvents}
+// 		/>
+// 		<TaskTime
+// 			className={classes['sub-events']}
+// 			time={props.startTime}
+// 		/>
+// 		<TaskTime className={classes['sub-events']} time={props.endTime} />
+// 		<div className={`${classes['sub-events']} ${classes.id}`}>
+// 			{props.id}
+// 		</div>
+// 		<div className={`${classes['sub-events']} ${classes.message}`}>
+// 			{props.message}
+// 		</div>
+// 	</li>
+// );
+
+//NOTE ANOTHER TRY
+// let statusClass = '';
+
+// if (status === 'Aborted') {
+// 	statusClass = 'classes.Aborted';
+// } else if (status === 'Completed') {
+// 	statusClass = 'classes.Completed';
+// }
+
+//note ANOTHER
+// const classHandler = () => {
+// 	if (props.status === 'Aborted') {
+// 		return classes.Aborted;
+// 	} else if (props.status === 'Completed') {
+// 		return classes.Completed;
+// 	}
+// 	return;
+// };
+
+// const statusClass = classes. + props.status;

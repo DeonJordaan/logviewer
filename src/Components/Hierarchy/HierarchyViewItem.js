@@ -1,4 +1,4 @@
-import './HierarchyViewItem.css';
+import classes from './HierarchyViewItem.module.css';
 // import TaskTime from '../Tasks/TaskTime';
 
 const HierarchyViewItem = (props) => {
@@ -9,7 +9,7 @@ const HierarchyViewItem = (props) => {
 	const message = props.eventDetails.message;
 
 	return (
-		<div className="hierarchy-item">
+		<div className={classes['hierarchy-item']}>
 			<div>{status}</div>
 			<div>{subEvents}</div>
 			{/* <TaskTime time={startTime} /> */}

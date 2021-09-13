@@ -1,9 +1,10 @@
-import './FilterMenuBar.css';
 import DataFilterButton from './DataFilterButton';
+
+import classes from './FilterMenuBar.module.css';
 
 const FilterMenuBar = () => {
 	return (
-		<div className="filter-menu-bar">
+		<div className={classes['filter-menu-bar']}>
 			<DataFilterButton />
 			<DataFilterButton />
 			<DataFilterButton />

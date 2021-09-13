@@ -1,10 +1,10 @@
-import './ExpandSubEvents.css';
+import classes from './ExpandSubEvents.module.css';
 
 const ExpandSubEvents = (props) => {
-	let classes = 'sub-event-button';
+	let importedClasses = `${classes['sub-event-button']}`;
 
 	if (props.subEvents === 0) {
-		classes = 'no-sub-events';
+		importedClasses = 'no-sub-events';
 	}
 
 	const findParentId = () => {
@@ -15,7 +15,7 @@ const ExpandSubEvents = (props) => {
 
 	return (
 		// <div>
-		<button onClick={findParentId} className={classes}>
+		<button onClick={findParentId} className={importedClasses}>
 			{props.subEvents}
 		</button>
 		// </div>

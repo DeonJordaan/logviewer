@@ -1,4 +1,4 @@
-import './PushButton.css';
+import classes from './PushButton.module.css';
 
 const PushButton = (props) => {
 	return (
@@ -6,11 +6,11 @@ const PushButton = (props) => {
 			onClick={props.onClick}
 			id="submitbutton"
 			type="button"
-			className="btn push-button"
+			className={`${classes.btn} ${classes['push-button']}`}
 		>
-			<span className="shadow"></span>
-			<span className="edge"></span>
-			<span className="front">Fetch Data!</span>
+			<span className={classes.shadow}></span>
+			<span className={classes.edge}></span>
+			<span className={classes.front}>Fetch Data!</span>
 		</button>
 	);
 };

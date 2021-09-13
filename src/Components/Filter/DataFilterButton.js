@@ -1,9 +1,9 @@
-import './DataFilterButton.css';
+import classes from './DataFilterButton.module.css';
 
 const DataFilterButton = () => {
 	return (
 		<div>
-			<button className="filter-button">PropIQ</button>
+			<button className={classes['filter-button']}>PropIQ</button>
 		</div>
 	);
 };

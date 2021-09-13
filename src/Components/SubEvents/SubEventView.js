@@ -1,14 +1,14 @@
-import './SubEventView.css';
-
 import SubEventViewColumnHeader from './SubEventViewColumnHeader';
 import SubEventViewItem from './SubEventViewItem';
+
+import classes from './SubEventView.module.css';
 
 const SubEventView = (props) => {
 	const items = props.subEventItems;
 
 	return (
-		<ul className="sub-event-view">
-			<h3 className="sub-event-header">Event Details</h3>
+		<ul className={classes['sub-event-view']}>
+			<h3 className={classes['sub-event-header']}>Event Details</h3>
 			<SubEventViewColumnHeader headers={props.taskItems} />
 			{items.map((task) => (
 				<SubEventViewItem

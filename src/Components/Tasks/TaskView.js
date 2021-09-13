@@ -1,11 +1,11 @@
-import './TaskView.css';
-
 import TaskViewItem from './TaskViewItem';
 import TaskViewHeader from './TaskViewHeader';
 
+import classes from './TaskView.module.css';
+
 const TaskView = (props) => {
 	return (
-		<ul className="task-view">
+		<ul className={classes['task-view']}>
 			<TaskViewHeader headers={props.taskItems} />
 			{props.taskItems.map((task) => (
 				<TaskViewItem

@@ -1,8 +1,8 @@
-import './SubEventViewColumnHeader.css';
+import classes from './SubEventViewColumnHeader.module.css';
 
 const SubEventViewColumnHeader = () => {
 	return (
-		<div className="sub-event-column-header">
+		<div className={classes['sub-event-column-header']}>
 			<div>Status</div>
 			<div>Sub-Events</div>
 			<div>Started</div>

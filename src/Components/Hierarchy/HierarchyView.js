@@ -1,7 +1,7 @@
 import HierarchyViewColumnHeader from './HierarchyViewColumnHeader';
 import HierarchyViewItem from './HierarchyViewItem';
 
-import './HierarchyView.css';
+import classes from './HierarchyView.module.css';
 
 const HierarchyView = (props) => {
 	const app = props.hierarchyData.App;
@@ -9,12 +9,12 @@ const HierarchyView = (props) => {
 	// const status =
 
 	return (
-		<div className="hierarchy-view">
-			<h3 className="hierarchy-header">
+		<div className={classes['hierarchy-view']}>
+			<h3 className={classes['hierarchy-header']}>
 				<span>Event Hierarchy Application:</span>
-				<span className="box">{app}</span>
+				<span className={classes.box}>{app}</span>
 				<span>running on Host:</span>
-				<span className="box">{host}</span>
+				<span className={classes.box}>{host}</span>
 				{/* Event Hierarchy Application: {app} running on Host: {host} */}
 			</h3>
 			<HierarchyViewColumnHeader />
