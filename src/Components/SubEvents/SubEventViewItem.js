@@ -4,24 +4,20 @@ import ExpandSubEvents from './ExpandSubEvents';
 import classes from './SubEventViewItem.module.css';
 
 const SubEventViewItem = (props) => {
-	//Combine status classname with the status to define what style class should be applied. CSS classes are identical to status description
+	//Extract status in order to set className. Classes are identical to status description.
 	const status = props.status;
 
-	const statusClass = () => {
-		const statusThing = {
-			'Not-Set': classes['Not-Set'],
-			Started: classes.Started,
-			Completed: classes.Completed,
-			Aborted: classes.Aborted,
-			Failed: classes.Failed,
-		};
-		return classes[statusCode];
+	const classesMap = {
+		NotSet: classes.NotSet,
+		Started: classes.Started,
+		Completed: classes.Completed,
+		Aborted: classes.Aborted,
+		Failed: classes.Failed,
 	};
 
 	return (
 		<li className={classes['sub-event-item']}>
-			<div className={statusClass}>{props.status}</div>
-			{/* <div className={statusClass}>{props.status}</div> */}
+			<div className={classesMap[status]}>{props.status}</div>
 			<ExpandSubEvents
 				id={props.id}
 				subEvents={props.subEvents}
@@ -36,8 +32,6 @@ const SubEventViewItem = (props) => {
 };
 
 export default SubEventViewItem;
-
-// NOTE EXAMPLE className={`${styles.description} ${styles.yellow}`}
 
 //NOTE Alternate return statement with more classNames
 // return (
@@ -62,24 +56,3 @@ export default SubEventViewItem;
 // 		</div>
 // 	</li>
 // );
-
-//NOTE ANOTHER TRY
-// let statusClass = '';
-
-// if (status === 'Aborted') {
-// 	statusClass = 'classes.Aborted';
-// } else if (status === 'Completed') {
-// 	statusClass = 'classes.Completed';
-// }
-
-//note ANOTHER
-// const classHandler = () => {
-// 	if (props.status === 'Aborted') {
-// 		return classes.Aborted;
-// 	} else if (props.status === 'Completed') {
-// 		return classes.Completed;
-// 	}
-// 	return;
-// };
-
-// const statusClass = classes. + props.status;

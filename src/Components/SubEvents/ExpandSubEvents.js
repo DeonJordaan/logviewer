@@ -4,7 +4,7 @@ const ExpandSubEvents = (props) => {
 	let importedClasses = `${classes['sub-event-button']}`;
 
 	if (props.subEvents === 0) {
-		importedClasses = 'no-sub-events';
+		importedClasses = `${classes['no-sub-events']}`;
 	}
 
 	const findParentId = () => {

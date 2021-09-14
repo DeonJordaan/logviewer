@@ -125,10 +125,9 @@ function App() {
 	// const selectedTask = tasks.filter(
 	// 	(task) => task.id === parseInt(parentId)
 	// );
-
 	const setStatusHandler = (statusCode) => {
 		const status = {
-			0: 'Not-Set',
+			0: 'NotSet',
 			1: 'Started',
 			2: 'Completed',
 			3: 'Aborted',

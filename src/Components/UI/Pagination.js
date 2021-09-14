@@ -22,14 +22,8 @@ const ButtonBar = (props) => {
 
 	return (
 		<div className={classes['button-bar']}>
-			<Button
-				onClick={props.firstPage}
-				className={classes['double-left-arrow']}
-			/>
-			<Button
-				onClick={props.prevPage}
-				className={classes['left-arrow']}
-			/>
+			<Button onClick={props.firstPage} className={'doubleLeftArrow'} />
+			<Button onClick={props.prevPage} className={'leftArrow'} />
 			{/* <Pagination
 				pageNumber={pageNumber}
 				totalRecordCount={props.totalRecordCount}
@@ -37,14 +31,8 @@ const ButtonBar = (props) => {
 			<div className="current-page">
 				Page {props.pageNumber} of {props.totalPageCount}
 			</div>
-			<Button
-				onClick={props.nextPage}
-				className={classes['right-arrow']}
-			/>
-			<Button
-				onClick={props.lastPage}
-				className={classes['double-right-arrow']}
-			/>
+			<Button onClick={props.nextPage} className={'rightArrow'} />
+			<Button onClick={props.lastPage} className={'doubleRightArrow'} />
 		</div>
 	);
 };

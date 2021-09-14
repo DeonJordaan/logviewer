@@ -3,7 +3,7 @@ import classes from './Header.module.css';
 const Header = () => {
 	return (
 		<div>
-			<header className="header">
+			<header className={classes.header}>
 				<img
 					src="../logo-lexisnexis.png"
 					className={classes.logo}

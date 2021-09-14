@@ -4,18 +4,25 @@ import TaskTime from './TaskTime';
 import classes from './TaskViewItem.module.css';
 
 const TaskViewItem = (props) => {
-	// const combinedClasses = `${classes.status} ` + props.status;
-
 	//TODO PERHAPS I'M DOING THIS CLASSES THING ALL WRONG...? MUST THEY BE DECALRED WITH 'classes.whatever' ALL THE TIME...?
+	//FIXME Should I remove all the other classes? I'm probably not going to ever need them.
+
+	const status = props.status;
+
+	const classesMap = {
+		NotSet: classes.NotSet,
+		Started: classes.Started,
+		Completed: classes.Completed,
+		Aborted: classes.Aborted,
+		Failed: classes.Failed,
+	};
 
 	return (
 		<li className={classes['task-item']}>
-			<div className={classes.host}>{props.host}</div>
-			<div className={classes.app}>{props.app}</div>
-			<div className={classes.Aborted}>{props.status}</div>
-			{/* <div className={props.status}>{props.status}</div> */}
-			{/* <div className={combinedClasses}>{props.status}</div> */}
-			<div className={classes.code}>{props.taskCode}</div>
+			<div className={'host'}>{props.host}</div>
+			<div className={'app'}>{props.app}</div>
+			<div className={classesMap[status]}>{props.status}</div>
+			<div className={'code'}>{props.taskCode}</div>
 			<TaskTime time={props.startTime} />
 			<TaskTime time={props.endTime} />
 			<ExpandSubEvents
@@ -23,8 +30,8 @@ const TaskViewItem = (props) => {
 				subEvents={props.subEvents}
 				onGetSubEvents={props.getSubEvents}
 			/>
-			<div className={classes.id}>{props.id}</div>
-			<div className={classes.message}>{props.message}</div>
+			<div className={'id'}>{props.id}</div>
+			<div className={'message'}>{props.message}</div>
 		</li>
 	);
 };

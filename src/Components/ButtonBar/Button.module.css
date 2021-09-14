@@ -29,23 +29,23 @@
 	transform: scale(0.99);
 }
 
-.left-arrow {
+.leftArrow {
 	background: url('../svg/leftArrow.svg') left top no-repeat;
 	/* background: url('../svg/leftArrow.svg') left top no-repeat; */
 	background-size: 80px 30px;
 	background-color: #ededed;
 }
-.right-arrow {
+.rightArrow {
 	background: url('../svg/rightArrow.svg');
 	background-size: 80px 30px;
 	background-color: #ededed;
 }
-.double-left-arrow {
+.doubleLeftArrow {
 	background: url('../svg/dblLeftArrow.svg');
 	background-size: 80px 30px;
 	background-color: #ededed;
 }
-.double-right-arrow {
+.doubleRightArrow {
 	background: url('../svg/dblRightArrow.svg');
 	background-size: 80px 30px;
 	background-color: #ededed;
