@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import './App.css';
 
@@ -10,18 +10,14 @@ import HierarchyView from './Components/Hierarchy/HierarchyView';
 import SubEventView from './Components/SubEvents/SubEventView';
 
 function App() {
-	// Listen for page load event and fetch first page data
-	useEffect(() => {
-		getEventData();
-	}, []);
-
 	const [tasks, setTasks] = useState([]);
-
+	// const [isLoading, setIsLoading] = useState(false);
+	// const [error, setError] = useState(null);
 	const [totalRecordCount, setTotalRecordCount] = useState([]);
 
+	//NOTE Pagination control
 	const [pageNumber, setPageNumber] = useState(1);
 
-	// Pagination control
 	const totalPageCount = Math.ceil(totalRecordCount / 10);
 
 	const getNextPage = () => {
@@ -40,40 +36,53 @@ function App() {
 		setPageNumber((page) => (page = totalPageCount));
 	};
 
-	useEffect(() => {
-		getEventData();
+	//NOTE Fetch data, sort and set tasks
+	const getEventData = useCallback(async () => {
+		// setIsLoading(true);
+		// setError(null);
+		try {
+			const response = await fetch(
+				`http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=${pageNumber}&pageSize=10&hostname=`
+				// `http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=2&pageSize=10&hostname=`
+			);
+
+			if (!response.ok) {
+				throw new Error('Could not retrieve data');
+			}
+
+			const data = await response.json();
+
+			const { Data: allData, TotalRecordCount: recordCount } = data;
+
+			const allTasks = allData.map((taskData) => {
+				return {
+					key: taskData.Id,
+					id: taskData.Id,
+					App: taskData.AppName,
+					taskCode: taskData.Code,
+					startTime: taskData.Started,
+					endTime: taskData.Completed,
+					subEvents: taskData.SubEventCount,
+					host: taskData.Host,
+					message: taskData.Message,
+					status: taskData.Status,
+				};
+			});
+
+			setTasks(allTasks);
+			setTotalRecordCount(recordCount);
+		} catch (error) {
+			console.log('Error');
+			// setError(error.message);
+		}
+		// setIsLoading(false);
 	}, [pageNumber]);
 
-	// Fetch data and sort and set tasks
-	const getEventData = async () => {
-		const response = await fetch(
-			`http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=${pageNumber}&pageSize=10&hostname=`
-			// `http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=2&pageSize=10&hostname=`
-		);
+	useEffect(() => {
+		getEventData();
+	}, [getEventData, pageNumber]);
 
-		const data = await response.json();
-
-		const { Data: allData, TotalRecordCount: recordCount } = data;
-
-		const allTasks = allData.map((taskData) => {
-			return {
-				key: taskData.Id,
-				id: taskData.Id,
-				App: taskData.AppName,
-				taskCode: taskData.Code,
-				startTime: taskData.Started,
-				endTime: taskData.Completed,
-				subEvents: taskData.SubEventCount,
-				host: taskData.Host,
-				message: taskData.Message,
-				status: taskData.Status,
-			};
-		});
-
-		setTasks(allTasks);
-		setTotalRecordCount(recordCount);
-	};
-
+	//NOTE Fetch data, sort and set subEvents
 	const [subEvents, setSubEvents] = useState([]);
 
 	const [Hierarchy, setHierarchy] = useState({});
@@ -125,6 +134,7 @@ function App() {
 	// const selectedTask = tasks.filter(
 	// 	(task) => task.id === parseInt(parentId)
 	// );
+
 	const setStatusHandler = (statusCode) => {
 		const status = {
 			0: 'NotSet',
@@ -136,6 +146,27 @@ function App() {
 		return status[statusCode];
 	};
 
+	//NOTE Define taskContent
+	let taskContent = <p>'No data found'</p>;
+
+	if (tasks.length > 0) {
+		taskContent = (
+			<TaskView
+				taskItems={tasks}
+				setStatus={setStatusHandler}
+				onGetSubEvents={getSubEventData}
+			/>
+		);
+	}
+
+	// if (error) {
+	// 	taskContent = <p>{error}</p>;
+	// }
+
+	// if (isLoading) {
+	// 	taskContent = <p>Loading...</p>;
+	// }
+
 	return (
 		<div className="App">
 			<Header />
@@ -145,11 +176,7 @@ function App() {
 					totalRecords={totalRecordCount}
 				/>
 				<div>
-					<TaskView
-						taskItems={tasks}
-						setStatus={setStatusHandler}
-						onGetSubEvents={getSubEventData}
-					/>
+					<section>{taskContent}</section>
 					<Pagination
 						nextPage={getNextPage}
 						prevPage={getPrevPage}
