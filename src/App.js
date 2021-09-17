@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import './App.css';
 
@@ -8,17 +8,19 @@ import Pagination from './Components/UI/Pagination';
 import TaskView from './Components/Tasks/TaskView';
 import HierarchyView from './Components/Hierarchy/HierarchyView';
 import SubEventView from './Components/SubEvents/SubEventView';
+import EventContext from './Context/event-context';
 
 function App() {
-	const [tasks, setTasks] = useState([]);
+	const eventCtx = useContext(EventContext);
+	// const [tasks, setTasks] = useState([]);
 	// const [isLoading, setIsLoading] = useState(false);
 	// const [error, setError] = useState(null);
-	const [totalRecordCount, setTotalRecordCount] = useState([]);
+	// const [totalRecordCount, setTotalRecordCount] = useState([]);
 
 	//NOTE Pagination control
 	const [pageNumber, setPageNumber] = useState(1);
 
-	const totalPageCount = Math.ceil(totalRecordCount / 10);
+	const totalPageCount = Math.ceil(eventCtx.totalRecordCount / 10);
 
 	const getNextPage = () => {
 		setPageNumber((page) => page + 1);
@@ -37,50 +39,50 @@ function App() {
 	};
 
 	//NOTE Fetch data, sort and set tasks
-	const getEventData = useCallback(async () => {
-		// setIsLoading(true);
-		// setError(null);
-		try {
-			const response = await fetch(
-				`http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=${pageNumber}&pageSize=10&hostname=`
-				// `http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=2&pageSize=10&hostname=`
-			);
+	// const getEventData = useCallback(async () => {
+	// 	setIsLoading(true);
+	// 	setError(null);
+	// 	try {
+	// 		const response = await fetch(
+	// 			`http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=${pageNumber}&pageSize=10&hostname=`
+	// 			// `http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=2&pageSize=10&hostname=`
+	// 		);
 
-			if (!response.ok) {
-				throw new Error('Could not retrieve data');
-			}
+	// 		if (!response.ok) {
+	// 			throw new Error('Could not retrieve data');
+	// 		}
 
-			const data = await response.json();
+	// 		const data = await response.json();
 
-			const { Data: allData, TotalRecordCount: recordCount } = data;
+	// 		const { Data: allData, TotalRecordCount: recordCount } = data;
 
-			const allTasks = allData.map((taskData) => {
-				return {
-					key: taskData.Id,
-					id: taskData.Id,
-					App: taskData.AppName,
-					taskCode: taskData.Code,
-					startTime: taskData.Started,
-					endTime: taskData.Completed,
-					subEvents: taskData.SubEventCount,
-					host: taskData.Host,
-					message: taskData.Message,
-					status: taskData.Status,
-				};
-			});
+	// 		const allTasks = allData.map((taskData) => {
+	// 			return {
+	// 				key: taskData.Id,
+	// 				id: taskData.Id,
+	// 				App: taskData.AppName,
+	// 				taskCode: taskData.Code,
+	// 				startTime: taskData.Started,
+	// 				endTime: taskData.Completed,
+	// 				subEvents: taskData.SubEventCount,
+	// 				host: taskData.Host,
+	// 				message: taskData.Message,
+	// 				status: taskData.Status,
+	// 			};
+	// 		});
 
-			setTasks(allTasks);
-			setTotalRecordCount(recordCount);
-		} catch (error) {
-			console.log('Error');
-			// setError(error.message);
-		}
-		// setIsLoading(false);
-	}, [pageNumber]);
+	// 		setTasks(allTasks);
+	// 		setTotalRecordCount(recordCount);
+	// 	} catch (error) {
+	// 		console.log('Error');
+	// 		setError(error.message);
+	// 	}
+	// 	setIsLoading(false);
+	// }, [pageNumber]);
 
 	useEffect(() => {
-		getEventData();
-	}, [getEventData, pageNumber]);
+		eventCtx.getEventData();
+	}, [pageNumber]);
 
 	//NOTE Fetch data, sort and set subEvents
 	const [subEvents, setSubEvents] = useState([]);
@@ -146,7 +148,7 @@ function App() {
 		return status[statusCode];
 	};
 
-	//NOTE Define taskContent
+	// //NOTE Define taskContent
 	let taskContent = <p>'No data found'</p>;
 
 	if (tasks.length > 0) {
@@ -159,44 +161,46 @@ function App() {
 		);
 	}
 
-	// if (error) {
-	// 	taskContent = <p>{error}</p>;
-	// }
+	if (error) {
+		taskContent = <p>{error}</p>;
+	}
 
-	// if (isLoading) {
-	// 	taskContent = <p>Loading...</p>;
-	// }
+	if (isLoading) {
+		taskContent = <p>Loading...</p>;
+	}
 
 	return (
-		<div className="App">
-			<Header />
-			<div className="display">
-				<FilterBoard
-					onGetData={getEventData}
-					totalRecords={totalRecordCount}
-				/>
-				<div>
-					<section>{taskContent}</section>
-					<Pagination
-						nextPage={getNextPage}
-						prevPage={getPrevPage}
-						firstPage={goToFirstPage}
-						lastPage={goToLastPage}
-						pageNumber={pageNumber}
-						totalPageCount={totalPageCount}
+		<EventContext>
+			<div className="App">
+				<Header />
+				<div className="display">
+					<FilterBoard
+						onGetData={getEventData}
+						totalRecords={totalRecordCount}
 					/>
-					<HierarchyView
-						hierarchyData={Hierarchy}
-						setStatus={setStatusHandler}
-					/>
-					<SubEventView
-						subEventItems={subEvents}
-						setStatus={setStatusHandler}
-						onGetSubEvents={getSubEventData}
-					/>
+					<div>
+						<section>{taskContent}</section>
+						<Pagination
+							nextPage={getNextPage}
+							prevPage={getPrevPage}
+							firstPage={goToFirstPage}
+							lastPage={goToLastPage}
+							pageNumber={pageNumber}
+							totalPageCount={totalPageCount}
+						/>
+						<HierarchyView
+							hierarchyData={Hierarchy}
+							setStatus={setStatusHandler}
+						/>
+						<SubEventView
+							subEventItems={subEvents}
+							setStatus={setStatusHandler}
+							onGetSubEvents={getSubEventData}
+						/>
+					</div>
 				</div>
 			</div>
-		</div>
+		</EventContext>
 	);
 }
 
