@@ -21,7 +21,7 @@ const SubEventViewItem = (props) => {
 			<ExpandSubEvents
 				id={props.id}
 				subEvents={props.subEvents}
-				onGetSubEvents={props.getSubEvents}
+				// onGetSubEvents={props.getSubEvents}
 			/>
 			<TaskTime time={props.startTime} />
 			<TaskTime time={props.endTime} />

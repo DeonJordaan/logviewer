@@ -28,7 +28,7 @@ const TaskViewItem = (props) => {
 			<ExpandSubEvents
 				id={props.id}
 				subEvents={props.subEvents}
-				onGetSubEvents={props.getSubEvents}
+				// onGetSubEvents={props.getSubEvents}
 			/>
 			<div className={'id'}>{props.id}</div>
 			<div className={'message'}>{props.message}</div>

@@ -12,31 +12,39 @@ import EventContext from './Context/event-context';
 
 function App() {
 	const eventCtx = useContext(EventContext);
+
+	const currentPage = eventCtx.pageNumber;
+	const getEventDataHere = eventCtx.getEventData;
 	// const [tasks, setTasks] = useState([]);
 	// const [isLoading, setIsLoading] = useState(false);
 	// const [error, setError] = useState(null);
 	// const [totalRecordCount, setTotalRecordCount] = useState([]);
 
 	//NOTE Pagination control
-	const [pageNumber, setPageNumber] = useState(1);
+	// const [pageNumber, setPageNumber] = useState(1);
 
 	const totalPageCount = Math.ceil(eventCtx.totalRecordCount / 10);
 
 	const getNextPage = () => {
-		setPageNumber((page) => page + 1);
+		eventCtx.setPageNumber((page) => page + 1);
+		console.log(eventCtx.pageNumber);
 	};
 
 	const getPrevPage = () => {
-		setPageNumber((page) => page - 1);
+		eventCtx.setPageNumber((page) => page - 1);
 	};
 
 	const goToFirstPage = () => {
-		setPageNumber((page) => (page = 1));
+		eventCtx.setPageNumber((page) => (page = 1));
 	};
 
 	const goToLastPage = () => {
-		setPageNumber((page) => (page = totalPageCount));
+		eventCtx.setPageNumber((page) => (page = totalPageCount));
 	};
+
+	useEffect(() => {
+		getEventDataHere();
+	}, [getEventDataHere, currentPage]);
 
 	//NOTE Fetch data, sort and set tasks
 	// const getEventData = useCallback(async () => {
@@ -82,10 +90,10 @@ function App() {
 
 	useEffect(() => {
 		eventCtx.getEventData();
-	}, [pageNumber]);
+	}, []);
 
 	//NOTE Fetch data, sort and set subEvents
-	const [subEvents, setSubEvents] = useState([]);
+	// const [subEvents, setSubEvents] = useState([]);
 
 	const [Hierarchy, setHierarchy] = useState({});
 
@@ -97,38 +105,37 @@ function App() {
 	// useEffect(() => setHierarchy(selectedTask), [selectedTask]);
 
 	/////////////////////////
-	// Fetch sub-event data and extract selected event data to insert in hierarchy view
+	// // Fetch sub-event data and extract selected event data to insert in hierarchy view
 
-	const getSubEventData = async (id) => {
-		console.log(id);
-		const parentId = id;
-		// const parentId = id.toString();
+	// const getSubEventData = async (id) => {
+	// 	console.log(id);
+	// 	const parentId = id;
 
-		const response = await fetch(
-			// `http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=15001`
-			`http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=${parentId}`
-		);
+	// 	const response = await fetch(
+	// 		// `http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=15001`
+	// 		`http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=${parentId}`
+	// 	);
 
-		const data = await response.json();
-		const allData = data.Data;
+	// 	const data = await response.json();
+	// 	const allData = data.Data;
 
-		const subEventTasks = allData.map((taskData) => {
-			return {
-				key: taskData.Id,
-				id: taskData.Id,
-				app: taskData.AppName,
-				taskCode: taskData.Code,
-				startTime: taskData.Started,
-				endTime: taskData.Completed,
-				subEvents: taskData.SubEventCount,
-				host: taskData.Host,
-				message: taskData.Message,
-				status: taskData.Status,
-			};
-		});
+	// 	const subEventTasks = allData.map((taskData) => {
+	// 		return {
+	// 			key: taskData.Id,
+	// 			id: taskData.Id,
+	// 			app: taskData.AppName,
+	// 			taskCode: taskData.Code,
+	// 			startTime: taskData.Started,
+	// 			endTime: taskData.Completed,
+	// 			subEvents: taskData.SubEventCount,
+	// 			host: taskData.Host,
+	// 			message: taskData.Message,
+	// 			status: taskData.Status,
+	// 		};
+	// 	});
 
-		setSubEvents(subEventTasks);
-	};
+	// 	setSubEvents(subEventTasks);
+	// };
 
 	// setSubEvents(allData);
 	// useEffect(() => setSubEvents(subEventTasks), [subEventTasks]);
@@ -151,56 +158,54 @@ function App() {
 	// //NOTE Define taskContent
 	let taskContent = <p>'No data found'</p>;
 
-	if (tasks.length > 0) {
+	if (eventCtx.tasks.length > 0) {
 		taskContent = (
 			<TaskView
-				taskItems={tasks}
+				taskItems={eventCtx.tasks}
 				setStatus={setStatusHandler}
-				onGetSubEvents={getSubEventData}
+				// onGetSubEvents={eventCtx.getSubEventData}
 			/>
 		);
 	}
 
-	if (error) {
-		taskContent = <p>{error}</p>;
+	if (eventCtx.error) {
+		taskContent = <p>{eventCtx.error}</p>;
 	}
 
-	if (isLoading) {
+	if (eventCtx.isLoading) {
 		taskContent = <p>Loading...</p>;
 	}
 
 	return (
-		<EventContext>
-			<div className="App">
-				<Header />
-				<div className="display">
-					<FilterBoard
-						onGetData={getEventData}
-						totalRecords={totalRecordCount}
+		<div className="App">
+			<Header />
+			<div className="display">
+				<FilterBoard
+					// onGetData={eventCtx.getEventData}
+					totalRecords={eventCtx.totalRecordCount}
+				/>
+				<div>
+					<section>{taskContent}</section>
+					<Pagination
+						nextPage={getNextPage}
+						prevPage={getPrevPage}
+						firstPage={goToFirstPage}
+						lastPage={goToLastPage}
+						// pageNumber={eventCtx.pageNumber}
+						totalPageCount={totalPageCount}
 					/>
-					<div>
-						<section>{taskContent}</section>
-						<Pagination
-							nextPage={getNextPage}
-							prevPage={getPrevPage}
-							firstPage={goToFirstPage}
-							lastPage={goToLastPage}
-							pageNumber={pageNumber}
-							totalPageCount={totalPageCount}
-						/>
-						<HierarchyView
-							hierarchyData={Hierarchy}
-							setStatus={setStatusHandler}
-						/>
-						<SubEventView
-							subEventItems={subEvents}
-							setStatus={setStatusHandler}
-							onGetSubEvents={getSubEventData}
-						/>
-					</div>
+					<HierarchyView
+						hierarchyData={Hierarchy}
+						setStatus={setStatusHandler}
+					/>
+					<SubEventView
+						subEventItems={eventCtx.subEvents}
+						setStatus={setStatusHandler}
+						// onGetSubEvents={eventCtx.getSubEventData}
+					/>
 				</div>
 			</div>
-		</EventContext>
+		</div>
 	);
 }
 

@@ -15,7 +15,7 @@ const FilterBoard = (props) => {
 				<SearchBar />
 				<PushButton
 					className={classes['push-button']}
-					onClick={props.onGetData}
+					// onClick={props.onGetData}
 				/>
 				<TotalRecordCount totalRecordCount={totalRecordCount} />
 				{/* <TotalRecordCount totalRecords={props.totalRecords} /> */}

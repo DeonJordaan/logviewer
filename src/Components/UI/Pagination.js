@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+import EventContext from '../../Context/event-context';
 
 import Button from '../ButtonBar/Button';
 
 import classes from './Pagination.module.css';
 
 const ButtonBar = (props) => {
+	const eventCtx = useContext(EventContext);
 	// const totalPageCount = Math.ceil(props.totalRecordCount / 10);
 
 	// const [pageNumber, setPageNumber] = useState(props.pageNumber);
 	// const [pageNumber, setPageNumber] = useState(1);
 
 	// props.setPageNum(pageNumber);
-
 	// console.log(pageNumber);
 
 	// const getNextPage = () => {
@@ -29,7 +31,7 @@ const ButtonBar = (props) => {
 				totalRecordCount={props.totalRecordCount}
 			/> */}
 			<div className="current-page">
-				Page {props.pageNumber} of {props.totalPageCount}
+				Page {eventCtx.pageNumber} of {props.totalPageCount}
 			</div>
 			<Button onClick={props.nextPage} className={'rightArrow'} />
 			<Button onClick={props.lastPage} className={'doubleRightArrow'} />

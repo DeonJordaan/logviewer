@@ -18,7 +18,7 @@ const TaskView = (props) => {
 					startTime={task.startTime}
 					endTime={task.endTime}
 					message={task.message}
-					getSubEvents={props.onGetSubEvents}
+					// getSubEvents={props.onGetSubEvents}
 					status={props.setStatus(task.status)}
 				/>
 			))}

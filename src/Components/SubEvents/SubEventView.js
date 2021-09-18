@@ -19,7 +19,7 @@ const SubEventView = (props) => {
 					endTime={task.endTime}
 					id={task.id}
 					message={task.message}
-					getSubEvents={props.onGetSubEvents}
+					// getSubEvents={props.onGetSubEvents}
 				/>
 			))}
 		</ul>

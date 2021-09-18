@@ -1,6 +1,12 @@
+import React, { useContext } from 'react';
+
 import classes from './ExpandSubEvents.module.css';
 
+import EventContext from '../../Context/event-context';
+
 const ExpandSubEvents = (props) => {
+	const eventCtx = useContext(EventContext);
+
 	let importedClasses = `${classes['sub-event-button']}`;
 
 	if (props.subEvents === 0) {
@@ -9,7 +15,7 @@ const ExpandSubEvents = (props) => {
 
 	const findParentId = () => {
 		console.log(props.id);
-		props.onGetSubEvents(props.id);
+		eventCtx.getSubEvents(props.id);
 	};
 	// console.log(props.subEvents);
 
