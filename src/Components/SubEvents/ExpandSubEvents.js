@@ -13,15 +13,16 @@ const ExpandSubEvents = (props) => {
 		importedClasses = `${classes['no-sub-events']}`;
 	}
 
-	const findParentId = () => {
+	const parentIdHandler = () => {
 		console.log(props.id);
-		eventCtx.getSubEvents(props.id);
+		eventCtx.setParentId(props.id);
+		// eventCtx.getSubEventData();
 	};
 	// console.log(props.subEvents);
 
 	return (
 		// <div>
-		<button onClick={findParentId} className={importedClasses}>
+		<button onClick={parentIdHandler} className={importedClasses}>
 			{props.subEvents}
 		</button>
 		// </div>

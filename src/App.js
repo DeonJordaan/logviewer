@@ -13,87 +13,9 @@ import EventContext from './Context/event-context';
 function App() {
 	const eventCtx = useContext(EventContext);
 
-	const currentPage = eventCtx.pageNumber;
-	const getEventDataHere = eventCtx.getEventData;
-	// const [tasks, setTasks] = useState([]);
-	// const [isLoading, setIsLoading] = useState(false);
-	// const [error, setError] = useState(null);
-	// const [totalRecordCount, setTotalRecordCount] = useState([]);
-
-	//NOTE Pagination control
-	// const [pageNumber, setPageNumber] = useState(1);
-
-	const totalPageCount = Math.ceil(eventCtx.totalRecordCount / 10);
-
-	const getNextPage = () => {
-		eventCtx.setPageNumber((page) => page + 1);
-		console.log(eventCtx.pageNumber);
-	};
-
-	const getPrevPage = () => {
-		eventCtx.setPageNumber((page) => page - 1);
-	};
-
-	const goToFirstPage = () => {
-		eventCtx.setPageNumber((page) => (page = 1));
-	};
-
-	const goToLastPage = () => {
-		eventCtx.setPageNumber((page) => (page = totalPageCount));
-	};
-
-	useEffect(() => {
-		getEventDataHere();
-	}, [getEventDataHere, currentPage]);
-
-	//NOTE Fetch data, sort and set tasks
-	// const getEventData = useCallback(async () => {
-	// 	setIsLoading(true);
-	// 	setError(null);
-	// 	try {
-	// 		const response = await fetch(
-	// 			`http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=${pageNumber}&pageSize=10&hostname=`
-	// 			// `http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=2&pageSize=10&hostname=`
-	// 		);
-
-	// 		if (!response.ok) {
-	// 			throw new Error('Could not retrieve data');
-	// 		}
-
-	// 		const data = await response.json();
-
-	// 		const { Data: allData, TotalRecordCount: recordCount } = data;
-
-	// 		const allTasks = allData.map((taskData) => {
-	// 			return {
-	// 				key: taskData.Id,
-	// 				id: taskData.Id,
-	// 				App: taskData.AppName,
-	// 				taskCode: taskData.Code,
-	// 				startTime: taskData.Started,
-	// 				endTime: taskData.Completed,
-	// 				subEvents: taskData.SubEventCount,
-	// 				host: taskData.Host,
-	// 				message: taskData.Message,
-	// 				status: taskData.Status,
-	// 			};
-	// 		});
-
-	// 		setTasks(allTasks);
-	// 		setTotalRecordCount(recordCount);
-	// 	} catch (error) {
-	// 		console.log('Error');
-	// 		setError(error.message);
-	// 	}
-	// 	setIsLoading(false);
-	// }, [pageNumber]);
-
 	useEffect(() => {
 		eventCtx.getEventData();
 	}, []);
-
-	//NOTE Fetch data, sort and set subEvents
-	// const [subEvents, setSubEvents] = useState([]);
 
 	const [Hierarchy, setHierarchy] = useState({});
 
@@ -104,46 +26,7 @@ function App() {
 
 	// useEffect(() => setHierarchy(selectedTask), [selectedTask]);
 
-	/////////////////////////
-	// // Fetch sub-event data and extract selected event data to insert in hierarchy view
-
-	// const getSubEventData = async (id) => {
-	// 	console.log(id);
-	// 	const parentId = id;
-
-	// 	const response = await fetch(
-	// 		// `http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=15001`
-	// 		`http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=${parentId}`
-	// 	);
-
-	// 	const data = await response.json();
-	// 	const allData = data.Data;
-
-	// 	const subEventTasks = allData.map((taskData) => {
-	// 		return {
-	// 			key: taskData.Id,
-	// 			id: taskData.Id,
-	// 			app: taskData.AppName,
-	// 			taskCode: taskData.Code,
-	// 			startTime: taskData.Started,
-	// 			endTime: taskData.Completed,
-	// 			subEvents: taskData.SubEventCount,
-	// 			host: taskData.Host,
-	// 			message: taskData.Message,
-	// 			status: taskData.Status,
-	// 		};
-	// 	});
-
-	// 	setSubEvents(subEventTasks);
-	// };
-
-	// setSubEvents(allData);
-	// useEffect(() => setSubEvents(subEventTasks), [subEventTasks]);
-
-	// const selectedTask = tasks.filter(
-	// 	(task) => task.id === parseInt(parentId)
-	// );
-
+	//FIXME => MOVE STATUS HANDLING TO A COMPONENT...?
 	const setStatusHandler = (statusCode) => {
 		const status = {
 			0: 'NotSet',
@@ -155,7 +38,7 @@ function App() {
 		return status[statusCode];
 	};
 
-	// //NOTE Define taskContent
+	//NOTE Define taskContent
 	let taskContent = <p>'No data found'</p>;
 
 	if (eventCtx.tasks.length > 0) {
@@ -163,7 +46,7 @@ function App() {
 			<TaskView
 				taskItems={eventCtx.tasks}
 				setStatus={setStatusHandler}
-				// onGetSubEvents={eventCtx.getSubEventData}
+				// onGetSubEvents={eventCtx.getSubEventData} //TODO DELETE ONCE CONTEXT WORKING CORRECTLY
 			/>
 		);
 	}
@@ -176,23 +59,27 @@ function App() {
 		taskContent = <p>Loading...</p>;
 	}
 
+	//TODO => SET CONTENT FOR HIERARCHY
+
+	//TODO => SET CONTENT FOR SUB-EVENTS
+
 	return (
 		<div className="App">
 			<Header />
 			<div className="display">
 				<FilterBoard
-					// onGetData={eventCtx.getEventData}
+					// onGetData={eventCtx.getEventData} //TODO DELETE ONCE CONTEXT WORKING CORRECTLY
 					totalRecords={eventCtx.totalRecordCount}
 				/>
 				<div>
 					<section>{taskContent}</section>
 					<Pagination
-						nextPage={getNextPage}
-						prevPage={getPrevPage}
-						firstPage={goToFirstPage}
-						lastPage={goToLastPage}
-						// pageNumber={eventCtx.pageNumber}
-						totalPageCount={totalPageCount}
+					// nextPage={getNextPage}
+					// prevPage={getPrevPage}
+					// firstPage={goToFirstPage}
+					// lastPage={goToLastPage}
+					// pageNumber={eventCtx.pageNumber} //TODO DELETE ONCE CONTEXT WORKING CORRECTLY
+					// totalPageCount={totalPageCount}
 					/>
 					<HierarchyView
 						hierarchyData={Hierarchy}
@@ -201,7 +88,7 @@ function App() {
 					<SubEventView
 						subEventItems={eventCtx.subEvents}
 						setStatus={setStatusHandler}
-						// onGetSubEvents={eventCtx.getSubEventData}
+						// onGetSubEvents={eventCtx.getSubEventData} //TODO DELETE ONCE CONTEXT WORKING CORRECTLY
 					/>
 				</div>
 			</div>
@@ -211,37 +98,76 @@ function App() {
 
 export default App;
 
+//NOTE POSSIBLE FIXME Fetch request moved to EventContext
+
+// const [tasks, setTasks] = useState([]);
+// const [isLoading, setIsLoading] = useState(false);
+// const [error, setError] = useState(null);
+// const [totalRecordCount, setTotalRecordCount] = useState([]);
+
+//NOTE Fetch data, sort and set tasks
+// const getEventData = useCallback(async () => {
+// 	setIsLoading(true);
+// 	setError(null);
+// 	try {
+// 		const response = await fetch(
+// 			`http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=${pageNumber}&pageSize=10&hostname=`
+// 			// `http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=2&pageSize=10&hostname=`
+// 		);
+
+// 		if (!response.ok) {
+// 			throw new Error('Could not retrieve data');
+// 		}
+
+// 		const data = await response.json();
+
+// 		const { Data: allData, TotalRecordCount: recordCount } = data;
+
+// 		const allTasks = allData.map((taskData) => {
+// 			return {
+// 				key: taskData.Id,
+// 				id: taskData.Id,
+// 				App: taskData.AppName,
+// 				taskCode: taskData.Code,
+// 				startTime: taskData.Started,
+// 				endTime: taskData.Completed,
+// 				subEvents: taskData.SubEventCount,
+// 				host: taskData.Host,
+// 				message: taskData.Message,
+// 				status: taskData.Status,
+// 			};
+// 		});
+
+// 		setTasks(allTasks);
+// 		setTotalRecordCount(recordCount);
+// 	} catch (error) {
+// 		console.log('Error');
+// 		setError(error.message);
+// 	}
+// 	setIsLoading(false);
+// }, [pageNumber]);
+
 /////////////////////////
-// Fetch sub-event data and extract selected event data to insert in hierarchy view
-// async function getSubEventData(e) {
-// 	const parentData = e.target.parentElement;
-// 	// console.log(parentData);
-// 	const parentElement = parentData.closest('.task-item');
-// 	// const parentElement = parentData.closest('.sub-event-item');
-// 	// console.log(parentElement);
-// 	const parentIdElement = parentElement.querySelector('.id');
-// 	const parentId = parentIdElement.innerText;
+//NOTE Fetch data, sort and set subEvents
+// const [subEvents, setSubEvents] = useState([]);
 
-// 	const selectedTask = tasks.filter(
-// 		(task) => task.id === parseInt(parentId)
-// 	);
+// // Fetch sub-event data and extract selected event data to insert in hierarchy view
 
-// 	// console.log(selectedTask[0]);
-
-// 	setHierarchy(selectedTask[0]);
-
-// 	// console.log(Hierarchy);
+// const getSubEventData = async (id) => {
+// 	console.log(id);
+// 	const parentId = id;
 
 // 	const response = await fetch(
+// 		// `http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=15001`
 // 		`http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=${parentId}`
 // 	);
 
 // 	const data = await response.json();
-
 // 	const allData = data.Data;
 
-// 	const allTasks = allData.map((taskData) => {
+// 	const subEventTasks = allData.map((taskData) => {
 // 		return {
+// 			key: taskData.Id,
 // 			id: taskData.Id,
 // 			app: taskData.AppName,
 // 			taskCode: taskData.Code,
@@ -253,4 +179,13 @@ export default App;
 // 			status: taskData.Status,
 // 		};
 // 	});
-// 	setSubEvents(allTasks);
+
+// 	setSubEvents(subEventTasks);
+// };
+
+// setSubEvents(allData);
+// useEffect(() => setSubEvents(subEventTasks), [subEventTasks]);
+
+// const selectedTask = tasks.filter(
+// 	(task) => task.id === parseInt(parentId)
+// );
