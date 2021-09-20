@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 
 import './App.css';
 
@@ -11,22 +11,15 @@ import SubEventView from './Components/SubEvents/SubEventView';
 import EventContext from './Context/event-context';
 
 function App() {
+	//FIXME
+
 	const eventCtx = useContext(EventContext);
 
 	useEffect(() => {
 		eventCtx.getEventData();
 	}, []);
 
-	const [Hierarchy, setHierarchy] = useState({});
-
-	// FIXME Trying to get setHierarchy to work via useMemo
-	// let selectedTask = useMemo(() => {
-	// 	return [];
-	// }, []);
-
-	// useEffect(() => setHierarchy(selectedTask), [selectedTask]);
-
-	//FIXME => MOVE STATUS HANDLING TO A COMPONENT...?
+	//FIXME => MOVE STATUS HANDLING TO A COMPONENT...???
 	const setStatusHandler = (statusCode) => {
 		const status = {
 			0: 'NotSet',
@@ -68,8 +61,8 @@ function App() {
 			<Header />
 			<div className="display">
 				<FilterBoard
-					// onGetData={eventCtx.getEventData} //TODO DELETE ONCE CONTEXT WORKING CORRECTLY
-					totalRecords={eventCtx.totalRecordCount}
+				// onGetData={eventCtx.getEventData} //TODO DELETE ONCE CONTEXT WORKING CORRECTLY
+				// totalRecords={eventCtx.totalRecordCount}
 				/>
 				<div>
 					<section>{taskContent}</section>
@@ -82,7 +75,7 @@ function App() {
 					// totalPageCount={totalPageCount}
 					/>
 					<HierarchyView
-						hierarchyData={Hierarchy}
+						// hierarchyData={hierarchy}
 						setStatus={setStatusHandler}
 					/>
 					<SubEventView

@@ -12,11 +12,13 @@ const EventContext = React.createContext({
 	totalRecordCount: [],
 	pageNumber: 1,
 	parentId: [],
+	hierarchy: [],
 	getEventData: () => {},
 	getSubEventData: () => {},
-	// setPageNumber: () => {},
+	// setPageNumber: () => {}, //TODO DELETE ONCE PAGINATION WORKING
 	setParentId: () => {},
 	dispatchPageNumber: () => {},
+	setHierarchy: () => {},
 });
 
 export const EventContextProvider = (props) => {
@@ -28,11 +30,24 @@ export const EventContextProvider = (props) => {
 	const [isLoadingSubEvents, setIsLoadingSubEvents] = useState(false);
 	const [subEventError, setSubEventError] = useState(null);
 	const [parentId, setParentId] = useState();
-	// const [pageNumber, setPageNumber] = useState(1);
+	const [hierarchy, setHierarchy] = useState([]);
+
+	// const [pageNumber, setPageNumber] = useState(1); //TODO DELETE ONCE PAGINATION WORKING
 
 	const [pageNumber, dispatchPageNumber] = useReducer(paginationReducer, {
-		value: 1,
+		page: 1,
 	});
+
+	//SETTING HIERARCHY
+	// FIXME Trying to get setHierarchy to work via useMemo
+	// let selectedTask = useMemo(() => {
+	// 	return [];
+	// }, []);
+
+	// const [hierarchy, setHierarchy] = useState({});
+
+	// const selectedTask = tasks.filter((task) => task.id === parseInt(parentId));
+	// useEffect(() => setHierarchy(selectedTask), [selectedTask]);
 
 	//NOTE Fetch data, sort and set tasks
 	const getEventData = useCallback(async () => {
@@ -40,7 +55,7 @@ export const EventContextProvider = (props) => {
 		setError(null);
 		try {
 			const response = await fetch(
-				`http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=${pageNumber}&pageSize=10&hostname=`
+				`http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=${pageNumber.page}&pageSize=10&hostname=`
 				// `http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=2&pageSize=10&hostname=`
 			);
 
@@ -82,9 +97,6 @@ export const EventContextProvider = (props) => {
 			setIsLoadingSubEvents(true);
 			setSubEventError(null);
 			try {
-				// console.log(id);
-				// setParentId(id);
-
 				const response = await fetch(
 					// `http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=15001`
 					`http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=${parentId}`
@@ -111,8 +123,8 @@ export const EventContextProvider = (props) => {
 						status: taskData.Status,
 					};
 				});
-
 				setSubEvents(subEventTasks);
+				// setHierarchy();
 			} catch (error) {
 				console.log('Error');
 				setSubEventError(error.message);
@@ -137,11 +149,13 @@ export const EventContextProvider = (props) => {
 				totalRecordCount: totalRecordCount,
 				getEventData: getEventData,
 				getSubEventData: getSubEventData,
-				// setPageNumber: setPageNumber,
-				pageNumber: pageNumber,
+				// setPageNumber: setPageNumber, //TODO DELETE ONCE PAGINATION WORKING
+				pageNumber: pageNumber.page,
 				dispatchPageNumber: dispatchPageNumber, //NOTE WHILE ATTEMPTING REDUCER
 				parentId: parentId,
 				setParentId: setParentId,
+				hierarchy: hierarchy,
+				setHierarchy: setHierarchy,
 			}}
 		>
 			{props.children}

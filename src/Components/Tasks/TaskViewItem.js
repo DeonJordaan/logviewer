@@ -4,9 +4,6 @@ import TaskTime from './TaskTime';
 import classes from './TaskViewItem.module.css';
 
 const TaskViewItem = (props) => {
-	//TODO PERHAPS I'M DOING THIS CLASSES THING ALL WRONG...? MUST THEY BE DECALRED WITH 'classes.whatever' ALL THE TIME...?
-	//FIXME Should I remove all the other classes? I'm probably not going to ever need them.
-
 	const status = props.status;
 
 	const classesMap = {

@@ -5,47 +5,47 @@ import Button from '../ButtonBar/Button';
 import classes from './Pagination.module.css';
 
 export const paginationReducer = (state, action) => {
-	if (action.type === 'NEXT_PAGE' && state.value < action.payload.value) {
-		return { value: state.value + 1 };
+	if (action.type === 'NEXT_PAGE' && state.page < action.payload) {
+		return { page: state.page + 1 };
 	}
 
-	if (action.type === 'PREVIOUS_PAGE' && state.value > 0) {
-		return { value: state.value - 1 };
+	if (action.type === 'PREVIOUS_PAGE' && state.page > 1) {
+		return { page: state.page - 1 };
 	}
 
 	if (action.type === 'FIRST_PAGE') {
-		return { value: 1 };
+		return { page: 1 };
 	}
 
 	if (action.type === 'LAST_PAGE') {
-		return { value: action.payload.value };
+		return { page: action.payload };
 	}
+	return { page: state.page };
 };
 
 const Pagination = (props) => {
 	const eventCtx = useContext(EventContext);
 
+	// Extracting necessary data from the EventContext
 	const currentPage = eventCtx.pageNumber;
 	const getEventDataHere = eventCtx.getEventData;
-
 	const totalPageCount = Math.ceil(eventCtx.totalRecordCount / 10);
 
+	// Pagination Functions
 	const getNextPage = () => {
 		eventCtx.dispatchPageNumber({
 			type: 'NEXT_PAGE',
 			payload: totalPageCount,
 		});
-		// eventCtx.setPageNumber((page) => page + 1);
 	};
 
 	const getPrevPage = () => {
+		console.log(eventCtx.pageNumber);
 		eventCtx.dispatchPageNumber({ type: 'PREVIOUS_PAGE' });
-		// eventCtx.setPageNumber((page) => page - 1);
 	};
 
 	const goToFirstPage = () => {
 		eventCtx.dispatchPageNumber({ type: 'FIRST_PAGE' });
-		// eventCtx.setPageNumber((page) => (page = 1));
 	};
 
 	const goToLastPage = () => {
@@ -53,7 +53,6 @@ const Pagination = (props) => {
 			type: 'LAST_PAGE',
 			payload: totalPageCount,
 		});
-		// eventCtx.setPageNumber((page) => (page = totalPageCount));
 	};
 
 	useEffect(() => {

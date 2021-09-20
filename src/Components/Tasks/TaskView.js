@@ -6,7 +6,7 @@ import classes from './TaskView.module.css';
 const TaskView = (props) => {
 	return (
 		<ul className={classes['task-view']}>
-			<TaskViewHeader headers={props.taskItems} />
+			<TaskViewHeader />
 			{props.taskItems.map((task) => (
 				<TaskViewItem
 					key={task.key}

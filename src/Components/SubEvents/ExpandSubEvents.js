@@ -14,18 +14,12 @@ const ExpandSubEvents = (props) => {
 	}
 
 	const parentIdHandler = () => {
-		console.log(props.id);
 		eventCtx.setParentId(props.id);
-		// eventCtx.getSubEventData();
 	};
-	// console.log(props.subEvents);
-
 	return (
-		// <div>
 		<button onClick={parentIdHandler} className={importedClasses}>
 			{props.subEvents}
 		</button>
-		// </div>
 	);
 };
 

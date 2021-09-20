@@ -9,7 +9,7 @@ const SubEventView = (props) => {
 	return (
 		<ul className={classes['sub-event-view']}>
 			<h3 className={classes['sub-event-header']}>Event Details</h3>
-			<SubEventViewColumnHeader headers={props.taskItems} />
+			<SubEventViewColumnHeader />
 			{items.map((task) => (
 				<SubEventViewItem
 					key={task.key}

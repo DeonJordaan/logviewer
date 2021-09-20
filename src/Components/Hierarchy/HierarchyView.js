@@ -4,9 +4,10 @@ import HierarchyViewItem from './HierarchyViewItem';
 import classes from './HierarchyView.module.css';
 
 const HierarchyView = (props) => {
-	const app = props.hierarchyData.App;
-	const host = props.hierarchyData.host;
-	// const status =
+	// const app = props.hierarchyData.App;
+	const app = 'app';
+	// const host = props.hierarchyData.host;
+	const host = 'host';
 
 	return (
 		<div className={classes['hierarchy-view']}>
