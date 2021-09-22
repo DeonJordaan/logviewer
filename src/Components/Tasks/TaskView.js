@@ -1,3 +1,5 @@
+import React from 'react';
+
 import TaskViewItem from './TaskViewItem';
 import TaskViewHeader from './TaskViewHeader';
 
@@ -26,4 +28,4 @@ const TaskView = (props) => {
 	);
 };
 
-export default TaskView;
+export default React.memo(TaskView);

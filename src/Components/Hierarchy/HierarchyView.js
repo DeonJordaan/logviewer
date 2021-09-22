@@ -1,12 +1,18 @@
+import React, { useContext } from 'react';
+
 import HierarchyViewColumnHeader from './HierarchyViewColumnHeader';
 import HierarchyViewItem from './HierarchyViewItem';
 
 import classes from './HierarchyView.module.css';
+import EventContext from '../../Context/event-context';
 
 const HierarchyView = (props) => {
-	// const app = props.hierarchyData.App;
-	const app = 'app';
-	// const host = props.hierarchyData.host;
+	const eventCtx = useContext(EventContext);
+	console.log(eventCtx);
+
+	// const app = eventCtx.hierarchy[0].App;
+	const app = 'App';
+	// const host = eventCtx.hierarchy[0].host;
 	const host = 'host';
 
 	return (
@@ -20,17 +26,17 @@ const HierarchyView = (props) => {
 			</h3>
 			<HierarchyViewColumnHeader />
 			<HierarchyViewItem
-				// status={props.setStatus(props.hierarchyData.status)}
-				// subEvent={props.hierarchyData}
-				// startTime={props.hierarchyData.startTime}
-				// endTime={props.hierarchyData.endTime}
-				// id={props.hierarchyData.id}
-				// message={props.hierarchyData.message}
-				eventDetails={props.hierarchyData}
-				setStatus={props.setStatus}
+			// status={props.setStatus(props.hierarchyData.status)}
+			// subEvent={props.hierarchyData}
+			// startTime={props.hierarchyData.startTime}
+			// endTime={props.hierarchyData.endTime}
+			// id={props.hierarchyData.id}
+			// message={props.hierarchyData.message}
+			// eventDetails={props.hierarchyData}
+			// setStatus={props.setStatus}
 			/>
 		</div>
 	);
 };
 
-export default HierarchyView;
+export default React.memo(HierarchyView);

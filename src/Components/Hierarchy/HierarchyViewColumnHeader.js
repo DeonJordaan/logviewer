@@ -1,3 +1,4 @@
+import React from 'react';
 import classes from './HierarchyViewColumnHeader.module.css';
 
 const HierarchyViewColumnHeader = () => {

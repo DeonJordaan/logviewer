@@ -15,9 +15,10 @@ function App() {
 
 	const eventCtx = useContext(EventContext);
 
-	useEffect(() => {
-		eventCtx.getEventData();
-	}, []);
+	//TODO Do I need this initial useEffect for some reason? Initial load seems to work
+	// useEffect(() => {
+	// 	eventCtx.getEventData();
+	// }, []);
 
 	//FIXME => MOVE STATUS HANDLING TO A COMPONENT...???
 	const setStatusHandler = (statusCode) => {
@@ -31,7 +32,7 @@ function App() {
 		return status[statusCode];
 	};
 
-	//NOTE Define taskContent
+	//NOTE Define TaskView Content
 	let taskContent = <p>'No data found'</p>;
 
 	if (eventCtx.tasks.length > 0) {
@@ -53,8 +54,10 @@ function App() {
 	}
 
 	//TODO => SET CONTENT FOR HIERARCHY
+	//NOTE Define HierarchyView Content
 
 	//TODO => SET CONTENT FOR SUB-EVENTS
+	//NOTE Define SubEventView Content
 
 	return (
 		<div className="App">
@@ -75,11 +78,11 @@ function App() {
 					// totalPageCount={totalPageCount}
 					/>
 					<HierarchyView
-						// hierarchyData={hierarchy}
-						setStatus={setStatusHandler}
+					// hierarchyData={hierarchy}
+					// setStatus={setStatusHandler}
 					/>
 					<SubEventView
-						subEventItems={eventCtx.subEvents}
+						// subEventItems={eventCtx.subEvents}
 						setStatus={setStatusHandler}
 						// onGetSubEvents={eventCtx.getSubEventData} //TODO DELETE ONCE CONTEXT WORKING CORRECTLY
 					/>

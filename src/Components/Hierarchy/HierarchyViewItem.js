@@ -1,29 +1,17 @@
-import { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useCallback } from 'react';
 import EventContext from '../../Context/event-context';
 // import TaskTime from '../Tasks/TaskTime';
 
 import classes from './HierarchyViewItem.module.css';
 
 const HierarchyViewItem = (props) => {
-	// const status = props.setStatus(props.eventDetails.status);
-	// const subEvents = props.eventDetails.subEvents;
-	// const startTime = props.eventDetails.startTime;
-	// const endTime = props.eventDetails.endTime;
-	// const message = props.eventDetails.message;
+	// const eventCtx = useContext(EventContext);
 
-	const eventCtx = useContext(EventContext);
-	const setHierarchyHere = eventCtx.setHierarchy;
-
-	const selectedTask = eventCtx.tasks.filter(
-		(task) => task.id === parseInt(eventCtx.parentId)
-	);
-	console.log(selectedTask);
-
-	//FIXME THIS IS CAUSING AN INFINITE LOOP, BUT I AM GETTING THE REQUIRED EVENT DATA FOR THE HIERARCHYVIEW....WORK TO DO, THEN!
-	useEffect(
-		() => setHierarchyHere(selectedTask),
-		[setHierarchyHere, selectedTask]
-	);
+	// const status = props.setStatus(eventCtx.hierarchy[0].status);
+	// const subEvents = eventCtx.hierarchy[0].subEvents;
+	// const startTime = eventCtx.hierarchy[0].startTime;
+	// const endTime = eventCtx.hierarchy[0].endTime;
+	// const message = eventCtx.hierarchy[0].message;
 
 	return (
 		<div className={classes['hierarchy-item']}>
@@ -33,11 +21,34 @@ const HierarchyViewItem = (props) => {
 			<div>subEvents</div>
 			{/* <TaskTime time={startTime} /> */}
 			<div>startTime</div>
+			{/* <div>{startTime}</div> */}
 			{/* <TaskTime time={endTime} /> */}
 			<div>endTime</div>
+			{/* <div>{endTime}</div> */}
 			<div>message</div>
+			{/* <div>{message}</div> */}
 		</div>
 	);
 };
 
 export default HierarchyViewItem;
+
+//NOTE PREVIOUS ATTEMPTS TO GET HIERARCHY TO WORK
+// const setHierarchyHere = eventCtx.setHierarchy;
+// const parentIdHere = eventCtx.parentId;
+
+// const selectedTask = useCallback(() => {
+// 	eventCtx.tasks.filter(
+// 		(task) => task.id === parseInt(eventCtx.parentId)
+// 	);
+// }, [eventCtx.tasks, eventCtx.parentId]);
+// console.log(selectedTask());
+
+//FIXME THIS IS CAUSING AN INFINITE LOOP, BUT I AM GETTING THE REQUIRED EVENT DATA FOR THE HIERARCHYVIEW....WORK TO DO, THEN!
+// useEffect(
+// 	() => {
+// 		setHierarchyHere(selectedTask);
+// 		console.log(eventCtx.hierarchy);
+// 	},
+// 	[setHierarchyHere, selectedTask]
+// );

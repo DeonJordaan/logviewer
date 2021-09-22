@@ -1,3 +1,4 @@
+import React from 'react';
 import ExpandSubEvents from '../SubEvents/ExpandSubEvents';
 import TaskTime from './TaskTime';
 
@@ -33,4 +34,4 @@ const TaskViewItem = (props) => {
 	);
 };
 
-export default TaskViewItem;
+export default React.memo(TaskViewItem);

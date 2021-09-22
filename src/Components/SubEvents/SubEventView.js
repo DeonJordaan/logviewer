@@ -1,10 +1,14 @@
+import React, { useContext } from 'react';
 import SubEventViewColumnHeader from './SubEventViewColumnHeader';
 import SubEventViewItem from './SubEventViewItem';
 
 import classes from './SubEventView.module.css';
+import EventContext from '../../Context/event-context';
 
 const SubEventView = (props) => {
-	const items = props.subEventItems;
+	const eventCtx = useContext(EventContext);
+
+	const items = eventCtx.subEvents;
 
 	return (
 		<ul className={classes['sub-event-view']}>

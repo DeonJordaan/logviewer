@@ -1,3 +1,6 @@
+// import { useContext } from 'react';
+// import EventContext from '../../Context/event-context';
+import React from 'react';
 import TaskTime from '../Tasks/TaskTime';
 import ExpandSubEvents from './ExpandSubEvents';
 
@@ -5,6 +8,8 @@ import classes from './SubEventViewItem.module.css';
 
 const SubEventViewItem = (props) => {
 	//Extract status in order to set className. Classes are identical to status description.
+	// const eventCtx = useContext(EventContext);
+
 	const status = props.status;
 
 	const classesMap = {
@@ -32,27 +37,3 @@ const SubEventViewItem = (props) => {
 };
 
 export default SubEventViewItem;
-
-//NOTE Alternate return statement with more classNames
-// return (
-// 	<li className={classes['sub-event-item']}>
-// 		<div className={combinedClasses}>{props.status}</div>
-// 		<ExpandSubEvents
-// 			id={props.id}
-// 			className={classes['sub-events']}
-// 			subEvents={props.subEvents}
-// 			onGetSubEvents={props.getSubEvents}
-// 		/>
-// 		<TaskTime
-// 			className={classes['sub-events']}
-// 			time={props.startTime}
-// 		/>
-// 		<TaskTime className={classes['sub-events']} time={props.endTime} />
-// 		<div className={`${classes['sub-events']} ${classes.id}`}>
-// 			{props.id}
-// 		</div>
-// 		<div className={`${classes['sub-events']} ${classes.message}`}>
-// 			{props.message}
-// 		</div>
-// 	</li>
-// );
