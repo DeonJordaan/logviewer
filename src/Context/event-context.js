@@ -2,21 +2,6 @@ import React, { useEffect, useState, useCallback, useReducer } from 'react';
 
 import { paginationReducer } from '../Components/UI/Pagination';
 
-const INITIAL_HIERARCHY = [
-	{
-		App: 'none',
-		endTime: 'none',
-		host: 'none',
-		id: 0,
-		key: 0,
-		message: 'none',
-		startTime: 'none',
-		status: 0,
-		subEvents: 'none',
-		taskCode: 0,
-	},
-];
-
 const EventContext = React.createContext({
 	tasks: [],
 	subEvents: [],
@@ -26,7 +11,7 @@ const EventContext = React.createContext({
 	subEventError: null,
 	totalRecordCount: [],
 	pageNumber: 1,
-	parentId: 0,
+	parentId: 1,
 	selectedTask: [],
 	hierarchy: [],
 	getEventData: () => {},
@@ -46,8 +31,34 @@ export const EventContextProvider = (props) => {
 	const [isLoadingSubEvents, setIsLoadingSubEvents] = useState(false);
 	const [subEventError, setSubEventError] = useState(null);
 	const [parentId, setParentId] = useState(0);
-	const [selectedTask, setSelectedTask] = useState([]);
-	const [hierarchy, setHierarchy] = useState([...INITIAL_HIERARCHY]);
+	const [selectedTask, setSelectedTask] = useState([
+		{
+			key: 0,
+			id: 1,
+			App: '',
+			taskCode: '',
+			startTime: '0000-00-00T00:00:00.00',
+			endTime: '0000-00-00T00:00:00.00',
+			subEvents: 0,
+			host: '',
+			message: '',
+			status: '',
+		},
+	]);
+	const [hierarchy, setHierarchy] = useState([
+		{
+			key: 0,
+			id: 1,
+			App: '',
+			taskCode: '',
+			startTime: '0000-00-00T00:00:00.00',
+			endTime: '0000-00-00T00:00:00.00',
+			subEvents: 0,
+			host: '',
+			message: '',
+			status: '',
+		},
+	]);
 	const [pageNumber, dispatchPageNumber] = useReducer(paginationReducer, {
 		page: 1,
 	});
@@ -55,9 +66,10 @@ export const EventContextProvider = (props) => {
 	console.log('RENDERING');
 
 	// useEffect(() => {
-	// 	setHierarchy(EventContext.selectedTask);
-	// 	console.log(selectedTask);
-	// }, [parentId, selectedTask]);
+	// 	setTasks(INITIAL_TASKS);
+	// 	setSelectedTask(tasks);
+	// 	setHierarchy(selectedTask);
+	// }, []);
 
 	//NOTE Fetch data, sort and set tasks
 	const getEventData = useCallback(async () => {
@@ -133,6 +145,9 @@ export const EventContextProvider = (props) => {
 				};
 			});
 			setSubEvents(subEventTasks);
+			setSelectedTask(
+				tasks.filter((task) => task.id === parseInt(parentId))
+			);
 			// console.log(parentId);
 			// setHierarchy(parentId);
 			// console.log(hierarchy);
@@ -147,18 +162,32 @@ export const EventContextProvider = (props) => {
 	}, [getSubEventData, parentId]);
 
 	//NOTE SETTING HIERARCHY
+	// const selectedTask = tasks.filter((task) => task.id === parseInt(parentId));
+
+	// console.log(selectedTask);
+	// const hierarchy = [];
+
 	// FIXME Trying to get setHierarchy to work via useMemo
 	// let selectedTask = useMemo(() => {
 	// 	return [];
 	// }, []);
 
-	useEffect(() => {
-		setSelectedTask(tasks.filter((task) => task.id === parseInt(parentId)));
-	}, [parentId, tasks]);
+	// useEffect(() => {
+	// 	setSelectedTask(
+	// 		tasks?.filter((task) => task.id === parseInt(parentId))
+	// 	);
+	// }, [parentId, tasks]);
 	// const selectedTaskHandler = useCallback(() => {
 	// 	tasks.filter((task) => task.id === parseInt(parentId));
 	// 	// 	console.log(parentId);
 	// }, [tasks, parentId]);
+
+	useEffect(() => {
+		setHierarchy(selectedTask);
+	}, [selectedTask]);
+	// useEffect(() => {
+	// 	setHierarchy(() => {
+	// 		return {selectedTask}}), [selectedTask]);
 
 	return (
 		<EventContext.Provider
@@ -189,3 +218,34 @@ export const EventContextProvider = (props) => {
 };
 
 export default EventContext;
+
+//////////////////////////////////////////////
+// const INITIAL_HIERARCHY = [
+// 	{
+// 		App: 'none',
+// 		endTime: 'none',
+// 		host: 'none',
+// 		id: 0,
+// 		key: 0,
+// 		message: 'none',
+// 		startTime: 'none',
+// 		status: 0,
+// 		subEvents: 'none',
+// 		taskCode: 0,
+// 	},
+// ];
+
+// const INITIAL_TASKS = [
+// 	{
+// 		key: 0,
+// 		id: 1,
+// 		App: '',
+// 		taskCode: '',
+// 		startTime: '0000-00-00T00:00:00.00',
+// 		endTime: '0000-00-00T00:00:00.00',
+// 		subEvents: 0,
+// 		host: '',
+// 		message: '',
+// 		status: '',
+// 	},
+// ];

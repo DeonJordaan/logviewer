@@ -11,26 +11,26 @@ const ExpandSubEvents = (props) => {
 
 	const id = props.id;
 
-	// console.log(eventCtx.parentId);
-	// console.log(props.id);
-
 	let importedClasses = `${classes['sub-event-button']}`;
 
 	if (props.subEvents === 0) {
 		importedClasses = `${classes['no-sub-events']}`;
 	}
 
-	// const onGetsubEvent = eventCtx.getSubEventData(props.id);
-
-	const parentIdHandler = useMemo(() => {
+	const parentIdHandler = async () => {
 		setParentId(id);
-		// console.log(eventCtx.tasks);
-		// console.log(eventCtx.hierarchy);
-		// console.log(eventCtx.hierarchy[0]);
-	}, [id, setParentId]);
+	};
+
+	// const setSelectedTaskFunction = async () => {
+	// 	await parentIdHandler()
+	// 	eventCtx.setSelectedTask(
+	// 		eventCtx.tasks.filter(
+	// 			(task) => task.id === parseInt(eventCtx.parentId)
+	// 		)
+	// 	);
+	// }
 
 	return (
-		// <button onClick={onGetsubEvent} className={importedClasses}>
 		<button onClick={parentIdHandler} className={importedClasses}>
 			{props.subEvents}
 		</button>

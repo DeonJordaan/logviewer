@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import TaskViewItem from './TaskViewItem';
 import TaskViewHeader from './TaskViewHeader';
 
 import classes from './TaskView.module.css';
+import EventContext from '../../Context/event-context';
 
 const TaskView = (props) => {
+	const eventCtx = useContext(EventContext);
+
 	console.log('TASKVIEW');
 	return (
 		<ul className={classes['task-view']}>
 			<TaskViewHeader />
-			{props.taskItems.map((task) => (
+			{eventCtx.tasks.map((task) => (
 				<TaskViewItem
 					key={task.key}
 					host={task.host}

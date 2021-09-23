@@ -7,14 +7,16 @@ import classes from './HierarchyView.module.css';
 import EventContext from '../../Context/event-context';
 
 const HierarchyView = (props) => {
-	// const eventCtx = useContext(EventContext);
-	// console.log(eventCtx);
-	console.log('HIERARCHY');
+	const eventCtx = useContext(EventContext);
+	console.log(eventCtx);
 
-	// const app = eventCtx.hierarchy[0].App;
-	const app = 'App';
-	// const host = eventCtx.hierarchy[0].host;
-	const host = 'host';
+	const app = eventCtx.hierarchy[0].App ? eventCtx.hierarchy[0].App : 'App';
+	const host = eventCtx.hierarchy[0].host
+		? eventCtx.hierarchy[0].host
+		: 'App';
+
+	// const app = 'App';
+	// const host = 'Host';
 
 	return (
 		<div className={classes['hierarchy-view']}>
@@ -26,16 +28,7 @@ const HierarchyView = (props) => {
 				{/* Event Hierarchy Application: {app} running on Host: {host} */}
 			</h3>
 			<HierarchyViewColumnHeader />
-			<HierarchyViewItem
-			// status={props.setStatus(props.hierarchyData.status)}
-			// subEvent={props.hierarchyData}
-			// startTime={props.hierarchyData.startTime}
-			// endTime={props.hierarchyData.endTime}
-			// id={props.hierarchyData.id}
-			// message={props.hierarchyData.message}
-			// eventDetails={props.hierarchyData}
-			// setStatus={props.setStatus}
-			/>
+			{/* <HierarchyViewItem setStatus={props.status} /> */}
 		</div>
 	);
 };

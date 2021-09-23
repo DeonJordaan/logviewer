@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 
 import './App.css';
 
@@ -6,7 +6,7 @@ import Header from './Components/UI/Header';
 import FilterBoard from './Components/Filter/FilterBoard';
 import Pagination from './Components/UI/Pagination';
 import TaskView from './Components/Tasks/TaskView';
-import HierarchyView from './Components/Hierarchy/HierarchyView';
+// import HierarchyView from './Components/Hierarchy/HierarchyView';
 import SubEventView from './Components/SubEvents/SubEventView';
 import EventContext from './Context/event-context';
 
@@ -37,11 +37,7 @@ function App() {
 
 	if (eventCtx.tasks.length > 0) {
 		taskContent = (
-			<TaskView
-				taskItems={eventCtx.tasks}
-				setStatus={setStatusHandler}
-				// onGetSubEvents={eventCtx.getSubEventData} //TODO DELETE ONCE CONTEXT WORKING CORRECTLY
-			/>
+			<TaskView taskItems={eventCtx.tasks} setStatus={setStatusHandler} />
 		);
 	}
 
@@ -63,29 +59,15 @@ function App() {
 		<div className="App">
 			<Header />
 			<div className="display">
-				<FilterBoard
-				// onGetData={eventCtx.getEventData} //TODO DELETE ONCE CONTEXT WORKING CORRECTLY
-				// totalRecords={eventCtx.totalRecordCount}
-				/>
+				<FilterBoard />
 				<div>
 					<section>{taskContent}</section>
-					<Pagination
-					// nextPage={getNextPage}
-					// prevPage={getPrevPage}
-					// firstPage={goToFirstPage}
-					// lastPage={goToLastPage}
-					// pageNumber={eventCtx.pageNumber} //TODO DELETE ONCE CONTEXT WORKING CORRECTLY
-					// totalPageCount={totalPageCount}
-					/>
-					<HierarchyView
-					// hierarchyData={hierarchy}
-					// setStatus={setStatusHandler}
-					/>
-					<SubEventView
-						// subEventItems={eventCtx.subEvents}
+					<Pagination />
+					{/* <HierarchyView
+						// hierarchyData={hierarchy}
 						setStatus={setStatusHandler}
-						// onGetSubEvents={eventCtx.getSubEventData} //TODO DELETE ONCE CONTEXT WORKING CORRECTLY
-					/>
+					/> */}
+					<SubEventView setStatus={setStatusHandler} />
 				</div>
 			</div>
 		</div>
