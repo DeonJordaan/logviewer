@@ -30,4 +30,4 @@ const SubEventView = (props) => {
 	);
 };
 
-export default SubEventView;
+export default React.memo(SubEventView);

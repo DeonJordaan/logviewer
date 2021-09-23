@@ -6,6 +6,7 @@ import TaskViewHeader from './TaskViewHeader';
 import classes from './TaskView.module.css';
 
 const TaskView = (props) => {
+	console.log('TASKVIEW');
 	return (
 		<ul className={classes['task-view']}>
 			<TaskViewHeader />
@@ -20,7 +21,6 @@ const TaskView = (props) => {
 					startTime={task.startTime}
 					endTime={task.endTime}
 					message={task.message}
-					// getSubEvents={props.onGetSubEvents}
 					status={props.setStatus(task.status)}
 				/>
 			))}

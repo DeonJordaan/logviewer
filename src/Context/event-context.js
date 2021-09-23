@@ -26,7 +26,7 @@ const EventContext = React.createContext({
 	subEventError: null,
 	totalRecordCount: [],
 	pageNumber: 1,
-	parentId: [],
+	parentId: 0,
 	selectedTask: [],
 	hierarchy: [],
 	getEventData: () => {},
@@ -45,12 +45,14 @@ export const EventContextProvider = (props) => {
 	const [subEvents, setSubEvents] = useState([]);
 	const [isLoadingSubEvents, setIsLoadingSubEvents] = useState(false);
 	const [subEventError, setSubEventError] = useState(null);
-	const [parentId, setParentId] = useState([]);
+	const [parentId, setParentId] = useState(0);
 	const [selectedTask, setSelectedTask] = useState([]);
 	const [hierarchy, setHierarchy] = useState([...INITIAL_HIERARCHY]);
 	const [pageNumber, dispatchPageNumber] = useReducer(paginationReducer, {
 		page: 1,
 	});
+
+	console.log('RENDERING');
 
 	// useEffect(() => {
 	// 	setHierarchy(EventContext.selectedTask);
@@ -99,10 +101,6 @@ export const EventContextProvider = (props) => {
 		setIsLoading(false);
 	}, [pageNumber]);
 
-	// useEffect(() => {
-	// 	getEventData();
-	// }, []);
-
 	//NOTE Fetch sub-event data and extract selected event data to insert in hierarchy view
 	const getSubEventData = useCallback(async () => {
 		setIsLoadingSubEvents(true);
@@ -144,9 +142,9 @@ export const EventContextProvider = (props) => {
 		}
 	}, [parentId]);
 
-	// useEffect(() => {
-	// 	getSubEventData();
-	// }, [getSubEventData, parentId]);
+	useEffect(() => {
+		getSubEventData();
+	}, [getSubEventData, parentId]);
 
 	//NOTE SETTING HIERARCHY
 	// FIXME Trying to get setHierarchy to work via useMemo

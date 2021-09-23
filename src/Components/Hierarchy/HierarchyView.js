@@ -7,8 +7,9 @@ import classes from './HierarchyView.module.css';
 import EventContext from '../../Context/event-context';
 
 const HierarchyView = (props) => {
-	const eventCtx = useContext(EventContext);
-	console.log(eventCtx);
+	// const eventCtx = useContext(EventContext);
+	// console.log(eventCtx);
+	console.log('HIERARCHY');
 
 	// const app = eventCtx.hierarchy[0].App;
 	const app = 'App';
