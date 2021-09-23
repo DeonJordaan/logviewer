@@ -6,7 +6,7 @@ import Header from './Components/UI/Header';
 import FilterBoard from './Components/Filter/FilterBoard';
 import Pagination from './Components/UI/Pagination';
 import TaskView from './Components/Tasks/TaskView';
-// import HierarchyView from './Components/Hierarchy/HierarchyView';
+import HierarchyView from './Components/Hierarchy/HierarchyView';
 import SubEventView from './Components/SubEvents/SubEventView';
 import EventContext from './Context/event-context';
 
@@ -63,10 +63,10 @@ function App() {
 				<div>
 					<section>{taskContent}</section>
 					<Pagination />
-					{/* <HierarchyView
+					<HierarchyView
 						// hierarchyData={hierarchy}
 						setStatus={setStatusHandler}
-					/> */}
+					/>
 					<SubEventView setStatus={setStatusHandler} />
 				</div>
 			</div>

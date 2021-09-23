@@ -28,7 +28,7 @@ const HierarchyView = (props) => {
 				{/* Event Hierarchy Application: {app} running on Host: {host} */}
 			</h3>
 			<HierarchyViewColumnHeader />
-			{/* <HierarchyViewItem setStatus={props.status} /> */}
+			<HierarchyViewItem setStatus={props.setStatus} />
 		</div>
 	);
 };

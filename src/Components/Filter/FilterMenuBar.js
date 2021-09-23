@@ -9,7 +9,7 @@ const FilterMenuBar = () => {
 			<DataFilterButton text="Sales" />
 			<DataFilterButton text="SACompany" />
 			<DataFilterButton text="MetroIQ" />
-			<DataFilterButton text="AGentIQ" />
+			<DataFilterButton text="AgentIQ" />
 		</div>
 	);
 };

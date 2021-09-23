@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useCallback } from 'react';
 import EventContext from '../../Context/event-context';
-// import TaskTime from '../Tasks/TaskTime';
+import TaskTime from '../Tasks/TaskTime';
 
 import classes from './HierarchyViewItem.module.css';
 
@@ -8,6 +8,7 @@ const HierarchyViewItem = (props) => {
 	const eventCtx = useContext(EventContext);
 
 	const status = props.setStatus(eventCtx.hierarchy[0].status);
+	// const status = props.setStatus(eventCtx.hierarchy[0].status);
 	const subEvents = eventCtx.hierarchy[0].subEvents;
 	const startTime = eventCtx.hierarchy[0].startTime;
 	const endTime = eventCtx.hierarchy[0].endTime;
@@ -19,12 +20,12 @@ const HierarchyViewItem = (props) => {
 			{/* <div>status</div> */}
 			<div>{subEvents}</div>
 			{/* <div>subEvents</div> */}
-			{/* <TaskTime time={startTime} /> */}
+			<TaskTime time={startTime} />
 			{/* <div>startTime</div> */}
-			<div>{startTime}</div>
-			{/* <TaskTime time={endTime} /> */}
+			{/* <div>{startTime}</div> */}
+			<TaskTime time={endTime} />
 			{/* <div>endTime</div> */}
-			<div>{endTime}</div>
+			{/* <div>{endTime}</div> */}
 			{/* <div>message</div> */}
 			<div>{message}</div>
 		</div>
