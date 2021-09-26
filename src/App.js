@@ -9,6 +9,7 @@ import TaskView from './Components/Tasks/TaskView';
 import HierarchyView from './Components/Hierarchy/HierarchyView';
 import SubEventView from './Components/SubEvents/SubEventView';
 import EventContext from './Context/event-context';
+import Footer from './Components/UI/Footer';
 
 function App() {
 	//FIXME
@@ -70,6 +71,7 @@ function App() {
 					<SubEventView setStatus={setStatusHandler} />
 				</div>
 			</div>
+			<Footer />
 		</div>
 	);
 }

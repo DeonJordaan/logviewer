@@ -5,7 +5,7 @@ const Header = () => {
 		<div>
 			<header className={classes.header}>
 				<img
-					src="../logo-lexisnexis.png"
+					src="../logo-placeholder.png"
 					className={classes.logo}
 					alt="logo"
 				/>
