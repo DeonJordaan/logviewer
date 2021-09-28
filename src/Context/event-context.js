@@ -65,12 +65,6 @@ export const EventContextProvider = (props) => {
 
 	console.log('RENDERING');
 
-	// useEffect(() => {
-	// 	setTasks(INITIAL_TASKS);
-	// 	setSelectedTask(tasks);
-	// 	setHierarchy(selectedTask);
-	// }, []);
-
 	//NOTE Fetch data, sort and set tasks
 	const getEventData = useCallback(async () => {
 		setIsLoading(true);
@@ -148,35 +142,25 @@ export const EventContextProvider = (props) => {
 			setSelectedTask(
 				tasks.filter((task) => task.id === parseInt(parentId))
 			);
-			// console.log(parentId);
-			// setHierarchy(parentId);
-			// console.log(hierarchy);
 		} catch (error) {
 			console.log('Error');
 			setSubEventError(error.message);
 		}
-	}, [parentId]);
+	}, [parentId, tasks]);
 
 	useEffect(() => {
 		getSubEventData();
 	}, [getSubEventData, parentId]);
 
-	//NOTE SETTING HIERARCHY
+	//NOTE/FIXME ATTEMPTING TO SET HIERARCHY
 	// const selectedTask = tasks.filter((task) => task.id === parseInt(parentId));
-
-	// console.log(selectedTask);
-	// const hierarchy = [];
-
-	// FIXME Trying to get setHierarchy to work via useMemo
-	// let selectedTask = useMemo(() => {
-	// 	return [];
-	// }, []);
 
 	// useEffect(() => {
 	// 	setSelectedTask(
 	// 		tasks?.filter((task) => task.id === parseInt(parentId))
 	// 	);
 	// }, [parentId, tasks]);
+
 	// const selectedTaskHandler = useCallback(() => {
 	// 	tasks.filter((task) => task.id === parseInt(parentId));
 	// 	// 	console.log(parentId);
@@ -185,9 +169,6 @@ export const EventContextProvider = (props) => {
 	useEffect(() => {
 		setHierarchy(selectedTask);
 	}, [selectedTask]);
-	// useEffect(() => {
-	// 	setHierarchy(() => {
-	// 		return {selectedTask}}), [selectedTask]);
 
 	return (
 		<EventContext.Provider
@@ -201,9 +182,8 @@ export const EventContextProvider = (props) => {
 				totalRecordCount: totalRecordCount,
 				getEventData: getEventData,
 				getSubEventData: getSubEventData,
-				// setPageNumber: setPageNumber, //TODO DELETE ONCE PAGINATION WORKING
 				pageNumber: pageNumber.page,
-				dispatchPageNumber: dispatchPageNumber, //NOTE WHILE ATTEMPTING REDUCER
+				dispatchPageNumber: dispatchPageNumber,
 				parentId: parentId,
 				setParentId: setParentId,
 				hierarchy: hierarchy,
@@ -218,34 +198,3 @@ export const EventContextProvider = (props) => {
 };
 
 export default EventContext;
-
-//////////////////////////////////////////////
-// const INITIAL_HIERARCHY = [
-// 	{
-// 		App: 'none',
-// 		endTime: 'none',
-// 		host: 'none',
-// 		id: 0,
-// 		key: 0,
-// 		message: 'none',
-// 		startTime: 'none',
-// 		status: 0,
-// 		subEvents: 'none',
-// 		taskCode: 0,
-// 	},
-// ];
-
-// const INITIAL_TASKS = [
-// 	{
-// 		key: 0,
-// 		id: 1,
-// 		App: '',
-// 		taskCode: '',
-// 		startTime: '0000-00-00T00:00:00.00',
-// 		endTime: '0000-00-00T00:00:00.00',
-// 		subEvents: 0,
-// 		host: '',
-// 		message: '',
-// 		status: '',
-// 	},
-// ];

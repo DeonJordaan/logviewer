@@ -1,13 +1,10 @@
 .sub-event-button {
 	display: inline-block;
-	/* border: none; */
 	padding: 0.15rem 0;
 	margin: 0;
-	/* width: auto; */
 	max-height: 1.2rem;
 	border-radius: 3px;
 	border: none;
-	/* border: 0.1rem solid lightgray; */
 	text-decoration: none;
 	background: rgba(17, 153, 17, 0.75);
 	opacity: 0.75;
@@ -29,9 +26,6 @@
 .no-sub-events {
 	display: inline-block;
 	border: none;
-	/* border: 0.1rem solid lightgray; */
-	/* border: none; */
-	/* padding: 1rem 2rem; */
 	margin: 0;
 	width: auto;
 	max-height: 1.2rem;
@@ -41,9 +35,7 @@
 	color: black;
 	font-family: inherit;
 	font-size: 0.75rem;
-	/* cursor: pointer; */
 	text-align: center;
-	/* transition: background 250ms ease-in-out, transform 150ms ease; */
 	-webkit-appearance: none;
 	-moz-appearance: none;
 }

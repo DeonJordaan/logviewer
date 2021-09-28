@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
+
+import EventContext from '../../Context/event-context';
+
 import SubEventViewColumnHeader from './SubEventViewColumnHeader';
 import SubEventViewItem from './SubEventViewItem';
 
 import classes from './SubEventView.module.css';
-import EventContext from '../../Context/event-context';
 
 const SubEventView = (props) => {
 	const eventCtx = useContext(EventContext);
@@ -23,7 +25,6 @@ const SubEventView = (props) => {
 					endTime={task.endTime}
 					id={task.id}
 					message={task.message}
-					// getSubEvents={props.onGetSubEvents}
 				/>
 			))}
 		</ul>

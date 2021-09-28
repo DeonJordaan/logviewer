@@ -1,4 +1,5 @@
 import React from 'react';
+
 import ExpandSubEvents from '../SubEvents/ExpandSubEvents';
 import TaskTime from './TaskTime';
 
@@ -23,11 +24,7 @@ const TaskViewItem = (props) => {
 			<div className={'code'}>{props.taskCode}</div>
 			<TaskTime time={props.startTime} />
 			<TaskTime time={props.endTime} />
-			<ExpandSubEvents
-				id={props.id}
-				subEvents={props.subEvents}
-				// onGetSubEvents={props.getSubEvents}
-			/>
+			<ExpandSubEvents id={props.id} subEvents={props.subEvents} />
 			<div className={'id'}>{props.id}</div>
 			<div className={'message'}>{props.message}</div>
 		</li>

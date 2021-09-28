@@ -7,18 +7,12 @@ import FilterMenuBar from './FilterMenuBar';
 import classes from './Filterboard.module.css';
 
 const FilterBoard = (props) => {
-	// const totalRecordCount = props.totalRecords;
-
 	return (
 		<div className={classes['filter-board']}>
 			<Card className={classes['filter-bar']}>
 				<SearchBar />
-				<PushButton
-					className={classes['push-button']}
-					// onClick={props.onGetData}
-				/>
+				<PushButton className={classes['push-button']} />
 				<TotalRecordCount />
-				{/* <TotalRecordCount totalRecordCount={totalRecordCount} /> */}
 				<FilterMenuBar />
 			</Card>
 		</div>

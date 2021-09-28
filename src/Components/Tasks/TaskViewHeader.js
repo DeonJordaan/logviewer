@@ -1,7 +1,5 @@
 import classes from './TaskViewHeader.module.css';
 
-// import GridHeader from '../UI/GridHeader';
-
 const TaskViewHeader = () => {
 	return (
 		<div className={classes['task-header']}>

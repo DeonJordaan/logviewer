@@ -5,8 +5,6 @@
 .push-button {
 	position: relative;
 	border: none;
-	/* min-width: 320px; */
-	/* min-height: 40px; */
 	background: transparent;
 	margin: 1rem 0.5rem;
 	padding: 0;
@@ -53,11 +51,7 @@
 	padding: 5px 60px;
 	border-radius: var(--border-radius);
 	font-size: 1rem;
-	/* min-height: 40px; */
-	/* justify-content: center; */
 	color: #fff;
-	/* background: hsl(220, 1%, 45%); */
-	/* background: #525355; */
 	background: #009ddb;
 	will-change: transform;
 	transform: translateY(-4px);

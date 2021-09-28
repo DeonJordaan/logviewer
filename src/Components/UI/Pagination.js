@@ -1,7 +1,9 @@
 import React, { useEffect, useContext } from 'react';
 
 import EventContext from '../../Context/event-context';
+
 import Button from '../ButtonBar/Button';
+
 import classes from './Pagination.module.css';
 
 export const paginationReducer = (state, action) => {

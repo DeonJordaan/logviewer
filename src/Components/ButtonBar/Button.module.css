@@ -31,7 +31,6 @@
 
 .leftArrow {
 	background: url('../svg/leftArrow.svg') left top no-repeat;
-	/* background: url('../svg/leftArrow.svg') left top no-repeat; */
 	background-size: 80px 30px;
 	background-color: #ededed;
 }

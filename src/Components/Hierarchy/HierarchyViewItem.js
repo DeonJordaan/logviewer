@@ -1,5 +1,7 @@
-import React, { useEffect, useContext, useCallback } from 'react';
+import React, { useContext } from 'react';
+
 import EventContext from '../../Context/event-context';
+
 import ExpandSubEvents from '../SubEvents/ExpandSubEvents';
 import TaskTime from '../Tasks/TaskTime';
 
@@ -42,23 +44,3 @@ const HierarchyViewItem = (props) => {
 };
 
 export default HierarchyViewItem;
-
-//NOTE PREVIOUS ATTEMPTS TO GET HIERARCHY TO WORK
-// const setHierarchyHere = eventCtx.setHierarchy;
-// const parentIdHere = eventCtx.parentId;
-
-// const selectedTask = useCallback(() => {
-// 	eventCtx.tasks.filter(
-// 		(task) => task.id === parseInt(eventCtx.parentId)
-// 	);
-// }, [eventCtx.tasks, eventCtx.parentId]);
-// console.log(selectedTask());
-
-//FIXME THIS IS CAUSING AN INFINITE LOOP, BUT I AM GETTING THE REQUIRED EVENT DATA FOR THE HIERARCHYVIEW....WORK TO DO, THEN!
-// useEffect(
-// 	() => {
-// 		setHierarchyHere(selectedTask);
-// 		console.log(eventCtx.hierarchy);
-// 	},
-// 	[setHierarchyHere, selectedTask]
-// );

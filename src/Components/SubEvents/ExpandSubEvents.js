@@ -1,8 +1,8 @@
-import React, { useMemo, useContext } from 'react';
-
-import classes from './ExpandSubEvents.module.css';
+import React, { useContext } from 'react';
 
 import EventContext from '../../Context/event-context';
+
+import classes from './ExpandSubEvents.module.css';
 
 const ExpandSubEvents = (props) => {
 	const eventCtx = useContext(EventContext);
@@ -20,15 +20,6 @@ const ExpandSubEvents = (props) => {
 	const parentIdHandler = async () => {
 		setParentId(id);
 	};
-
-	// const setSelectedTaskFunction = async () => {
-	// 	await parentIdHandler()
-	// 	eventCtx.setSelectedTask(
-	// 		eventCtx.tasks.filter(
-	// 			(task) => task.id === parseInt(eventCtx.parentId)
-	// 		)
-	// 	);
-	// }
 
 	return (
 		<button onClick={parentIdHandler} className={importedClasses}>
