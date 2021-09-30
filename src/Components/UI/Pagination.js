@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 
-import EventContext from '../../Context/event-context';
+import EventContext from '../../store/event-context';
 import Button from '../ButtonBar/Button';
 import classes from './Pagination.module.css';
 

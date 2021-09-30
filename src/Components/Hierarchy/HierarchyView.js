@@ -1,22 +1,22 @@
 import React, { useContext } from 'react';
 
 import HierarchyViewColumnHeader from './HierarchyViewColumnHeader';
-import HierarchyViewItem from './HierarchyViewItem';
+// import HierarchyViewItem from './HierarchyViewItem';
 
 import classes from './HierarchyView.module.css';
-import EventContext from '../../Context/event-context';
+// import EventContext from '../../Context/event-context';
 
 const HierarchyView = (props) => {
-	const eventCtx = useContext(EventContext);
-	console.log(eventCtx);
+	// const eventCtx = useContext(EventContext);
+	// console.log(eventCtx);
 
-	const app = eventCtx.hierarchy[0].App ? eventCtx.hierarchy[0].App : 'App';
-	const host = eventCtx.hierarchy[0].host
-		? eventCtx.hierarchy[0].host
-		: 'App';
+	// const app = eventCtx.hierarchy[0].App ? eventCtx.hierarchy[0].App : 'App';
+	// const host = eventCtx.hierarchy[0].host
+	// 	? eventCtx.hierarchy[0].host
+	// 	: 'App';
 
-	// const app = 'App';
-	// const host = 'Host';
+	const app = 'App';
+	const host = 'Host';
 
 	return (
 		<div className={classes['hierarchy-view']}>

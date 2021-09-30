@@ -1,11 +1,30 @@
 import React, { useEffect, useState, useCallback, useReducer } from 'react';
 
-import { paginationReducer } from '../Components/UI/Pagination';
+import LogDataWorker from './LogDataWorker';
 
-import LogDataWorker from './data-worker';
+//TODO SUGGESTION
+// const EventContext = React.createContext({
+// 	dataWorkerInstance: LogDataWorker,
+// });
 
 const EventContext = React.createContext({
-	dataWorkerInstance: LogDataWorker,
+	tasks: LogDataWorker.tasks,
+	subEvents: [],
+	isLoading: false,
+	error: null,
+	isLoadingSubEvents: false,
+	subEventError: null,
+	totalRecordCount: [],
+	pageNumber: 1,
+	parentId: 1,
+	selectedTask: [],
+	hierarchy: [],
+	getEventData: () => {},
+	getSubEventData: () => {},
+	setParentId: () => {},
+	dispatchPageNumber: () => {},
+	setHierarchy: () => {},
+	setSelectedTask: () => {},
 });
 
 export const EventContextProvider = (props) => {
@@ -13,23 +32,23 @@ export const EventContextProvider = (props) => {
 		<EventContext.Provider
 			value={{
 				tasks: dataworker.tasks,
-				subEvents: subEvents,
-				isLoading: isLoading,
-				error: error,
-				isLoadingSubEvents: isLoadingSubEvents,
-				subEventError: subEventError,
-				totalRecordCount: totalRecordCount,
-				getEventData: getEventData,
-				getSubEventData: getSubEventData,
+				subEvents: dataworker.subEvents,
+				isLoading: dataworker.isLoading,
+				error: dataworker.error,
+				isLoadingSubEvents: dataworker.isLoadingSubEvents,
+				subEventError: dataworker.subEventError,
+				totalRecordCount: dataworker.totalRecordCount,
+				getEventData: dataworker.getEventData,
+				getSubEventData: dataworker.getSubEventData,
 				// setPageNumber: setPageNumber, //TODO DELETE ONCE PAGINATION WORKING
 				pageNumber: pageNumber.page,
 				dispatchPageNumber: dispatchPageNumber, //NOTE WHILE ATTEMPTING REDUCER
-				parentId: parentId,
-				setParentId: setParentId,
-				hierarchy: hierarchy,
-				setHierarchy: setHierarchy,
-				selectedTask: selectedTask,
-				setSelectedTask: setSelectedTask,
+				parentId: dataworker.parentId,
+				setParentId: dataworker.setParentId,
+				hierarchy: dataworker.hierarchy,
+				setHierarchy: dataworker.setHierarchy,
+				selectedTask: dataworker.selectedTask,
+				setSelectedTask: dataworker.setSelectedTask,
 			}}
 		>
 			{props.children}
