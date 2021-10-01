@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 
 import './App.css';
 
@@ -8,7 +8,7 @@ import Pagination from './Components/UI/Pagination';
 import TaskView from './Components/Tasks/TaskView';
 // import HierarchyView from './Components/Hierarchy/HierarchyView';
 import SubEventView from './Components/SubEvents/SubEventView';
-import EventContext from './Context/event-context';
+import EventContext from './store/event-context';
 
 function App() {
 	//FIXME
@@ -35,7 +35,7 @@ function App() {
 	//NOTE Define TaskView Content
 	let taskContent = <p>'No data found'</p>;
 
-	if (eventCtx.tasks.length > 0) {
+	if (eventCtx.tasks) {
 		taskContent = (
 			<TaskView taskItems={eventCtx.tasks} setStatus={setStatusHandler} />
 		);

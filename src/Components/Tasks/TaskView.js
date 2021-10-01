@@ -4,7 +4,7 @@ import TaskViewItem from './TaskViewItem';
 import TaskViewHeader from './TaskViewHeader';
 
 import classes from './TaskView.module.css';
-import EventContext from '../../Context/event-context';
+import EventContext from '../../store/event-context';
 
 const TaskView = (props) => {
 	const eventCtx = useContext(EventContext);

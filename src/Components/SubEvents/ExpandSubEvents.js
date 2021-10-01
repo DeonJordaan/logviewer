@@ -1,8 +1,8 @@
-import React, { useMemo, useContext } from 'react';
+import React, { useContext } from 'react';
 
 import classes from './ExpandSubEvents.module.css';
 
-import EventContext from '../../Context/event-context';
+import EventContext from '../../store/event-context';
 
 const ExpandSubEvents = (props) => {
 	const eventCtx = useContext(EventContext);
