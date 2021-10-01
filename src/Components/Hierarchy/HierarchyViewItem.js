@@ -9,12 +9,21 @@ import classes from './HierarchyViewItem.module.css';
 
 const HierarchyViewItem = (props) => {
 	const eventCtx = useContext(EventContext);
+	console.log(eventCtx);
 
-	const status = props.setStatus(eventCtx.hierarchy[0].status);
-	const subEvents = eventCtx.hierarchy[0].subEvents;
-	const startTime = eventCtx.hierarchy[0].startTime;
-	const endTime = eventCtx.hierarchy[0].endTime;
-	const message = eventCtx.hierarchy[0].message;
+	let status = 'status';
+	let subEvents = 'subEvents';
+	let startTime = 'startTime';
+	let endTime = 'endTime';
+	let message = 'message';
+
+	if (eventCtx.hierarchy.length > 0) {
+		status = props.setStatus(eventCtx.hierarchy[0].status);
+		subEvents = eventCtx.hierarchy[0].subEvents;
+		startTime = eventCtx.hierarchy[0].startTime;
+		endTime = eventCtx.hierarchy[0].endTime;
+		message = eventCtx.hierarchy[0].message;
+	}
 
 	const classesMap = {
 		NotSet: classes.NotSet,
@@ -43,4 +52,4 @@ const HierarchyViewItem = (props) => {
 	);
 };
 
-export default HierarchyViewItem;
+export default React.memo(HierarchyViewItem);
