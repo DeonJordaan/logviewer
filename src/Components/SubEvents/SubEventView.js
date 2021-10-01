@@ -6,6 +6,7 @@ import SubEventViewColumnHeader from './SubEventViewColumnHeader';
 import SubEventViewItem from './SubEventViewItem';
 
 import classes from './SubEventView.module.css';
+import EventContext from '../../store/event-context';
 
 const SubEventView = (props) => {
 	const eventCtx = useContext(EventContext);

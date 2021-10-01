@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 
-import EventContext from '../../Context/event-context';
+import classes from './ExpandSubEvents.module.css';
+
+import EventContext from '../../store/event-context';
 
 import classes from './ExpandSubEvents.module.css';
 

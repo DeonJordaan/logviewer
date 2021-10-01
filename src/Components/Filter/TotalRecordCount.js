@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import EventContext from '../../Context/event-context';
+import EventContext from '../../store/event-context';
 
 import classes from './TotalRecordCount.module.css';
 

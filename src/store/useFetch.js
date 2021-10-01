@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const useFetch = (url) => {
 	// const cache = useRef({});
@@ -19,6 +19,7 @@ const useFetch = (url) => {
 				}
 
 				const data = await response.json();
+				console.log(data);
 
 				setData(data);
 			} catch (error) {

@@ -8,8 +8,12 @@ import Pagination from './Components/UI/Pagination';
 import TaskView from './Components/Tasks/TaskView';
 import HierarchyView from './Components/Hierarchy/HierarchyView';
 import SubEventView from './Components/SubEvents/SubEventView';
+<<<<<<< HEAD
 import EventContext from './Context/event-context';
 import Footer from './Components/UI/Footer';
+=======
+import EventContext from './store/event-context';
+>>>>>>> 76d5e80 (Trying a custom useFetch hook and working on the data-worker)
 
 function App() {
 	const eventCtx = useContext(EventContext);
@@ -29,7 +33,7 @@ function App() {
 	//NOTE Define TaskView Content
 	let taskContent = <p>'No data found'</p>;
 
-	if (eventCtx.tasks.length > 0) {
+	if (eventCtx.tasks) {
 		taskContent = (
 			<TaskView taskItems={eventCtx.tasks} setStatus={setStatusHandler} />
 		);
