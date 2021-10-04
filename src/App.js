@@ -12,16 +12,9 @@ import EventContext from './Context/event-context';
 import Footer from './Components/UI/Footer';
 
 function App() {
-	//FIXME
-
 	const eventCtx = useContext(EventContext);
 
-	//TODO Do I need this initial useEffect for some reason? Initial load seems to work
-	// useEffect(() => {
-	// 	eventCtx.getEventData();
-	// }, []);
-
-	//FIXME => MOVE STATUS HANDLING TO A COMPONENT...???
+	//TODO => MOVE STATUS HANDLING TO A COMPONENT...???
 	const setStatusHandler = (statusCode) => {
 		const status = {
 			0: 'NotSet',
@@ -50,11 +43,35 @@ function App() {
 		taskContent = <p>Loading...</p>;
 	}
 
-	//TODO => SET CONTENT FOR HIERARCHY
 	//NOTE Define HierarchyView Content
+	let hierarchyContent = <p>'No event selected'</p>;
 
-	//TODO => SET CONTENT FOR SUB-EVENTS
+	if (eventCtx.tasks.length > 0) {
+		hierarchyContent = <HierarchyView setStatus={setStatusHandler} />;
+	}
+
+	if (eventCtx.error) {
+		hierarchyContent = <p>{eventCtx.error}</p>;
+	}
+
+	if (eventCtx.isLoading) {
+		hierarchyContent = <p>Loading...</p>;
+	}
+
 	//NOTE Define SubEventView Content
+	let subEventContent = <p>'No event selected'</p>;
+
+	if (eventCtx.tasks.length > 0) {
+		subEventContent = <SubEventView setStatus={setStatusHandler} />;
+	}
+
+	if (eventCtx.error) {
+		subEventContent = <p>{eventCtx.error}</p>;
+	}
+
+	if (eventCtx.isLoading) {
+		subEventContent = <p>Loading...</p>;
+	}
 
 	return (
 		<div className="App">
@@ -64,8 +81,8 @@ function App() {
 				<div>
 					<section>{taskContent}</section>
 					<Pagination />
-					<HierarchyView setStatus={setStatusHandler} />
-					<SubEventView setStatus={setStatusHandler} />
+					<section>{hierarchyContent}</section>
+					<section>{subEventContent}</section>
 				</div>
 			</div>
 			<Footer />

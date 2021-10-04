@@ -1,5 +1,11 @@
 const TaskTime = (props) => {
-	const [date, time] = props.time.split('T');
+	let timeStamp = '0000-00-00T00:00:00.00';
+
+	if (props.time) {
+		timeStamp = props.time;
+	}
+
+	const [date, time] = timeStamp.split('T');
 
 	const roundedTime = time.substring(0, 8);
 

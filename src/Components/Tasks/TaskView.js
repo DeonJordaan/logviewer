@@ -10,7 +10,7 @@ import classes from './TaskView.module.css';
 const TaskView = (props) => {
 	const eventCtx = useContext(EventContext);
 
-	console.log('TASKVIEW');
+	// console.log('TASKVIEW');
 	return (
 		<ul className={classes['task-view']}>
 			<TaskViewHeader />

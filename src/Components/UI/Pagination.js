@@ -65,7 +65,7 @@ const Pagination = (props) => {
 		<div className={classes['button-bar']}>
 			<Button onClick={goToFirstPage} className={'doubleLeftArrow'} />
 			<Button onClick={getPrevPage} className={'leftArrow'} />
-			<div className="current-page">
+			<div className={classes['current-page']}>
 				Page {eventCtx.pageNumber} of {totalPageCount}
 			</div>
 			<Button onClick={getNextPage} className={'rightArrow'} />

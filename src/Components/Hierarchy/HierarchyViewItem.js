@@ -9,13 +9,13 @@ import classes from './HierarchyViewItem.module.css';
 
 const HierarchyViewItem = (props) => {
 	const eventCtx = useContext(EventContext);
-	console.log(eventCtx);
+	// console.log(eventCtx);
 
-	let status = 'status';
-	let subEvents = 'subEvents';
-	let startTime = 'startTime';
-	let endTime = 'endTime';
-	let message = 'message';
+	let status = '-';
+	let subEvents = '0';
+	let startTime = '0000-00-00T00:00:00.00';
+	let endTime = '0000-00-00T00:00:00.00';
+	let message = '-';
 
 	if (eventCtx.hierarchy.length > 0) {
 		status = props.setStatus(eventCtx.hierarchy[0].status);

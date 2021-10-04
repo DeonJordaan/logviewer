@@ -19,6 +19,10 @@ const ExpandSubEvents = (props) => {
 
 	const parentIdHandler = async () => {
 		setParentId(id);
+		console.log(eventCtx.tasks);
+		console.log(eventCtx.hierarchy);
+		console.log(eventCtx.selectedTask);
+		console.log(eventCtx.subEvents);
 	};
 
 	return (

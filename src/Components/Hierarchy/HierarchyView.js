@@ -19,6 +19,7 @@ const HierarchyView = (props) => {
 		app = eventCtx.hierarchy[0].App;
 		host = eventCtx.hierarchy[0].host;
 	}
+
 	// console.log(eventCtx.hierarchy[0]);
 	// console.log(eventCtx.hierarchy[0].App);
 
@@ -40,8 +41,9 @@ const HierarchyView = (props) => {
 				{/* Event Hierarchy Application: {app} running on Host: {host} */}
 			</h3>
 			<HierarchyViewColumnHeader />
-			{/* <HierarchyViewItem status={props.setStatus({ status })} /> */}
-			<HierarchyViewItem setStatus={props.setStatus} />
+			{eventCtx.hierarchy.map((task) => (
+				<HierarchyViewItem setStatus={props.setStatus} />
+			))}
 		</div>
 	);
 };

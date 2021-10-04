@@ -32,38 +32,38 @@ export const EventContextProvider = (props) => {
 	const [subEventError, setSubEventError] = useState(null);
 	const [parentId, setParentId] = useState(0);
 	const [selectedTask, setSelectedTask] = useState([
-		{
-			key: 0,
-			id: 1,
-			App: '',
-			taskCode: '',
-			startTime: '0000-00-00T00:00:00.00',
-			endTime: '0000-00-00T00:00:00.00',
-			subEvents: 0,
-			host: '',
-			message: '',
-			status: '',
-		},
+		// {
+		// 	key: 0,
+		// 	id: 1,
+		// 	App: '',
+		// 	taskCode: '',
+		// 	startTime: '0000-00-00T00:00:00.00',
+		// 	endTime: '0000-00-00T00:00:00.00',
+		// 	subEvents: 0,
+		// 	host: '',
+		// 	message: '',
+		// 	status: '',
+		// },
 	]);
 	const [hierarchy, setHierarchy] = useState([
-		{
-			key: 0,
-			id: 1,
-			App: '',
-			taskCode: '',
-			startTime: '0000-00-00T00:00:00.00',
-			endTime: '0000-00-00T00:00:00.00',
-			subEvents: 0,
-			host: '',
-			message: '',
-			status: '',
-		},
+		// {
+		// 	key: 0,
+		// 	id: 1,
+		// 	App: '',
+		// 	taskCode: '',
+		// 	startTime: '0000-00-00T00:00:00.00',
+		// 	endTime: '0000-00-00T00:00:00.00',
+		// 	subEvents: 0,
+		// 	host: '',
+		// 	message: '',
+		// 	status: '',
+		// },
 	]);
 	const [pageNumber, dispatchPageNumber] = useReducer(paginationReducer, {
 		page: 1,
 	});
 
-	console.log('RENDERING');
+	// console.log('RENDERING');
 
 	//NOTE Fetch data, sort and set tasks
 	const getEventData = useCallback(async () => {
@@ -142,6 +142,10 @@ export const EventContextProvider = (props) => {
 			setSelectedTask(
 				tasks.filter((task) => task.id === parseInt(parentId))
 			);
+			// NOTE SET HIERARCHY FROM WITHIN THE GETSUBEVENT FUNCTION. DOES NOT WORK.
+			// setHierarchy((prevState) => {
+			// 	return [...prevState, selectedTask];
+			// });
 		} catch (error) {
 			console.log('Error');
 			setSubEventError(error.message);
@@ -152,23 +156,19 @@ export const EventContextProvider = (props) => {
 		getSubEventData();
 	}, [getSubEventData, parentId]);
 
-	//NOTE/FIXME ATTEMPTING TO SET HIERARCHY
-	// const selectedTask = tasks.filter((task) => task.id === parseInt(parentId));
-
+	// NOTE SETTING HIERARCHY VIEW TO THE CURRENTLY SELECTED TASK
 	// useEffect(() => {
-	// 	setSelectedTask(
-	// 		tasks?.filter((task) => task.id === parseInt(parentId))
-	// 	);
-	// }, [parentId, tasks]);
+	// 	setHierarchy(selectedTask);
+	// }, [selectedTask]);
 
-	// const selectedTaskHandler = useCallback(() => {
-	// 	tasks.filter((task) => task.id === parseInt(parentId));
-	// 	// 	console.log(parentId);
-	// }, [tasks, parentId]);
-
+	// FIXME ATTEMPTING TO ADD THE CURRENTLY SELECTED TASK TO THE HIERARCHY ARRAY IN ORDER TO SUPPLY THE NESTED TASKS AS THEY'RE SELECTED
 	useEffect(() => {
-		setHierarchy(selectedTask);
+		setHierarchy((prevState) => {
+			return [...prevState, ...selectedTask];
+		});
 	}, [selectedTask]);
+
+	//setTheArray(prevArray => [...prevArray, newValue])
 
 	return (
 		<EventContext.Provider
