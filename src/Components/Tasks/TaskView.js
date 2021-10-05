@@ -12,23 +12,27 @@ const TaskView = (props) => {
 
 	// console.log('TASKVIEW');
 	return (
-		<ul className={classes['task-view']}>
-			<TaskViewHeader />
-			{eventCtx.tasks.map((task) => (
-				<TaskViewItem
-					key={task.key}
-					host={task.host}
-					id={task.id}
-					app={task.App}
-					subEvents={task.subEvents}
-					taskCode={task.taskCode}
-					startTime={task.startTime}
-					endTime={task.endTime}
-					message={task.message}
-					status={props.setStatus(task.status)}
-				/>
-			))}
-		</ul>
+		<table className={classes['task-view']}>
+			<thead>
+				<TaskViewHeader />
+			</thead>
+			<tbody>
+				{eventCtx.tasks.map((task) => (
+					<TaskViewItem
+						key={task.key}
+						host={task.host}
+						id={task.id}
+						app={task.App}
+						subEvents={task.subEvents}
+						taskCode={task.taskCode}
+						startTime={task.startTime}
+						endTime={task.endTime}
+						message={task.message}
+						status={props.setStatus(task.status)}
+					/>
+				))}
+			</tbody>
+		</table>
 	);
 };
 

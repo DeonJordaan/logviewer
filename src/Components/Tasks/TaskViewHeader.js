@@ -2,17 +2,17 @@ import classes from './TaskViewHeader.module.css';
 
 const TaskViewHeader = () => {
 	return (
-		<div className={classes['task-header']}>
-			<div>Host</div>
-			<div>Application</div>
-			<div>Status</div>
-			<div>Task Code</div>
-			<div>Started</div>
-			<div>Completed</div>
-			<div>Sub-Events</div>
-			<div>ID</div>
-			<div>Message</div>
-		</div>
+		<tr className={classes['task-header']}>
+			<td>Host</td>
+			<td>Application</td>
+			<td>Status</td>
+			<td>Task Code</td>
+			<td>Started</td>
+			<td>Completed</td>
+			<td>Sub-Events</td>
+			<td>ID</td>
+			<td>Message</td>
+		</tr>
 	);
 };
 
