@@ -11,19 +11,6 @@ import { paginationReducer } from '../Components/UI/Pagination';
 // 	dataWorkerInstance: LogDataWorker,
 // });
 
-const INITIAL_STATE = {
-	key: 0,
-	id: 1,
-	App: '',
-	taskCode: '',
-	startTime: '0000-00-00T00:00:00.00',
-	endTime: '0000-00-00T00:00:00.00',
-	subEvents: 0,
-	host: '',
-	message: '',
-	status: '',
-};
-
 const EventContext = React.createContext({
 	tasks: [],
 	subEvents: [],
@@ -53,8 +40,8 @@ export const EventContextProvider = ({ children }) => {
 	const [isLoadingSubEvents, setIsLoadingSubEvents] = useState(false);
 	const [subEventError, setSubEventError] = useState(null);
 	const [parentId, setParentId] = useState(0);
-	const [selectedTask, setSelectedTask] = useState([{ INITIAL_STATE }]);
-	const [hierarchy, setHierarchy] = useState([{ INITIAL_STATE }]);
+	const [selectedTask, setSelectedTask] = useState([]);
+	const [hierarchy, setHierarchy] = useState([]);
 	const [pageNumber, dispatchPageNumber] = useReducer(paginationReducer, {
 		page: 1,
 	});
