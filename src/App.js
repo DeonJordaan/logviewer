@@ -8,15 +8,14 @@ import Pagination from './Components/UI/Pagination';
 import TaskView from './Components/Tasks/TaskView';
 import HierarchyView from './Components/Hierarchy/HierarchyView';
 import SubEventView from './Components/SubEvents/SubEventView';
-<<<<<<< HEAD
-import EventContext from './Context/event-context';
 import Footer from './Components/UI/Footer';
-=======
 import EventContext from './store/event-context';
->>>>>>> 76d5e80 (Trying a custom useFetch hook and working on the data-worker)
+import SubEventContext from './store/sub-event-context';
 
 function App() {
 	const eventCtx = useContext(EventContext);
+
+	const subEventCtx = useContext(SubEventContext);
 
 	//TODO => MOVE STATUS HANDLING TO A COMPONENT...???
 	const setStatusHandler = (statusCode) => {
@@ -50,30 +49,30 @@ function App() {
 	//NOTE Define HierarchyView Content
 	let hierarchyContent = <p>'No event selected'</p>;
 
-	if (eventCtx.tasks.length > 0) {
+	if (subEventCtx.hierarchy.length > 0) {
 		hierarchyContent = <HierarchyView setStatus={setStatusHandler} />;
 	}
 
-	if (eventCtx.error) {
-		hierarchyContent = <p>{eventCtx.error}</p>;
+	if (subEventCtx.error) {
+		hierarchyContent = <p>{subEventCtx.error}</p>;
 	}
 
-	if (eventCtx.isLoading) {
+	if (subEventCtx.isLoading) {
 		hierarchyContent = <p>Loading...</p>;
 	}
 
 	//NOTE Define SubEventView Content
 	let subEventContent = <p>'No event selected'</p>;
 
-	if (eventCtx.tasks.length > 0) {
+	if (subEventCtx.subEvents.length > 0) {
 		subEventContent = <SubEventView setStatus={setStatusHandler} />;
 	}
 
-	if (eventCtx.error) {
-		subEventContent = <p>{eventCtx.error}</p>;
+	if (subEventCtx.error) {
+		subEventContent = <p>{subEventCtx.error}</p>;
 	}
 
-	if (eventCtx.isLoading) {
+	if (subEventCtx.isLoading) {
 		subEventContent = <p>Loading...</p>;
 	}
 

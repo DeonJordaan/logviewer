@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import EventContext from '../../Context/event-context';
+import SubEventContext from '../../store/event-context';
 
 import ExpandSubEvents from '../SubEvents/ExpandSubEvents';
 import TaskTime from '../Tasks/TaskTime';
@@ -8,7 +8,7 @@ import TaskTime from '../Tasks/TaskTime';
 import classes from './HierarchyViewItem.module.css';
 
 const HierarchyViewItem = (props) => {
-	const eventCtx = useContext(EventContext);
+	const eventCtx = useContext(SubEventContext);
 	// console.log(eventCtx);
 
 	let status = '-';

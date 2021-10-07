@@ -1,40 +1,67 @@
-import { useState, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 
-const useFetch = (url) => {
-	// const cache = useRef({});
-	// const [status, setStatus] = useState('idle');
+const useFetch = () => {
 	const [isLoading, setIsLoading] = useState(false);
-	const [data, setData] = useState([]);
 	const [error, setError] = useState(null);
+	// const [data, setData] = useState([]);
 
-	useEffect(() => {
+	const sendRequest = useCallback(async (requestConfig, applyData) => {
 		setIsLoading(true);
 		setError(null);
-		const fetchData = async () => {
-			try {
-				const response = await fetch(url);
+		try {
+			const response = await fetch(requestConfig.url, {
+				method: requestConfig.method ? requestConfig.method : 'GET',
+				headers: requestConfig.headers ? requestConfig.headers : {},
+				body: requestConfig.body
+					? JSON.stringify(requestConfig.body)
+					: null,
+			});
 
-				if (!response.ok) {
-					throw new Error('Could not retrieve data');
-				}
-
-				const data = await response.json();
-				console.log(data);
-
-				setData(data);
-			} catch (error) {
-				console.log('Error');
-				setError(error.message);
+			if (!response.ok) {
+				throw new Error('Could not retrieve data');
 			}
-		};
-		fetchData();
-		setIsLoading(false);
-	}, [url]);
 
-	return { isLoading, data, error };
+			const data = await response.json();
+			// console.log(data);
+
+			applyData(data);
+		} catch (error) {
+			console.log('Error');
+			setError(error.message);
+		}
+		setIsLoading(false);
+	}, []);
+
+	return { isLoading, error, sendRequest }; //REMOVED , data
 };
 
 export default useFetch;
+
+//PREVIOUS ATTEMPT AT useFetch
+// useEffect(() => {
+// 	setIsLoading(true);
+// 	setError(null);
+// 	const fetchData = async () => {
+// 		try {
+// 			const response = await fetch(url);
+
+// 			if (!response.ok) {
+// 				throw new Error('Could not retrieve data');
+// 			}
+
+// 			const data = await response.json();
+// 			console.log(data);
+
+// 			setData(data);
+// 		} catch (error) {
+// 			console.log('Error');
+// 			setError(error.message);
+// 		}
+// 	};
+// 	fetchData();
+// 	setIsLoading(false);
+// }, [url]);
+///////////////////////////
 
 // const useFetch = (url) => {
 // 	const cache = useRef({});

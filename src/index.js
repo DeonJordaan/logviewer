@@ -4,11 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { EventContextProvider } from './store/event-context';
+import { SubEventContextProvider } from './store/sub-event-context';
 
 ReactDOM.render(
 	<React.StrictMode>
 		<EventContextProvider>
-			<App />
+			<SubEventContextProvider>
+				<App />
+			</SubEventContextProvider>
 		</EventContextProvider>
 	</React.StrictMode>,
 	document.getElementById('root')

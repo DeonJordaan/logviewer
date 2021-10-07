@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 
 import EventContext from '../../store/event-context';
+import SubEventContext from '../../store/event-context';
 import Button from '../ButtonBar/Button';
 
 import classes from './Pagination.module.css';
@@ -26,10 +27,11 @@ export const paginationReducer = (state, action) => {
 
 const Pagination = (props) => {
 	const eventCtx = useContext(EventContext);
+	// const subEventCtx = useContext(SubEventContext);
 
 	// Extracting necessary data from the EventContext
 	const currentPage = eventCtx.pageNumber;
-	const getEventDataHere = eventCtx.getEventData;
+	const getEventDataHere = eventCtx.getEventData; //FIXME HOW DO I GET THIS DATA? DO I REALLY NEED IT?
 	const totalPageCount = Math.ceil(eventCtx.totalRecordCount / 10);
 
 	// Pagination Functions
@@ -65,7 +67,7 @@ const Pagination = (props) => {
 			<Button onClick={goToFirstPage} className={'doubleLeftArrow'} />
 			<Button onClick={getPrevPage} className={'leftArrow'} />
 			<div className={classes['current-page']}>
-				Page {eventCtx.pageNumber} of {totalPageCount}
+				Page {currentPage} of {totalPageCount}
 			</div>
 			<Button onClick={getNextPage} className={'rightArrow'} />
 			<Button onClick={goToLastPage} className={'doubleRightArrow'} />

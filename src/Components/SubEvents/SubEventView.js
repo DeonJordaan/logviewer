@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
 
-import EventContext from '../../Context/event-context';
-
 import SubEventViewColumnHeader from './SubEventViewColumnHeader';
 import SubEventViewItem from './SubEventViewItem';
 

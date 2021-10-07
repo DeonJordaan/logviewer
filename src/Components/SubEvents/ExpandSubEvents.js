@@ -4,8 +4,6 @@ import classes from './ExpandSubEvents.module.css';
 
 import EventContext from '../../store/event-context';
 
-import classes from './ExpandSubEvents.module.css';
-
 const ExpandSubEvents = (props) => {
 	const eventCtx = useContext(EventContext);
 
