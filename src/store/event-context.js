@@ -1,9 +1,21 @@
 import React, { useEffect, useState, useCallback, useReducer } from 'react';
 
+<<<<<<< HEAD
 import { paginationReducer } from '../Components/UI/Pagination';
 
 const EventContext = React.createContext({
 	tasks: [],
+=======
+import LogDataWorker from './LogDataWorker';
+
+//TODO SUGGESTION
+// const EventContext = React.createContext({
+// 	dataWorkerInstance: LogDataWorker,
+// });
+
+const EventContext = React.createContext({
+	tasks: LogDataWorker.tasks,
+>>>>>>> aced6ee (Working on the data worker and figuring out how to get the data from the useFetch hook through the data worker and into the Context)
 	subEvents: [],
 	isLoading: false,
 	error: null,
@@ -23,6 +35,7 @@ const EventContext = React.createContext({
 });
 
 export const EventContextProvider = (props) => {
+<<<<<<< HEAD
 	const [tasks, setTasks] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState(null);
@@ -190,6 +203,29 @@ export const EventContextProvider = (props) => {
 				setHierarchy: setHierarchy,
 				selectedTask: selectedTask,
 				setSelectedTask: setSelectedTask,
+=======
+	return (
+		<EventContext.Provider
+			value={{
+				tasks: dataworker.tasks,
+				subEvents: dataworker.subEvents,
+				isLoading: dataworker.isLoading,
+				error: dataworker.error,
+				isLoadingSubEvents: dataworker.isLoadingSubEvents,
+				subEventError: dataworker.subEventError,
+				totalRecordCount: dataworker.totalRecordCount,
+				getEventData: dataworker.getEventData,
+				getSubEventData: dataworker.getSubEventData,
+				// setPageNumber: setPageNumber, //TODO DELETE ONCE PAGINATION WORKING
+				pageNumber: pageNumber.page,
+				dispatchPageNumber: dispatchPageNumber, //NOTE WHILE ATTEMPTING REDUCER
+				parentId: dataworker.parentId,
+				setParentId: dataworker.setParentId,
+				hierarchy: dataworker.hierarchy,
+				setHierarchy: dataworker.setHierarchy,
+				selectedTask: dataworker.selectedTask,
+				setSelectedTask: dataworker.setSelectedTask,
+>>>>>>> aced6ee (Working on the data worker and figuring out how to get the data from the useFetch hook through the data worker and into the Context)
 			}}
 		>
 			{props.children}
@@ -198,3 +234,38 @@ export const EventContextProvider = (props) => {
 };
 
 export default EventContext;
+<<<<<<< HEAD
+=======
+
+//////////////////////////////////////
+// useEffect(() => {
+// 	setTasks(INITIAL_TASKS);
+// 	setSelectedTask(tasks);
+// 	setHierarchy(selectedTask);
+// }, []);
+
+//NOTE SETTING HIERARCHY
+// const selectedTask = tasks.filter((task) => task.id === parseInt(parentId));
+
+// console.log(selectedTask);
+// const hierarchy = [];
+
+// FIXME Trying to get setHierarchy to work via useMemo
+// let selectedTask = useMemo(() => {
+// 	return [];
+// }, []);
+
+// useEffect(() => {
+// 	setSelectedTask(
+// 		tasks?.filter((task) => task.id === parseInt(parentId))
+// 	);
+// }, [parentId, tasks]);
+// const selectedTaskHandler = useCallback(() => {
+// 	tasks.filter((task) => task.id === parseInt(parentId));
+// 	// 	console.log(parentId);
+// }, [tasks, parentId]);
+
+// useEffect(() => {
+// 	setHierarchy(() => {
+// 		return {selectedTask}}), [selectedTask]);
+>>>>>>> aced6ee (Working on the data worker and figuring out how to get the data from the useFetch hook through the data worker and into the Context)

@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import EventContext from '../../Context/event-context';
 
 import HierarchyViewColumnHeader from './HierarchyViewColumnHeader';
-import HierarchyViewItem from './HierarchyViewItem';
+// import HierarchyViewItem from './HierarchyViewItem';
 
 import classes from './HierarchyView.module.css';
 
