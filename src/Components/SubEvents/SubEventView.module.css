@@ -14,3 +14,7 @@
 	border-radius: 3px;
 	max-width: 85vw;
 }
+
+table {
+	border-collapse: collapse;
+}

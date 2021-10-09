@@ -64,7 +64,7 @@ export const EventContextProvider = (props) => {
 				isLoading: isLoading,
 				error: error,
 				totalRecordCount: totalRecordCount,
-				pageNumber: pageNumber,
+				pageNumber: pageNumber.page,
 				dispatchPageNumber: dispatchPageNumber,
 			}}
 		>

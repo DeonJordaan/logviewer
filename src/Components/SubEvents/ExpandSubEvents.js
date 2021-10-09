@@ -3,11 +3,13 @@ import React, { useContext } from 'react';
 import classes from './ExpandSubEvents.module.css';
 
 import EventContext from '../../store/event-context';
+import SubEventContext from '../../store/sub-event-context';
 
 const ExpandSubEvents = (props) => {
 	const eventCtx = useContext(EventContext);
+	const subEventCtx = useContext(SubEventContext);
 
-	const setParentId = eventCtx.setParentId;
+	const setParentId = subEventCtx.setParentId;
 
 	const id = props.id;
 
@@ -20,9 +22,9 @@ const ExpandSubEvents = (props) => {
 	const parentIdHandler = async () => {
 		setParentId(id);
 		console.log(eventCtx.tasks);
-		console.log(eventCtx.hierarchy);
-		console.log(eventCtx.selectedTask);
-		console.log(eventCtx.subEvents);
+		console.log(subEventCtx.hierarchy);
+		console.log(subEventCtx.selectedTask);
+		console.log(subEventCtx.subEvents);
 	};
 
 	return (

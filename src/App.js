@@ -10,12 +10,12 @@ import HierarchyView from './Components/Hierarchy/HierarchyView';
 import SubEventView from './Components/SubEvents/SubEventView';
 import Footer from './Components/UI/Footer';
 import EventContext from './store/event-context';
-import SubEventContext from './store/sub-event-context';
+// import SubEventContext from './store/sub-event-context';
 
 function App() {
 	const eventCtx = useContext(EventContext);
 
-	const subEventCtx = useContext(SubEventContext);
+	// const subEventCtx = useContext(SubEventContext);
 
 	//TODO => MOVE STATUS HANDLING TO A COMPONENT...???
 	const setStatusHandler = (statusCode) => {
@@ -29,63 +29,22 @@ function App() {
 		return status[statusCode];
 	};
 
-	//NOTE Define TaskView Content
-	let taskContent = <p>'No data found'</p>;
-
-	if (eventCtx.tasks) {
-		taskContent = (
-			<TaskView taskItems={eventCtx.tasks} setStatus={setStatusHandler} />
-		);
-	}
-
-	if (eventCtx.error) {
-		taskContent = <p>{eventCtx.error}</p>;
-	}
-
-	if (eventCtx.isLoading) {
-		taskContent = <p>Loading...</p>;
-	}
-
-	//NOTE Define HierarchyView Content
-	let hierarchyContent = <p>'No event selected'</p>;
-
-	if (subEventCtx.hierarchy.length > 0) {
-		hierarchyContent = <HierarchyView setStatus={setStatusHandler} />;
-	}
-
-	if (subEventCtx.error) {
-		hierarchyContent = <p>{subEventCtx.error}</p>;
-	}
-
-	if (subEventCtx.isLoading) {
-		hierarchyContent = <p>Loading...</p>;
-	}
-
-	//NOTE Define SubEventView Content
-	let subEventContent = <p>'No event selected'</p>;
-
-	if (subEventCtx.subEvents.length > 0) {
-		subEventContent = <SubEventView setStatus={setStatusHandler} />;
-	}
-
-	if (subEventCtx.error) {
-		subEventContent = <p>{subEventCtx.error}</p>;
-	}
-
-	if (subEventCtx.isLoading) {
-		subEventContent = <p>Loading...</p>;
-	}
-
 	return (
 		<div className="App">
 			<Header />
 			<div className="display">
 				<FilterBoard />
 				<div>
-					<section>{taskContent}</section>
+					{/* <section>{taskContent}</section> */}
+					<TaskView
+						taskItems={eventCtx.tasks}
+						setStatus={setStatusHandler}
+					/>
 					<Pagination />
-					<section>{hierarchyContent}</section>
-					<section>{subEventContent}</section>
+					{/* <section>{hierarchyContent}</section> */}
+					<HierarchyView setStatus={setStatusHandler} />
+					{/* <section>{subEventContent}</section> */}
+					<SubEventView setStatus={setStatusHandler} />
 				</div>
 			</div>
 			<Footer />
@@ -94,3 +53,51 @@ function App() {
 }
 
 export default App;
+
+//NOTE OLDER OPTIONS
+//NOTE Define TaskView Content
+// let taskContent = <p>'No data found'</p>;
+
+// if (eventCtx.tasks) {
+// 	taskContent = (
+// 		<TaskView taskItems={eventCtx.tasks} setStatus={setStatusHandler} />
+// 	);
+// }
+
+// if (eventCtx.error) {
+// 	taskContent = <p>{eventCtx.error}</p>;
+// }
+
+// if (eventCtx.isLoading) {
+// 	taskContent = <p>Loading...</p>;
+// }
+
+//NOTE Define HierarchyView Content
+// let hierarchyContent = <p>'No event selected'</p>;
+
+// if (subEventCtx.hierarchy.length > 0) {
+// 	hierarchyContent = <HierarchyView setStatus={setStatusHandler} />;
+// }
+
+// if (subEventCtx.error) {
+// 	hierarchyContent = <p>{subEventCtx.error}</p>;
+// }
+
+// if (subEventCtx.isLoading) {
+// 	hierarchyContent = <p>Loading...</p>;
+// }
+
+//NOTE Define SubEventView Content
+// let subEventContent = <p>'No event selected'</p>;
+
+// if (subEventCtx.subEvents.length > 0) {
+// 	subEventContent = <SubEventView setStatus={setStatusHandler} />;
+// }
+
+// if (subEventCtx.error) {
+// 	subEventContent = <p>{subEventCtx.error}</p>;
+// }
+
+// if (subEventCtx.isLoading) {
+// 	subEventContent = <p>Loading...</p>;
+// }

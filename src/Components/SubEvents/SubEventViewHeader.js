@@ -1,6 +1,6 @@
-import classes from './SubEventViewColumnHeader.module.css';
+import classes from './SubEventViewHeader.module.css';
 
-const SubEventViewColumnHeader = () => {
+const SubEventViewHeader = () => {
 	return (
 		<div className={classes['sub-event-column-header']}>
 			<div>Status</div>
@@ -13,4 +13,4 @@ const SubEventViewColumnHeader = () => {
 	);
 };
 
-export default SubEventViewColumnHeader;
+export default SubEventViewHeader;

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import SubEventContext from '../../store/event-context';
+import SubEventContext from '../../store/sub-event-context';
 
 import ExpandSubEvents from '../SubEvents/ExpandSubEvents';
 import TaskTime from '../Tasks/TaskTime';
@@ -8,22 +8,22 @@ import TaskTime from '../Tasks/TaskTime';
 import classes from './HierarchyViewItem.module.css';
 
 const HierarchyViewItem = (props) => {
-	const eventCtx = useContext(SubEventContext);
-	// console.log(eventCtx);
+	// const subEventCtx = useContext(SubEventContext);
+	// console.log(subEventCtx);
 
-	let status = '-';
-	let subEvents = '0';
-	let startTime = '0000-00-00T00:00:00.00';
-	let endTime = '0000-00-00T00:00:00.00';
-	let message = '-';
+	// let status = '-';
+	// let subEvents = '0';
+	// let startTime = '0000-00-00T00:00:00.00';
+	// let endTime = '0000-00-00T00:00:00.00';
+	// let message = '-';
 
-	if (eventCtx.hierarchy.length > 0) {
-		status = props.setStatus(eventCtx.hierarchy[0].status);
-		subEvents = eventCtx.hierarchy[0].subEvents;
-		startTime = eventCtx.hierarchy[0].startTime;
-		endTime = eventCtx.hierarchy[0].endTime;
-		message = eventCtx.hierarchy[0].message;
-	}
+	// if (subEventCtx.hierarchy.length > 0) {
+	// 	status = props.setStatus(subEventCtx.hierarchy[0].status);
+	// 	subEvents = subEventCtx.hierarchy[0].subEvents;
+	// 	startTime = subEventCtx.hierarchy[0].startTime;
+	// 	endTime = subEventCtx.hierarchy[0].endTime;
+	// 	message = subEventCtx.hierarchy[0].message;
+	// }
 
 	const classesMap = {
 		NotSet: classes.NotSet,
@@ -34,21 +34,21 @@ const HierarchyViewItem = (props) => {
 	};
 
 	return (
-		<div className={classes['hierarchy-item']}>
-			<div className={classesMap[status]}>{status}</div>
+		<tr className={classes['hierarchy-item']}>
+			<td className={classesMap[props.status]}>{props.status}</td>
 			{/* <div>status</div> */}
-			<ExpandSubEvents subEvents={subEvents} />
+			<ExpandSubEvents subEvents={props.subEvents} />
 			{/* <div>{subEvents}</div> */}
 			{/* <div>subEvents</div> */}
-			<TaskTime time={startTime} />
+			<TaskTime time={props.startTime} />
 			{/* <div>startTime</div> */}
 			{/* <div>{startTime}</div> */}
-			<TaskTime time={endTime} />
+			<TaskTime time={props.endTime} />
 			{/* <div>endTime</div> */}
 			{/* <div>{endTime}</div> */}
 			{/* <div>message</div> */}
-			<div>{message}</div>
-		</div>
+			<td>{props.message}</td>
+		</tr>
 	);
 };
 

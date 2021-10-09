@@ -1,7 +1,7 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 
 import EventContext from '../../store/event-context';
-import SubEventContext from '../../store/event-context';
+// import SubEventContext from '../../store/event-context';
 import Button from '../ButtonBar/Button';
 
 import classes from './Pagination.module.css';
@@ -30,8 +30,8 @@ const Pagination = (props) => {
 	// const subEventCtx = useContext(SubEventContext);
 
 	// Extracting necessary data from the EventContext
-	const currentPage = eventCtx.pageNumber;
-	const getEventDataHere = eventCtx.getEventData; //FIXME HOW DO I GET THIS DATA? DO I REALLY NEED IT?
+	// const currentPage = eventCtx.pageNumber;
+	// const getEventDataHere = eventCtx.getEventData;
 	const totalPageCount = Math.ceil(eventCtx.totalRecordCount / 10);
 
 	// Pagination Functions
@@ -58,16 +58,17 @@ const Pagination = (props) => {
 		});
 	};
 
-	useEffect(() => {
-		getEventDataHere();
-	}, [getEventDataHere, currentPage]);
+	//FIXME CALL THE GETEVENTDATA FUNCTION WHEN THE PAGENUMBER CHANGES. NOT WORKING SINCE CONTEXT SPLIT AND USEFETCH IMPLEMENTATION
+	// useEffect(() => {
+	// 	getEventDataHere();
+	// }, [getEventDataHere, currentPage]);
 
 	return (
 		<div className={classes['button-bar']}>
 			<Button onClick={goToFirstPage} className={'doubleLeftArrow'} />
 			<Button onClick={getPrevPage} className={'leftArrow'} />
 			<div className={classes['current-page']}>
-				Page {currentPage} of {totalPageCount}
+				Page {eventCtx.pageNumber} of {totalPageCount}
 			</div>
 			<Button onClick={getNextPage} className={'rightArrow'} />
 			<Button onClick={goToLastPage} className={'doubleRightArrow'} />

@@ -5,6 +5,19 @@
 	min-height: 22rem;
 }
 
+.task-header {
+	text-align: start;
+	margin: 0 0 0.25rem 0;
+	padding: 0.25rem 0 0.25rem 1.5rem;
+	background-color: #ededed;
+	border: 0.1rem solid lightgray;
+	border-radius: 3px;
+	max-width: 85vw;
+}
+
+table {
+	border-collapse: collapse;
+}
 /*
 	Max width before this PARTICULAR table gets nasty. This query will take effect for any screen smaller than 760px and also iPads specifically.
 	*/
