@@ -16,8 +16,111 @@
 }
 
 table {
+	table-layout: fixed;
+	width: 100%;
 	border-collapse: collapse;
+	white-space: nowrap;
+	border: 1px solid lightgray;
+	/* border-radius: 3px; */
 }
+
+thead th:nth-child(1) {
+	width: 10%;
+}
+
+thead th:nth-child(2) {
+	width: 11%;
+}
+
+thead th:nth-child(3) {
+	width: 8%;
+}
+
+thead th:nth-child(4) {
+	width: 12%;
+}
+thead th:nth-child(5) {
+	width: 11%;
+}
+
+thead th:nth-child(6) {
+	width: 11%;
+}
+
+thead th:nth-child(7) {
+	width: 8%;
+}
+
+thead th:nth-child(8) {
+	width: 6%;
+}
+thead th:nth-child(9) {
+	width: 23%;
+}
+
+tbody td:nth-child(1) {
+	width: 10%;
+}
+
+tbody td:nth-child(2) {
+	width: 11%;
+}
+
+tbody td:nth-child(3) {
+	width: 8%;
+}
+
+tbody td:nth-child(4) {
+	width: 12%;
+}
+tbody td:nth-child(5) {
+	width: 11%;
+}
+
+tbody td:nth-child(6) {
+	width: 11%;
+}
+
+tbody td:nth-child(7) {
+	width: 8%;
+}
+
+tbody td:nth-child(8) {
+	width: 6%;
+}
+tbody td:nth-child(9) {
+	width: 23%;
+}
+
+tbody,
+td {
+	text-align: center;
+}
+
+td {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+tr {
+	width: 100%;
+}
+
+th,
+td {
+	padding: 5px;
+}
+
+th {
+	letter-spacing: 1.5px;
+}
+
+/* FIXME NOT SURE ABOUT THIS */
+td {
+	letter-spacing: 0.25px;
+}
+
 /*
 	Max width before this PARTICULAR table gets nasty. This query will take effect for any screen smaller than 760px and also iPads specifically.
 	*/

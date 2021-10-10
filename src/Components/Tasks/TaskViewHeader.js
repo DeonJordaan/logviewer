@@ -3,15 +3,15 @@ import classes from './TaskViewHeader.module.css';
 const TaskViewHeader = () => {
 	return (
 		<tr className={classes['task-header']}>
-			<td>Host</td>
-			<td>Application</td>
-			<td>Status</td>
-			<td>Task Code</td>
-			<td>Started</td>
-			<td>Completed</td>
-			<td>Sub-Events</td>
-			<td>ID</td>
-			<td>Message</td>
+			<th>Host</th>
+			<th>Application</th>
+			<th>Status</th>
+			<th>Task Code</th>
+			<th>Started</th>
+			<th>Completed</th>
+			<th>Sub-Events</th>
+			<th>ID</th>
+			<th>Message</th>
 		</tr>
 	);
 };

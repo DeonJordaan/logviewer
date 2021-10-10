@@ -24,7 +24,9 @@ const TaskViewItem = (props) => {
 			<td className={'code'}>{props.taskCode}</td>
 			<TaskTime time={props.startTime} />
 			<TaskTime time={props.endTime} />
-			<ExpandSubEvents id={props.id} subEvents={props.subEvents} />
+			<td>
+				<ExpandSubEvents id={props.id} subEvents={props.subEvents} />
+			</td>
 			<td className={'id'}>{props.id}</td>
 			<td className={'message'}>{props.message}</td>
 		</tr>

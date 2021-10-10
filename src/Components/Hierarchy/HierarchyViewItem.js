@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import SubEventContext from '../../store/sub-event-context';
+// import SubEventContext from '../../store/sub-event-context';
 
 import ExpandSubEvents from '../SubEvents/ExpandSubEvents';
 import TaskTime from '../Tasks/TaskTime';
@@ -37,7 +37,9 @@ const HierarchyViewItem = (props) => {
 		<tr className={classes['hierarchy-item']}>
 			<td className={classesMap[props.status]}>{props.status}</td>
 			{/* <div>status</div> */}
-			<ExpandSubEvents subEvents={props.subEvents} />
+			<td>
+				<ExpandSubEvents subEvents={props.subEvents} />
+			</td>
 			{/* <div>{subEvents}</div> */}
 			{/* <div>subEvents</div> */}
 			<TaskTime time={props.startTime} />
