@@ -10,9 +10,9 @@ const TaskTime = (props) => {
 	const roundedTime = time.substring(0, 8);
 
 	return (
-		<td>
+		<>
 			{date} at {roundedTime}
-		</td>
+		</>
 	);
 };
 

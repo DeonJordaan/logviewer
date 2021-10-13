@@ -5,11 +5,12 @@ import classes from './HierarchyViewHeader.module.css';
 const HierarchyViewHeader = () => {
 	return (
 		<tr className={classes['hierarchy-column-header']}>
-			<td>Status</td>
-			<td>Sub-Events</td>
-			<td>Started</td>
-			<td>Completed</td>
-			<td>Message</td>
+			<th>Status</th>
+			<th>Sub-Events</th>
+			<th>Started</th>
+			<th>Completed</th>
+			<th>ID</th>
+			<th>Message</th>
 		</tr>
 	);
 };

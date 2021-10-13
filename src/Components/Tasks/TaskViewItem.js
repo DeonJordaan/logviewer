@@ -18,17 +18,21 @@ const TaskViewItem = (props) => {
 
 	return (
 		<tr className={classes['task-item']}>
-			<td className={'host'}>{props.host}</td>
-			<td className={'app'}>{props.app}</td>
+			<td>{props.host}</td>
+			<td>{props.app}</td>
 			<td className={classesMap[status]}>{props.status}</td>
-			<td className={'code'}>{props.taskCode}</td>
-			<TaskTime time={props.startTime} />
-			<TaskTime time={props.endTime} />
+			<td>{props.taskCode}</td>
+			<td>
+				<TaskTime time={props.startTime} />
+			</td>
+			<td>
+				<TaskTime time={props.endTime} />
+			</td>
 			<td>
 				<ExpandSubEvents id={props.id} subEvents={props.subEvents} />
 			</td>
-			<td className={'id'}>{props.id}</td>
-			<td className={'message'}>{props.message}</td>
+			<td>{props.id}</td>
+			<td>{props.message}</td>
 		</tr>
 	);
 };

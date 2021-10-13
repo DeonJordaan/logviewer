@@ -1,9 +1,9 @@
 .hierarchy-item {
-	font-size: 0.8rem;
-	display: grid;
+	font-size: 0.75rem;
+	/* display: grid;
 	grid-template-columns: 8rem 5rem 12rem 12rem 30rem;
 	grid-template-rows: 1.2rem;
-	gap: 0.5rem;
+	gap: 0.5rem; */
 	margin: 0.25rem auto;
 	padding: 0.25rem 0 0.25rem 0;
 	background-color: #ededed;
@@ -13,10 +13,23 @@
 	width: 100%;
 }
 
-td {
-	white-space: nowrap;
+/* Styling to be applied to the status element based on the task status */
+.NotSet {
+	color: rgb(36, 193, 228);
 }
 
- {
-	width: 99%;
+.Started {
+	color: rgb(35, 12, 187);
+}
+
+.Completed {
+	color: rgb(33, 179, 33);
+}
+
+.Aborted {
+	color: rgb(242, 129, 24);
+}
+
+.Failed {
+	color: rgb(206, 64, 32);
 }

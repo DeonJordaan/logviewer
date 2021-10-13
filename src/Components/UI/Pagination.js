@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import EventContext from '../../store/event-context';
-// import SubEventContext from '../../store/event-context';
+
 import Button from '../ButtonBar/Button';
 
 import classes from './Pagination.module.css';
@@ -27,11 +27,7 @@ export const paginationReducer = (state, action) => {
 
 const Pagination = (props) => {
 	const eventCtx = useContext(EventContext);
-	// const subEventCtx = useContext(SubEventContext);
 
-	// Extracting necessary data from the EventContext
-	// const currentPage = eventCtx.pageNumber;
-	// const getEventDataHere = eventCtx.getEventData;
 	const totalPageCount = Math.ceil(eventCtx.totalRecordCount / 10);
 
 	// Pagination Functions
@@ -57,11 +53,6 @@ const Pagination = (props) => {
 			payload: totalPageCount,
 		});
 	};
-
-	//FIXME CALL THE GETEVENTDATA FUNCTION WHEN THE PAGENUMBER CHANGES. NOT WORKING SINCE CONTEXT SPLIT AND USEFETCH IMPLEMENTATION
-	// useEffect(() => {
-	// 	getEventDataHere();
-	// }, [getEventDataHere, currentPage]);
 
 	return (
 		<div className={classes['button-bar']}>

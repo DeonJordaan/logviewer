@@ -10,7 +10,6 @@ import classes from './SubEventViewItem.module.css';
 
 const SubEventViewItem = (props) => {
 	//Extract status in order to set className. Classes are identical to status description.
-	// const eventCtx = useContext(EventContext);
 	const status = props.status;
 
 	const classesMap = {
@@ -22,14 +21,20 @@ const SubEventViewItem = (props) => {
 	};
 
 	return (
-		<li className={classes['sub-event-item']}>
-			<div className={classesMap[status]}>{props.status}</div>
-			<ExpandSubEvents id={props.id} subEvents={props.subEvents} />
-			<TaskTime time={props.startTime} />
-			<TaskTime time={props.endTime} />
-			<div className="id">{props.id}</div>
-			<div className="message">{props.message}</div>
-		</li>
+		<tr className={classes['sub-event-item']}>
+			<td className={classesMap[status]}>{props.status}</td>
+			<td>
+				<ExpandSubEvents id={props.id} subEvents={props.subEvents} />
+			</td>
+			<td>
+				<TaskTime time={props.startTime} />
+			</td>
+			<td>
+				<TaskTime time={props.endTime} />
+			</td>
+			<td>{props.id}</td>
+			<td>{props.message}</td>
+		</tr>
 	);
 };
 

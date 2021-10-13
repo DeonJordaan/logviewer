@@ -27,6 +27,7 @@ const HierarchyView = (props) => {
 	let subEvents = '0';
 	let startTime = '0000-00-00T00:00:00.00';
 	let endTime = '0000-00-00T00:00:00.00';
+	let id = '0';
 	let message = '-';
 
 	if (subEventCtx.hierarchy.length > 0) {
@@ -34,21 +35,29 @@ const HierarchyView = (props) => {
 		subEvents = subEventCtx.hierarchy[0].subEvents;
 		startTime = subEventCtx.hierarchy[0].startTime;
 		endTime = subEventCtx.hierarchy[0].endTime;
+		id = subEventCtx.hierarchy[0].id;
 		message = subEventCtx.hierarchy[0].message;
 	}
 
-	let hierarchyContent = <p>'No event selected'</p>;
+	let hierarchyContent = (
+		<tbody>
+			<tr>
+				<td>No event selected</td>
+			</tr>
+		</tbody>
+	);
 
 	if (subEventCtx.hierarchy.length > 0) {
 		hierarchyContent = (
 			<tbody>
 				{subEventCtx.hierarchy.map((task) => (
-					// <HierarchyViewItem setStatus={props.setStatus} />
 					<HierarchyViewItem
+						key={task.key}
 						subEvents={subEvents}
 						status={status}
 						startTime={startTime}
 						endTime={endTime}
+						id={id}
 						message={message}
 					/>
 				))}
@@ -57,11 +66,23 @@ const HierarchyView = (props) => {
 	}
 
 	if (subEventCtx.error) {
-		hierarchyContent = <p>{subEventCtx.error}</p>;
+		hierarchyContent = (
+			<tbody>
+				<tr>
+					<td>{subEventCtx.error}</td>
+				</tr>
+			</tbody>
+		);
 	}
 
 	if (subEventCtx.isLoading) {
-		hierarchyContent = <p>Loading...</p>;
+		hierarchyContent = (
+			<tbody>
+				<tr>
+					<td>Loading...</td>
+				</tr>
+			</tbody>
+		);
 	}
 
 	return (
@@ -80,34 +101,10 @@ const HierarchyView = (props) => {
 				<thead>
 					<HierarchyViewHeader />
 				</thead>
-				<section>{hierarchyContent}</section>
-				{/* <tbody>
-					{subEventCtx.hierarchy.map((task) => (
-						// <HierarchyViewItem setStatus={props.setStatus} />
-						<HierarchyViewItem
-							subEvents={subEvents}
-							status={status}
-							startTime={startTime}
-							endTime={endTime}
-							message={message}
-						/>
-					))}
-				</tbody> */}
+				<>{hierarchyContent}</>
 			</table>
 		</div>
 	);
 };
 
 export default React.memo(HierarchyView);
-
-//NOTE OLDER STUFF
-// console.log(eventCtx.hierarchy[0]);
-// console.log(eventCtx.hierarchy[0].App);
-
-// const status = eventCtx.hierarchy[0].status;
-// const status = 'status';
-
-// const app = eventCtx.hierarchy[0].App ? eventCtx.hierarchy[0].App : 'App';
-// const host = eventCtx.hierarchy[0].host
-// 	? eventCtx.hierarchy[0].host
-// 	: 'App';

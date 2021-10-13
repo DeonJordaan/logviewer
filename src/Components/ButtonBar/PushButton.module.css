@@ -48,9 +48,9 @@
 .front {
 	display: block;
 	position: relative;
-	padding: 5px 60px;
+	padding: 0.5rem 1rem;
 	border-radius: var(--border-radius);
-	font-size: 1rem;
+	font-size: 1.2em;
 	color: #fff;
 	background: #009ddb;
 	will-change: transform;

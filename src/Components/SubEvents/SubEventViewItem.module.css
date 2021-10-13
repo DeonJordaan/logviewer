@@ -1,9 +1,9 @@
 .sub-event-item {
 	font-size: 0.75rem;
-	display: grid;
+	/* display: grid;
 	grid-template-columns: 8rem 5rem 12rem 12rem 5rem minmax(auto, max-content);
 	grid-template-rows: minmax(1.2rem, auto);
-	gap: 0.5rem;
+	gap: 0.5rem; */
 	margin: 0.25rem 0 0.25rem 0;
 	padding: 0.25rem 0 0.25rem 0;
 	background-color: #ededed;
@@ -12,39 +12,23 @@
 	align-items: center;
 }
 
-/* If any item within the task-item is focused, apply these styles to the element to highlight the selected task*/
-.sub-event-item:focus-within {
-	border: 1px solid black;
-	background-color: lightgray;
-}
-
 /* Styling to be applied to the status element based on the task status */
 .NotSet {
-	padding: 0.15rem 0;
 	color: rgb(36, 193, 228);
-	border-radius: 3px;
 }
 
 .Started {
-	padding: 0.15rem 0;
 	color: rgb(35, 12, 187);
-	border-radius: 3px;
 }
 
 .Completed {
-	padding: 0.15rem 0;
 	color: rgb(33, 179, 33);
-	border-radius: 3px;
 }
 
 .Aborted {
-	padding: 0.15rem 0;
 	color: rgb(242, 129, 24);
-	border-radius: 3px;
 }
 
 .Failed {
-	padding: 0.15rem 0;
 	color: rgb(206, 64, 32);
-	border-radius: 3px;
 }

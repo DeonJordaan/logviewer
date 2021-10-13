@@ -15,10 +15,6 @@
 	max-width: 85vw;
 }
 
-table {
-	border-collapse: collapse;
-}
-
 .box {
 	display: inline-block;
 	border: 0.1rem solid lightgray;
@@ -30,4 +26,27 @@ table {
 	color: black;
 	font-family: inherit;
 	text-align: center;
+}
+
+@media only screen and (max-width: 760px),
+	(min-device-width: 768px) and (max-device-width: 1024px) {
+	/* Hierarchy Labels */
+	.hierarchy-view td:nth-of-type(1):before {
+		content: 'Status';
+	}
+	.hierarchy-view td:nth-of-type(2):before {
+		content: 'Sub-Events';
+	}
+	.hierarchy-view td:nth-of-type(3):before {
+		content: 'Started';
+	}
+	.hierarchy-view td:nth-of-type(4):before {
+		content: 'Completed';
+	}
+	.hierarchy-view td:nth-of-type(5):before {
+		content: 'ID';
+	}
+	.hierarchy-view td:nth-of-type(6):before {
+		content: 'Message';
+	}
 }

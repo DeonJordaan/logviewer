@@ -1,17 +1,24 @@
 import React, { useContext } from 'react';
 
+import SubEventContext from '../../store/sub-event-context';
+
 import SubEventViewHeader from './SubEventViewHeader';
 import SubEventViewItem from './SubEventViewItem';
 
 import classes from './SubEventView.module.css';
-import SubEventContext from '../../store/sub-event-context';
 
 const SubEventView = (props) => {
 	const subEventCtx = useContext(SubEventContext);
 
 	const items = subEventCtx.subEvents;
 
-	let subEventContent = <p>'No event selected'</p>;
+	let subEventContent = (
+		<tbody>
+			<tr>
+				<td>No event selected</td>
+			</tr>
+		</tbody>
+	);
 
 	if (subEventCtx.subEvents.length > 0) {
 		subEventContent = (
@@ -32,11 +39,23 @@ const SubEventView = (props) => {
 	}
 
 	if (subEventCtx.error) {
-		subEventContent = <p>{subEventCtx.error}</p>;
+		subEventContent = (
+			<tbody>
+				<tr>
+					<td>{subEventCtx.error}</td>
+				</tr>
+			</tbody>
+		);
 	}
 
 	if (subEventCtx.isLoading) {
-		subEventContent = <p>Loading...</p>;
+		subEventContent = (
+			<tbody>
+				<tr>
+					<td>Loading...</td>
+				</tr>
+			</tbody>
+		);
 	}
 
 	return (
@@ -46,20 +65,7 @@ const SubEventView = (props) => {
 				<thead>
 					<SubEventViewHeader />
 				</thead>
-				<section>{subEventContent}</section>
-				{/* <tbody>
-					{items.map((task) => (
-						<SubEventViewItem
-							key={task.key}
-							status={props.setStatus(task.status)}
-							subEvents={task.subEvents}
-							startTime={task.startTime}
-							endTime={task.endTime}
-							id={task.id}
-							message={task.message}
-						/>
-					))}
-				</tbody> */}
+				<>{subEventContent}</>
 			</table>
 		</div>
 	);

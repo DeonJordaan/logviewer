@@ -1,15 +1,22 @@
 import React, { useContext } from 'react';
 
+import EventContext from '../../store/event-context';
+
 import TaskViewItem from './TaskViewItem';
 import TaskViewHeader from './TaskViewHeader';
 
 import classes from './TaskView.module.css';
-import EventContext from '../../store/event-context';
 
 const TaskView = (props) => {
 	const eventCtx = useContext(EventContext);
 
-	let taskContent = <p>'No data found'</p>;
+	let taskContent = (
+		<tbody>
+			<tr>
+				<td>No event selected</td>
+			</tr>
+		</tbody>
+	);
 
 	if (eventCtx.tasks) {
 		taskContent = (
@@ -33,14 +40,25 @@ const TaskView = (props) => {
 	}
 
 	if (eventCtx.error) {
-		taskContent = <p>{eventCtx.error}</p>;
+		taskContent = (
+			<tbody>
+				<tr>
+					<td>{eventCtx.error}</td>
+				</tr>
+			</tbody>
+		);
 	}
 
 	if (eventCtx.isLoading) {
-		taskContent = <p>Loading...</p>;
+		taskContent = (
+			<tbody>
+				<tr>
+					<td>Loading...</td>
+				</tr>
+			</tbody>
+		);
 	}
 
-	// console.log('TASKVIEW');
 	return (
 		<div className={classes['task-view']}>
 			<h3 className={classes['task-header']}>Event Data</h3>
@@ -48,23 +66,7 @@ const TaskView = (props) => {
 				<thead>
 					<TaskViewHeader />
 				</thead>
-				<section>{taskContent}</section>
-				{/* <tbody>
-					{eventCtx.tasks.map((task) => (
-						<TaskViewItem
-							key={task.key}
-							host={task.host}
-							id={task.id}
-							app={task.App}
-							subEvents={task.subEvents}
-							taskCode={task.taskCode}
-							startTime={task.startTime}
-							endTime={task.endTime}
-							message={task.message}
-							status={props.setStatus(task.status)}
-						/>
-					))}
-				</tbody> */}
+				<>{taskContent}</>
 			</table>
 		</div>
 	);
