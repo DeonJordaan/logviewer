@@ -34,7 +34,7 @@ function App() {
 			<Header />
 			<div className="display">
 				<FilterBoard />
-				<div>
+				<div className={'main-task-display'}>
 					{/* <section>{taskContent}</section> */}
 					<TaskView
 						taskItems={eventCtx.tasks}

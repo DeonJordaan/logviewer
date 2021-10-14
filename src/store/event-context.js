@@ -49,6 +49,12 @@ export const EventContextProvider = (props) => {
 			setTotalRecordCount(recordCount);
 		};
 
+		// NOTE appName options for URL below
+		// SalesActivityReport
+		// MetroIQ
+		// AgentIQ
+		// PropIQ
+		// SACompany
 		fetchTasks(
 			{
 				url: `http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=${pageNumber.page}&pageSize=10&hostname=`,

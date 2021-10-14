@@ -1,14 +1,20 @@
 .App {
 	text-align: center;
-	margin: 0 0 5rem 0;
-	max-width: 100vw;
+	/* margin: 0 0 5rem 0; */
+	margin: 0 auto;
+	/* max-width: 100vw; */
 	position: absolute;
+	width: 100%;
 }
 
 .display {
 	display: flex;
 	flex-direction: row;
 	max-width: 100vw;
+}
+
+.main-task-display {
+	width: 85%;
 }
 
 @media only screen and (max-width: 760px),

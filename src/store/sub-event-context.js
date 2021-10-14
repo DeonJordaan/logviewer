@@ -10,12 +10,10 @@ const SubEventContext = React.createContext({
 	subEvents: [],
 	isLoading: false,
 	error: null,
-	// pageNumber: 1,
 	parentId: 1,
 	selectedTask: [],
 	hierarchy: [],
 	setParentId: () => {},
-	// dispatchPageNumber: () => {},
 	setHierarchy: () => {},
 	setSelectedTask: () => {},
 });
@@ -25,9 +23,6 @@ export const SubEventContextProvider = (props) => {
 	const [parentId, setParentId] = useState(0);
 	const [selectedTask, setSelectedTask] = useState([]);
 	const [hierarchy, setHierarchy] = useState([]);
-	// const [pageNumber, dispatchPageNumber] = useReducer(paginationReducer, {
-	// 	page: 1,
-	// });
 
 	// FIXME ATTEMPTING TO ADD THE CURRENTLY SELECTED TASK TO THE HIERARCHY ARRAY IN ORDER TO SUPPLY THE NESTED TASKS AS THEY'RE SELECTED
 	useEffect(() => {
@@ -84,8 +79,6 @@ export const SubEventContextProvider = (props) => {
 				subEvents: subEvents,
 				isLoading: isLoading,
 				error: error,
-				// pageNumber: pageNumber,
-				// dispatchPageNumber: dispatchPageNumber,
 				parentId: parentId,
 				setParentId: setParentId,
 				hierarchy: hierarchy,
