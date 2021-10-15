@@ -82,34 +82,6 @@ export const EventContextProvider = (props) => {
 export default EventContext;
 
 ///////////////////////////////////////
-//NOTE STUFF NOT CURRENTLY NEEDED WHILE ATTEMPTING TO SPLIT INTO TWO CONTEXTS
-
-// useEffect(() => {
-// 	setHierarchy(selectedTask);
-// }, [selectedTask]);
-
-//FROM EVENTCONTEXT
-// subEvents: [],
-// 	isLoadingSubEvents: false,
-// 	subEventError: null,
-// 	parentId: 1,
-// 	getEventData: () => {},
-// 	selectedTask: [],
-// 	hierarchy: [],
-// 	getSubEventData: () => {},
-// 	setParentId: () => {},
-// 	setHierarchy: () => {},
-// 	setSelectedTask: () => {},
-
-//FROM EVENTCONTEXTPROVIDER
-// const [isLoading, setIsLoading] = useState(false);
-// const [error, setError] = useState(null);
-// const [subEvents, setSubEvents] = useState([]);
-// const [isLoadingSubEvents, setIsLoadingSubEvents] = useState(false);
-// const [subEventError, setSubEventError] = useState(null);
-// const [parentId, setParentId] = useState(0);
-// const [selectedTask, setSelectedTask] = useState([]);
-// const [hierarchy, setHierarchy] = useState([]);
 
 // NOTE SETTING HIERARCHY VIEW TO THE CURRENTLY SELECTED TASK
 // useEffect(() => {

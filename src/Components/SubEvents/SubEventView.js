@@ -10,8 +10,6 @@ import classes from './SubEventView.module.css';
 const SubEventView = (props) => {
 	const subEventCtx = useContext(SubEventContext);
 
-	const items = subEventCtx.subEvents;
-
 	let subEventContent = (
 		<tbody>
 			<tr>
@@ -20,10 +18,10 @@ const SubEventView = (props) => {
 		</tbody>
 	);
 
-	if (subEventCtx.subEvents.length > 0) {
+	if (subEventCtx.subEvents) {
 		subEventContent = (
 			<tbody>
-				{items.map((task) => (
+				{subEventCtx.subEvents.map((task) => (
 					<SubEventViewItem
 						key={task.key}
 						status={props.setStatus(task.status)}

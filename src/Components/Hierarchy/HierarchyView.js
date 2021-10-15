@@ -7,6 +7,7 @@ import HierarchyViewHeader from './HierarchyViewHeader';
 import HierarchyViewItem from './HierarchyViewItem';
 
 import classes from './HierarchyView.module.css';
+import HierarchyViewMainItem from './HierarchyViewMainItem';
 
 const HierarchyView = (props) => {
 	// const eventCtx = useContext(EventContext);
@@ -23,21 +24,23 @@ const HierarchyView = (props) => {
 		host = subEventCtx.hierarchy[0].host;
 	}
 
-	let status = '-';
-	let subEvents = '0';
-	let startTime = '0000-00-00T00:00:00.00';
-	let endTime = '0000-00-00T00:00:00.00';
-	let id = '0';
-	let message = '-';
+	// let key = '';
+	// let status = '';
+	// let subEvents = '';
+	// let startTime = '0000-00-00T00:00:00.00';
+	// let endTime = '0000-00-00T00:00:00.00';
+	// let id = '';
+	// let message = '';
 
-	if (subEventCtx.hierarchy.length > 0) {
-		status = props.setStatus(subEventCtx.hierarchy[0].status);
-		subEvents = subEventCtx.hierarchy[0].subEvents;
-		startTime = subEventCtx.hierarchy[0].startTime;
-		endTime = subEventCtx.hierarchy[0].endTime;
-		id = subEventCtx.hierarchy[0].id;
-		message = subEventCtx.hierarchy[0].message;
-	}
+	// if (subEventCtx.hierarchy.length > 0) {
+	// 	key = subEventCtx.hierarchy[0].key;
+	// 	status = props.setStatus(subEventCtx.hierarchy[0].status);
+	// 	subEvents = subEventCtx.hierarchy[0].subEvents;
+	// 	startTime = subEventCtx.hierarchy[0].startTime;
+	// 	endTime = subEventCtx.hierarchy[0].endTime;
+	// 	id = subEventCtx.hierarchy[0].id;
+	// 	message = subEventCtx.hierarchy[0].message;
+	// }
 
 	let hierarchyContent = (
 		<tbody>
@@ -47,18 +50,18 @@ const HierarchyView = (props) => {
 		</tbody>
 	);
 
-	if (subEventCtx.hierarchy.length > 0) {
+	if (subEventCtx.hierarchy) {
 		hierarchyContent = (
 			<tbody>
 				{subEventCtx.hierarchy.map((task) => (
 					<HierarchyViewItem
 						key={task.key}
-						subEvents={subEvents}
-						status={status}
-						startTime={startTime}
-						endTime={endTime}
-						id={id}
-						message={message}
+						subEvents={task.subEvents}
+						status={task.status}
+						startTime={task.startTime}
+						endTime={task.endTime}
+						id={task.id}
+						message={task.message}
 					/>
 				))}
 			</tbody>
@@ -101,6 +104,7 @@ const HierarchyView = (props) => {
 				<thead>
 					<HierarchyViewHeader />
 				</thead>
+				<HierarchyViewMainItem />
 				<>{hierarchyContent}</>
 			</table>
 		</div>
