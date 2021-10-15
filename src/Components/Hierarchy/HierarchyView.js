@@ -14,7 +14,7 @@ const HierarchyView = (props) => {
 	const subEventCtx = useContext(SubEventContext);
 
 	// console.log(eventCtx);
-	// console.log(eventCtx.hierarchy);
+	// console.log(subEventCtx.hierarchy);
 
 	let app = 'App';
 	let host = 'Host';
@@ -23,24 +23,6 @@ const HierarchyView = (props) => {
 		app = subEventCtx.hierarchy[0].App;
 		host = subEventCtx.hierarchy[0].host;
 	}
-
-	// let key = '';
-	// let status = '';
-	// let subEvents = '';
-	// let startTime = '0000-00-00T00:00:00.00';
-	// let endTime = '0000-00-00T00:00:00.00';
-	// let id = '';
-	// let message = '';
-
-	// if (subEventCtx.hierarchy.length > 0) {
-	// 	key = subEventCtx.hierarchy[0].key;
-	// 	status = props.setStatus(subEventCtx.hierarchy[0].status);
-	// 	subEvents = subEventCtx.hierarchy[0].subEvents;
-	// 	startTime = subEventCtx.hierarchy[0].startTime;
-	// 	endTime = subEventCtx.hierarchy[0].endTime;
-	// 	id = subEventCtx.hierarchy[0].id;
-	// 	message = subEventCtx.hierarchy[0].message;
-	// }
 
 	let hierarchyContent = (
 		<tbody>
@@ -57,7 +39,7 @@ const HierarchyView = (props) => {
 					<HierarchyViewItem
 						key={task.key}
 						subEvents={task.subEvents}
-						status={task.status}
+						status={props.setStatus(task.status)}
 						startTime={task.startTime}
 						endTime={task.endTime}
 						id={task.id}
@@ -104,7 +86,7 @@ const HierarchyView = (props) => {
 				<thead>
 					<HierarchyViewHeader />
 				</thead>
-				<HierarchyViewMainItem />
+				<HierarchyViewMainItem setStatus={props.setStatus} />
 				<>{hierarchyContent}</>
 			</table>
 		</div>
@@ -112,3 +94,22 @@ const HierarchyView = (props) => {
 };
 
 export default React.memo(HierarchyView);
+
+///////////////////////
+// let key = '';
+// let status = '';
+// let subEvents = '';
+// let startTime = '0000-00-00T00:00:00.00';
+// let endTime = '0000-00-00T00:00:00.00';
+// let id = '';
+// let message = '';
+
+// if (subEventCtx.hierarchy.length > 0) {
+// 	key = subEventCtx.hierarchy[0].key;
+// 	status = props.setStatus(subEventCtx.hierarchy[0].status);
+// 	subEvents = subEventCtx.hierarchy[0].subEvents;
+// 	startTime = subEventCtx.hierarchy[0].startTime;
+// 	endTime = subEventCtx.hierarchy[0].endTime;
+// 	id = subEventCtx.hierarchy[0].id;
+// 	message = subEventCtx.hierarchy[0].message;
+// }

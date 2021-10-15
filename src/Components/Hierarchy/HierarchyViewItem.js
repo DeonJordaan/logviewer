@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ExpandSubEvents from '../SubEvents/ExpandSubEvents';
+// import ExpandSubEvents from '../SubEvents/ExpandSubEvents';
 import TaskTime from '../Tasks/TaskTime';
 
 import classes from './HierarchyViewItem.module.css';
@@ -18,7 +18,8 @@ const HierarchyViewItem = (props) => {
 		<tr className={classes['hierarchy-item']}>
 			<td className={classesMap[props.status]}>{props.status}</td>
 			<td>
-				<ExpandSubEvents subEvents={props.subEvents} />
+				{props.subEvents}
+				{/* <ExpandSubEvents subEvents={props.subEvents} /> */}
 			</td>
 			<td>
 				<TaskTime time={props.startTime} />

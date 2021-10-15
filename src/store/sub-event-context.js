@@ -25,6 +25,9 @@ export const SubEventContextProvider = (props) => {
 	const [hierarchy, setHierarchy] = useState([]);
 
 	// FIXME ATTEMPTING TO ADD THE CURRENTLY SELECTED TASK TO THE HIERARCHY ARRAY IN ORDER TO SUPPLY THE NESTED TASKS AS THEY'RE SELECTED
+	// useEffect(() => {
+	// 	setHierarchy(selectedTask);
+	// }, [selectedTask]);
 	useEffect(() => {
 		setHierarchy((prevState) => {
 			return [...prevState, ...selectedTask];
@@ -56,9 +59,9 @@ export const SubEventContextProvider = (props) => {
 			});
 
 			setSubEvents(allTasks);
-			setSelectedTask(
-				eventCtx.tasks.filter((task) => task.id === parseInt(parentId))
-			);
+			// setSelectedTask(
+			// 	eventCtx.tasks.filter((task) => task.id === parseInt(parentId))
+			// );
 		};
 
 		fetchTasks(

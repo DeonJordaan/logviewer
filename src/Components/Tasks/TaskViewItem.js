@@ -1,12 +1,12 @@
 import React from 'react';
 
-import ExpandSubEvents from '../SubEvents/ExpandSubEvents';
+import ExpandEvents from '../Tasks/ExpandEvents';
 import TaskTime from './TaskTime';
 
 import classes from './TaskViewItem.module.css';
 
 const TaskViewItem = (props) => {
-	const status = props.status;
+	// const status = props.status;
 
 	const classesMap = {
 		NotSet: classes.NotSet,
@@ -20,7 +20,7 @@ const TaskViewItem = (props) => {
 		<tr className={classes['task-item']}>
 			<td>{props.host}</td>
 			<td>{props.app}</td>
-			<td className={classesMap[status]}>{props.status}</td>
+			<td className={classesMap[props.status]}>{props.status}</td>
 			<td>{props.taskCode}</td>
 			<td>
 				<TaskTime time={props.startTime} />
@@ -29,7 +29,7 @@ const TaskViewItem = (props) => {
 				<TaskTime time={props.endTime} />
 			</td>
 			<td>
-				<ExpandSubEvents id={props.id} subEvents={props.subEvents} />
+				<ExpandEvents id={props.id} subEvents={props.subEvents} />
 			</td>
 			<td>{props.id}</td>
 			<td>{props.message}</td>
