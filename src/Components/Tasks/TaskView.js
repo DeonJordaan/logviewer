@@ -32,7 +32,7 @@ const TaskView = (props) => {
 						startTime={task.startTime}
 						endTime={task.endTime}
 						message={task.message}
-						status={props.setStatus(task.status)}
+						status={props.setStatus(+task.status)}
 					/>
 				))}
 			</tbody>
