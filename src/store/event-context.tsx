@@ -1,13 +1,14 @@
 import React, { useState, useReducer, useEffect } from 'react';
 
 import { paginationReducer } from '../Components/UI/Pagination';
-
 import useFetch from './useFetch';
+import Task from '../Interfaces/task';
+import DataInterface from '../Interfaces/dataInterface'
 
 type EventContextObject = {
-	tasks: [];
+	tasks: Task[];
 	isLoading: boolean;
-	error: Error | null;
+	error: string | null;
 	totalRecordCount: number[];
 	pageNumber: number;
 	dispatchPageNumber: () => void;
@@ -23,7 +24,7 @@ const EventContext = React.createContext<EventContextObject>({
 });
 
 export const EventContextProvider: React.FC = (props) => {
-	const [tasks, setTasks] = useState([]);
+	const [tasks, setTasks] = useState<Task[]>([]);
 
 	const [totalRecordCount, setTotalRecordCount] = useState([]);
 
@@ -35,11 +36,11 @@ export const EventContextProvider: React.FC = (props) => {
 	const { isLoading, error, sendRequest: fetchTasks } = useFetch();
 
 	useEffect(() => {
-		const transformData = (taskData: object) => {
-			const { Data: allTaskData, TotalRecordCount: recordCount } =
+		const transformData = (taskData: ) => {
+			const { Data: allTaskData, TotalRecordCount: recordCount }: {Data: DataInterface; TotalRecordCount: number} =
 				taskData;
 
-			const allTasks = allTaskData.map((Data) => {
+			const allTasks = allTaskData.map((taskData) => {
 				return {
 					key: taskData.Id,
 					id: taskData.Id,
@@ -72,17 +73,17 @@ export const EventContextProvider: React.FC = (props) => {
 		);
 	}, [fetchTasks, pageNumber.page]);
 
+	const contextValue: EventContextObject = {
+		tasks: tasks,
+		isLoading: isLoading,
+		error: error,
+		totalRecordCount: totalRecordCount,
+		pageNumber: pageNumber.page,
+		dispatchPageNumber: dispatchPageNumber,
+	};
+
 	return (
-		<EventContext.Provider
-			value={{
-				tasks: tasks,
-				isLoading: isLoading,
-				error: error,
-				totalRecordCount: totalRecordCount,
-				pageNumber: pageNumber.page,
-				dispatchPageNumber: dispatchPageNumber,
-			}}
-		>
+		<EventContext.Provider value={contextValue}>
 			{props.children}
 		</EventContext.Provider>
 	);
