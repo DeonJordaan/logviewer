@@ -1,3 +1,5 @@
+import DataInterface from './dataInterface';
+
 class Task {
 	key: number;
 	id: number;
@@ -10,7 +12,7 @@ class Task {
 	message: string;
 	status: number;
 
-	constructor(data: object) {
+	constructor(data: DataInterface) {
 		this.key = data.Id;
 		this.id = data.Id;
 		this.App = data.AppName;
