@@ -23,7 +23,7 @@ const useFetch = () => {
 			const data = await response.json();
 
 			applyData(data);
-		} catch (error: any) {
+		} catch (error) {
 			if (error instanceof Error) {
 				setError(error.message);
 			}

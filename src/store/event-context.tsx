@@ -4,7 +4,16 @@ import { paginationReducer } from '../Components/UI/Pagination';
 
 import useFetch from './useFetch';
 
-const EventContext = React.createContext({
+type EventContextObject = {
+	tasks: [];
+	isLoading: boolean;
+	error: Error | null;
+	totalRecordCount: number[];
+	pageNumber: number;
+	dispatchPageNumber: () => void;
+};
+
+const EventContext = React.createContext<EventContextObject>({
 	tasks: [],
 	isLoading: false,
 	error: null,
@@ -13,7 +22,7 @@ const EventContext = React.createContext({
 	dispatchPageNumber: () => {},
 });
 
-export const EventContextProvider = (props) => {
+export const EventContextProvider: React.FC = (props) => {
 	const [tasks, setTasks] = useState([]);
 
 	const [totalRecordCount, setTotalRecordCount] = useState([]);
@@ -26,11 +35,11 @@ export const EventContextProvider = (props) => {
 	const { isLoading, error, sendRequest: fetchTasks } = useFetch();
 
 	useEffect(() => {
-		const transformData = (taskData) => {
+		const transformData = (taskData: object) => {
 			const { Data: allTaskData, TotalRecordCount: recordCount } =
 				taskData;
 
-			const allTasks = allTaskData.map((taskData) => {
+			const allTasks = allTaskData.map((Data) => {
 				return {
 					key: taskData.Id,
 					id: taskData.Id,
