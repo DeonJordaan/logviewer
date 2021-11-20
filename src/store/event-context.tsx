@@ -3,13 +3,13 @@ import React, { useState, useReducer, useEffect } from 'react';
 import { paginationReducer } from '../Components/UI/Pagination';
 import useFetch from './useFetch';
 import Task from '../Interfaces/task';
-import DataInterface from '../Interfaces/dataInterface'
+import DataInterface from '../Interfaces/dataInterface';
 
 type EventContextObject = {
 	tasks: Task[];
 	isLoading: boolean;
 	error: string | null;
-	totalRecordCount: number[];
+	totalRecordCount: number | null;
 	pageNumber: number;
 	dispatchPageNumber: () => void;
 };
@@ -18,7 +18,7 @@ const EventContext = React.createContext<EventContextObject>({
 	tasks: [],
 	isLoading: false,
 	error: null,
-	totalRecordCount: [],
+	totalRecordCount: null,
 	pageNumber: 1,
 	dispatchPageNumber: () => {},
 });
@@ -26,7 +26,9 @@ const EventContext = React.createContext<EventContextObject>({
 export const EventContextProvider: React.FC = (props) => {
 	const [tasks, setTasks] = useState<Task[]>([]);
 
-	const [totalRecordCount, setTotalRecordCount] = useState([]);
+	const [totalRecordCount, setTotalRecordCount] = useState<number | null>(
+		null
+	);
 
 	const [pageNumber, dispatchPageNumber] = useReducer(paginationReducer, {
 		page: 1,
@@ -36,8 +38,12 @@ export const EventContextProvider: React.FC = (props) => {
 	const { isLoading, error, sendRequest: fetchTasks } = useFetch();
 
 	useEffect(() => {
-		const transformData = (taskData: ) => {
-			const { Data: allTaskData, TotalRecordCount: recordCount }: {Data: DataInterface; TotalRecordCount: number} =
+		const transformData = (taskData: {
+			TotalRecordCount: number;
+			Data: DataInterface[];
+			PageNumber: number;
+		}) => {
+			const { Data: allTaskData, TotalRecordCount: recordCount } =
 				taskData;
 
 			const allTasks = allTaskData.map((taskData) => {
