@@ -1,3 +1,5 @@
+// NOTE - EXPERIMENTAL - NOT CURRENTLY IN USE
+
 import { useState, useEffect, useReducer } from 'react';
 
 import useFetch from './useFetch';

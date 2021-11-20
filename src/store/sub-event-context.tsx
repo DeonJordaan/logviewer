@@ -3,26 +3,39 @@ import React, { useState, useEffect, useContext } from 'react';
 // import { paginationReducer } from '../Components/UI/Pagination';
 
 import EventContext from './event-context';
-
 import useFetch from './useFetch';
+import SubEvent from '../Interfaces/subEvent';
+import DataInterface from '../Interfaces/dataInterface';
 
-const SubEventContext = React.createContext({
+type SubEventContextObject = {
+	subEvents: SubEvent[];
+	isLoading: boolean;
+	error: string | null;
+	parentId: number | null;
+	selectedTask: SubEvent | null;
+	hierarchy: SubEvent[];
+	setParentId: () => void;
+	setHierarchy: () => void;
+	setSelectedTask: () => void;
+};
+
+const SubEventContext = React.createContext<SubEventContextObject>({
 	subEvents: [],
 	isLoading: false,
 	error: null,
 	parentId: 1,
-	selectedTask: [],
+	selectedTask: null,
 	hierarchy: [],
 	setParentId: () => {},
 	setHierarchy: () => {},
 	setSelectedTask: () => {},
 });
 
-export const SubEventContextProvider = (props) => {
-	const [subEvents, setSubEvents] = useState([]);
-	const [parentId, setParentId] = useState(0);
-	const [selectedTask, setSelectedTask] = useState([]);
-	const [hierarchy, setHierarchy] = useState([]);
+export const SubEventContextProvider: React.FC = (props) => {
+	const [subEvents, setSubEvents] = useState<SubEvent[]>([]);
+	const [parentId, setParentId] = useState(null);
+	const [selectedTask, setSelectedTask] = useState<SubEvent | null>(null);
+	const [hierarchy, setHierarchy] = useState<SubEvent[]>([]);
 
 	// FIXME ATTEMPTING TO ADD THE CURRENTLY SELECTED TASK TO THE HIERARCHY ARRAY IN ORDER TO SUPPLY THE NESTED TASKS AS THEY'RE SELECTED
 	// useEffect(() => {
@@ -30,7 +43,7 @@ export const SubEventContextProvider = (props) => {
 	// }, [selectedTask]);
 	useEffect(() => {
 		setHierarchy((prevState) => {
-			return [...prevState, ...selectedTask];
+			return [...prevState, selectedTask];
 		});
 	}, [selectedTask]);
 
@@ -40,7 +53,11 @@ export const SubEventContextProvider = (props) => {
 	const eventCtx = useContext(EventContext);
 
 	useEffect(() => {
-		const transformData = (taskData) => {
+		const transformData = (taskData: {
+			TotalRecordCount: number;
+			Data: DataInterface[];
+			PageNumber: number;
+		}) => {
 			const { Data: allTaskData } = taskData;
 
 			const allTasks = allTaskData.map((taskData) => {
