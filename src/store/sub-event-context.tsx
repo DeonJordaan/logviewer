@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, {
+	useState,
+	useEffect,
+	useContext,
+	Dispatch,
+	SetStateAction,
+} from 'react';
 
 // import { paginationReducer } from '../Components/UI/Pagination';
 
@@ -12,11 +18,11 @@ type SubEventContextObject = {
 	isLoading: boolean;
 	error: string | null;
 	parentId: number | null;
-	selectedTask: SubEvent | null;
+	selectedTask: SubEvent[];
 	hierarchy: SubEvent[];
-	setParentId: () => void;
-	setHierarchy: () => void;
-	setSelectedTask: () => void;
+	setParentId: Dispatch<SetStateAction<null>>;
+	setHierarchy: Dispatch<SetStateAction<SubEvent[]>>;
+	setSelectedTask: Dispatch<SetStateAction<SubEvent[]>>;
 };
 
 const SubEventContext = React.createContext<SubEventContextObject>({
@@ -24,7 +30,7 @@ const SubEventContext = React.createContext<SubEventContextObject>({
 	isLoading: false,
 	error: null,
 	parentId: 1,
-	selectedTask: null,
+	selectedTask: [],
 	hierarchy: [],
 	setParentId: () => {},
 	setHierarchy: () => {},
@@ -34,7 +40,7 @@ const SubEventContext = React.createContext<SubEventContextObject>({
 export const SubEventContextProvider: React.FC = (props) => {
 	const [subEvents, setSubEvents] = useState<SubEvent[]>([]);
 	const [parentId, setParentId] = useState(null);
-	const [selectedTask, setSelectedTask] = useState<SubEvent | null>(null);
+	const [selectedTask, setSelectedTask] = useState<SubEvent[]>([]);
 	const [hierarchy, setHierarchy] = useState<SubEvent[]>([]);
 
 	// FIXME ATTEMPTING TO ADD THE CURRENTLY SELECTED TASK TO THE HIERARCHY ARRAY IN ORDER TO SUPPLY THE NESTED TASKS AS THEY'RE SELECTED
@@ -42,9 +48,10 @@ export const SubEventContextProvider: React.FC = (props) => {
 	// 	setHierarchy(selectedTask);
 	// }, [selectedTask]);
 	useEffect(() => {
-		setHierarchy((prevState) => {
-			return [...prevState, selectedTask];
-		});
+		setHierarchy(selectedTask);
+		// setHierarchy((prevState) => {
+		// 	return [...prevState, selectedTask];
+		// });
 	}, [selectedTask]);
 
 	//COMMENT Fetch data, sort and set tasks
