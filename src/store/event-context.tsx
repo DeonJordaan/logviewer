@@ -46,20 +46,7 @@ export const EventContextProvider: React.FC = (props) => {
 			const { Data: allTaskData, TotalRecordCount: recordCount } =
 				taskData;
 
-			const allTasks = allTaskData.map((taskData) => {
-				return {
-					key: taskData.Id,
-					id: taskData.Id,
-					App: taskData.AppName,
-					taskCode: taskData.Code,
-					startTime: taskData.Started,
-					endTime: taskData.Completed,
-					subEvents: taskData.SubEventCount,
-					host: taskData.Host,
-					message: taskData.Message,
-					status: taskData.Status,
-				};
-			});
+			const allTasks = allTaskData.map((data) => new Task(data));
 
 			setTasks(allTasks);
 			setTotalRecordCount(recordCount);
