@@ -4,12 +4,12 @@ import EventContext from '../../store/event-context';
 
 import classes from './PushButton.module.css';
 
-const PushButton = (props) => {
+const PushButton: React.FC<React.HTMLAttributes<any>> = (props) => {
 	const eventCtx = useContext(EventContext);
 
 	return (
 		<button
-			onClick={eventCtx.getEventData}
+			// onClick={eventCtx.getEventData} FIXME NEED TO FIND A WAY TO ACTIVATE THIS FETCH REQUEST SINCE I NO LONGER ACTIVATE MY FETCH REQUEST FROM A FUNCTION THAT COULD ALSO BE TRIGGERED FROM THIS BUTTON
 			id="submitbutton"
 			type="button"
 			className={`${classes.btn} ${classes['push-button']}`}

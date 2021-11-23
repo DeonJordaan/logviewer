@@ -1,6 +1,6 @@
 import classes from './SearchInput.module.css';
 
-const SearchInput = () => {
+const SearchInput: React.FC = () => {
 	return (
 		<div className={classes['search-wrapper']}>
 			<div className={classes['search-input']}>

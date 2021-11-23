@@ -18,7 +18,7 @@ type SubEventContextObject = {
 	isLoading: boolean;
 	error: string | null;
 	parentId: number | null;
-	selectedTask: SubEvent[];
+	selectedTask: SubEvent[]; //NOTE CHANGE THIS TO selectedSubEvent
 	hierarchy: SubEvent[];
 	setParentId: Dispatch<SetStateAction<null>>;
 	setHierarchy: Dispatch<SetStateAction<SubEvent[]>>;
@@ -67,25 +67,9 @@ export const SubEventContextProvider: React.FC = (props) => {
 		}) => {
 			const { Data: allTaskData } = taskData;
 
-			const allTasks = allTaskData.map((taskData) => {
-				return {
-					key: taskData.Id,
-					id: taskData.Id,
-					App: taskData.AppName,
-					taskCode: taskData.Code,
-					startTime: taskData.Started,
-					endTime: taskData.Completed,
-					subEvents: taskData.SubEventCount,
-					host: taskData.Host,
-					message: taskData.Message,
-					status: taskData.Status,
-				};
-			});
+			const allTasks = allTaskData.map((data) => new SubEvent(data));
 
 			setSubEvents(allTasks);
-			// setSelectedTask(
-			// 	eventCtx.tasks.filter((task) => task.id === parseInt(parentId))
-			// );
 		};
 
 		fetchTasks(
