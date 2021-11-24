@@ -9,7 +9,7 @@ const ExpandSubEvents = (props) => {
 	// const eventCtx = useContext(EventContext);
 	const subEventCtx = useContext(SubEventContext);
 
-	const setParentId = subEventCtx.setParentId;
+	const setSubEventParentId = subEventCtx.setSubEventParentId;
 
 	// const setHierarchy = subEventCtx.setHierarchy;
 
@@ -25,7 +25,7 @@ const ExpandSubEvents = (props) => {
 	}
 
 	const parentIdHandler = async () => {
-		setParentId(id);
+		setSubEventParentId(id);
 		// console.log(eventCtx.tasks);
 		// console.log(subEventCtx.hierarchy);
 		// console.log(subEventCtx.selectedTask);

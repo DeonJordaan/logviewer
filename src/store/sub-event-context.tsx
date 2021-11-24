@@ -18,29 +18,39 @@ type SubEventContextObject = {
 	isLoading: boolean;
 	error: string | null;
 	parentId: number | null;
-	selectedTask: SubEvent[]; //NOTE CHANGE THIS TO selectedSubEvent
+	subEventParentId: number | null;
+	selectedTask: SubEvent[];
+	selectedSubEvent: SubEvent[];
 	hierarchy: SubEvent[];
 	setParentId: Dispatch<SetStateAction<null>>;
+	setSubEventParentId: Dispatch<SetStateAction<null>>;
 	setHierarchy: Dispatch<SetStateAction<SubEvent[]>>;
 	setSelectedTask: Dispatch<SetStateAction<SubEvent[]>>;
+	setSelectedSubEvent: Dispatch<SetStateAction<SubEvent[]>>;
 };
 
 const SubEventContext = React.createContext<SubEventContextObject>({
 	subEvents: [],
 	isLoading: false,
 	error: null,
-	parentId: 1,
+	parentId: 0,
+	subEventParentId: 0,
 	selectedTask: [],
+	selectedSubEvent: [],
 	hierarchy: [],
 	setParentId: () => {},
+	setSubEventParentId: () => {},
 	setHierarchy: () => {},
 	setSelectedTask: () => {},
+	setSelectedSubEvent: () => {},
 });
 
 export const SubEventContextProvider: React.FC = (props) => {
 	const [subEvents, setSubEvents] = useState<SubEvent[]>([]);
 	const [parentId, setParentId] = useState(null);
+	const [subEventParentId, setSubEventParentId] = useState(null);
 	const [selectedTask, setSelectedTask] = useState<SubEvent[]>([]);
+	const [selectedSubEvent, setSelectedSubEvent] = useState<SubEvent[]>([]);
 	const [hierarchy, setHierarchy] = useState<SubEvent[]>([]);
 
 	// FIXME ATTEMPTING TO ADD THE CURRENTLY SELECTED TASK TO THE HIERARCHY ARRAY IN ORDER TO SUPPLY THE NESTED TASKS AS THEY'RE SELECTED
@@ -48,13 +58,12 @@ export const SubEventContextProvider: React.FC = (props) => {
 	// 	setHierarchy(selectedTask);
 	// }, [selectedTask]);
 	useEffect(() => {
-		setHierarchy(selectedTask);
-		// setHierarchy((prevState) => {
-		// 	return [...prevState, selectedTask];
-		// });
-	}, [selectedTask]);
+		setHierarchy((prevState) => {
+			return [prevState.push(...selectedSubEvent)];
+		});
+	}, [selectedSubEvent]);
 
-	//COMMENT Fetch data, sort and set tasks
+	//COMMENT Fetch data, sort and set subEvents
 	const { isLoading, error, sendRequest: fetchTasks } = useFetch();
 
 	const eventCtx = useContext(EventContext);
@@ -92,10 +101,14 @@ export const SubEventContextProvider: React.FC = (props) => {
 				error: error,
 				parentId: parentId,
 				setParentId: setParentId,
+				subEventParentId: subEventParentId,
+				setSubEventParentId: setSubEventParentId,
 				hierarchy: hierarchy,
 				setHierarchy: setHierarchy,
 				selectedTask: selectedTask,
 				setSelectedTask: setSelectedTask,
+				selectedSubEvent: selectedSubEvent,
+				setSelectedSubEvent: setSelectedSubEvent,
 			}}
 		>
 			{props.children}
