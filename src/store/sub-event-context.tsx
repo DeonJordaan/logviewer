@@ -14,7 +14,7 @@ import SubEvent from '../Interfaces/subEvent';
 import DataInterface from '../Interfaces/dataInterface';
 
 type SubEventContextObject = {
-	subEvents: SubEvent[];
+	subEvents: SubEvent[] | undefined;
 	isLoading: boolean;
 	error: string | null;
 	parentId: number | undefined;
@@ -46,12 +46,15 @@ const SubEventContext = React.createContext<SubEventContextObject>({
 });
 
 export const SubEventContextProvider: React.FC = (props) => {
-	const [subEvents, setSubEvents] = useState<SubEvent[]>([]);
+	const [subEvents, setSubEvents] = useState<SubEvent[] | undefined>([]);
 	const [parentId, setParentId] = useState(undefined);
 	const [subEventParentId, setSubEventParentId] = useState(undefined);
-	const [selectedTask, setSelectedTask] = useState<SubEvent[] | undefined>();
+	const [selectedTask, setSelectedTask] = useState<SubEvent[] | undefined>(
+		[]
+	);
 	const [selectedSubEvent, setSelectedSubEvent] = useState<SubEvent[]>([]);
-	const [hierarchy, setHierarchy] = useState<SubEvent[] | undefined>();
+	const [hierarchy, setHierarchy] = useState<SubEvent[]>();
+	// const [hierarchy, setHierarchy] = useState<SubEvent[] | undefined>();
 
 	// FIXME ATTEMPTING TO ADD THE CURRENTLY SELECTED TASK TO THE HIERARCHY ARRAY IN ORDER TO SUPPLY THE NESTED TASKS AS THEY'RE SELECTED
 	// useEffect(() => {
