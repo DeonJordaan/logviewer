@@ -17,15 +17,15 @@ type SubEventContextObject = {
 	subEvents: SubEvent[];
 	isLoading: boolean;
 	error: string | null;
-	parentId: number | null;
-	subEventParentId: number | null;
-	selectedTask: SubEvent[];
+	parentId: number | undefined;
+	subEventParentId: number | undefined;
+	selectedTask: SubEvent[] | undefined;
 	selectedSubEvent: SubEvent[];
-	hierarchy: SubEvent[];
-	setParentId: Dispatch<SetStateAction<null>>;
-	setSubEventParentId: Dispatch<SetStateAction<null>>;
-	setHierarchy: Dispatch<SetStateAction<SubEvent[]>>;
-	setSelectedTask: Dispatch<SetStateAction<SubEvent[]>>;
+	hierarchy: SubEvent[] | undefined;
+	setParentId: Dispatch<SetStateAction<undefined>>;
+	setSubEventParentId: Dispatch<SetStateAction<undefined>>;
+	setHierarchy: Dispatch<SetStateAction<SubEvent[] | undefined>>;
+	setSelectedTask: Dispatch<SetStateAction<SubEvent[] | undefined>>;
 	setSelectedSubEvent: Dispatch<SetStateAction<SubEvent[]>>;
 };
 
@@ -47,11 +47,11 @@ const SubEventContext = React.createContext<SubEventContextObject>({
 
 export const SubEventContextProvider: React.FC = (props) => {
 	const [subEvents, setSubEvents] = useState<SubEvent[]>([]);
-	const [parentId, setParentId] = useState(null);
-	const [subEventParentId, setSubEventParentId] = useState(null);
-	const [selectedTask, setSelectedTask] = useState<SubEvent[]>([]);
+	const [parentId, setParentId] = useState(undefined);
+	const [subEventParentId, setSubEventParentId] = useState(undefined);
+	const [selectedTask, setSelectedTask] = useState<SubEvent[] | undefined>();
 	const [selectedSubEvent, setSelectedSubEvent] = useState<SubEvent[]>([]);
-	const [hierarchy, setHierarchy] = useState<SubEvent[]>([]);
+	const [hierarchy, setHierarchy] = useState<SubEvent[] | undefined>();
 
 	// FIXME ATTEMPTING TO ADD THE CURRENTLY SELECTED TASK TO THE HIERARCHY ARRAY IN ORDER TO SUPPLY THE NESTED TASKS AS THEY'RE SELECTED
 	// useEffect(() => {
@@ -59,7 +59,7 @@ export const SubEventContextProvider: React.FC = (props) => {
 	// }, [selectedTask]);
 	useEffect(() => {
 		setHierarchy((prevState) => {
-			return [prevState.push(...selectedSubEvent)];
+			return [...prevState, ...selectedSubEvent];
 		});
 	}, [selectedSubEvent]);
 
