@@ -62,6 +62,7 @@ export const SubEventContextProvider: React.FC = (props) => {
 	// }, [selectedTask]);
 	useEffect(() => {
 		setHierarchy((prevState) => {
+			// if(prevState) NOTE how to check for not undefined...? Possible?
 			return [...prevState, ...selectedSubEvent];
 		});
 	}, [selectedSubEvent]);
