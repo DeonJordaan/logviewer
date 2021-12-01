@@ -19,6 +19,7 @@ const HierarchyViewMainItem = (props) => {
 
 	if (subEventCtx.selectedTask) {
 		console.log(subEventCtx.selectedTask);
+		console.log(subEventCtx.selectedSubEvent);
 		hierarchyViewMainItemContent = (
 			<tbody>
 				{subEventCtx.selectedTask.map((task) => (

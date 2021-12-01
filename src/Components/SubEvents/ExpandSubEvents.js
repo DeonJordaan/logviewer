@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import classes from './ExpandSubEvents.module.css';
 
@@ -11,9 +11,10 @@ const ExpandSubEvents = (props) => {
 
 	const setSubEventParentId = subEventCtx.setSubEventParentId;
 
-	// const setHierarchy = subEventCtx.setHierarchy;
+	const setSelectedSubEvent = subEventCtx.setSelectedSubEvent;
 
 	const id = props.id;
+	// console.log(id);
 
 	let subEvents = props.subEvents;
 
@@ -32,6 +33,18 @@ const ExpandSubEvents = (props) => {
 		// console.log(subEventCtx.subEvents);
 	};
 
+	useEffect(() => {
+		setSelectedSubEvent(
+			subEventCtx.subEvents.filter(
+				(subEvent) =>
+					subEvent.id === parseInt(subEventCtx.subEventParentId)
+			)
+		);
+	}, [
+		setSelectedSubEvent,
+		subEventCtx.subEventParentId,
+		subEventCtx.subEvents,
+	]);
 	// useEffect(() => {
 	// 	setHierarchy(
 	// 		subEventCtx.subEvents.filter(
