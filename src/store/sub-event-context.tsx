@@ -1,76 +1,81 @@
-import React, {
-	useState,
-	useEffect,
-	useContext,
-	Dispatch,
-	SetStateAction,
-} from 'react';
+import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 
-// import { paginationReducer } from '../Components/UI/Pagination';
-
-import EventContext from './event-context';
 import useFetch from './useFetch';
-import SubEvent from '../Interfaces/subEvent';
+import Event from '../Interfaces/event';
 import DataInterface from '../Interfaces/dataInterface';
 
 type SubEventContextObject = {
-	subEvents: SubEvent[] | undefined;
-	isLoading: boolean;
 	error: string | null;
-	parentId: number | undefined;
-	subEventParentId: number | undefined;
-	selectedTask: SubEvent[] | undefined;
-	selectedSubEvent: SubEvent[];
-	hierarchy: SubEvent[] | undefined;
-	setParentId: Dispatch<SetStateAction<undefined>>;
-	setSubEventParentId: Dispatch<SetStateAction<undefined>>;
-	setHierarchy: Dispatch<SetStateAction<SubEvent[] | undefined>>;
-	setSelectedTask: Dispatch<SetStateAction<SubEvent[] | undefined>>;
-	setSelectedSubEvent: Dispatch<SetStateAction<SubEvent[]>>;
+	isLoading: boolean;
+	selectedTask: Event[];
+	subEvents: Event[];
+	selectedSubEvent: Event[];
+	hierarchy: Event[] | undefined;
+	// hierarchy: Event[];
+	parentId: number;
+	subEventParentId: number;
+	setParentId: Dispatch<SetStateAction<number>>;
+	setSubEventParentId: Dispatch<SetStateAction<number>>;
+	setHierarchy: Dispatch<SetStateAction<Event[] | undefined>>;
+	// setHierarchy: Dispatch<SetStateAction<Event[] | undefined>>;
+	// setHierarchy: Dispatch<SetStateAction<Event[]>>;
+	setSelectedTask: Dispatch<SetStateAction<Event[]>>;
+	setSelectedSubEvent: Dispatch<SetStateAction<Event[]>>;
 };
 
 const SubEventContext = React.createContext<SubEventContextObject>({
-	subEvents: [],
-	isLoading: false,
 	error: null,
-	parentId: 0,
-	subEventParentId: 0,
+	isLoading: false,
 	selectedTask: [],
+	subEvents: [],
 	selectedSubEvent: [],
 	hierarchy: [],
-	setParentId: () => {},
-	setSubEventParentId: () => {},
-	setHierarchy: () => {},
-	setSelectedTask: () => {},
-	setSelectedSubEvent: () => {},
+	parentId: 0,
+	subEventParentId: 0,
+	setParentId: () => [],
+	setSubEventParentId: () => [],
+	setHierarchy: () => [],
+	setSelectedTask: () => [],
+	setSelectedSubEvent: () => [],
 });
 
 export const SubEventContextProvider: React.FC = (props) => {
-	const [subEvents, setSubEvents] = useState<SubEvent[] | undefined>([]);
-	const [parentId, setParentId] = useState(undefined);
-	const [subEventParentId, setSubEventParentId] = useState(undefined);
-	const [selectedTask, setSelectedTask] = useState<SubEvent[] | undefined>(
-		[]
-	);
-	const [selectedSubEvent, setSelectedSubEvent] = useState<SubEvent[]>([]);
-	const [hierarchy, setHierarchy] = useState<SubEvent[]>();
-	// const [hierarchy, setHierarchy] = useState<SubEvent[] | undefined>();
+	const [subEvents, setSubEvents] = useState<Event[]>([]);
+
+	const [parentId, setParentId] = useState(0);
+
+	const [subEventParentId, setSubEventParentId] = useState(0);
+
+	const [selectedTask, setSelectedTask] = useState<Event[]>([]);
+
+	const [selectedSubEvent, setSelectedSubEvent] = useState<Event[]>([]);
+
+	// const [hierarchy, setHierarchy] = useState<Event[]>();
+	const [hierarchy, setHierarchy] = useState<Event[] | undefined>([]);
 
 	// FIXME ATTEMPTING TO ADD THE CURRENTLY SELECTED TASK TO THE HIERARCHY ARRAY IN ORDER TO SUPPLY THE NESTED TASKS AS THEY'RE SELECTED
 	// useEffect(() => {
 	// 	setHierarchy(selectedTask);
 	// }, [selectedTask]);
+
 	useEffect(() => {
-		setHierarchy((prevState) => {
-			// if(prevState) NOTE how to check for not undefined...? Possible?
-			return [...prevState, ...selectedSubEvent];
-		});
+		// setHierarchy(selectedSubEvent);
+		setHierarchy((prevState) => [...prevState, selectedSubEvent]);
+		// setHierarchy((prevState) =>
+		// 	prevState ? [...prevState, selectedSubEvent] : [selectedSubEvent]
+		// );
+		// WITH push()?
+		// setHierarchy((prevState) => {
+		// 	return [prevState?.push(selectedSubEvent)];
+		// });
 	}, [selectedSubEvent]);
+
+	// const addToFriendList = (friend: FriendListItem): void => {
+	// 	setFriendList((prevstate) => prevstate ? [...prevstate, friend] : [friend]);
+	//   };
 
 	//COMMENT Fetch data, sort and set subEvents
 	const { isLoading, error, sendRequest: fetchTasks } = useFetch();
-
-	const eventCtx = useContext(EventContext);
 
 	useEffect(() => {
 		const transformData = (taskData: {
@@ -80,7 +85,7 @@ export const SubEventContextProvider: React.FC = (props) => {
 		}) => {
 			const { Data: allTaskData } = taskData;
 
-			const allTasks = allTaskData.map((data) => new SubEvent(data));
+			const allTasks = allTaskData.map((data) => new Event(data));
 
 			setSubEvents(allTasks);
 		};
@@ -91,11 +96,7 @@ export const SubEventContextProvider: React.FC = (props) => {
 			},
 			transformData
 		);
-	}, [eventCtx.tasks, fetchTasks, parentId]);
-
-	// useEffect(() => {
-	// 	setHierarchy(selectedTask);
-	// }, [selectedTask]);
+	}, [fetchTasks, parentId]);
 
 	return (
 		<SubEventContext.Provider

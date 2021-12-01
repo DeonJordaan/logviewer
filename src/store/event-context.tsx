@@ -2,11 +2,11 @@ import React, { useState, useReducer, useEffect } from 'react';
 
 import { paginationReducer } from '../Components/UI/Pagination';
 import useFetch from './useFetch';
-import Task from '../Interfaces/task';
+import Event from '../Interfaces/event';
 import DataInterface from '../Interfaces/dataInterface';
 
 type EventContextObject = {
-	tasks: Task[];
+	tasks: Event[];
 	isLoading: boolean;
 	error: string | null;
 	totalRecordCount: number | null;
@@ -24,7 +24,7 @@ const EventContext = React.createContext<EventContextObject>({
 });
 
 export const EventContextProvider: React.FC = (props) => {
-	const [tasks, setTasks] = useState<Task[]>([]);
+	const [tasks, setTasks] = useState<Event[]>([]);
 
 	const [totalRecordCount, setTotalRecordCount] = useState<number | null>(
 		null
@@ -46,7 +46,7 @@ export const EventContextProvider: React.FC = (props) => {
 			const { Data: allTaskData, TotalRecordCount: recordCount } =
 				taskData;
 
-			const allTasks = allTaskData.map((data) => new Task(data));
+			const allTasks = allTaskData.map((data) => new Event(data));
 
 			setTasks(allTasks);
 			setTotalRecordCount(recordCount);

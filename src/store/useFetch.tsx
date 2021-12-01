@@ -7,6 +7,7 @@ const useFetch = () => {
 	const sendRequest = useCallback(async (requestConfig, applyData) => {
 		setIsLoading(true);
 		setError(null);
+
 		try {
 			const response = await fetch(requestConfig.url, {
 				method: requestConfig.method ? requestConfig.method : 'GET',

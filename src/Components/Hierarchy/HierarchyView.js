@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 
-// import EventContext from '../../store/event-context';
 import SubEventContext from '../../store/sub-event-context';
 
 import HierarchyViewHeader from './HierarchyViewHeader';
@@ -10,16 +9,15 @@ import classes from './HierarchyView.module.css';
 import HierarchyViewMainItem from './HierarchyViewMainItem';
 
 const HierarchyView = (props) => {
-	// const eventCtx = useContext(EventContext);
 	const subEventCtx = useContext(SubEventContext);
-
-	// console.log(eventCtx);
-	// console.log(subEventCtx.hierarchy);
 
 	let app = 'App';
 	let host = 'Host';
 
-	if (subEventCtx.hierarchy.length > 0) {
+	console.log(subEventCtx.hierarchy);
+	// console.log(subEventCtx.hierarchy.length);
+
+	if (subEventCtx.hierarchy && subEventCtx.hierarchy.length > 0) {
 		app = subEventCtx.hierarchy[0].App;
 		host = subEventCtx.hierarchy[0].host;
 	}
@@ -94,22 +92,3 @@ const HierarchyView = (props) => {
 };
 
 export default React.memo(HierarchyView);
-
-///////////////////////
-// let key = '';
-// let status = '';
-// let subEvents = '';
-// let startTime = '0000-00-00T00:00:00.00';
-// let endTime = '0000-00-00T00:00:00.00';
-// let id = '';
-// let message = '';
-
-// if (subEventCtx.hierarchy.length > 0) {
-// 	key = subEventCtx.hierarchy[0].key;
-// 	status = props.setStatus(subEventCtx.hierarchy[0].status);
-// 	subEvents = subEventCtx.hierarchy[0].subEvents;
-// 	startTime = subEventCtx.hierarchy[0].startTime;
-// 	endTime = subEventCtx.hierarchy[0].endTime;
-// 	id = subEventCtx.hierarchy[0].id;
-// 	message = subEventCtx.hierarchy[0].message;
-// }
