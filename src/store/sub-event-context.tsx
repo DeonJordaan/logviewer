@@ -51,8 +51,8 @@ export const SubEventContextProvider: React.FC = (props) => {
 
 	const [selectedSubEvent, setSelectedSubEvent] = useState<Event[]>([]);
 
+	// const [hierarchy, setHierarchy] = useState<Event[]>([]);
 	const [hierarchy, setHierarchy] = useState<Event[]>([]);
-	// const [hierarchy, setHierarchy] = useState<Event[] | undefined>([]);
 
 	// FIXME ATTEMPTING TO ADD THE CURRENTLY SELECTED TASK TO THE HIERARCHY ARRAY IN ORDER TO SUPPLY THE NESTED TASKS AS THEY'RE SELECTED
 	// useEffect(() => {
@@ -60,15 +60,22 @@ export const SubEventContextProvider: React.FC = (props) => {
 	// }, [selectedTask]);
 
 	// NOTE SETTING HIERARCHY
+	// FROM WORKING VERSION IN MAIN BRANCH
+	// useEffect(() => {
+	// 	setHierarchy((prevState) => {
+	// 		return [...prevState, ...selectedSubEvent];
+	// 	});
+	// }, [selectedSubEvent]);
+
 	// STANDARD STATE UPDATING FUNCTION
 	useEffect(() => {
-		setHierarchy((prevState) => [...prevState, selectedSubEvent]);
+		setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
 	}, [selectedSubEvent]);
 
 	// CHECKING PREVSTATE
 	// useEffect(() => {
 	// 	setHierarchy((prevState) =>
-	// 		prevState ? [...prevState, selectedSubEvent] : [selectedSubEvent]
+	// 		prevState ? [...prevState, ...selectedSubEvent] : selectedSubEvent
 	// 	);
 	// }, [selectedSubEvent]);
 
