@@ -8,6 +8,7 @@ type SubEventContextObject = {
 	error: string | null;
 	isLoading: boolean;
 	selectedTask: Event[];
+	// selectedTask: Event[] | undefined;
 	subEvents: Event[];
 	selectedSubEvent: Event[];
 	hierarchy: Event[] | undefined;
@@ -16,10 +17,10 @@ type SubEventContextObject = {
 	subEventParentId: number;
 	setParentId: Dispatch<SetStateAction<number>>;
 	setSubEventParentId: Dispatch<SetStateAction<number>>;
-	setHierarchy: Dispatch<SetStateAction<Event[] | undefined>>;
 	// setHierarchy: Dispatch<SetStateAction<Event[] | undefined>>;
-	// setHierarchy: Dispatch<SetStateAction<Event[]>>;
+	setHierarchy: Dispatch<SetStateAction<Event[]>>;
 	setSelectedTask: Dispatch<SetStateAction<Event[]>>;
+	// setSelectedTask: Dispatch<SetStateAction<Event[] | undefined>>;
 	setSelectedSubEvent: Dispatch<SetStateAction<Event[]>>;
 };
 
@@ -50,29 +51,39 @@ export const SubEventContextProvider: React.FC = (props) => {
 
 	const [selectedSubEvent, setSelectedSubEvent] = useState<Event[]>([]);
 
-	// const [hierarchy, setHierarchy] = useState<Event[]>();
-	const [hierarchy, setHierarchy] = useState<Event[] | undefined>([]);
+	const [hierarchy, setHierarchy] = useState<Event[]>([]);
+	// const [hierarchy, setHierarchy] = useState<Event[] | undefined>([]);
 
 	// FIXME ATTEMPTING TO ADD THE CURRENTLY SELECTED TASK TO THE HIERARCHY ARRAY IN ORDER TO SUPPLY THE NESTED TASKS AS THEY'RE SELECTED
 	// useEffect(() => {
 	// 	setHierarchy(selectedTask);
 	// }, [selectedTask]);
 
+	// NOTE SETTING HIERARCHY
+	// STANDARD STATE UPDATING FUNCTION
 	useEffect(() => {
-		// setHierarchy(selectedSubEvent);
 		setHierarchy((prevState) => [...prevState, selectedSubEvent]);
-		// setHierarchy((prevState) =>
-		// 	prevState ? [...prevState, selectedSubEvent] : [selectedSubEvent]
-		// );
-		// WITH push()?
-		// setHierarchy((prevState) => {
-		// 	return [prevState?.push(selectedSubEvent)];
-		// });
 	}, [selectedSubEvent]);
 
-	// const addToFriendList = (friend: FriendListItem): void => {
-	// 	setFriendList((prevstate) => prevstate ? [...prevstate, friend] : [friend]);
-	//   };
+	// CHECKING PREVSTATE
+	// useEffect(() => {
+	// 	setHierarchy((prevState) =>
+	// 		prevState ? [...prevState, selectedSubEvent] : [selectedSubEvent]
+	// 	);
+	// }, [selectedSubEvent]);
+
+	// TYPECASTING PREVSTATE
+	// useEffect(() => {
+	// 	setHierarchy((prevState) => [
+	// 		...(prevState as Event[]),
+	// 		selectedSubEvent,
+	// 	]);
+	// }, [selectedSubEvent]);
+
+	// AS ONE SELECTED SUBEVENT
+	// useEffect(() => {
+	// 	setHierarchy(selectedSubEvent);
+	// }, [selectedSubEvent]);
 
 	//COMMENT Fetch data, sort and set subEvents
 	const { isLoading, error, sendRequest: fetchTasks } = useFetch();
