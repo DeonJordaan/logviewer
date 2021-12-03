@@ -4,7 +4,7 @@ import EventContext from '../../store/event-context';
 
 import classes from './TotalRecordCount.module.css';
 
-const TotalRecordCount = (props) => {
+const TotalRecordCount: React.FC = (props) => {
 	const eventCtx = useContext(EventContext);
 
 	return (

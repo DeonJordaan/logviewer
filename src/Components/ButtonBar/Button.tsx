@@ -1,11 +1,15 @@
+import React from 'react';
 import classes from './Button.module.css';
 
-const Button = (props) => {
+const Button: React.FC<{
+	className: string;
+	onClick: (event: React.MouseEvent) => void;
+}> = (props) => {
 	const buttonClasses = classes['arrow-button'];
 
 	const paginationClasses = props.className;
 
-	const classesMap = {
+	const classesMap: { [key: string]: string } = {
 		doubleLeftArrow: classes.doubleLeftArrow,
 		leftArrow: classes.leftArrow,
 		rightArrow: classes.rightArrow,

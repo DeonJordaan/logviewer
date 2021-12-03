@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import EventContext from '../../store/event-context';
+// import EventContext from '../../store/event-context';
 
 import classes from './PushButton.module.css';
 
 const PushButton: React.FC<React.HTMLAttributes<any>> = (props) => {
-	const eventCtx = useContext(EventContext);
+	// const eventCtx = useContext(EventContext);
 
 	return (
 		<button

@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 
 import EventContext from '../../store/event-context';
-
 import TaskViewItem from './TaskViewItem';
 import TaskViewHeader from './TaskViewHeader';
-
 import classes from './TaskView.module.css';
 
-const TaskView = (props) => {
+const TaskView: React.FC<{
+	setStatus: (statusCode: keyof object) => {};
+}> = (props) => {
 	const eventCtx = useContext(EventContext);
 
 	let taskContent = (

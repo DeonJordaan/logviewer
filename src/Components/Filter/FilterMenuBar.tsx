@@ -2,7 +2,7 @@ import DataFilterButton from './DataFilterButton';
 
 import classes from './FilterMenuBar.module.css';
 
-const FilterMenuBar = () => {
+const FilterMenuBar: React.FC = () => {
 	return (
 		<div className={classes['filter-menu-bar']}>
 			<DataFilterButton text="PropIQ" />

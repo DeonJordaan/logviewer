@@ -1,6 +1,8 @@
 import classes from './DataFilterButton.module.css';
 
-const DataFilterButton = (props) => {
+const DataFilterButton: React.FC<{
+	text: string;
+}> = (props) => {
 	return (
 		<div>
 			<button className={classes['filter-button']}>{props.text}</button>
