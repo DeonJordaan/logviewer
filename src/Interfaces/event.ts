@@ -13,6 +13,7 @@ class Event {
 	status: number;
 
 	// getEventStatus(statusCode: keyof object): string {
+	// getEventStatus(statusCode: keyof object): string {
 	// 	const status: {
 	// 		0: string;
 	// 		1: string;

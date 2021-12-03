@@ -1,18 +1,19 @@
 import React, { useContext } from 'react';
 
 import SubEventContext from '../../store/sub-event-context';
-
 import HierarchyViewHeader from './HierarchyViewHeader';
 import HierarchyViewItem from './HierarchyViewItem';
-
 import classes from './HierarchyView.module.css';
 import HierarchyViewMainItem from './HierarchyViewMainItem';
+import Status from '../../Interfaces/statusInterface';
 
-const HierarchyView = (props) => {
+const HierarchyView: React.FC<{
+	setStatus: (statusCode: keyof Status) => string;
+}> = (props) => {
 	const subEventCtx = useContext(SubEventContext);
 
-	let app = 'App';
-	let host = 'Host';
+	let app: string | undefined = 'App'; //FIXME: Setting as undefined to remove errors below. Is this correct?
+	let host: string | undefined = 'Host';
 
 	console.log(subEventCtx.hierarchy);
 	// console.log(subEventCtx.hierarchy.length);
