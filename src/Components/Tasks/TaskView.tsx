@@ -6,7 +6,7 @@ import TaskViewHeader from './TaskViewHeader';
 import classes from './TaskView.module.css';
 
 const TaskView: React.FC<{
-	setStatus: (statusCode: keyof object) => {};
+	setStatus: (statusCode: number) => {};
 }> = (props) => {
 	const eventCtx = useContext(EventContext);
 

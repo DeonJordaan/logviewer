@@ -16,7 +16,7 @@ const ExpandSubEvents = (props) => {
 	const id = props.id;
 	// console.log(id);
 
-	let subEvents = props.subEvents;
+	let subEvents = props.subEvents; // FIXME WHY IS THIS STILL COMING FROM PROPS? SHOULD BE LINKED TO CONTEXT, NO?
 
 	let importedClasses = `${classes['sub-event-button']}`;
 

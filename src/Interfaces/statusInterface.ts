@@ -1,3 +1,5 @@
+// TODO CURRENTLY UNUSED
+
 interface Status {
 	0: string;
 	1: string;

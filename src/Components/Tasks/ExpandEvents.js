@@ -13,6 +13,8 @@ const ExpandEvents = (props) => {
 
 	const setSelectedTask = subEventCtx.setSelectedTask;
 
+	const setHierarchy = subEventCtx.setHierarchy;
+
 	// const id = this.id;
 	const id = props.id;
 	// console.log(id);
@@ -26,13 +28,14 @@ const ExpandEvents = (props) => {
 		subEvents = '-';
 	}
 
-	const parentIdHandler = async (event) => {
+	const clickHandler = async (event) => {
 		console.log(event);
 		setParentId(id);
+		setHierarchy([]);
 		// console.log(eventCtx.tasks);
-		console.log(subEventCtx.hierarchy);
-		console.log(subEventCtx.selectedTask);
-		console.log(subEventCtx.subEvents);
+		// console.log(subEventCtx.hierarchy);
+		// console.log(subEventCtx.selectedTask);
+		// console.log(subEventCtx.subEvents);
 	};
 
 	useEffect(() => {
@@ -44,7 +47,7 @@ const ExpandEvents = (props) => {
 	}, [eventCtx.tasks, setSelectedTask, subEventCtx.parentId]);
 
 	return (
-		<button onClick={parentIdHandler} className={importedClasses}>
+		<button onClick={clickHandler} className={importedClasses}>
 			{subEvents}
 		</button>
 	);
