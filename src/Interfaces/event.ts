@@ -12,7 +12,7 @@ class Event {
 	message: string;
 	status: number;
 
-	// getEventStatus(statusCode: keyof object): string {
+	// NOTE GETTER TO SET THE STATUS. JUST AN IDEA, NOT SURE THIS CAN WORK. IF IT CAN, WOULD LIKELY IMPORT statusInterface AND USE IT HERE
 	// getEventStatus(statusCode: keyof object): string {
 	// 	const status: {
 	// 		0: string;

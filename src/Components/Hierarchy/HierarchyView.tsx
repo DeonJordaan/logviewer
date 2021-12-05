@@ -5,10 +5,10 @@ import HierarchyViewHeader from './HierarchyViewHeader';
 import HierarchyViewItem from './HierarchyViewItem';
 import classes from './HierarchyView.module.css';
 import HierarchyViewMainItem from './HierarchyViewMainItem';
-import Status from '../../Interfaces/statusInterface';
+// import Status from '../../Interfaces/statusInterface';
 
 const HierarchyView: React.FC<{
-	setStatus: (statusCode: keyof Status) => string;
+	setStatus: (statusCode: number) => string;
 }> = (props) => {
 	const subEventCtx = useContext(SubEventContext);
 
@@ -18,9 +18,9 @@ const HierarchyView: React.FC<{
 	console.log(subEventCtx.hierarchy);
 	// console.log(subEventCtx.hierarchy.length);
 
-	if (subEventCtx.hierarchy && subEventCtx.hierarchy.length > 0) {
-		app = subEventCtx.hierarchy[0].App;
-		host = subEventCtx.hierarchy[0].host;
+	if (subEventCtx.selectedTask && subEventCtx.selectedTask.length > 0) {
+		app = subEventCtx.selectedTask[0].App;
+		host = subEventCtx.selectedTask[0].host;
 	}
 
 	let hierarchyContent = (
