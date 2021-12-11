@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 
 import SubEventContext from '../../store/sub-event-context';
-
 import SubEventViewHeader from './SubEventViewHeader';
 import SubEventViewItem from './SubEventViewItem';
-
 import classes from './SubEventView.module.css';
 
-const SubEventView = (props) => {
+const SubEventView: React.FC<{
+	setStatus: (statusCode: number) => string;
+}> = (props) => {
 	const subEventCtx = useContext(SubEventContext);
 
 	let subEventContent = (
@@ -30,6 +30,10 @@ const SubEventView = (props) => {
 						endTime={task.endTime}
 						id={task.id}
 						message={task.message}
+						//FIXME See LVerror01 doc
+						host={task.host}
+						app={task.App}
+						taskCode={task.taskCode}
 					/>
 				))}
 			</tbody>

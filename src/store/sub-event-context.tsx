@@ -1,7 +1,9 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 
 import useFetch from './useFetch';
+
 import Event from '../Interfaces/event';
+
 import DataInterface from '../Interfaces/dataInterface';
 
 type SubEventContextObject = {
@@ -10,7 +12,7 @@ type SubEventContextObject = {
 	selectedTask: Event[];
 	subEvents: Event[];
 	selectedSubEvent: Event[];
-	hierarchy: Event[] | undefined;
+	hierarchy: Event[];
 	parentId: number;
 	subEventParentId: number;
 	setParentId: Dispatch<SetStateAction<number>>;
@@ -50,30 +52,9 @@ export const SubEventContextProvider: React.FC = (props) => {
 	const [hierarchy, setHierarchy] = useState<Event[]>([]);
 
 	// NOTE SETTING HIERARCHY
-	// STANDARD STATE UPDATING FUNCTION
 	useEffect(() => {
 		setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
 	}, [selectedSubEvent]);
-
-	// CHECKING PREVSTATE
-	// useEffect(() => {
-	// 	setHierarchy((prevState) =>
-	// 		prevState ? [...prevState, ...selectedSubEvent] : selectedSubEvent
-	// 	);
-	// }, [selectedSubEvent]);
-
-	// TYPECASTING PREVSTATE
-	// useEffect(() => {
-	// 	setHierarchy((prevState) => [
-	// 		...(prevState as Event[]),
-	// 		selectedSubEvent,
-	// 	]);
-	// }, [selectedSubEvent]);
-
-	// SINGLE SELECTED SUBEVENT
-	// useEffect(() => {
-	// 	setHierarchy(selectedSubEvent);
-	// }, [selectedSubEvent]);
 
 	//COMMENT Fetch data, sort and set subEvents
 	const { isLoading, error, sendRequest: fetchTasks } = useFetch();
@@ -123,6 +104,32 @@ export const SubEventContextProvider: React.FC = (props) => {
 };
 
 export default SubEventContext;
+
+// NOTE DIFFERENT METHODS FOR SETTING HIERARCHY
+// STANDARD STATE UPDATING FUNCTION
+// useEffect(() => {
+// 	setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
+// }, [selectedSubEvent]);
+
+// CHECKING PREVSTATE
+// useEffect(() => {
+// 	setHierarchy((prevState) =>
+// 		prevState ? [...prevState, ...selectedSubEvent] : selectedSubEvent
+// 	);
+// }, [selectedSubEvent]);
+
+// TYPECASTING PREVSTATE
+// useEffect(() => {
+// 	setHierarchy((prevState) => [
+// 		...(prevState as Event[]),
+// 		selectedSubEvent,
+// 	]);
+// }, [selectedSubEvent]);
+
+// SINGLE SELECTED SUBEVENT
+// useEffect(() => {
+// 	setHierarchy(selectedSubEvent);
+// }, [selectedSubEvent]);
 
 ///////////////////////////
 //NOTE OLD GETSUBEVENT FUNCTION

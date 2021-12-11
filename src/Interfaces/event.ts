@@ -3,12 +3,12 @@ import DataInterface from './dataInterface';
 class Event {
 	key: number;
 	id: number;
-	App?: string;
-	taskCode?: string;
+	App: string;
+	taskCode: string;
 	startTime: string;
 	endTime: string;
 	subEvents: number;
-	host?: string;
+	host: string;
 	message: string;
 	status: number;
 

@@ -3,8 +3,8 @@ import React, { useContext } from 'react';
 import SubEventContext from '../../store/sub-event-context';
 import HierarchyViewHeader from './HierarchyViewHeader';
 import HierarchyViewItem from './HierarchyViewItem';
-import classes from './HierarchyView.module.css';
 import HierarchyViewMainItem from './HierarchyViewMainItem';
+import classes from './HierarchyView.module.css';
 // import Status from '../../Interfaces/statusInterface';
 
 const HierarchyView: React.FC<{
@@ -79,7 +79,6 @@ const HierarchyView: React.FC<{
 				<span className={classes.box}>{app}</span>
 				<span>running on Host:</span>
 				<span className={classes.box}>{host}</span>
-				{/* Event Hierarchy Application: {app} running on Host: {host} */}
 			</h4>
 			<table>
 				<thead>

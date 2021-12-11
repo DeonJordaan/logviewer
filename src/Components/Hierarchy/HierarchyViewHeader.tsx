@@ -2,7 +2,7 @@ import React from 'react';
 
 import classes from './HierarchyViewHeader.module.css';
 
-const HierarchyViewHeader = () => {
+const HierarchyViewHeader: React.FC = () => {
 	return (
 		<tr className={classes['hierarchy-column-header']}>
 			<th>Status</th>
