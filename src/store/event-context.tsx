@@ -9,7 +9,7 @@ type EventContextObject = {
 	tasks: Event[];
 	isLoading: boolean;
 	error: string | null;
-	totalRecordCount: number | null;
+	totalRecordCount: number;
 	pageNumber: number;
 	dispatchPageNumber: () => void;
 };
@@ -18,7 +18,7 @@ const EventContext = React.createContext<EventContextObject>({
 	tasks: [],
 	isLoading: false,
 	error: null,
-	totalRecordCount: null,
+	totalRecordCount: 0,
 	pageNumber: 1,
 	dispatchPageNumber: () => {},
 });
@@ -26,9 +26,7 @@ const EventContext = React.createContext<EventContextObject>({
 export const EventContextProvider: React.FC = (props) => {
 	const [tasks, setTasks] = useState<Event[]>([]);
 
-	const [totalRecordCount, setTotalRecordCount] = useState<number | null>(
-		null
-	);
+	const [totalRecordCount, setTotalRecordCount] = useState<number>(0);
 
 	const [pageNumber, dispatchPageNumber] = useReducer(paginationReducer, {
 		page: 1,
@@ -66,17 +64,26 @@ export const EventContextProvider: React.FC = (props) => {
 		);
 	}, [fetchTasks, pageNumber.page]);
 
-	const contextValue: EventContextObject = {
-		tasks: tasks,
-		isLoading: isLoading,
-		error: error,
-		totalRecordCount: totalRecordCount,
-		pageNumber: pageNumber.page,
-		dispatchPageNumber: dispatchPageNumber,
-	};
+	// const contextValue: EventContextObject = {
+	// 	tasks: tasks,
+	// 	isLoading: isLoading,
+	// 	error: error,
+	// 	totalRecordCount: totalRecordCount,
+	// 	pageNumber: pageNumber.page,
+	// 	dispatchPageNumber: dispatchPageNumber,
+	// };
 
 	return (
-		<EventContext.Provider value={contextValue}>
+		<EventContext.Provider
+			value={{
+				tasks: tasks,
+				isLoading: isLoading,
+				error: error,
+				totalRecordCount: totalRecordCount,
+				pageNumber: pageNumber.page,
+				dispatchPageNumber: dispatchPageNumber,
+			}}
+		>
 			{props.children}
 		</EventContext.Provider>
 	);

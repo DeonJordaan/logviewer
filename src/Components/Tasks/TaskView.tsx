@@ -6,7 +6,7 @@ import TaskViewHeader from './TaskViewHeader';
 import classes from './TaskView.module.css';
 
 const TaskView: React.FC<{
-	setStatus: (statusCode: number) => {};
+	setStatus: (statusCode: number) => string;
 }> = (props) => {
 	const eventCtx = useContext(EventContext);
 
@@ -32,7 +32,7 @@ const TaskView: React.FC<{
 						startTime={task.startTime}
 						endTime={task.endTime}
 						message={task.message}
-						status={props.setStatus(+task.status)}
+						status={props.setStatus(task.status)}
 					/>
 				))}
 			</tbody>
