@@ -9,11 +9,11 @@ import TaskView from './Components/Tasks/TaskView';
 import HierarchyView from './Components/Hierarchy/HierarchyView';
 import SubEventView from './Components/SubEvents/SubEventView';
 import Footer from './Components/UI/Footer';
-import EventContext from './store/event-context';
+// import EventContext from './store/event-context';
 // import SubEventContext from './store/sub-event-context';
 
 function App() {
-	const eventCtx = useContext(EventContext);
+	// const eventCtx = useContext(EventContext);
 
 	// const subEventCtx = useContext(SubEventContext);
 
@@ -37,7 +37,7 @@ function App() {
 				<div className={'main-task-display'}>
 					{/* <section>{taskContent}</section> */}
 					<TaskView
-						taskItems={eventCtx.tasks}
+						// taskItems={eventCtx.tasks}
 						setStatus={setStatusHandler}
 					/>
 					<Pagination />
