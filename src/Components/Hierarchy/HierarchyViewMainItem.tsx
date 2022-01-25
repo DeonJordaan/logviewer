@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
-
 import SubEventContext from '../../store/sub-event-context';
-
 import classes from './HierarchyViewMainItem.module.css';
-
 import TaskTime from '../Tasks/TaskTime';
 
-const HierarchyViewMainItem = (props) => {
+const HierarchyViewMainItem: React.FC<{
+	setStatus: (statusCode: number) => string;
+}> = (props) => {
 	const subEventCtx = useContext(SubEventContext);
 
 	let hierarchyViewMainItemContent = (
@@ -64,18 +63,3 @@ const HierarchyViewMainItem = (props) => {
 };
 
 export default HierarchyViewMainItem;
-
-// <tbody>
-// 	<tr>
-// 		<td>{selectedTask.status}</td>
-// 		<td>{selectedTask.subEvents}</td>
-// 		<td>
-// 			<TaskTime time={selectedTask.startTime} />
-// 		</td>
-// 		<td>
-// 			<TaskTime time={selectedTask.endTime} />
-// 		</td>
-// 		<td>{selectedTask.id}</td>
-// 		<td>{selectedTask.message}</td>
-// 	</tr>
-// </tbody>
