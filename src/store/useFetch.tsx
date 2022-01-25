@@ -32,7 +32,7 @@ const useFetch = () => {
 		setIsLoading(false);
 	}, []);
 
-	return { isLoading, error, sendRequest }; //REMOVED , data
+	return { isLoading, error, sendRequest };
 };
 
 export default useFetch;

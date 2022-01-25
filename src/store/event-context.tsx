@@ -1,9 +1,8 @@
 import React, { useState, useReducer, useEffect } from 'react';
-
 import { paginationReducer } from '../Components/UI/Pagination';
 import useFetch from './useFetch';
-import Event from '../Interfaces/event';
-import DataInterface from '../Interfaces/dataInterface';
+import Event from '../types/event';
+import DataInterface from '../types/dataInterface';
 
 type EventContextObject = {
 	tasks: Event[];

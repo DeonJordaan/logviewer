@@ -1,43 +1,30 @@
 import React, { useContext, useEffect } from 'react';
-
 import classes from './ExpandSubEvents.module.css';
-
-// import EventContext from '../../store/event-context';
 import SubEventContext from '../../store/sub-event-context';
 
-const ExpandSubEvents = (props) => {
-	// const eventCtx = useContext(EventContext);
+const ExpandSubEvents: React.FC<{
+	id: number;
+	subEvents: number;
+}> = (props) => {
 	const subEventCtx = useContext(SubEventContext);
-
 	const setSubEventParentId = subEventCtx.setSubEventParentId;
-
 	const setSelectedSubEvent = subEventCtx.setSelectedSubEvent;
-
 	const id = props.id;
-	// console.log(id);
-
-	let subEvents = props.subEvents; // FIXME WHY IS THIS STILL COMING FROM PROPS? SHOULD BE LINKED TO CONTEXT, NO?
-
+	let subEvents = props.subEvents;
 	let importedClasses = `${classes['sub-event-button']}`;
 
 	if (subEvents === 0) {
 		importedClasses = `${classes['no-sub-events']}`;
-		subEvents = '-';
 	}
 
-	const parentIdHandler = async () => {
+	const parentIdHandler = () => {
 		setSubEventParentId(id);
-		// console.log(eventCtx.tasks);
-		// console.log(subEventCtx.hierarchy);
-		// console.log(subEventCtx.selectedTask);
-		// console.log(subEventCtx.subEvents);
 	};
 
 	useEffect(() => {
 		setSelectedSubEvent(
 			subEventCtx.subEvents.filter(
-				(subEvent) =>
-					subEvent.id === parseInt(subEventCtx.subEventParentId)
+				(subEvent) => subEvent.id === subEventCtx.subEventParentId
 			)
 		);
 	}, [
@@ -55,7 +42,7 @@ const ExpandSubEvents = (props) => {
 
 	return (
 		<button onClick={parentIdHandler} className={importedClasses}>
-			{subEvents}
+			{subEvents === 0 ? <p>-</p> : subEvents}
 		</button>
 	);
 };

@@ -2,9 +2,9 @@ import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 
 import useFetch from './useFetch';
 
-import Event from '../Interfaces/event';
+import Event from '../types/event';
 
-import DataInterface from '../Interfaces/dataInterface';
+import DataInterface from '../types/dataInterface';
 
 type SubEventContextObject = {
 	error: string | null;
