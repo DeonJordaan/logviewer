@@ -9,10 +9,11 @@ const ExpandSubEvents: React.FC<{
 	const subEventCtx = useContext(SubEventContext);
 	const setSubEventParentId = subEventCtx.setSubEventParentId;
 	const setSelectedSubEvent = subEventCtx.setSelectedSubEvent;
+	// TODO Can I get these values from context rather than props?
 	const id = props.id;
 	let subEvents = props.subEvents;
-	let importedClasses = `${classes['sub-event-button']}`;
 
+	let importedClasses = `${classes['sub-event-button']}`;
 	if (subEvents === 0) {
 		importedClasses = `${classes['no-sub-events']}`;
 	}

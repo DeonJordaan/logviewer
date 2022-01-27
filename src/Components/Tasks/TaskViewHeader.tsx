@@ -1,6 +1,6 @@
 import classes from './TaskViewHeader.module.css';
 
-const TaskViewHeader = () => {
+const TaskViewHeader: React.FC = () => {
 	return (
 		<tr className={classes['task-header']}>
 			<th>Host</th>

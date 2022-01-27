@@ -1,5 +1,9 @@
-import React, { useState, useReducer, useEffect } from 'react';
-import { paginationReducer } from '../Components/UI/Pagination';
+import React, { useState, useReducer, useEffect, Dispatch } from 'react';
+import {
+	paginationReducer,
+	initialState,
+	ACTIONTYPES,
+} from '../Components/UI/Pagination';
 import useFetch from './useFetch';
 import Event from '../types/event';
 import DataInterface from '../types/dataInterface';
@@ -9,8 +13,10 @@ type EventContextObject = {
 	isLoading: boolean;
 	error: string | null;
 	totalRecordCount: number;
+	// pageNumber: number | undefined;
 	pageNumber: number;
-	dispatchPageNumber: () => void;
+	dispatchPageNumber: Dispatch<ACTIONTYPES>;
+	// dispatchPageNumber: () => void;
 };
 
 const EventContext = React.createContext<EventContextObject>({
@@ -27,9 +33,10 @@ export const EventContextProvider: React.FC = (props) => {
 
 	const [totalRecordCount, setTotalRecordCount] = useState<number>(0);
 
-	const [pageNumber, dispatchPageNumber] = useReducer(paginationReducer, {
-		page: 1,
-	});
+	const [pageNumber, dispatchPageNumber] = useReducer(
+		paginationReducer,
+		initialState
+	);
 
 	//COMMENT Fetch data, sort and set tasks
 	const { isLoading, error, sendRequest: fetchTasks } = useFetch();
@@ -63,6 +70,7 @@ export const EventContextProvider: React.FC = (props) => {
 		);
 	}, [fetchTasks, pageNumber.page]);
 
+	// TODO Try and get the context value to work to use in the EventContext.Provider value
 	// const contextValue: EventContextObject = {
 	// 	tasks: tasks,
 	// 	isLoading: isLoading,
