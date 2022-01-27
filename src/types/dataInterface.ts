@@ -14,6 +14,8 @@ interface DataInterface {
 }
 
 export default DataInterface;
+
+// NOTE Example of all the task/event data provided by the DB
 // AppName: "MetroIQ - SQL Processing"
 // Code: "Refresh.Township.Chart"
 // Completed: "2021-08-05T12:36:57.1966667"

@@ -1,4 +1,8 @@
-const TaskTime = (props) => {
+import React from 'react';
+
+const TaskTime: React.FC<{
+	time: string,
+}> = (props) => {
 	let timeStamp = '0000-00-00T00:00:00.00';
 
 	if (props.time) {
