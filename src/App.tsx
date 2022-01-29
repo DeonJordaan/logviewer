@@ -7,6 +7,7 @@ import TaskView from './Components/Tasks/TaskView';
 import HierarchyView from './Components/Hierarchy/HierarchyView';
 import SubEventView from './Components/SubEvents/SubEventView';
 import Footer from './Components/UI/Footer';
+import { AppListContextProvider } from './store/app-list-context';
 // import Status from './Interfaces/statusInterface';
 // import EventContext from './store/event-context';
 
@@ -45,7 +46,9 @@ function App() {
 		<div className="App">
 			<Header />
 			<div className="display">
-				<FilterBoard />
+				<AppListContextProvider>
+					<FilterBoard />
+				</AppListContextProvider>
 				<div className={'main-task-display'}>
 					<TaskView setStatus={setStatusHandler} />
 					<Pagination />
