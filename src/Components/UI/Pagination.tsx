@@ -50,7 +50,6 @@ const Pagination: React.FC = () => {
 	};
 
 	const getPrevPage = () => {
-		console.log(eventCtx.pageNumber);
 		eventCtx.dispatchPageNumber({ type: 'PREVIOUS_PAGE' });
 	};
 
