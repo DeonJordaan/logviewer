@@ -31,7 +31,7 @@ const HierarchyView: React.FC<{
 		</tbody>
 	);
 
-	if (subEventCtx.hierarchy) {
+	if (subEventCtx.hierarchy.length > 0) {
 		hierarchyContent = (
 			<tbody>
 				{subEventCtx.hierarchy.map((task) => (
@@ -91,4 +91,5 @@ const HierarchyView: React.FC<{
 	);
 };
 
-export default React.memo(HierarchyView);
+export default HierarchyView;
+// export default React.memo(HierarchyView);
