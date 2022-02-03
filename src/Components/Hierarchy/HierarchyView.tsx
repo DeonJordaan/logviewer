@@ -16,7 +16,6 @@ const HierarchyView: React.FC<{
 	let host: string | undefined = 'Host';
 
 	console.log(subEventCtx.hierarchy);
-	// console.log(subEventCtx.hierarchy.length);
 
 	if (subEventCtx.selectedTask && subEventCtx.selectedTask.length > 0) {
 		app = subEventCtx.selectedTask[0].App;
