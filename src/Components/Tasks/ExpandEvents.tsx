@@ -12,38 +12,38 @@ const ExpandEvents: React.FC<{
 	// Extract contexts
 	const eventCtx = useContext(EventContext);
 	const subEventCtx = useContext(SubEventContext);
+	const tasks = eventCtx.tasks;
+	const parentId = subEventCtx.parentId;
 	// Extract state setters
 	const setParentId = subEventCtx.setParentId;
 	const setFetchId = subEventCtx.setFetchId;
 	const setSelectedTask = subEventCtx.setSelectedTask;
+	// const setHierarchy = subEventCtx.setHierarchy;
 
 	//FIXME Check where the hierarchy main item is being drawn from
-	const setHierarchyHeader = subEventCtx.setHierarchy;
-
 	const id = props.id;
-	let subEvents = props.subEvents;
+	let subEventQuantity = props.subEvents;
 
 	let importedClasses = `${classes['sub-event-button']}`;
-	if (subEvents === 0) {
+	if (subEventQuantity === 0) {
 		importedClasses = `${classes['no-sub-events']}`;
 	}
 
 	const clickHandler = () => {
+		console.log(id);
 		setParentId(id);
 		setFetchId(id);
-		setHierarchyHeader([]);
+		// setHierarchy([]);
 	};
 
 	useEffect(() => {
-		setSelectedTask(
-			eventCtx.tasks.filter((task) => task.id === subEventCtx.parentId)
-		);
-	}, [eventCtx.tasks, setSelectedTask, subEventCtx.parentId]);
+		setSelectedTask(tasks.filter((task) => task.id === parentId));
+	}, [tasks, setSelectedTask, parentId]);
 	console.log(subEventCtx.selectedTask);
 
 	return (
 		<button onClick={clickHandler} className={importedClasses}>
-			{subEvents}
+			{subEventQuantity}
 		</button>
 	);
 };
