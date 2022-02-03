@@ -73,4 +73,4 @@ const SubEventView: React.FC<{
 	);
 };
 
-export default React.memo(SubEventView);
+export default SubEventView;

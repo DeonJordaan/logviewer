@@ -2,7 +2,7 @@ import './App.css';
 
 import Header from './Components/UI/Header';
 import FilterBoard from './Components/Filter/FilterBoard';
-import Pagination from './Components/UI/Pagination';
+import PaginationControl from './Components/UI/PaginationControl';
 import TaskView from './Components/Tasks/TaskView';
 import HierarchyView from './Components/Hierarchy/HierarchyView';
 import SubEventView from './Components/SubEvents/SubEventView';
@@ -51,7 +51,7 @@ function App() {
 				</AppListContextProvider>
 				<div className={'main-task-display'}>
 					<TaskView setStatus={setStatusHandler} />
-					<Pagination />
+					<PaginationControl />
 					<HierarchyView setStatus={setStatusHandler} />
 					<SubEventView setStatus={setStatusHandler} />
 				</div>

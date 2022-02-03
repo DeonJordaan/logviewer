@@ -22,7 +22,6 @@ const useFetch = () => {
 			}
 
 			const data = await response.json();
-			console.log(data);
 
 			applyData(data);
 		} catch (error) {

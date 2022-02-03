@@ -14,8 +14,11 @@ const ExpandEvents: React.FC<{
 	const subEventCtx = useContext(SubEventContext);
 	// Extract state setters
 	const setParentId = subEventCtx.setParentId;
+	const setFetchId = subEventCtx.setFetchId;
 	const setSelectedTask = subEventCtx.setSelectedTask;
-	const setHierarchy = subEventCtx.setHierarchy;
+
+	//FIXME Check where the hierarchy main item is being drawn from
+	const setHierarchyHeader = subEventCtx.setHierarchy;
 
 	const id = props.id;
 	let subEvents = props.subEvents;
@@ -27,7 +30,8 @@ const ExpandEvents: React.FC<{
 
 	const clickHandler = () => {
 		setParentId(id);
-		setHierarchy([]);
+		setFetchId(id);
+		setHierarchyHeader([]);
 	};
 
 	useEffect(() => {
@@ -35,6 +39,7 @@ const ExpandEvents: React.FC<{
 			eventCtx.tasks.filter((task) => task.id === subEventCtx.parentId)
 		);
 	}, [eventCtx.tasks, setSelectedTask, subEventCtx.parentId]);
+	console.log(subEventCtx.selectedTask);
 
 	return (
 		<button onClick={clickHandler} className={importedClasses}>

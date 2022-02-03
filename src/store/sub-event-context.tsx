@@ -1,10 +1,18 @@
-import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import React, {
+	useState,
+	useEffect,
+	Dispatch,
+	SetStateAction,
+	useContext,
+} from 'react';
 
 import useFetch from './useFetch';
 
 import Event from '../types/event';
 
 import DataInterface from '../types/dataInterface';
+
+import EventContext from './event-context';
 
 type SubEventContextObject = {
 	error: string | null;
@@ -14,8 +22,10 @@ type SubEventContextObject = {
 	selectedSubEvent: Event[];
 	hierarchy: Event[];
 	parentId: number;
+	fetchId: number;
 	subEventParentId: number;
 	setParentId: Dispatch<SetStateAction<number>>;
+	setFetchId: Dispatch<SetStateAction<number>>;
 	setSubEventParentId: Dispatch<SetStateAction<number>>;
 	setHierarchy: Dispatch<SetStateAction<Event[]>>;
 	setSelectedTask: Dispatch<SetStateAction<Event[]>>;
@@ -30,8 +40,10 @@ const SubEventContext = React.createContext<SubEventContextObject>({
 	selectedSubEvent: [],
 	hierarchy: [],
 	parentId: 0,
+	fetchId: 0,
 	subEventParentId: 0,
 	setParentId: () => [],
+	setFetchId: () => [],
 	setSubEventParentId: () => [],
 	setHierarchy: () => [],
 	setSelectedTask: () => [],
@@ -43,6 +55,8 @@ export const SubEventContextProvider: React.FC = (props) => {
 
 	const [parentId, setParentId] = useState(0);
 
+	const [fetchId, setFetchId] = useState(0);
+
 	const [subEventParentId, setSubEventParentId] = useState(0);
 
 	const [selectedTask, setSelectedTask] = useState<Event[]>([]);
@@ -51,12 +65,7 @@ export const SubEventContextProvider: React.FC = (props) => {
 
 	const [hierarchy, setHierarchy] = useState<Event[]>([]);
 
-	// NOTE SETTING HIERARCHY
-	useEffect(() => {
-		setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
-	}, [selectedSubEvent]);
-
-	//COMMENT Fetch data, sort and set subEvents
+	//FETCH DATA, SORT & SET SUBEVENTS
 	const { isLoading, error, sendRequest: fetchTasks } = useFetch();
 
 	useEffect(() => {
@@ -74,11 +83,29 @@ export const SubEventContextProvider: React.FC = (props) => {
 
 		fetchTasks(
 			{
-				url: `http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=${parentId}`,
+				url: `http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=${fetchId}`,
 			},
 			transformData
 		);
-	}, [fetchTasks, parentId]);
+	}, [fetchTasks, fetchId]);
+
+	// SETTING SELECTED EVENT TO HIERARCHY
+	useEffect(() => {
+		setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
+	}, [selectedSubEvent]);
+
+	// WATCH PAGENUMBER AND CLEAR STATES WHEN IT CHANGES
+	const eventCtx = useContext(EventContext);
+	const pageNumber = eventCtx.pageNumber;
+
+	useEffect(() => {
+		setSubEvents([]);
+		setParentId(0);
+		setSubEventParentId(0);
+		setSelectedTask([]);
+		setSelectedSubEvent([]);
+		setHierarchy([]);
+	}, [pageNumber]);
 
 	return (
 		<SubEventContext.Provider
@@ -87,7 +114,9 @@ export const SubEventContextProvider: React.FC = (props) => {
 				isLoading: isLoading,
 				error: error,
 				parentId: parentId,
+				fetchId: fetchId,
 				setParentId: setParentId,
+				setFetchId: setFetchId,
 				subEventParentId: subEventParentId,
 				setSubEventParentId: setSubEventParentId,
 				hierarchy: hierarchy,
@@ -130,41 +159,3 @@ export default SubEventContext;
 // useEffect(() => {
 // 	setHierarchy(selectedSubEvent);
 // }, [selectedSubEvent]);
-
-///////////////////////////
-//NOTE OLD GETSUBEVENT FUNCTION
-//COMMENT Fetch data, sort and set subEvents
-//NOTE Fetch sub-event data and extract selected event data to insert in hierarchy view
-// const {
-// 	data: subEventData,
-// 	isLoading: subEventsLoading,
-// 	error: subEventErrorIncoming,
-// } = useFetch(
-// 	`http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=${parentId}`,
-// 	{},
-// 	[parentId]
-// );
-// console.log(subEventData);
-
-// setIsLoadingSubEvents(subEventsLoading);
-// setSubEventError(subEventErrorIncoming);
-
-// const allSubEventData = subEventData.Data;
-// console.log(allSubEventData);
-
-// const subEventTasks = allSubEventData.map((taskData) => {
-// 	return {
-// 		key: taskData.Id,
-// 		id: taskData.Id,
-// 		app: taskData.AppName,
-// 		taskCode: taskData.Code,
-// 		startTime: taskData.Started,
-// 		endTime: taskData.Completed,
-// 		subEvents: taskData.SubEventCount,
-// 		host: taskData.Host,
-// 		message: taskData.Message,
-// 		status: taskData.Status,
-// 	};
-// });
-// setSubEvents(subEventTasks);
-// setSelectedTask(tasks.filter((task) => task.id === parseInt(parentId)));

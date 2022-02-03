@@ -7,9 +7,13 @@ const ExpandSubEvents: React.FC<{
 	subEvents: number;
 }> = (props) => {
 	const subEventCtx = useContext(SubEventContext);
-	const setSubEventParentId = subEventCtx.setSubEventParentId;
+	// const setSubEventParentId = subEventCtx.setSubEventParentId;
 	const setSelectedSubEvent = subEventCtx.setSelectedSubEvent;
-	// TODO Can I get these values from context rather than props?
+	const setHierarchy = subEventCtx.setHierarchy;
+
+	const setFetchId = subEventCtx.setFetchId;
+
+	// TODOLATER - Can I get these values from context rather than props?
 	const id = props.id;
 	let subEvents = props.subEvents;
 
@@ -19,8 +23,10 @@ const ExpandSubEvents: React.FC<{
 	}
 
 	const parentIdHandler = () => {
-		setSubEventParentId(id);
+		setFetchId(id);
 	};
+
+	// Extract selected subEvent
 
 	useEffect(() => {
 		setSelectedSubEvent(
@@ -33,13 +39,13 @@ const ExpandSubEvents: React.FC<{
 		subEventCtx.subEventParentId,
 		subEventCtx.subEvents,
 	]);
-	// useEffect(() => {
-	// 	setHierarchy(
-	// 		subEventCtx.subEvents.filter(
-	// 			(task) => task.id === parseInt(subEventCtx.parentId)
-	// 		)
-	// 	);
-	// }, []);
+
+	useEffect(() => {
+		const clickedSubEvent = subEventCtx.subEvents.filter(
+			(subEvent) => subEvent.id === subEventCtx.subEventParentId
+		);
+		setHierarchy((prevState) => [...prevState, ...clickedSubEvent]);
+	}, [setHierarchy, subEventCtx.subEventParentId, subEventCtx.subEvents]);
 
 	return (
 		<button onClick={parentIdHandler} className={importedClasses}>
