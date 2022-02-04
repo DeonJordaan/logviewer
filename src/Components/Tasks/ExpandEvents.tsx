@@ -1,9 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 
 import classes from './ExpandEvents.module.css';
-
-import EventContext from '../../store/event-context';
 import SubEventContext from '../../store/sub-event-context';
+import EventContext from '../../store/event-context';
 
 const ExpandEvents: React.FC<{
 	id: number;
@@ -22,8 +21,8 @@ const ExpandEvents: React.FC<{
 
 	//FIXME Check where the hierarchy main item is being drawn from
 	const id = props.id;
-	let subEventQuantity = props.subEvents;
 
+	let subEventQuantity = props.subEvents;
 	let importedClasses = `${classes['sub-event-button']}`;
 	if (subEventQuantity === 0) {
 		importedClasses = `${classes['no-sub-events']}`;
@@ -33,7 +32,6 @@ const ExpandEvents: React.FC<{
 		console.log(id);
 		setParentId(id);
 		setFetchId(id);
-		// setHierarchy([]);
 	};
 
 	useEffect(() => {
