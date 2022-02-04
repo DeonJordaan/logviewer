@@ -1,57 +1,58 @@
 import React, { useContext, useEffect } from 'react';
 
 import classes from './ExpandSubEvents.module.css';
-
 import SubEventContext from '../../store/sub-event-context';
+// import EventContext from '../../store/event-context';
 
 const ExpandSubEvents: React.FC<{
 	id: number;
 	subEvents: number;
 }> = (props) => {
+	// Extract contexts
+	// const eventCtx = useContext(EventContext);
 	const subEventCtx = useContext(SubEventContext);
 	const subEvents = subEventCtx.subEvents;
 	const subEventParentId = subEventCtx.subEventParentId;
-	// const setHierarchy = subEventCtx.setHierarchy;
-
-	const setFetchId = subEventCtx.setFetchId;
+	const selectedSubEvent = subEventCtx.selectedSubEvent;
+	// Extract state setters
 	const setSubEventParentId = subEventCtx.setSubEventParentId;
+	const setFetchId = subEventCtx.setFetchId;
 	const setSelectedSubEvent = subEventCtx.setSelectedSubEvent;
+	const setHierarchy = subEventCtx.setHierarchy;
 
-	// TODOLATER - Can I get these values from context rather than props?
+	//FIXME Check where the hierarchy main item is being drawn from
 	const id = props.id;
-	let subEventQuantity = props.subEvents;
 
+	let subEventQuantity = props.subEvents;
 	let importedClasses = `${classes['sub-event-button']}`;
 	if (subEventQuantity === 0) {
 		importedClasses = `${classes['no-sub-events']}`;
 	}
 
-	const fetchIdHandler = () => {
+	const clickHandler = () => {
 		console.log(id);
 		setSubEventParentId(id);
 		setFetchId(id);
 	};
 
-	// Extract selected subEvent
-
 	useEffect(() => {
 		setSelectedSubEvent(
 			subEvents.filter((subEvent) => subEvent.id === subEventParentId)
 		);
-	}, [setSelectedSubEvent, subEventParentId, subEvents]);
-	console.log(subEventCtx.selectedSubEvent);
+	}, [subEvents, setSelectedSubEvent, subEventParentId]);
 
-	// useEffect(() => {
-	// 	const clickedSubEvent = subEventCtx.subEvents.filter(
-	// 		(subEvent) => subEvent.id === subEventCtx.subEventParentId
-	// 	);
-	// 	setHierarchy((prevState) => [...prevState, ...clickedSubEvent]);
-	// }, [setHierarchy, subEventCtx.subEventParentId, subEventCtx.subEvents]);
+	useEffect(() => {
+		setHierarchy(selectedSubEvent);
+		// setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
+	}, [selectedSubEvent, setHierarchy]);
+
+	console.log(subEventParentId);
+	console.log(subEventCtx.selectedSubEvent);
+	console.log(subEventCtx.hierarchy);
 
 	return (
-		<button onClick={fetchIdHandler} className={importedClasses}>
+		<button onClick={clickHandler} className={importedClasses}>
 			{subEventQuantity}
-			{/* {subEventQuantity === 0 ? <p>-</p> : subEventQuantity} */}
 		</button>
 	);
 };
