@@ -96,10 +96,10 @@ export const SubEventContextProvider: React.FC = (props) => {
 	}, [fetchTasks, fetchId]);
 
 	// SETTING SELECTED EVENT TO HIERARCHY
-	useEffect(() => {
-		setHierarchy(selectedSubEvent);
-		// setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
-	}, [selectedSubEvent]);
+	// useEffect(() => {
+	// setHierarchy(selectedSubEvent);
+	// setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
+	// }, [selectedSubEvent]);
 
 	// WATCH PAGENUMBER AND CLEAR STATES WHEN IT CHANGES
 	const eventCtx = useContext(EventContext);
@@ -114,6 +114,14 @@ export const SubEventContextProvider: React.FC = (props) => {
 		setHierarchy([]);
 		// setHierarchyHeader([]);
 	}, [pageNumber]);
+
+	useEffect(() => {
+		setSubEventParentId(0);
+		setSelectedTask([]);
+		setSelectedSubEvent([]);
+		setHierarchy([]);
+		// setHierarchyHeader([]);
+	}, [selectedTask]);
 
 	return (
 		<SubEventContext.Provider

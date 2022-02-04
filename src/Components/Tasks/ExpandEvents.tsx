@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 
-import classes from './ExpandEvents.module.css';
-import SubEventContext from '../../store/sub-event-context';
 import EventContext from '../../store/event-context';
+import SubEventContext from '../../store/sub-event-context';
+import classes from './ExpandEvents.module.css';
 
 const ExpandEvents: React.FC<{
 	id: number;
@@ -11,13 +11,13 @@ const ExpandEvents: React.FC<{
 	// Extract contexts
 	const eventCtx = useContext(EventContext);
 	const subEventCtx = useContext(SubEventContext);
-	const tasks = eventCtx.tasks;
-	const parentId = subEventCtx.parentId;
+	const { tasks } = eventCtx;
+	const { parentId } = subEventCtx;
 	// Extract state setters
-	const setParentId = subEventCtx.setParentId;
-	const setFetchId = subEventCtx.setFetchId;
-	const setSelectedTask = subEventCtx.setSelectedTask;
-	// const setHierarchy = subEventCtx.setHierarchy;
+	const { setParentId } = subEventCtx;
+	const { setFetchId } = subEventCtx;
+	const { setSelectedTask } = subEventCtx;
+	const { setHierarchy } = subEventCtx;
 
 	//FIXME Check where the hierarchy main item is being drawn from
 	const id = props.id;
@@ -28,15 +28,18 @@ const ExpandEvents: React.FC<{
 		importedClasses = `${classes['no-sub-events']}`;
 	}
 
+	//TODO Should I not just avoid the useEffect and just 'manually' set the selectedTask when the button is clicked?
 	const clickHandler = () => {
 		console.log(id);
 		setParentId(id);
 		setFetchId(id);
+		setHierarchy([]);
 	};
 
 	useEffect(() => {
 		setSelectedTask(tasks.filter((task) => task.id === parentId));
 	}, [tasks, setSelectedTask, parentId]);
+
 	console.log(subEventCtx.selectedTask);
 
 	return (
