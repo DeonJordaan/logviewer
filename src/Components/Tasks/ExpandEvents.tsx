@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 
 import EventContext from '../../store/event-context';
 import SubEventContext from '../../store/sub-event-context';
@@ -17,7 +17,7 @@ const ExpandEvents: React.FC<{
 	const { setParentId } = subEventCtx;
 	const { setFetchId } = subEventCtx;
 	const { setSelectedTask } = subEventCtx;
-	const { setHierarchy } = subEventCtx;
+	// const { setHierarchy } = subEventCtx;
 
 	//FIXME Check where the hierarchy main item is being drawn from
 	const id = props.id;
@@ -29,12 +29,12 @@ const ExpandEvents: React.FC<{
 	}
 
 	//TODO Should I not just avoid the useEffect and just 'manually' set the selectedTask when the button is clicked?
-	const clickHandler = () => {
+	const clickHandler = useCallback(() => {
 		console.log(id);
 		setParentId(id);
 		setFetchId(id);
-		setHierarchy([]);
-	};
+		// setHierarchy([]);
+	}, [id, setFetchId, setParentId]);
 
 	useEffect(() => {
 		setSelectedTask(tasks.filter((task) => task.id === parentId));

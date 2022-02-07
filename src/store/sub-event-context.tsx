@@ -7,12 +7,9 @@ import React, {
 } from 'react';
 
 import useFetch from './useFetch';
-
-import Event from '../types/event';
-
-import DataInterface from '../types/dataInterface';
-
 import EventContext from './event-context';
+import DataInterface from '../types/dataInterface';
+import Event from '../types/event';
 
 type SubEventContextObject = {
 	error: string | null;
@@ -21,7 +18,6 @@ type SubEventContextObject = {
 	subEvents: Event[];
 	selectedSubEvent: Event[];
 	hierarchy: Event[];
-	// hierarchyHeader: Event[];
 	parentId: number;
 	fetchId: number;
 	subEventParentId: number;
@@ -29,7 +25,6 @@ type SubEventContextObject = {
 	setFetchId: Dispatch<SetStateAction<number>>;
 	setSubEventParentId: Dispatch<SetStateAction<number>>;
 	setHierarchy: Dispatch<SetStateAction<Event[]>>;
-	// setHierarchyHeader: Dispatch<SetStateAction<Event[]>>;
 	setSelectedTask: Dispatch<SetStateAction<Event[]>>;
 	setSelectedSubEvent: Dispatch<SetStateAction<Event[]>>;
 };
@@ -41,7 +36,6 @@ const SubEventContext = React.createContext<SubEventContextObject>({
 	subEvents: [],
 	selectedSubEvent: [],
 	hierarchy: [],
-	// hierarchyHeader: [],
 	parentId: 0,
 	fetchId: 0,
 	subEventParentId: 0,
@@ -49,7 +43,6 @@ const SubEventContext = React.createContext<SubEventContextObject>({
 	setFetchId: () => [],
 	setSubEventParentId: () => [],
 	setHierarchy: () => [],
-	// setHierarchyHeader: () => [],
 	setSelectedTask: () => [],
 	setSelectedSubEvent: () => [],
 });
@@ -68,8 +61,6 @@ export const SubEventContextProvider: React.FC = (props) => {
 	const [selectedSubEvent, setSelectedSubEvent] = useState<Event[]>([]);
 
 	const [hierarchy, setHierarchy] = useState<Event[]>([]);
-
-	// const [hierarchyHeader, setHierarchyHeader] = useState<Event[]>([]);
 
 	//FETCH DATA, SORT & SET SUBEVENTS
 	const { isLoading, error, sendRequest: fetchTasks } = useFetch();
@@ -95,12 +86,6 @@ export const SubEventContextProvider: React.FC = (props) => {
 		);
 	}, [fetchTasks, fetchId]);
 
-	// SETTING SELECTED EVENT TO HIERARCHY
-	// useEffect(() => {
-	// setHierarchy(selectedSubEvent);
-	// setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
-	// }, [selectedSubEvent]);
-
 	// WATCH PAGENUMBER AND CLEAR STATES WHEN IT CHANGES
 	const eventCtx = useContext(EventContext);
 	const pageNumber = eventCtx.pageNumber;
@@ -112,15 +97,12 @@ export const SubEventContextProvider: React.FC = (props) => {
 		setSelectedTask([]);
 		setSelectedSubEvent([]);
 		setHierarchy([]);
-		// setHierarchyHeader([]);
 	}, [pageNumber]);
 
 	useEffect(() => {
 		setSubEventParentId(0);
-		setSelectedTask([]);
 		setSelectedSubEvent([]);
 		setHierarchy([]);
-		// setHierarchyHeader([]);
 	}, [selectedTask]);
 
 	return (
@@ -136,9 +118,7 @@ export const SubEventContextProvider: React.FC = (props) => {
 				subEventParentId: subEventParentId,
 				setSubEventParentId: setSubEventParentId,
 				hierarchy: hierarchy,
-				// hierarchyHeader: hierarchyHeader,
 				setHierarchy: setHierarchy,
-				// setHierarchyHeader: setHierarchyHeader,
 				selectedTask: selectedTask,
 				setSelectedTask: setSelectedTask,
 				selectedSubEvent: selectedSubEvent,
