@@ -30,7 +30,6 @@ const SubEventView: React.FC<{
 						endTime={task.endTime}
 						id={task.id}
 						message={task.message}
-						//FIXME See LVerror01 doc
 						host={task.host}
 						app={task.App}
 						taskCode={task.taskCode}
@@ -73,4 +72,4 @@ const SubEventView: React.FC<{
 	);
 };
 
-export default SubEventView;
+export default React.memo(SubEventView);

@@ -90,5 +90,5 @@ const HierarchyView: React.FC<{
 	);
 };
 
-export default HierarchyView;
-// export default React.memo(HierarchyView);
+// export default HierarchyView;
+export default React.memo(HierarchyView);

@@ -59,7 +59,7 @@ const SubEventViewItem: React.FC<{
 	);
 };
 
-export default SubEventViewItem;
+export default React.memo(SubEventViewItem);
 
 //NOTE Mapping classes - cannot resolve type settings
 // const classesMap = {
