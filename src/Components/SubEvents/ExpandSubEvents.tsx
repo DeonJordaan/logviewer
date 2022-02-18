@@ -29,19 +29,19 @@ const ExpandSubEvents: React.FC<{
 		importedClasses = `${classes['no-sub-events']}`;
 	}
 
-	// const triggerHierarchy = useCallback(() => {
-	// 	setHierarchy((prevState) => {
-	// 		return [...prevState, ...selectedSubEvent];
-	// 	});
-	// }, [selectedSubEvent, setHierarchy]);
+	const triggerHierarchy = useCallback(() => {
+		setHierarchy((prevState) => {
+			return [...prevState, ...selectedSubEvent];
+		});
+	}, [selectedSubEvent, setHierarchy]);
 
 	const clickHandler = useCallback(() => {
 		setSubEventParentId(id);
 		setFetchId(id);
-		// triggerHierarchy();
+		triggerHierarchy();
 		// FIXME This setHierarchy works, but executes before the selectedSubEVent has been updated
 		// setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
-	}, [id, setFetchId, setSubEventParentId]);
+	}, [id, setFetchId, setSubEventParentId, triggerHierarchy]);
 
 	// Filter the event from the subEvent array and set it to selectedSubEvent
 	useEffect(() => {
@@ -51,16 +51,16 @@ const ExpandSubEvents: React.FC<{
 	}, [setSelectedSubEvent, subEventParentId, subEvents]);
 
 	// Push the event to the Hierarchy display
-	useEffect(() => {
-		const containsEvent = (hierarchy: Event[]) => {
-			hierarchy?.find((e) => {
-				return e.id === id;
-			});
-		};
-		if (containsEvent(hierarchy)) {
-			setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
-		}
-	}, [hierarchy, id, selectedSubEvent, setHierarchy]);
+	// useEffect(() => {
+	// 	const containsEvent = (hierarchy: Event[]) => {
+	// 		hierarchy?.find((e) => {
+	// 			return e.id === id;
+	// 		});
+	// 	};
+	// 	if (containsEvent()) {
+	// 		setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
+	// 	}
+	// }, [hierarchy, id, selectedSubEvent, setHierarchy]);
 
 	console.log(hierarchy);
 
