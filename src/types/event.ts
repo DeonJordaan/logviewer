@@ -1,5 +1,6 @@
 import DataInterface from './dataInterface';
 
+// FIXME When the only thing a class does is hold a list of values, then a class is overkill. Can JUST use the Interface
 class Event {
 	key: number;
 	id: number;

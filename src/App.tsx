@@ -17,6 +17,7 @@ function App() {
 	//TODO => MOVE STATUS HANDLING TO A COMPONENT...???
 	function setStatusHandler(statusCode: number) {
 		let status = '';
+		// TODO Name the cases descriptively
 		switch (statusCode) {
 			case 0: {
 				status = 'NotSet';
@@ -39,6 +40,7 @@ function App() {
 				break;
 			}
 		}
+		// FIXME Add default
 		return status;
 	}
 
