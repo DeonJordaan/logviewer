@@ -72,6 +72,9 @@ export const SubEventContextProvider: React.FC = (props) => {
 			PageNumber: number;
 		}) => {
 			const { Data: allTaskData } = taskData;
+			console.log(allTaskData);
+			// TODO PUSH ALL DATA TO FIREBASE HERE
+			// NOTE SET PARENTID IN ORDER THAT SUBEVENT DATA GETS PUSHED TO PARENT EVET UNDER SUBEVENTS
 
 			const allTasks = allTaskData.map((data) => new Event(data));
 

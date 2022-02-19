@@ -39,6 +39,8 @@ export const EventContextProvider: React.FC = (props) => {
 		}) => {
 			const { Data: allTaskData, TotalRecordCount: recordCount } =
 				taskData;
+			// TODO PUSH ALL DATA TO FIREBASE HERE
+			// NOTE ANY PREP NECESSARY HERE IN ORDER TO PUSH SUBEVENTS LATER?
 
 			const allTasks = allTaskData.map((data) => new Event(data));
 
