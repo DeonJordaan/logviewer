@@ -63,6 +63,7 @@ const ExpandSubEvents: React.FC<{
 	// }, [hierarchy, id, selectedSubEvent, setHierarchy]);
 
 	console.log(hierarchy);
+	console.log(selectedSubEvent);
 
 	return (
 		<button onClick={clickHandler} className={importedClasses}>
