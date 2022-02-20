@@ -5,6 +5,11 @@ import TaskViewHeader from './TaskViewHeader';
 import TaskViewItem from './TaskViewItem';
 import classes from './TaskView.module.css';
 
+import { doc, setDoc } from 'firebase/firestore';
+import db from '../../store/firebase';
+
+
+
 const TaskView: React.FC<{
 	setStatus: (statusCode: number) => string;
 }> = (props) => {
@@ -58,6 +63,31 @@ const TaskView: React.FC<{
 			</tbody>
 		);
 	}
+
+	const eventStore = doc(db, 'events/{data.id}');
+	const fbData = []
+	const fbase = fbData.push(eventCtx.tasks.map((data) => {
+		key: data.id;
+					id: data.id;
+					App: data.App;
+					taskCode: data.taskCode;
+					startTime: data.startTime;
+					endTime: data.endTime;
+					subEvents: data.subEvents;
+					host: data.host;
+					message: data.message;
+					status: data.status;
+			}))
+	
+		
+		function writeEvents() {
+			
+			setDoc(eventStore, eventData);
+		}
+		writeEvents();
+	});
+
+	fbase();
 
 	return (
 		<div className={classes['task-view']}>

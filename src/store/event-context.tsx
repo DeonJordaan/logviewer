@@ -2,6 +2,10 @@ import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import useFetch from './useFetch';
 import DataInterface from '../types/dataInterface';
 import Event from '../types/event';
+// TODO
+// import { set, ref } from 'firebase/database';
+// import { doc, setDoc } from 'firebase/firestore';
+// import db from '../store/firebase';
 
 type EventContextObject = {
 	tasks: Event[];
@@ -44,6 +48,29 @@ export const EventContextProvider: React.FC = (props) => {
 
 			const allTasks = allTaskData.map((data) => new Event(data));
 
+			// const eventStore = doc(db, 'events/{data.id}');
+			// const fbData = []
+			// const fbase = fbData.push(allTaskData.map((data) => {
+			// 	key: data.id;
+			// 				id: data.id;
+			// 				App: data.App;
+			// 				taskCode: data.taskCode;
+			// 				startTime: data.startTime;
+			// 				endTime: data.endTime;
+			// 				subEvents: data.subEvents;
+			// 				host: data.host;
+			// 				message: data.message;
+			// 				status: data.status;
+			// 		}))
+
+			// 	function writeEvents() {
+
+			// 		setDoc(eventStore, eventData);
+			// 	}
+			// 	writeEvents();
+			// });
+
+			// fbase();
 			setTasks(allTasks);
 			setTotalRecordCount(recordCount);
 		};
@@ -61,6 +88,27 @@ export const EventContextProvider: React.FC = (props) => {
 			transformData
 		);
 	}, [fetchTasks, pageNumber]);
+
+	// const eventStore = doc(db, 'events');
+	// function writeEvents() {
+	// 	const eventData = tasks.map((data) => {
+	// 		return {
+	// 			key: data.id,
+	// 			id: data.id,
+	// 			App: data.App,
+	// 			taskCode: data.taskCode,
+	// 			startTime: data.startTime,
+	// 			endTime: data.endTime,
+	// 			subEvents: data.subEvents,
+	// 			host: data.host,
+	// 			message: data.message,
+	// 			status: data.status,
+	// 		};
+	// 	});
+	// 	setDoc(eventStore, eventData);
+	// }
+
+	// writeEvents();
 
 	useEffect(() => {
 		setTotalPageCount(Math.ceil(totalRecordCount / 10));
@@ -94,3 +142,61 @@ export const EventContextProvider: React.FC = (props) => {
 };
 
 export default EventContext;
+
+///////////////////////////
+// NOTE ALTERNATE DATA
+// key: data.Id,
+// 						id: data.Id,
+// 						App: data.AppName,
+// 						taskCode: data.Code,
+// 						startTime: data.Started,
+// 						endTime: data.Completed,
+// 						subEvents: data.SubEventCount,
+// 						host: data.Host,
+// 						message: data.Message,
+// 						status: data.Status,
+
+////////////////////////////////////
+// NOTE FUNCTION USED BEFORE SETTASKS TO SET NONE DATA TO STATE AS OPOOSED TO LEXISNEXIS DATA
+// const allTasks = allTaskData.map((taskData) => {
+// 	return {
+// 		key: taskData.Id,
+// 		id: taskData.Id,
+// 		App: 'Application Name',
+// 		taskCode: 'Event Code',
+// 		startTime: taskData.Started,
+// 		endTime: taskData.Completed,
+// 		subEvents: taskData.SubEventCount,
+// 		host: 'Application Host',
+// 		message: 'Event Message',
+// 		status: taskData.Status,
+// 	};
+// });
+
+////////////////////////////////////
+// EXAMPLE FROM STOCK MANAGER - INCORRECT FOR REALTIME DB
+// const pushFirebase = allTaskData.map((data) => {
+// 	set(ref(database, 'events/' + uuid), {
+// 		key: uuid,
+// 		id: uuid,
+// 		productName: productNameUpperCase,
+// 		description,
+// 		prices: [],
+// 		averagePrice: 0,
+// 		quantity: 0,
+// 	});
+// })
+
+// FIRESTORE VERSION BASED ON ABOVE EXAMPLE FROM STOCK MANAGER
+// set(ref(database, 'events/' + data.Id), {
+// 	key: data.Id,
+// 	id: data.Id,
+// 	App: data.AppName,
+// 	taskCode: data.Code,
+// 	startTime: data.Started,
+// 	endTime: data.Completed,
+// 	subEvents: data.SubEventCount,
+// 	host: data.Host,
+// 	message: data.Message,
+// 	status: data.Status,
+// });

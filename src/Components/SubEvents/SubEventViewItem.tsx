@@ -18,23 +18,23 @@ const SubEventViewItem: React.FC<{
 		let taskClass = '';
 		switch (taskStatus) {
 			case 'NotSet': {
-				taskClass = 'classes.NotSet';
+				taskClass = classes.NotSet;
 				break;
 			}
 			case 'Started': {
-				taskClass = 'classes.Started';
+				taskClass = classes.Started;
 				break;
 			}
 			case 'Completed': {
-				taskClass = 'classes.Completed';
+				taskClass = classes.Completed;
 				break;
 			}
 			case 'Aborted': {
-				taskClass = 'classes.Aborted';
+				taskClass = classes.Aborted;
 				break;
 			}
 			case 'Failed': {
-				taskClass = 'classes.Failed';
+				taskClass = classes.Failed;
 				break;
 			}
 		}

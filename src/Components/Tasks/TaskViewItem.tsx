@@ -16,38 +16,43 @@ const TaskViewItem: React.FC<{
 	id: number;
 	message: string;
 }> = (props) => {
+	const { status } = props;
+
 	function setClasses(taskStatus: string) {
 		let taskClass = '';
 		switch (taskStatus) {
 			case 'NotSet': {
-				taskClass = 'classes.NotSet';
+				taskClass = classes.NotSet;
 				break;
 			}
 			case 'Started': {
-				taskClass = 'classes.Started';
+				taskClass = classes.Started;
 				break;
 			}
 			case 'Completed': {
-				taskClass = 'classes.Completed';
+				taskClass = classes.Completed;
 				break;
 			}
 			case 'Aborted': {
-				taskClass = 'classes.Aborted';
+				taskClass = classes.Aborted;
 				break;
 			}
 			case 'Failed': {
-				taskClass = 'classes.Failed';
+				taskClass = classes.Failed;
 				break;
 			}
 		}
 		return taskClass;
 	}
 
+	const statusClass = setClasses(status);
+
 	return (
 		<tr className={classes['task-item']}>
 			<td>{props.host}</td>
 			<td>{props.app}</td>
-			<td className={setClasses(props.status)}>{props.status}</td>
+			{/* <td className={classes.Aborted}>{props.status}</td> */}
+			<td className={statusClass}>{props.status}</td>
 			<td>{props.taskCode}</td>
 			<td>
 				<TaskTime time={props.startTime} />

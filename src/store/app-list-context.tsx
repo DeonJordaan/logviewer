@@ -27,7 +27,8 @@ export const AppListContextProvider: React.FC = (props) => {
 
 	useEffect(() => {
 		const transformData = (appData: Application[]) => {
-			const allApps = appData.map((app) => app.Name);
+			// const allApps = appData.map((app) => app.Name);
+			const allApps = appData.map((app) => 'Application');
 
 			setAppList(allApps);
 		};
