@@ -10,6 +10,8 @@ import useFetch from './useFetch';
 import EventContext from './event-context';
 import DataInterface from '../types/dataInterface';
 import Event from '../types/event';
+import db from './firebase';
+import { ref, set } from 'firebase/database';
 
 type SubEventContextObject = {
 	error: string | null;
@@ -89,6 +91,7 @@ export const SubEventContextProvider: React.FC = (props) => {
 					host: 'Application Host',
 					message: 'Event Message',
 					status: taskData.Status,
+					parentId: taskData.ParentId,
 				};
 			});
 
@@ -121,6 +124,14 @@ export const SubEventContextProvider: React.FC = (props) => {
 		setSelectedSubEvent([]);
 		setHierarchy([]);
 	}, [selectedTask]);
+
+	useEffect(() => {
+		subEvents.forEach((event) => {
+			set(ref(db, 'subEvents/' + event.id), {
+				event,
+			});
+		});
+	}, [subEvents]);
 
 	return (
 		<SubEventContext.Provider

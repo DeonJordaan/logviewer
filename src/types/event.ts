@@ -12,6 +12,7 @@ class Event {
 	host: string;
 	message: string;
 	status: number;
+	parentId: number;
 
 	// NOTE GETTER TO SET THE STATUS. JUST AN IDEA, NOT SURE THIS CAN WORK. IF IT CAN, WOULD LIKELY IMPORT statusInterface AND USE IT HERE
 	// getEventStatus(statusCode: keyof object): string {
@@ -42,6 +43,7 @@ class Event {
 		this.host = data.Host;
 		this.message = data.Message;
 		this.status = data.Status;
+		this.parentId = data.ParentId;
 	}
 }
 

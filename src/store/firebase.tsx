@@ -1,10 +1,11 @@
 import { initializeApp } from 'firebase/app';
-// import { getDatabase } from 'firebase/database';
-import { getFirestore } from 'firebase/firestore';
+import { getDatabase } from 'firebase/database';
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyAjUwHaR1h_BMPk4wODzlrAKjzvy38GFys',
 	authDomain: 'logviewer-a5478.firebaseapp.com',
+	databaseURL:
+		'https://logviewer-a5478-default-rtdb.europe-west1.firebasedatabase.app',
 	projectId: 'logviewer-a5478',
 	storageBucket: 'logviewer-a5478.appspot.com',
 	messagingSenderId: '971564053589',
@@ -14,27 +15,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
+const db = getDatabase(app);
 
 export default db;
-
-const eventStore = doc(db, 'events/{data.id}');
-const fbData = [];
-const fbase = () => {
-	fbData.push(
-		tasks.map((data) => {
-			{
-				key: data.id;
-				id: data.id;
-				App: data.App;
-				taskCode: data.taskCode;
-				startTime: data.startTime;
-				endTime: data.endTime;
-				subEvents: data.subEvents;
-				host: data.host;
-				message: data.message;
-				status: data.status;
-			}
-		})
-	);
-};

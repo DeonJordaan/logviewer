@@ -2,10 +2,8 @@ import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import useFetch from './useFetch';
 import DataInterface from '../types/dataInterface';
 import Event from '../types/event';
-// TODO
-// import { set, ref } from 'firebase/database';
-// import { doc, setDoc } from 'firebase/firestore';
-// import db from '../store/firebase';
+import db from './firebase';
+import { ref, set } from 'firebase/database';
 
 type EventContextObject = {
 	tasks: Event[];
@@ -43,17 +41,24 @@ export const EventContextProvider: React.FC = (props) => {
 		}) => {
 			const { Data: allTaskData, TotalRecordCount: recordCount } =
 				taskData;
-			// TODO PUSH ALL DATA TO FIREBASE HERE
-			// NOTE ANY PREP NECESSARY HERE IN ORDER TO PUSH SUBEVENTS LATER?
 
-			const allTasks = allTaskData.map((data) => new Event(data));
+			// const allTasks = allTaskData.map((data) => new Event(data));
+			const allTasks = allTaskData.map((taskData) => {
+				return {
+					key: taskData.Id,
+					id: taskData.Id,
+					App: 'Application Name',
+					taskCode: 'Event Code',
+					startTime: taskData.Started,
+					endTime: taskData.Completed,
+					subEvents: taskData.SubEventCount,
+					host: 'Application Host',
+					message: 'Event Message',
+					status: taskData.Status,
+					parentId: taskData.ParentId,
+				};
+			});
 
-			const writeEvents = () => {
-				setDoc(eventStore, fbData);
-			};
-			writeEvents();
-
-			fbase();
 			setTasks(allTasks);
 			setTotalRecordCount(recordCount);
 		};
@@ -71,6 +76,14 @@ export const EventContextProvider: React.FC = (props) => {
 			transformData
 		);
 	}, [fetchTasks, pageNumber]);
+
+	useEffect(() => {
+		tasks.forEach((event) => {
+			set(ref(db, 'events/' + event.id), {
+				event,
+			});
+		});
+	}, [tasks]);
 
 	useEffect(() => {
 		setTotalPageCount(Math.ceil(totalRecordCount / 10));
@@ -144,7 +157,7 @@ export default EventContext;
 
 /////////////////////////////////////
 
-// NOTE FUNCTION USED BEFORE SETTASKS TO SET NONE DATA TO STATE AS OPOOSED TO LEXISNEXIS DATA
+// NOTE FUNCTION USED BEFORE SETTASKS TO SET GENERIC DATA TO STATE AS OPPOSED TO LEXISNEXIS DATA
 // const allTasks = allTaskData.map((taskData) => {
 // 	return {
 // 		key: taskData.Id,

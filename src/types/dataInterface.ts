@@ -6,7 +6,7 @@ interface DataInterface {
 	Id: number;
 	Level: number;
 	Message: string;
-	ParentId: number | null;
+	ParentId: number;
 	Started: string;
 	Status: number;
 	SubEventCount: number;
