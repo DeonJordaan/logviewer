@@ -17,3 +17,24 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 export default db;
+
+const eventStore = doc(db, 'events/{data.id}');
+const fbData = [];
+const fbase = () => {
+	fbData.push(
+		tasks.map((data) => {
+			{
+				key: data.id;
+				id: data.id;
+				App: data.App;
+				taskCode: data.taskCode;
+				startTime: data.startTime;
+				endTime: data.endTime;
+				subEvents: data.subEvents;
+				host: data.host;
+				message: data.message;
+				status: data.status;
+			}
+		})
+	);
+};

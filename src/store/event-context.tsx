@@ -48,29 +48,12 @@ export const EventContextProvider: React.FC = (props) => {
 
 			const allTasks = allTaskData.map((data) => new Event(data));
 
-			// const eventStore = doc(db, 'events/{data.id}');
-			// const fbData = []
-			// const fbase = fbData.push(allTaskData.map((data) => {
-			// 	key: data.id;
-			// 				id: data.id;
-			// 				App: data.App;
-			// 				taskCode: data.taskCode;
-			// 				startTime: data.startTime;
-			// 				endTime: data.endTime;
-			// 				subEvents: data.subEvents;
-			// 				host: data.host;
-			// 				message: data.message;
-			// 				status: data.status;
-			// 		}))
+			const writeEvents = () => {
+				setDoc(eventStore, fbData);
+			};
+			writeEvents();
 
-			// 	function writeEvents() {
-
-			// 		setDoc(eventStore, eventData);
-			// 	}
-			// 	writeEvents();
-			// });
-
-			// fbase();
+			fbase();
 			setTasks(allTasks);
 			setTotalRecordCount(recordCount);
 		};
@@ -88,27 +71,6 @@ export const EventContextProvider: React.FC = (props) => {
 			transformData
 		);
 	}, [fetchTasks, pageNumber]);
-
-	// const eventStore = doc(db, 'events');
-	// function writeEvents() {
-	// 	const eventData = tasks.map((data) => {
-	// 		return {
-	// 			key: data.id,
-	// 			id: data.id,
-	// 			App: data.App,
-	// 			taskCode: data.taskCode,
-	// 			startTime: data.startTime,
-	// 			endTime: data.endTime,
-	// 			subEvents: data.subEvents,
-	// 			host: data.host,
-	// 			message: data.message,
-	// 			status: data.status,
-	// 		};
-	// 	});
-	// 	setDoc(eventStore, eventData);
-	// }
-
-	// writeEvents();
 
 	useEffect(() => {
 		setTotalPageCount(Math.ceil(totalRecordCount / 10));
@@ -157,6 +119,31 @@ export default EventContext;
 // 						status: data.Status,
 
 ////////////////////////////////////
+
+// const eventStore = doc(db, 'events/{data.id}');
+// const fbData = []
+// const fbase = fbData.push(allTaskData.map((data) => {
+// 	key: data.id;
+// 				id: data.id;
+// 				App: data.App;
+// 				taskCode: data.taskCode;
+// 				startTime: data.startTime;
+// 				endTime: data.endTime;
+// 				subEvents: data.subEvents;
+// 				host: data.host;
+// 				message: data.message;
+// 				status: data.status;
+// 		}))
+
+// 	function writeEvents() {
+
+// 		setDoc(eventStore, eventData);
+// 	}
+// 	writeEvents();
+// });
+
+/////////////////////////////////////
+
 // NOTE FUNCTION USED BEFORE SETTASKS TO SET NONE DATA TO STATE AS OPOOSED TO LEXISNEXIS DATA
 // const allTasks = allTaskData.map((taskData) => {
 // 	return {
