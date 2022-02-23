@@ -3,7 +3,8 @@ import useFetch from './useFetch';
 import DataInterface from '../types/dataInterface';
 import Event from '../types/event';
 import db from './firebase';
-import { ref, set } from 'firebase/database';
+import { collection, addDoc } from 'firebase/firestore';
+// import { ref, set } from 'firebase/database';
 
 type EventContextObject = {
 	tasks: Event[];
@@ -77,13 +78,20 @@ export const EventContextProvider: React.FC = (props) => {
 		);
 	}, [fetchTasks, pageNumber]);
 
+	const eventStore = collection(db, 'events');
+
 	useEffect(() => {
 		tasks.forEach((event) => {
-			set(ref(db, 'events/' + event.id), {
-				event,
-			});
+			addDoc(eventStore, { event });
 		});
 	}, [tasks]);
+	// useEffect(() => {
+	// 	tasks.forEach((event) => {
+	// 		set(ref(db, 'events/' + event.id), {
+	// 			event,
+	// 		});
+	// 	});
+	// }, [tasks]);
 
 	useEffect(() => {
 		setTotalPageCount(Math.ceil(totalRecordCount / 10));

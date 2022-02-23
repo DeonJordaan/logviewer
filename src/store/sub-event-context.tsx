@@ -11,7 +11,8 @@ import EventContext from './event-context';
 import DataInterface from '../types/dataInterface';
 import Event from '../types/event';
 import db from './firebase';
-import { ref, set } from 'firebase/database';
+import { addDoc, collection } from 'firebase/firestore';
+// import { ref, set } from 'firebase/database';
 
 type SubEventContextObject = {
 	error: string | null;
@@ -125,13 +126,21 @@ export const SubEventContextProvider: React.FC = (props) => {
 		setHierarchy([]);
 	}, [selectedTask]);
 
+	const subEventStore = collection(db, 'sub-events');
+
 	useEffect(() => {
 		subEvents.forEach((event) => {
-			set(ref(db, 'subEvents/' + event.id), {
-				event,
-			});
+			addDoc(subEventStore, { event });
 		});
 	}, [subEvents]);
+
+	// useEffect(() => {
+	// 	subEvents.forEach((event) => {
+	// 		set(ref(db, 'subEvents/' + event.id), {
+	// 			event,
+	// 		});
+	// 	});
+	// }, [subEvents]);
 
 	return (
 		<SubEventContext.Provider
