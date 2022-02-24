@@ -3,7 +3,7 @@ import useFetch from './useFetch';
 import DataInterface from '../types/dataInterface';
 import Event from '../types/event';
 import db from './firebase';
-import { collection, addDoc } from 'firebase/firestore';
+import { setDoc, doc } from 'firebase/firestore';
 // import { ref, set } from 'firebase/database';
 
 type EventContextObject = {
@@ -78,18 +78,19 @@ export const EventContextProvider: React.FC = (props) => {
 		);
 	}, [fetchTasks, pageNumber]);
 
-	const eventStore = collection(db, 'events');
-
+	// NOTE REVISED METHOD USING setDoc
 	useEffect(() => {
 		tasks.forEach((event) => {
-			addDoc(eventStore, { event });
+			setDoc(doc(db, 'events', `${event.id}`), { event });
 		});
 	}, [tasks]);
+
+	// NOTE Original method of sending data to firestore
+	// const eventStore = collection(db, 'events');
+
 	// useEffect(() => {
 	// 	tasks.forEach((event) => {
-	// 		set(ref(db, 'events/' + event.id), {
-	// 			event,
-	// 		});
+	// 		addDoc(eventStore, { event });
 	// 	});
 	// }, [tasks]);
 
@@ -125,6 +126,15 @@ export const EventContextProvider: React.FC = (props) => {
 };
 
 export default EventContext;
+
+// NOTE REALTIME DATABASE SETTING FUNCTION
+// useEffect(() => {
+// 	tasks.forEach((event) => {
+// 		set(ref(db, 'events/' + event.id), {
+// 			event,
+// 		});
+// 	});
+// }, [tasks]);
 
 ///////////////////////////
 // NOTE ALTERNATE DATA

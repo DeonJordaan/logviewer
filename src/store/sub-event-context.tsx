@@ -11,7 +11,7 @@ import EventContext from './event-context';
 import DataInterface from '../types/dataInterface';
 import Event from '../types/event';
 import db from './firebase';
-import { addDoc, collection } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 // import { ref, set } from 'firebase/database';
 
 type SubEventContextObject = {
@@ -126,11 +126,23 @@ export const SubEventContextProvider: React.FC = (props) => {
 		setHierarchy([]);
 	}, [selectedTask]);
 
-	const subEventStore = collection(db, 'sub-events');
+	// const subEventStore = collection(db, 'sub-events');
 
 	useEffect(() => {
 		subEvents.forEach((event) => {
-			addDoc(subEventStore, { event });
+			// console.log(event);
+			setDoc(
+				doc(
+					db,
+					'events',
+					`${event.parentId}`,
+					'subEvents',
+					`${event.id}`
+				),
+				{
+					event,
+				}
+			);
 		});
 	}, [subEvents]);
 
@@ -168,6 +180,11 @@ export const SubEventContextProvider: React.FC = (props) => {
 };
 
 export default SubEventContext;
+
+// NOTE WRITE FIREBASE SUBCOLLECTION
+// DocumentReference messageRef = db
+// .collection("rooms").document("roomA")
+// .collection("messages").document("message1");
 
 // NOTE DIFFERENT METHODS FOR SETTING HIERARCHY
 // STANDARD STATE UPDATING FUNCTION
