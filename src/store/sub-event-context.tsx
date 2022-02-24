@@ -11,7 +11,14 @@ import EventContext from './event-context';
 import DataInterface from '../types/dataInterface';
 import Event from '../types/event';
 import db from './firebase';
-import { doc, setDoc } from 'firebase/firestore';
+import {
+	collection,
+	doc,
+	getDocs,
+	query,
+	setDoc,
+	where,
+} from 'firebase/firestore';
 // import { ref, set } from 'firebase/database';
 
 type SubEventContextObject = {
@@ -67,6 +74,22 @@ export const SubEventContextProvider: React.FC = (props) => {
 
 	//FETCH DATA, SORT & SET SUBEVENTS
 	const { isLoading, error, sendRequest: fetchTasks } = useFetch();
+
+	// CMNT FETCHING DATA FROM FIRESTORE
+	const eventsRef = collection(db, 'subEvents');
+
+	const getEvents = async () => {
+		const q = query(eventsRef, where('parentId', '==', '15000'));
+
+		const querySnapshot = await getDocs(q);
+		querySnapshot.forEach((doc) => {
+			console.log(doc.data());
+		});
+	};
+
+	useEffect(() => {
+		getEvents();
+	}, []);
 
 	useEffect(() => {
 		const transformData = (taskData: {
@@ -128,23 +151,32 @@ export const SubEventContextProvider: React.FC = (props) => {
 
 	// const subEventStore = collection(db, 'sub-events');
 
-	useEffect(() => {
-		subEvents.forEach((event) => {
-			// console.log(event);
-			setDoc(
-				doc(
-					db,
-					'events',
-					`${event.parentId}`,
-					'subEvents',
-					`${event.id}`
-				),
-				{
-					event,
-				}
-			);
-		});
-	}, [subEvents]);
+	// OPEN FUNCTION TO WRITE SUB-EVENT DATA TO FIRESTORE IN SEPARATE ROOT LEVEL COLLECTION
+	// useEffect(() => {
+	// 	subEvents.forEach((event) => {
+	// 		setDoc(doc(db, 'subEvents', `${event.id}`), { event });
+	// 	});
+	// }, [subEvents]);
+	// CLOSE	/////////////////////
+
+	// OPEN FUNCTION TO SET SUB-EVENT DATA TO SUB-COLLECTION UNDER ITS PARENT EVENT
+	// useEffect(() => {
+	// 	subEvents.forEach((event) => {
+	// 		setDoc(
+	// 			doc(
+	// 				db,
+	// 				'events',
+	// 				`${event.parentId}`,
+	// 				'subEvents',
+	// 				`${event.id}`
+	// 			),
+	// 			{
+	// 				event,
+	// 			}
+	// 		);
+	// 	});
+	// }, [subEvents]);
+	// CLOSE////////////////////////////////
 
 	// useEffect(() => {
 	// 	subEvents.forEach((event) => {
@@ -181,7 +213,7 @@ export const SubEventContextProvider: React.FC = (props) => {
 
 export default SubEventContext;
 
-// NOTE WRITE FIREBASE SUBCOLLECTION
+// NOTE WRITE FIREBASE SUBCOLLECTION EXAMPLE
 // DocumentReference messageRef = db
 // .collection("rooms").document("roomA")
 // .collection("messages").document("message1");

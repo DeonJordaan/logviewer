@@ -3,8 +3,15 @@ import useFetch from './useFetch';
 import DataInterface from '../types/dataInterface';
 import Event from '../types/event';
 import db from './firebase';
-import { setDoc, doc } from 'firebase/firestore';
-// import { ref, set } from 'firebase/database';
+import {
+	setDoc,
+	doc,
+	query,
+	collection,
+	where,
+	getDocs,
+} from 'firebase/firestore';
+// import { ref, set } from 'firebase/database'; // USED FOR REALTIME DB
 
 type EventContextObject = {
 	tasks: Event[];
@@ -32,60 +39,76 @@ export const EventContextProvider: React.FC = (props) => {
 	const [totalPageCount, setTotalPageCount] = useState<number>(0);
 	const [pageNumber, setPageNumber] = useState(1);
 
-	//COMMENT Fetch data, sort and set tasks
+	//CMNT Fetch data, sort and set tasks
 	const { isLoading, error, sendRequest: fetchTasks } = useFetch();
 
-	useEffect(() => {
-		const transformData = (taskData: {
-			TotalRecordCount: number;
-			Data: DataInterface[];
-		}) => {
-			const { Data: allTaskData, TotalRecordCount: recordCount } =
-				taskData;
+	const eventsRef = collection(db, 'events');
 
-			// const allTasks = allTaskData.map((data) => new Event(data));
-			const allTasks = allTaskData.map((taskData) => {
-				return {
-					key: taskData.Id,
-					id: taskData.Id,
-					App: 'Application Name',
-					taskCode: 'Event Code',
-					startTime: taskData.Started,
-					endTime: taskData.Completed,
-					subEvents: taskData.SubEventCount,
-					host: 'Application Host',
-					message: 'Event Message',
-					status: taskData.Status,
-					parentId: taskData.ParentId,
-				};
-			});
+	const getEvents = async () => {
+		const q = query(eventsRef, where('parentId', '==', '15000'));
 
-			setTasks(allTasks);
-			setTotalRecordCount(recordCount);
-		};
-
-		// NOTE appName options for URL below
-		// SalesActivityReport
-		// MetroIQ
-		// AgentIQ
-		// PropIQ
-		// SACompany
-		fetchTasks(
-			{
-				url: `http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=${pageNumber}&pageSize=10&hostname=`,
-			},
-			transformData
-		);
-	}, [fetchTasks, pageNumber]);
-
-	// NOTE REVISED METHOD USING setDoc
-	useEffect(() => {
-		tasks.forEach((event) => {
-			setDoc(doc(db, 'events', `${event.id}`), { event });
+		const querySnapshot = await getDocs(q);
+		querySnapshot.forEach((doc) => {
+			console.log(doc.data());
 		});
-	}, [tasks]);
+	};
 
-	// NOTE Original method of sending data to firestore
+	useEffect(() => {
+		getEvents();
+	}, []);
+
+	// useEffect(() => {
+	// 	const transformData = (taskData: {
+	// 		TotalRecordCount: number;
+	// 		Data: DataInterface[];
+	// 	}) => {
+	// 		const { Data: allTaskData, TotalRecordCount: recordCount } =
+	// 			taskData;
+
+	// 		// CMNT const allTasks = allTaskData.map((data) => new Event(data));
+	// 		const allTasks = allTaskData.map((taskData) => {
+	// 			return {
+	// 				key: taskData.Id,
+	// 				id: taskData.Id,
+	// 				App: 'Application Name',
+	// 				taskCode: 'Event Code',
+	// 				startTime: taskData.Started,
+	// 				endTime: taskData.Completed,
+	// 				subEvents: taskData.SubEventCount,
+	// 				host: 'Application Host',
+	// 				message: 'Event Message',
+	// 				status: taskData.Status,
+	// 				parentId: taskData.ParentId,
+	// 			};
+	// 		});
+
+	// 		setTasks(allTasks);
+	// 		setTotalRecordCount(recordCount);
+	// 	};
+
+	// 	// CMNT appName options for URL below
+	// 	// SalesActivityReport
+	// 	// MetroIQ
+	// 	// AgentIQ
+	// 	// PropIQ
+	// 	// SACompany
+	// 	fetchTasks(
+	// 		{
+	// 			url: `http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=${pageNumber}&pageSize=10&hostname=`,
+	// 		},
+	// 		transformData
+	// 	);
+	// }, [fetchTasks, pageNumber]);
+
+	// OPEN REVISED METHOD USING setDoc TO WRITE EVENTS TO FIRESTORE COLLECTION
+	// useEffect(() => {
+	// 	tasks.forEach((event) => {
+	// 		setDoc(doc(db, 'events', `${event.id}`), { event });
+	// 	});
+	// }, [tasks]);
+	// CLOSE
+
+	// CMNT Original method of sending data to firestore
 	// const eventStore = collection(db, 'events');
 
 	// useEffect(() => {
