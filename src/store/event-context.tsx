@@ -10,6 +10,10 @@ import {
 	collection,
 	where,
 	getDocs,
+	orderBy,
+	limit,
+	startAfter,
+	DocumentData,
 } from 'firebase/firestore';
 // import { ref, set } from 'firebase/database'; // USED FOR REALTIME DB
 
@@ -42,21 +46,67 @@ export const EventContextProvider: React.FC = (props) => {
 	//CMNT Fetch data, sort and set tasks
 	const { isLoading, error, sendRequest: fetchTasks } = useFetch();
 
-	const eventsRef = collection(db, 'events');
-
 	const getEvents = async () => {
-		const q = query(eventsRef, where('parentId', '==', '15000'));
+		let taskData: DataInterface[] = [];
 
-		const querySnapshot = await getDocs(q);
-		querySnapshot.forEach((doc) => {
-			console.log(doc.data());
-		});
+		const eventsRef = collection(db, 'events');
+
+		// const querySnapshot = await getDocs(eventsRef);
+
+		// querySnapshot.forEach((doc) => taskData.push(doc.get('event')));
+
+		// OPEN PAGINATION FUNCTIONS
+		const firstPageQuery = query(eventsRef, orderBy('id'), limit(10));
+		const firstPgSnapshot = await getDocs(firstPageQuery);
+		firstPgSnapshot.forEach((doc) => taskData.push(doc.get('event')));
+
+		// const lastDoc = firstPgSnapshot.docs[firstPgSnapshot.docs.length - 1];
+		// console.log('last', lastDoc);
+
+		// const nextPgQuery = query(
+		// 	eventsRef,
+		// 	orderBy('id'),
+		// 	startAfter(lastDoc),
+		// 	limit(10)
+		// );
+		// CLOSE
+
+		const allTasks = taskData.map((data) => new Event(data));
+
+		setTasks(allTasks);
+
+		//OPEN VIA FIRESHIP
+		// const query = ref.orderBy(field).limit(pageSize)
+
+		//function nextPage(last){
+		// return ref.orderBy(field).startAfter(last[field]).limit(pageSize)
+		// }
+
+		//function prevPage(first){
+		// return ref.orderBy(field).endBefore(first[field]).limitToLast(pageSize)
+		// }
+		//CLOSE
+		// const getEvents = async () => {
+		// 	const firstPage = query(eventsRef, orderBy('id'), limit(10));
+		// 	const documentSnapshots = await getDocs(firstPage);
+
+		// 	const lastPage =
+		// 		documentSnapshots.docs[documentSnapshots.docs.length - 1];
+
+		// 	const nextPage = query(
+		// 		eventsRef,
+		// 		orderBy('id'),
+		// 		startAfter(lastPage),
+		// 		limit(10)
+		// 	);
+		// };
 	};
 
 	useEffect(() => {
 		getEvents();
 	}, []);
 
+	// OPEN FETCH API FUNCTION USING USEFETCH HOOK
 	// useEffect(() => {
 	// 	const transformData = (taskData: {
 	// 		TotalRecordCount: number;
@@ -99,6 +149,7 @@ export const EventContextProvider: React.FC = (props) => {
 	// 		transformData
 	// 	);
 	// }, [fetchTasks, pageNumber]);
+	// CLOSE
 
 	// OPEN REVISED METHOD USING setDoc TO WRITE EVENTS TO FIRESTORE COLLECTION
 	// useEffect(() => {
@@ -149,6 +200,17 @@ export const EventContextProvider: React.FC = (props) => {
 };
 
 export default EventContext;
+
+//OPEN
+// const getEvents = async () => {
+// 	const q = query(eventsRef, where('parentId', '==', '15000'));
+
+// 	const querySnapshot = await getDocs(q);
+// 	querySnapshot.forEach((doc) => {
+// 		console.log(doc.data());
+// 	});
+// };
+//CLOSE
 
 // NOTE REALTIME DATABASE SETTING FUNCTION
 // useEffect(() => {

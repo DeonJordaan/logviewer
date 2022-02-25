@@ -1,16 +1,16 @@
 interface DataInterface {
-	AppName: string;
-	Code: string;
-	Completed: string;
-	Host: string;
-	Id: number;
+	App: string;
+	taskCode: string;
+	endTime: string;
+	host: string;
+	id: number;
 	Level: number;
-	Message: string;
-	ParentId: number;
-	Started: string;
-	Status: number;
-	SubEventCount: number;
-	SubEvents: [];
+	message: string;
+	parentId: number;
+	startTime: string;
+	status: number;
+	subEvents: number;
+	// subEvents: [];
 }
 
 export default DataInterface;

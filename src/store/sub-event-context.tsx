@@ -14,6 +14,7 @@ import db from './firebase';
 import {
 	collection,
 	doc,
+	getDoc,
 	getDocs,
 	query,
 	setDoc,
@@ -76,59 +77,62 @@ export const SubEventContextProvider: React.FC = (props) => {
 	const { isLoading, error, sendRequest: fetchTasks } = useFetch();
 
 	// CMNT FETCHING DATA FROM FIRESTORE
-	const eventsRef = collection(db, 'subEvents');
 
-	const getEvents = async () => {
-		const q = query(eventsRef, where('parentId', '==', '15000'));
+	// OPEN GET DOCS THAT MATCH THE QUERY
+	// const getSubEvents = async () => {
+	// 	const subEventsRef = collection(db, 'subEvents');
 
-		const querySnapshot = await getDocs(q);
-		querySnapshot.forEach((doc) => {
-			console.log(doc.data());
-		});
-	};
+	// 	const q = query(subEventsRef, where('event.parentId', '==', 15000));
 
-	useEffect(() => {
-		getEvents();
-	}, []);
+	// 	const querySnapshot = await getDocs(q);
+	// 	querySnapshot.forEach((doc) => {
+	// 		console.log(doc.data());
+	// 	});
+	// };
 
-	useEffect(() => {
-		const transformData = (taskData: {
-			TotalRecordCount: number;
-			Data: DataInterface[];
-			PageNumber: number;
-		}) => {
-			const { Data: allTaskData } = taskData;
-			console.log(allTaskData);
-			// TODO PUSH ALL DATA TO FIREBASE HERE
-			// NOTE SET PARENTID IN ORDER THAT SUBEVENT DATA GETS PUSHED TO PARENT EVET UNDER SUBEVENTS
+	// useEffect(() => {
+	// 	getSubEvents();
+	// }, []);
+	// CLOSE
 
-			// const allTasks = allTaskData.map((data) => new Event(data));
-			const allTasks = allTaskData.map((taskData) => {
-				return {
-					key: taskData.Id,
-					id: taskData.Id,
-					App: 'Application Name',
-					taskCode: 'Event Code',
-					startTime: taskData.Started,
-					endTime: taskData.Completed,
-					subEvents: taskData.SubEventCount,
-					host: 'Application Host',
-					message: 'Event Message',
-					status: taskData.Status,
-					parentId: taskData.ParentId,
-				};
-			});
+	// useEffect(() => {
+	// 	const transformData = (taskData: {
+	// 		TotalRecordCount: number;
+	// 		Data: DataInterface[];
+	// 		PageNumber: number;
+	// 	}) => {
+	// 		const { Data: allTaskData } = taskData;
+	// 		console.log(allTaskData);
+	// 		// TODO PUSH ALL DATA TO FIREBASE HERE
+	// 		// NOTE SET PARENTID IN ORDER THAT SUBEVENT DATA GETS PUSHED TO PARENT EVET UNDER SUBEVENTS
 
-			setSubEvents(allTasks);
-		};
+	// 		// const allTasks = allTaskData.map((data) => new Event(data));
+	// 		const allTasks = allTaskData.map((taskData) => {
+	// 			return {
+	// 				key: taskData.Id,
+	// 				id: taskData.Id,
+	// 				App: 'Application Name',
+	// 				taskCode: 'Event Code',
+	// 				startTime: taskData.Started,
+	// 				endTime: taskData.Completed,
+	// 				subEvents: taskData.SubEventCount,
+	// 				host: 'Application Host',
+	// 				message: 'Event Message',
+	// 				status: taskData.Status,
+	// 				parentId: taskData.ParentId,
+	// 			};
+	// 		});
 
-		fetchTasks(
-			{
-				url: `http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=${fetchId}`,
-			},
-			transformData
-		);
-	}, [fetchTasks, fetchId]);
+	// 		setSubEvents(allTasks);
+	// 	};
+
+	// 	fetchTasks(
+	// 		{
+	// 			url: `http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=${fetchId}`,
+	// 		},
+	// 		transformData
+	// 	);
+	// }, [fetchTasks, fetchId]);
 
 	// WATCH PAGENUMBER AND CLEAR STATES WHEN IT CHANGES
 	const eventCtx = useContext(EventContext);
@@ -212,6 +216,75 @@ export const SubEventContextProvider: React.FC = (props) => {
 };
 
 export default SubEventContext;
+
+// OPEN POTENTIAL USE ONCE I HAVE THE APP ACTUALLY WORKING
+// TODO USE EVENT CLASS TO MANAGE THE DATA SENT/RECEIVED FROM FIREBASE
+// class City {
+//     constructor (name, state, country ) {
+//         this.name = name;
+//         this.state = state;
+//         this.country = country;
+//     }
+//     toString() {
+//         return this.name + ', ' + this.state + ', ' + this.country;
+//     }
+// }
+
+// // Firestore data converter
+// const cityConverter = {
+//     toFirestore: (city) => {
+//         return {
+//             name: city.name,
+//             state: city.state,
+//             country: city.country
+//             };
+//     },
+//     fromFirestore: (snapshot, options) => {
+//         const data = snapshot.data(options);
+//         return new City(data.name, data.state, data.country);
+//     }
+// };
+
+// import { doc, getDoc} from "firebase/firestore";
+
+// const ref = doc(db, "cities", "LA").withConverter(cityConverter);
+// const docSnap = await getDoc(ref);
+// if (docSnap.exists()) {
+//   // Convert to City object
+//   const city = docSnap.data();
+//   // Use a City instance method
+//   console.log(city.toString());
+// } else {
+//   console.log("No such document!");
+// }
+// CLOSE
+
+// NOTE ALTERNATE FIREBASE QUERIES
+//OPEN SUCCESSFULLY GETS SPECIFIC DOC
+// const getEvents = async () => {
+// 	const docRef = doc(db, 'subEvents', '15001');
+// 	const docSnap = await getDoc(docRef);
+
+// 	if (docSnap.exists()) {
+// 		console.log('Document data:', docSnap.data());
+// 	} else {
+// 		// doc.data() will be undefined in this case
+// 		console.log('No such document!');
+// 	}
+// };
+//CLOSE
+
+// OPEN SUCCESSFULLY GETS ALL DOCS IN COLLECTION
+// const getEvents = async () => {
+// 	const eventsRef = collection(db, 'subEvents');
+
+// 	const querySnapshot = await getDocs(eventsRef);
+// 	querySnapshot.forEach((doc) => {
+// 		console.log(doc.data());
+// 	});
+// };
+
+//CLOSE
 
 // NOTE WRITE FIREBASE SUBCOLLECTION EXAMPLE
 // DocumentReference messageRef = db
