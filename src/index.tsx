@@ -3,18 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { PaginationContextProvider } from './store/pagination-context';
+// import { PaginationContextProvider } from './store/pagination-context';
 import { EventContextProvider } from './store/event-context';
 import { SubEventContextProvider } from './store/sub-event-context';
 
 ReactDOM.render(
 	<React.StrictMode>
 		<EventContextProvider>
-			<PaginationContextProvider>
-				<SubEventContextProvider>
-					<App />
-				</SubEventContextProvider>
-			</PaginationContextProvider>
+			{/* <PaginationContextProvider> */}
+			<SubEventContextProvider>
+				<App />
+			</SubEventContextProvider>
+			{/* </PaginationContextProvider> */}
 		</EventContextProvider>
 	</React.StrictMode>,
 	document.getElementById('root')

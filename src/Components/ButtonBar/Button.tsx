@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './Button.module.css';
 
 const Button: React.FC<{
+	disabled?: boolean;
 	className: string;
 	onClick: (event: React.MouseEvent) => void;
 }> = (props) => {
