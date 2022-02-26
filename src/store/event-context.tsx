@@ -49,14 +49,18 @@ export const EventContextProvider: React.FC = (props) => {
 	const getEvents = async () => {
 		let taskData: DataInterface[] = [];
 
-		const eventsRef = collection(db, 'events');
+		// const eventsRef = collection(db, 'events');
 
 		// const querySnapshot = await getDocs(eventsRef);
 
 		// querySnapshot.forEach((doc) => taskData.push(doc.get('event')));
 
 		// OPEN PAGINATION FUNCTIONS
-		const firstPageQuery = query(eventsRef, orderBy('id'), limit(10));
+		const firstPageQuery = query(
+			collection(db, 'events'),
+			orderBy('event.id'),
+			limit(10)
+		);
 		const firstPgSnapshot = await getDocs(firstPageQuery);
 		firstPgSnapshot.forEach((doc) => taskData.push(doc.get('event')));
 
