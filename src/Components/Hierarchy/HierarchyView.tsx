@@ -15,7 +15,7 @@ const HierarchyView: React.FC<{
 	let app: string | undefined = 'App'; //FIXME: Setting as undefined to remove errors below. Is this correct?
 	let host: string | undefined = 'Host';
 
-	// console.log(subEventCtx.hierarchy);
+	console.log(subEventCtx.hierarchy);
 
 	if (subEventCtx.selectedTask && subEventCtx.selectedTask.length > 0) {
 		app = subEventCtx.selectedTask[0].App;

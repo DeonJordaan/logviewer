@@ -40,7 +40,7 @@ const ExpandEvents: React.FC<{
 		setSelectedTask(tasks.filter((task) => task.id === parentId));
 	}, [tasks, setSelectedTask, parentId]);
 
-	// console.log(subEventCtx.selectedTask);
+	console.log(subEventCtx.selectedTask);
 
 	return (
 		<button onClick={clickHandler} className={importedClasses}>

@@ -1,10 +1,4 @@
-import React, {
-	useState,
-	useEffect,
-	Dispatch,
-	SetStateAction,
-	useCallback,
-} from 'react';
+import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import useFetch from './useFetch';
 import DataInterface from '../types/dataInterface';
 import Event from '../types/event';
@@ -20,7 +14,6 @@ import {
 	limit,
 	startAfter,
 	DocumentData,
-	Query,
 } from 'firebase/firestore';
 // import { ref, set } from 'firebase/database'; // USED FOR REALTIME DB
 
@@ -53,65 +46,69 @@ export const EventContextProvider: React.FC = (props) => {
 	//CMNT Fetch data, sort and set tasks
 	const { isLoading, error, sendRequest: fetchTasks } = useFetch();
 
-	console.log(pageNumber);
-	// const getEvents = useCallback(async () => {
-	//OPEN
-	// if (isLoading) {
-	// 	return <Loading/>;
-	// }
-	//CLOSE
-	// let taskData: DataInterface[] = [];
-	// let lastDoc: unknown;
-	// const eventsRef = collection(db, 'events');
-	// let myQuery: Query;
-	// // const querySnapshot = await getDocs(eventsRef);
-	// // querySnapshot.forEach((doc) => taskData.push(doc.get('event')));
-	// // OPEN PAGINATION FUNCTIONS
-	// // const firstPage = async () => {
-	// if (pageNumber === 1) {
-	// 	myQuery = query(eventsRef, orderBy('event.id'), limit(10));
-	// 	const firstPgSnapshot = await getDocs(myQuery);
-	// 	firstPgSnapshot.forEach((doc) => taskData.push(doc.get('event')));
-	// 	lastDoc = firstPgSnapshot.docs[firstPgSnapshot.docs.length - 1];
-	// }
-	// // firstPage();
-	// if (pageNumber >= 2) {
-	// 	// const nextPage = () => {
-	// 	myQuery = query(
-	// 		eventsRef,
-	// 		orderBy('id'),
-	// 		limit(10),
-	// 		startAfter(lastDoc)
-	// 	);
-	// 	const nextPgSnapshot = await getDocs(myQuery);
-	// 	nextPgSnapshot.forEach((doc) => taskData.push(doc.get('event')));
-	// 	// };
-	// }
-	// CLOSE
-	// 	const allTasks = taskData.map((data) => new Event(data));
-	// 	setTasks(allTasks);
-	// }, [pageNumber]);
+	const getEvents = async () => {
+		let taskData: DataInterface[] = [];
 
-	// useEffect(() => {
-	// 	getEvents();
-	// }, [pageNumber]);
+		// const eventsRef = collection(db, 'events');
 
-	// useEffect(() => {
-	// 	const getPagination = async () => {
-	// 		const paginationRef = collection(db, 'pagination');
+		// const querySnapshot = await getDocs(eventsRef);
 
-	// 		const paginationSnapshot = await getDocs(paginationRef);
+		// querySnapshot.forEach((doc) => taskData.push(doc.get('event')));
 
-	// 		paginationSnapshot.forEach((doc) => {
-	// 			const totalRecordCount = doc.get('totalRecordCount');
-	// 			const pageSize = doc.get('pageSize');
-	// 			setTotalRecordCount(totalRecordCount);
-	// 			setTotalPageCount(totalRecordCount / pageSize);
-	// 			console.log(totalRecordCount);
-	// 		});
-	// 	};
-	// 	getPagination();
-	// }, []);
+		// OPEN PAGINATION FUNCTIONS
+		const firstPageQuery = query(
+			collection(db, 'events'),
+			orderBy('event.id'),
+			limit(10)
+		);
+		const firstPgSnapshot = await getDocs(firstPageQuery);
+		firstPgSnapshot.forEach((doc) => taskData.push(doc.get('event')));
+
+		// const lastDoc = firstPgSnapshot.docs[firstPgSnapshot.docs.length - 1];
+		// console.log('last', lastDoc);
+
+		// const nextPgQuery = query(
+		// 	eventsRef,
+		// 	orderBy('id'),
+		// 	startAfter(lastDoc),
+		// 	limit(10)
+		// );
+		// CLOSE
+
+		const allTasks = taskData.map((data) => new Event(data));
+
+		setTasks(allTasks);
+
+		//OPEN VIA FIRESHIP
+		// const query = ref.orderBy(field).limit(pageSize)
+
+		//function nextPage(last){
+		// return ref.orderBy(field).startAfter(last[field]).limit(pageSize)
+		// }
+
+		//function prevPage(first){
+		// return ref.orderBy(field).endBefore(first[field]).limitToLast(pageSize)
+		// }
+		//CLOSE
+		// const getEvents = async () => {
+		// 	const firstPage = query(eventsRef, orderBy('id'), limit(10));
+		// 	const documentSnapshots = await getDocs(firstPage);
+
+		// 	const lastPage =
+		// 		documentSnapshots.docs[documentSnapshots.docs.length - 1];
+
+		// 	const nextPage = query(
+		// 		eventsRef,
+		// 		orderBy('id'),
+		// 		startAfter(lastPage),
+		// 		limit(10)
+		// 	);
+		// };
+	};
+
+	useEffect(() => {
+		getEvents();
+	}, []);
 
 	// OPEN FETCH API FUNCTION USING USEFETCH HOOK
 	// useEffect(() => {
@@ -216,34 +213,6 @@ export default EventContext;
 // 	querySnapshot.forEach((doc) => {
 // 		console.log(doc.data());
 // 	});
-// };
-//CLOSE
-
-//OPEN PAGINATION VIA FIRESHIP
-// const query = ref.orderBy(field).limit(pageSize)
-
-//function nextPage(last){
-// return ref.orderBy(field).startAfter(last[field]).limit(pageSize)
-// }
-
-//function prevPage(first){
-// return ref.orderBy(field).endBefore(first[field]).limitToLast(pageSize)
-// }
-
-// VIA OTHER
-// const getEvents = async () => {
-// 	const firstPage = query(eventsRef, orderBy('id'), limit(10));
-// 	const documentSnapshots = await getDocs(firstPage);
-
-// 	const lastPage =
-// 		documentSnapshots.docs[documentSnapshots.docs.length - 1];
-
-// 	const nextPage = query(
-// 		eventsRef,
-// 		orderBy('id'),
-// 		startAfter(lastPage),
-// 		limit(10)
-// 	);
 // };
 //CLOSE
 
