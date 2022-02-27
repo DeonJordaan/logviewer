@@ -1,34 +1,42 @@
-import React, { useEffect } from 'react';
+import React, { Dispatch, SetStateAction, useEffect } from 'react';
 import { useState } from 'react';
 import useFetch from './useFetch';
 
 type Application = {
 	Name: string;
-	HostData: string;
+	Host: string;
 	Id: number;
 };
 
 type AppListContextObject = {
-	apps: string[] | undefined;
+	appList: Application[];
 	isLoading: boolean;
 	error: string | null;
+	setAppList: Dispatch<SetStateAction<Application[]>>;
 };
 
 const AppListContext = React.createContext<AppListContextObject>({
-	apps: [],
+	appList: [],
 	isLoading: false,
 	error: null,
+	setAppList: () => [],
 });
 
 export const AppListContextProvider: React.FC = (props) => {
-	const [appList, setAppList] = useState<string[]>();
+	const [appList, setAppList] = useState<Application[]>([]);
 
 	const { isLoading, error, sendRequest: fetchApps } = useFetch();
 
 	useEffect(() => {
 		const transformData = (appData: Application[]) => {
 			// const allApps = appData.map((app) => app.Name);
-			const allApps = appData.map((app) => 'Application');
+			const allApps = appData.map((app) => {
+				return {
+					Name: 'Application',
+					Host: 'Host',
+					Id: app.Id,
+				};
+			});
 
 			setAppList(allApps);
 		};
@@ -44,9 +52,10 @@ export const AppListContextProvider: React.FC = (props) => {
 	return (
 		<AppListContext.Provider
 			value={{
-				apps: appList,
+				appList: appList,
 				isLoading: isLoading,
 				error: error,
+				setAppList: setAppList,
 			}}
 		>
 			{props.children}

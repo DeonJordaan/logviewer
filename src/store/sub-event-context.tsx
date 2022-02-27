@@ -11,15 +11,8 @@ import EventContext from './event-context';
 import DataInterface from '../types/dataInterface';
 import Event from '../types/event';
 import db from './firebase';
-import {
-	collection,
-	doc,
-	getDoc,
-	getDocs,
-	query,
-	setDoc,
-	where,
-} from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+// import HierarchyContext from './hierarchy-context';
 // import { ref, set } from 'firebase/database';
 
 type SubEventContextObject = {
@@ -28,14 +21,14 @@ type SubEventContextObject = {
 	selectedTask: Event[];
 	subEvents: Event[];
 	selectedSubEvent: Event[];
-	hierarchy: Event[];
+	// hierarchy: Event[];
 	parentId: number;
 	fetchId: number;
 	subEventParentId: number;
 	setParentId: Dispatch<SetStateAction<number>>;
 	setFetchId: Dispatch<SetStateAction<number>>;
 	setSubEventParentId: Dispatch<SetStateAction<number>>;
-	setHierarchy: Dispatch<SetStateAction<Event[]>>;
+	// setHierarchy: Dispatch<SetStateAction<Event[]>>;
 	setSelectedTask: Dispatch<SetStateAction<Event[]>>;
 	setSelectedSubEvent: Dispatch<SetStateAction<Event[]>>;
 };
@@ -46,14 +39,14 @@ const SubEventContext = React.createContext<SubEventContextObject>({
 	selectedTask: [],
 	subEvents: [],
 	selectedSubEvent: [],
-	hierarchy: [],
+	// hierarchy: [],
 	parentId: 0,
 	fetchId: 0,
 	subEventParentId: 0,
 	setParentId: () => [],
 	setFetchId: () => [],
 	setSubEventParentId: () => [],
-	setHierarchy: () => [],
+	// setHierarchy: () => [],
 	setSelectedTask: () => [],
 	setSelectedSubEvent: () => [],
 });
@@ -71,72 +64,37 @@ export const SubEventContextProvider: React.FC = (props) => {
 
 	const [selectedSubEvent, setSelectedSubEvent] = useState<Event[]>([]);
 
-	const [hierarchy, setHierarchy] = useState<Event[]>([]);
+	// const [hierarchy, setHierarchy] = useState<Event[]>([]);
 
 	//FETCH DATA, SORT & SET SUBEVENTS
 	const { isLoading, error, sendRequest: fetchTasks } = useFetch();
 
 	// CMNT FETCHING DATA FROM FIRESTORE
-
 	// OPEN GET DOCS THAT MATCH THE QUERY
-	// const getSubEvents = async () => {
-	// 	const subEventsRef = collection(db, 'subEvents');
+	useEffect(() => {
+		const getSubEvents = async () => {
+			let subEventData: DataInterface[] = [];
+			const subEventsRef = collection(db, 'subEvents');
+			const subEventQuery = query(
+				subEventsRef,
+				where('event.parentId', '==', fetchId)
+			);
 
-	// 	const q = query(subEventsRef, where('event.parentId', '==', 15000));
-
-	// 	const querySnapshot = await getDocs(q);
-	// 	querySnapshot.forEach((doc) => {
-	// 		console.log(doc.data());
-	// 	});
-	// };
-
-	// useEffect(() => {
-	// 	getSubEvents();
-	// }, []);
+			const querySnapshot = await getDocs(subEventQuery);
+			querySnapshot.forEach((doc) => subEventData.push(doc.get('event')));
+			const allSubEvents = subEventData.map((data) => new Event(data));
+			setSubEvents(allSubEvents);
+		};
+		getSubEvents();
+	}, [fetchId]);
 	// CLOSE
-
-	// useEffect(() => {
-	// 	const transformData = (taskData: {
-	// 		TotalRecordCount: number;
-	// 		Data: DataInterface[];
-	// 		PageNumber: number;
-	// 	}) => {
-	// 		const { Data: allTaskData } = taskData;
-	// 		console.log(allTaskData);
-	// 		// TODO PUSH ALL DATA TO FIREBASE HERE
-	// 		// NOTE SET PARENTID IN ORDER THAT SUBEVENT DATA GETS PUSHED TO PARENT EVET UNDER SUBEVENTS
-
-	// 		// const allTasks = allTaskData.map((data) => new Event(data));
-	// 		const allTasks = allTaskData.map((taskData) => {
-	// 			return {
-	// 				key: taskData.Id,
-	// 				id: taskData.Id,
-	// 				App: 'Application Name',
-	// 				taskCode: 'Event Code',
-	// 				startTime: taskData.Started,
-	// 				endTime: taskData.Completed,
-	// 				subEvents: taskData.SubEventCount,
-	// 				host: 'Application Host',
-	// 				message: 'Event Message',
-	// 				status: taskData.Status,
-	// 				parentId: taskData.ParentId,
-	// 			};
-	// 		});
-
-	// 		setSubEvents(allTasks);
-	// 	};
-
-	// 	fetchTasks(
-	// 		{
-	// 			url: `http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=${fetchId}`,
-	// 		},
-	// 		transformData
-	// 	);
-	// }, [fetchTasks, fetchId]);
 
 	// WATCH PAGENUMBER AND CLEAR STATES WHEN IT CHANGES
 	const eventCtx = useContext(EventContext);
-	const pageNumber = eventCtx.pageNumber;
+	const { pageNumber } = eventCtx;
+
+	// const hierarchyCtx = useContext(HierarchyContext);
+	// const { setHierarchy } = hierarchyCtx;
 
 	useEffect(() => {
 		setSubEvents([]);
@@ -144,51 +102,16 @@ export const SubEventContextProvider: React.FC = (props) => {
 		setSubEventParentId(0);
 		setSelectedTask([]);
 		setSelectedSubEvent([]);
-		setHierarchy([]);
+		// setHierarchy([]);
 	}, [pageNumber]);
 
 	useEffect(() => {
 		setSubEventParentId(0);
 		setSelectedSubEvent([]);
-		setHierarchy([]);
+		// setHierarchy([]);
 	}, [selectedTask]);
 
 	// const subEventStore = collection(db, 'sub-events');
-
-	// OPEN FUNCTION TO WRITE SUB-EVENT DATA TO FIRESTORE IN SEPARATE ROOT LEVEL COLLECTION
-	// useEffect(() => {
-	// 	subEvents.forEach((event) => {
-	// 		setDoc(doc(db, 'subEvents', `${event.id}`), { event });
-	// 	});
-	// }, [subEvents]);
-	// CLOSE	/////////////////////
-
-	// OPEN FUNCTION TO SET SUB-EVENT DATA TO SUB-COLLECTION UNDER ITS PARENT EVENT
-	// useEffect(() => {
-	// 	subEvents.forEach((event) => {
-	// 		setDoc(
-	// 			doc(
-	// 				db,
-	// 				'events',
-	// 				`${event.parentId}`,
-	// 				'subEvents',
-	// 				`${event.id}`
-	// 			),
-	// 			{
-	// 				event,
-	// 			}
-	// 		);
-	// 	});
-	// }, [subEvents]);
-	// CLOSE////////////////////////////////
-
-	// useEffect(() => {
-	// 	subEvents.forEach((event) => {
-	// 		set(ref(db, 'subEvents/' + event.id), {
-	// 			event,
-	// 		});
-	// 	});
-	// }, [subEvents]);
 
 	return (
 		<SubEventContext.Provider
@@ -202,8 +125,8 @@ export const SubEventContextProvider: React.FC = (props) => {
 				setFetchId: setFetchId,
 				subEventParentId: subEventParentId,
 				setSubEventParentId: setSubEventParentId,
-				hierarchy: hierarchy,
-				setHierarchy: setHierarchy,
+				// hierarchy: hierarchy,
+				// setHierarchy: setHierarchy,
 				selectedTask: selectedTask,
 				setSelectedTask: setSelectedTask,
 				selectedSubEvent: selectedSubEvent,
@@ -216,6 +139,84 @@ export const SubEventContextProvider: React.FC = (props) => {
 };
 
 export default SubEventContext;
+
+// OPEN OPEN OPEN FETCH API FUNCTION USING USEFETCH HOOK
+// useEffect(() => {
+// 	const transformData = (taskData: {
+// 		TotalRecordCount: number;
+// 		Data: DataInterface[];
+// 		PageNumber: number;
+// 	}) => {
+// 		const { Data: allTaskData } = taskData;
+// 		console.log(allTaskData);
+// 		// TODO PUSH ALL DATA TO FIREBASE HERE
+// 		// NOTE SET PARENTID IN ORDER THAT SUBEVENT DATA GETS PUSHED TO PARENT EVET UNDER SUBEVENTS
+
+// 		// const allTasks = allTaskData.map((data) => new Event(data));
+// 		const allTasks = allTaskData.map((taskData) => {
+// 			return {
+// 				key: taskData.Id,
+// 				id: taskData.Id,
+// 				App: 'Application Name',
+// 				taskCode: 'Event Code',
+// 				startTime: taskData.Started,
+// 				endTime: taskData.Completed,
+// 				subEvents: taskData.SubEventCount,
+// 				host: 'Application Host',
+// 				message: 'Event Message',
+// 				status: taskData.Status,
+// 				parentId: taskData.ParentId,
+// 			};
+// 		});
+
+// 		setSubEvents(allTasks);
+// 	};
+
+// 	fetchTasks(
+// 		{
+// 			url: `http://logviewer.jordaan/api/LogData/GetSubEvents?parentid=${fetchId}`,
+// 		},
+// 		transformData
+// 	);
+// }, [fetchTasks, fetchId]);
+// CLOSE CLOSE CLOSE
+
+// OPEN FUNCTION TO WRITE SUB-EVENT DATA TO FIRESTORE IN SEPARATE ROOT LEVEL COLLECTION
+// useEffect(() => {
+// 	subEvents.forEach((event) => {
+// 		setDoc(doc(db, 'subEvents', `${event.id}`), { event });
+// 	});
+// }, [subEvents]);
+// CLOSE	/////////////////////
+
+// OPEN FUNCTION TO SET SUB-EVENT DATA TO SUB-COLLECTION UNDER ITS PARENT EVENT
+// useEffect(() => {
+// 	subEvents.forEach((event) => {
+// 		setDoc(
+// 			doc(
+// 				db,
+// 				'events',
+// 				`${event.parentId}`,
+// 				'subEvents',
+// 				`${event.id}`
+// 			),
+// 			{
+// 				event,
+// 			}
+// 		);
+// 	});
+// }, [subEvents]);
+// CLOSE////////////////////////////////
+
+// OPEN FUNCTION TO WRITE SUBEVENT DATA TO FIREBASE REALTIME DB
+// useEffect(() => {
+// 	subEvents.forEach((event) => {
+// 		set(ref(db, 'subEvents/' + event.id), {
+// 			event,
+// 		});
+// 	});
+// }, [subEvents]);
+// CLOSE
 
 // OPEN POTENTIAL USE ONCE I HAVE THE APP ACTUALLY WORKING
 // TODO USE EVENT CLASS TO MANAGE THE DATA SENT/RECEIVED FROM FIREBASE

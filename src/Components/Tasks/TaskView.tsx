@@ -12,6 +12,7 @@ const TaskView: React.FC<{
 	setStatus: (statusCode: number) => string;
 }> = (props) => {
 	const eventCtx = useContext(EventContext);
+	const { displayData } = eventCtx;
 
 	let taskContent = (
 		<tbody>
@@ -21,10 +22,10 @@ const TaskView: React.FC<{
 		</tbody>
 	);
 
-	if (eventCtx.tasks) {
+	if (displayData) {
 		taskContent = (
 			<tbody>
-				{eventCtx.tasks.map((task) => (
+				{displayData.map((task) => (
 					<TaskViewItem
 						key={task.key}
 						host={task.host}
@@ -42,15 +43,15 @@ const TaskView: React.FC<{
 		);
 	}
 
-	if (eventCtx.error) {
-		taskContent = (
-			<tbody>
-				<tr>
-					<td>{eventCtx.error}</td>
-				</tr>
-			</tbody>
-		);
-	}
+	// if (eventCtx.error) {
+	// 	taskContent = (
+	// 		<tbody>
+	// 			<tr>
+	// 				<td>{eventCtx.error}</td>
+	// 			</tr>
+	// 		</tbody>
+	// 	);
+	// }
 
 	if (eventCtx.isLoading) {
 		taskContent = (

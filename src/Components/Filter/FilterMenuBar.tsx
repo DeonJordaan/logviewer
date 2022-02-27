@@ -9,11 +9,11 @@ const FilterMenuBar: React.FC = () => {
 
 	let appListContent = <p>No applications available</p>;
 
-	if (appListCtx.apps) {
+	if (appListCtx.appList) {
 		appListContent = (
 			<div>
-				{appListCtx.apps.map((app) => (
-					<DataFilterButton text={app} />
+				{appListCtx.appList.map((app) => (
+					<DataFilterButton text={app.Name} key={app.Id} />
 				))}
 			</div>
 		);

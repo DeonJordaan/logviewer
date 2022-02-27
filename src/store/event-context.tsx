@@ -1,159 +1,91 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
-import useFetch from './useFetch';
 import DataInterface from '../types/dataInterface';
 import Event from '../types/event';
 import db from './firebase';
-import {
-	setDoc,
-	doc,
-	query,
-	collection,
-	where,
-	getDocs,
-	orderBy,
-	limit,
-	startAfter,
-	DocumentData,
-} from 'firebase/firestore';
-// import { ref, set } from 'firebase/database'; // USED FOR REALTIME DB
+import { collection, getDocs } from 'firebase/firestore';
 
 type EventContextObject = {
 	tasks: Event[];
 	isLoading: boolean;
-	error: string | null;
+	// error: string | null;
 	totalRecordCount: number;
 	totalPageCount: number;
 	pageNumber: number;
 	setPageNumber: Dispatch<SetStateAction<number>>;
+	displayData: Event[];
 };
 
 const EventContext = React.createContext<EventContextObject>({
 	tasks: [],
 	isLoading: false,
-	error: null,
+	// error: null,
 	totalRecordCount: 0,
 	totalPageCount: 0,
 	pageNumber: 1,
 	setPageNumber: () => {},
+	displayData: [],
 });
 
 export const EventContextProvider: React.FC = (props) => {
 	const [tasks, setTasks] = useState<Event[]>([]);
 	const [totalRecordCount, setTotalRecordCount] = useState<number>(0);
 	const [totalPageCount, setTotalPageCount] = useState<number>(0);
-	const [pageNumber, setPageNumber] = useState(1);
+	const [pageNumber, setPageNumber] = useState<number>(1);
+	const [displayData, setDisplayData] = useState<Event[]>([]);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+	// const [error, setError] = useState<boolean>(false);
 
 	//CMNT Fetch data, sort and set tasks
-	const { isLoading, error, sendRequest: fetchTasks } = useFetch();
 
 	const getEvents = async () => {
+		setIsLoading(true);
 		let taskData: DataInterface[] = [];
 
-		// const eventsRef = collection(db, 'events');
+		const eventsRef = collection(db, 'events');
 
-		// const querySnapshot = await getDocs(eventsRef);
+		const querySnapshot = await getDocs(eventsRef);
 
-		// querySnapshot.forEach((doc) => taskData.push(doc.get('event')));
-
-		// OPEN PAGINATION FUNCTIONS
-		const firstPageQuery = query(
-			collection(db, 'events'),
-			orderBy('event.id'),
-			limit(10)
-		);
-		const firstPgSnapshot = await getDocs(firstPageQuery);
-		firstPgSnapshot.forEach((doc) => taskData.push(doc.get('event')));
-
-		// const lastDoc = firstPgSnapshot.docs[firstPgSnapshot.docs.length - 1];
-		// console.log('last', lastDoc);
-
-		// const nextPgQuery = query(
-		// 	eventsRef,
-		// 	orderBy('id'),
-		// 	startAfter(lastDoc),
-		// 	limit(10)
-		// );
-		// CLOSE
+		querySnapshot.forEach((doc) => taskData.push(doc.get('event')));
 
 		const allTasks = taskData.map((data) => new Event(data));
 
 		setTasks(allTasks);
-
-		//OPEN VIA FIRESHIP
-		// const query = ref.orderBy(field).limit(pageSize)
-
-		//function nextPage(last){
-		// return ref.orderBy(field).startAfter(last[field]).limit(pageSize)
-		// }
-
-		//function prevPage(first){
-		// return ref.orderBy(field).endBefore(first[field]).limitToLast(pageSize)
-		// }
-		//CLOSE
-		// const getEvents = async () => {
-		// 	const firstPage = query(eventsRef, orderBy('id'), limit(10));
-		// 	const documentSnapshots = await getDocs(firstPage);
-
-		// 	const lastPage =
-		// 		documentSnapshots.docs[documentSnapshots.docs.length - 1];
-
-		// 	const nextPage = query(
-		// 		eventsRef,
-		// 		orderBy('id'),
-		// 		startAfter(lastPage),
-		// 		limit(10)
-		// 	);
-		// };
+		setIsLoading(false);
 	};
 
 	useEffect(() => {
 		getEvents();
 	}, []);
 
-	// OPEN FETCH API FUNCTION USING USEFETCH HOOK
-	// useEffect(() => {
-	// 	const transformData = (taskData: {
-	// 		TotalRecordCount: number;
-	// 		Data: DataInterface[];
-	// 	}) => {
-	// 		const { Data: allTaskData, TotalRecordCount: recordCount } =
-	// 			taskData;
+	const getPagination = async () => {
+		const paginationRef = collection(db, 'pagination');
+		const paginationSnapshot = await getDocs(paginationRef);
 
-	// 		// CMNT const allTasks = allTaskData.map((data) => new Event(data));
-	// 		const allTasks = allTaskData.map((taskData) => {
-	// 			return {
-	// 				key: taskData.Id,
-	// 				id: taskData.Id,
-	// 				App: 'Application Name',
-	// 				taskCode: 'Event Code',
-	// 				startTime: taskData.Started,
-	// 				endTime: taskData.Completed,
-	// 				subEvents: taskData.SubEventCount,
-	// 				host: 'Application Host',
-	// 				message: 'Event Message',
-	// 				status: taskData.Status,
-	// 				parentId: taskData.ParentId,
-	// 			};
-	// 		});
+		paginationSnapshot.forEach((doc) => {
+			const totalRecordCount = doc.get('totalRecordCount');
+			const pageSize = doc.get('pageSize');
+			setTotalRecordCount(totalRecordCount);
+			setTotalPageCount(Math.ceil(totalRecordCount / pageSize));
+		});
+	};
+	getPagination();
 
-	// 		setTasks(allTasks);
-	// 		setTotalRecordCount(recordCount);
-	// 	};
+	useEffect(() => {
+		const from: number = ((0 + 1) * pageNumber - 1) * 10;
+		// console.log(from);
+		const to: number = 10 * pageNumber;
+		// console.log(to);
+		const setDisplayPage = (data: Event[]) => {
+			setDisplayData(
+				data.slice(
+					`${from}` as unknown as number,
+					`${to}` as unknown as number
+				)
+			);
+		};
 
-	// 	// CMNT appName options for URL below
-	// 	// SalesActivityReport
-	// 	// MetroIQ
-	// 	// AgentIQ
-	// 	// PropIQ
-	// 	// SACompany
-	// 	fetchTasks(
-	// 		{
-	// 			url: `http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=${pageNumber}&pageSize=10&hostname=`,
-	// 		},
-	// 		transformData
-	// 	);
-	// }, [fetchTasks, pageNumber]);
-	// CLOSE
+		setDisplayPage(tasks);
+	}, [pageNumber, tasks]);
 
 	// OPEN REVISED METHOD USING setDoc TO WRITE EVENTS TO FIRESTORE COLLECTION
 	// useEffect(() => {
@@ -162,15 +94,6 @@ export const EventContextProvider: React.FC = (props) => {
 	// 	});
 	// }, [tasks]);
 	// CLOSE
-
-	// CMNT Original method of sending data to firestore
-	// const eventStore = collection(db, 'events');
-
-	// useEffect(() => {
-	// 	tasks.forEach((event) => {
-	// 		addDoc(eventStore, { event });
-	// 	});
-	// }, [tasks]);
 
 	useEffect(() => {
 		setTotalPageCount(Math.ceil(totalRecordCount / 10));
@@ -191,11 +114,12 @@ export const EventContextProvider: React.FC = (props) => {
 			value={{
 				tasks: tasks,
 				isLoading: isLoading,
-				error: error,
+				// error: error,
 				totalRecordCount: totalRecordCount,
 				totalPageCount: totalPageCount,
 				pageNumber: pageNumber,
 				setPageNumber: setPageNumber,
+				displayData: displayData,
 			}}
 		>
 			{props.children}
@@ -204,6 +128,111 @@ export const EventContextProvider: React.FC = (props) => {
 };
 
 export default EventContext;
+
+// OPEN OPEN OPENFETCH API FUNCTION USING USEFETCH HOOK
+// useEffect(() => {
+// 	const transformData = (taskData: {
+// 		TotalRecordCount: number;
+// 		Data: DataInterface[];
+// 	}) => {
+// 		const { Data: allTaskData, TotalRecordCount: recordCount } =
+// 			taskData;
+
+// 		// CMNT const allTasks = allTaskData.map((data) => new Event(data));
+// 		const allTasks = allTaskData.map((taskData) => {
+// 			return {
+// 				key: taskData.Id,
+// 				id: taskData.Id,
+// 				App: 'Application Name',
+// 				taskCode: 'Event Code',
+// 				startTime: taskData.Started,
+// 				endTime: taskData.Completed,
+// 				subEvents: taskData.SubEventCount,
+// 				host: 'Application Host',
+// 				message: 'Event Message',
+// 				status: taskData.Status,
+// 				parentId: taskData.ParentId,
+// 			};
+// 		});
+
+// 		setTasks(allTasks);
+// 		setTotalRecordCount(recordCount);
+// 	};
+
+// 	// CMNT appName options for URL below
+// 	// SalesActivityReport
+// 	// MetroIQ
+// 	// AgentIQ
+// 	// PropIQ
+// 	// SACompany
+// 	fetchTasks(
+// 		{
+// 			url: `http://logviewer.jordaan/api/LogData/GetLogPage?appName=&minDate=&pageNo=${pageNumber}&pageSize=10&hostname=`,
+// 		},
+// 		transformData
+// 	);
+// }, [fetchTasks, pageNumber]);
+// CLOSE CLOSE CLOSE
+
+//OPEN
+// CMNT Original method of sending data to firestore
+// const eventStore = collection(db, 'events');
+
+// useEffect(() => {
+// 	tasks.forEach((event) => {
+// 		addDoc(eventStore, { event });
+// 	});
+// }, [tasks]);
+//CLOSE
+
+// OPEN VIA I THINK FIREBASE'S OWN YOUTUBE TUTORIAL
+// const getEvents = async () => {
+// 	const firstPage = query(eventsRef, orderBy('id'), limit(10));
+// 	const documentSnapshots = await getDocs(firstPage);
+
+// 	const lastPage =
+// 		documentSnapshots.docs[documentSnapshots.docs.length - 1];
+
+// 	const nextPage = query(
+// 		eventsRef,
+// 		orderBy('id'),
+// 		startAfter(lastPage),
+// 		limit(10)
+// 	);
+// };
+// CLOSE
+
+//OPEN VIA FIRESHIP TUTORIAL NOTE OLD V8 FIRESTORE
+// const query = ref.orderBy(field).limit(pageSize)
+
+//function nextPage(last){
+// return ref.orderBy(field).startAfter(last[field]).limit(pageSize)
+// }
+
+//function prevPage(first){
+// return ref.orderBy(field).endBefore(first[field]).limitToLast(pageSize)
+// }
+//CLOSE
+
+// OPEN PAGINATION FUNCTIONS
+// const firstPageQuery = query(
+// 	collection(db, 'events'),
+// 	orderBy('event.id'),
+// 	limit(10)
+// );
+// const firstPgSnapshot = await getDocs(firstPageQuery);
+// firstPgSnapshot.forEach((doc) => taskData.push(doc.get('event')));
+
+// const lastDoc = firstPgSnapshot.docs[firstPgSnapshot.docs.length - 1];
+// console.log('last', lastDoc);
+
+// const nextPgQuery = query(
+// 	eventsRef,
+// 	orderBy('id'),
+// 	startAfter(lastDoc),
+// 	limit(10)
+// );
+// CLOSE
 
 //OPEN
 // const getEvents = async () => {

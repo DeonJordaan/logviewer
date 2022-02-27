@@ -5,17 +5,21 @@ import HierarchyViewHeader from './HierarchyViewHeader';
 import HierarchyViewItem from './HierarchyViewItem';
 import HierarchyViewMainItem from './HierarchyViewMainItem';
 import classes from './HierarchyView.module.css';
+import HierarchyContext from '../../store/hierarchy-context';
 // import Status from '../../Interfaces/statusInterface';
 
 const HierarchyView: React.FC<{
 	setStatus: (statusCode: number) => string;
 }> = (props) => {
+	const hierarchyCtx = useContext(HierarchyContext);
+	const { hierarchy } = hierarchyCtx;
+
 	const subEventCtx = useContext(SubEventContext);
 
 	let app: string | undefined = 'App'; //FIXME: Setting as undefined to remove errors below. Is this correct?
 	let host: string | undefined = 'Host';
 
-	console.log(subEventCtx.hierarchy);
+	// console.log(subEventCtx.hierarchy);
 
 	if (subEventCtx.selectedTask && subEventCtx.selectedTask.length > 0) {
 		app = subEventCtx.selectedTask[0].App;
@@ -30,10 +34,10 @@ const HierarchyView: React.FC<{
 		</tbody>
 	);
 
-	if (subEventCtx.hierarchy.length > 0) {
+	if (hierarchy.length > 0) {
 		hierarchyContent = (
 			<tbody>
-				{subEventCtx.hierarchy.map((task) => (
+				{hierarchy.map((task) => (
 					<HierarchyViewItem
 						key={task.key}
 						subEvents={task.subEvents}

@@ -30,7 +30,7 @@ const ExpandEvents: React.FC<{
 
 	//TODO Should I not just avoid the useEffect and just 'manually' set the selectedTask when the button is clicked?
 	const clickHandler = useCallback(() => {
-		console.log(id);
+		// console.log(id);
 		setParentId(id);
 		setFetchId(id);
 		// setHierarchy([]);
@@ -40,7 +40,7 @@ const ExpandEvents: React.FC<{
 		setSelectedTask(tasks.filter((task) => task.id === parentId));
 	}, [tasks, setSelectedTask, parentId]);
 
-	console.log(subEventCtx.selectedTask);
+	// console.log(subEventCtx.selectedTask);
 
 	return (
 		<button onClick={clickHandler} className={importedClasses}>
