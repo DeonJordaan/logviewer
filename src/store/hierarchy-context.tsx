@@ -24,26 +24,34 @@ const HierarchyContext = React.createContext<HierarchyContextObject>({
 export const HierarchyContextProvider: React.FC = (props) => {
 	const [hierarchy, setHierarchy] = useState<Event[]>([]);
 
-	const subEventCtx = useContext(SubEventContext);
-	const { selectedSubEvent } = subEventCtx;
+	// const subEventCtx = useContext(SubEventContext);
+	// const { selectedSubEvent } = subEventCtx;
 
 	// FIXME NOT SURE IF THIS ACTUALLY WORKS - ERRORS TO RESOLVE
 	const triggerHierarchy = useCallback(
 		(id: number) => {
+			// const containsTask: (element: any, object: any) => boolean = (
+			// 	element,
+			// 	object
+			// ) => object.element === element;
 			const containsTask = (event: Event) => event.id === id;
 
-			const containsEvent: (hierarchy: Event[]) => boolean = () => {
+			const containsEvent = (hierarchy: Event[]) => {
 				return hierarchy.some(containsTask);
 			};
+			// const containsEvent: (hierarchy: Event[]) => boolean = () => {
+			// 	return hierarchy.some(containsTask);
+			// };
 
 			if (!containsEvent(hierarchy)) {
-				setHierarchy((prevState) => [
-					...prevState,
-					...selectedSubEvent,
-				]);
+				console.log('Yes');
+				// setHierarchy((prevState) => [
+				// 	...prevState,
+				// 	...selectedSubEvent,
+				// ]);
 			}
 		},
-		[hierarchy, selectedSubEvent, setHierarchy]
+		[hierarchy]
 	);
 
 	return (
