@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect } from 'react';
+import React, { useCallback, useContext, useEffect, useRef } from 'react';
 
 import SubEventContext from '../../store/sub-event-context';
 import classes from './ExpandSubEvents.module.css';
@@ -68,19 +68,23 @@ const ExpandSubEvents: React.FC<{
 		// setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
 	}, [id, setFetchId, setSubEventParentId]);
 
+	const subEventRef = useRef<Event[]>([]);
+
+	subEventRef.current = hierarchy;
+
 	useEffect(() => {
-		// const containsTask = (task: Event) => task.id === id;
+		const containsTask = (task: Event) => task.id === id;
 
-		// const containsEvent = (hierarchy: Event[]) => {
-		// 	return hierarchy.some(containsTask);
-		// };
+		const containsEvent = (hierarchy: Event[]) => {
+			return hierarchy.some(containsTask);
+		};
 
-		// if (!containsEvent(hierarchy)) {
-		// 	console.log(containsTask);
-		// 	console.log(hierarchy);
-		// 	setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
-		// }
-		setHierarchy(selectedSubEvent);
+		if (!containsEvent(hierarchy)) {
+			console.log(containsTask);
+			console.log(hierarchy);
+			setHierarchy((prevState) => [...prevState, ...subEventRef.current]);
+		}
+		// setHierarchy(selectedSubEvent);
 		// setHierarchy((prevState) => {
 		// 	return [...prevState, ...selectedSubEvent];
 		// });
