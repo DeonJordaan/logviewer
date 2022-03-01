@@ -1,3 +1,5 @@
+import React from 'react';
+
 import './App.css';
 
 import Header from './Components/UI/Header';
@@ -63,7 +65,7 @@ function App() {
 	);
 }
 
-export default App;
+export default React.memo(App);
 
 //NOTE SETTING STATUS WITH OBJECT LITERAL - PREFER IT, BUT CANNOT RESOLVE TYPE ERRORS WITH THIS OPTION
 

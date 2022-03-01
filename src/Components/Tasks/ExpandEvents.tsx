@@ -49,4 +49,4 @@ const ExpandEvents: React.FC<{
 	);
 };
 
-export default ExpandEvents;
+export default React.memo(ExpandEvents);

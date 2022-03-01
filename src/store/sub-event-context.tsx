@@ -21,14 +21,14 @@ type SubEventContextObject = {
 	selectedTask: Event[];
 	subEvents: Event[];
 	selectedSubEvent: Event[];
-	// hierarchy: Event[];
+	hierarchy: Event[];
 	parentId: number;
 	fetchId: number;
 	subEventParentId: number;
 	setParentId: Dispatch<SetStateAction<number>>;
 	setFetchId: Dispatch<SetStateAction<number>>;
 	setSubEventParentId: Dispatch<SetStateAction<number>>;
-	// setHierarchy: Dispatch<SetStateAction<Event[]>>;
+	setHierarchy: Dispatch<SetStateAction<Event[]>>;
 	setSelectedTask: Dispatch<SetStateAction<Event[]>>;
 	setSelectedSubEvent: Dispatch<SetStateAction<Event[]>>;
 };
@@ -39,14 +39,14 @@ const SubEventContext = React.createContext<SubEventContextObject>({
 	selectedTask: [],
 	subEvents: [],
 	selectedSubEvent: [],
-	// hierarchy: [],
+	hierarchy: [],
 	parentId: 0,
 	fetchId: 0,
 	subEventParentId: 0,
 	setParentId: () => [],
 	setFetchId: () => [],
 	setSubEventParentId: () => [],
-	// setHierarchy: () => [],
+	setHierarchy: () => [],
 	setSelectedTask: () => [],
 	setSelectedSubEvent: () => [],
 });
@@ -64,7 +64,7 @@ export const SubEventContextProvider: React.FC = (props) => {
 
 	const [selectedSubEvent, setSelectedSubEvent] = useState<Event[]>([]);
 
-	// const [hierarchy, setHierarchy] = useState<Event[]>([]);
+	const [hierarchy, setHierarchy] = useState<Event[]>([]);
 
 	//FETCH DATA, SORT & SET SUBEVENTS
 	const { isLoading, error, sendRequest: fetchTasks } = useFetch();
@@ -125,8 +125,8 @@ export const SubEventContextProvider: React.FC = (props) => {
 				setFetchId: setFetchId,
 				subEventParentId: subEventParentId,
 				setSubEventParentId: setSubEventParentId,
-				// hierarchy: hierarchy,
-				// setHierarchy: setHierarchy,
+				hierarchy: hierarchy,
+				setHierarchy: setHierarchy,
 				selectedTask: selectedTask,
 				setSelectedTask: setSelectedTask,
 				selectedSubEvent: selectedSubEvent,
