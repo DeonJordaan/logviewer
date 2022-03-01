@@ -12,8 +12,6 @@ import DataInterface from '../types/dataInterface';
 import Event from '../types/event';
 import db from './firebase';
 import { collection, getDocs, query, where } from 'firebase/firestore';
-// import HierarchyContext from './hierarchy-context';
-// import { ref, set } from 'firebase/database';
 
 type SubEventContextObject = {
 	error: string | null;
@@ -66,11 +64,10 @@ export const SubEventContextProvider: React.FC = (props) => {
 
 	const [hierarchy, setHierarchy] = useState<Event[]>([]);
 
-	//FETCH DATA, SORT & SET SUBEVENTS
+	// FETCH DATA, SORT & SET SUBEVENTS
 	const { isLoading, error, sendRequest: fetchTasks } = useFetch();
 
-	// CMNT FETCHING DATA FROM FIRESTORE
-	// OPEN GET DOCS THAT MATCH THE QUERY
+	// FETCHING DATA FROM FIRESTORE
 	useEffect(() => {
 		const getSubEvents = async () => {
 			let subEventData: DataInterface[] = [];
@@ -87,14 +84,10 @@ export const SubEventContextProvider: React.FC = (props) => {
 		};
 		getSubEvents();
 	}, [fetchId]);
-	// CLOSE
 
 	// WATCH PAGENUMBER AND CLEAR STATES WHEN IT CHANGES
 	const eventCtx = useContext(EventContext);
 	const { pageNumber } = eventCtx;
-
-	// const hierarchyCtx = useContext(HierarchyContext);
-	// const { setHierarchy } = hierarchyCtx;
 
 	useEffect(() => {
 		setSubEvents([]);
@@ -102,16 +95,14 @@ export const SubEventContextProvider: React.FC = (props) => {
 		setSubEventParentId(0);
 		setSelectedTask([]);
 		setSelectedSubEvent([]);
-		// setHierarchy([]);
+		setHierarchy([]);
 	}, [pageNumber]);
 
 	useEffect(() => {
 		setSubEventParentId(0);
 		setSelectedSubEvent([]);
-		// setHierarchy([]);
+		setHierarchy([]);
 	}, [selectedTask]);
-
-	// const subEventStore = collection(db, 'sub-events');
 
 	return (
 		<SubEventContext.Provider
