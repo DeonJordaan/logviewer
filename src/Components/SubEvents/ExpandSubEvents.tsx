@@ -54,27 +54,37 @@ const ExpandSubEvents: React.FC<{
 		setSubEventParentId(id);
 		setFetchId(id);
 
-		const containsTask = (task: Event) => task.id === id;
+		// const containsTask = (task: Event) => task.id === id;
 
-		const containsEvent = (hierarchy: Event[]) => {
-			return hierarchy.some(containsTask);
-		};
+		// const containsEvent = (hierarchy: Event[]) => {
+		// 	return hierarchy.some(containsTask);
+		// };
 
-		if (!containsEvent(hierarchy)) {
-			console.log('Yes');
-			setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
-		}
+		// if (!containsEvent(hierarchy)) {
+		// 	console.log('Yes');
+		// 	setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
+		// }
 		// FIXME This setHierarchy works, but executes before the selectedSubEVent has been updated
 		// setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
-	}, [
-		hierarchy,
-		id,
-		selectedSubEvent,
-		setFetchId,
-		setHierarchy,
-		setSubEventParentId,
-	]);
+	}, [id, setFetchId, setSubEventParentId]);
 
+	useEffect(() => {
+		// const containsTask = (task: Event) => task.id === id;
+
+		// const containsEvent = (hierarchy: Event[]) => {
+		// 	return hierarchy.some(containsTask);
+		// };
+
+		// if (!containsEvent(hierarchy)) {
+		// 	console.log(containsTask);
+		// 	console.log(hierarchy);
+		// 	setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
+		// }
+		setHierarchy(selectedSubEvent);
+		// setHierarchy((prevState) => {
+		// 	return [...prevState, ...selectedSubEvent];
+		// });
+	}, [selectedSubEvent, setHierarchy]);
 	// Filter the event from the subEvent array and set it to selectedSubEvent
 	useEffect(() => {
 		setSelectedSubEvent(
