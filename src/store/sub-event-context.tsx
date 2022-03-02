@@ -65,7 +65,8 @@ export const SubEventContextProvider: React.FC = (props) => {
 	const [hierarchy, setHierarchy] = useState<Event[]>([]);
 
 	// FETCH DATA, SORT & SET SUBEVENTS
-	const { isLoading, error, sendRequest: fetchTasks } = useFetch();
+	const { isLoading, error } = useFetch();
+	// const { isLoading, error, sendRequest: fetchTasks } = useFetch();
 
 	// FETCHING DATA FROM FIRESTORE
 	useEffect(() => {

@@ -22,7 +22,10 @@ const HierarchyViewMainItem: React.FC<{
 		hierarchyViewMainItemContent = (
 			<tbody>
 				{subEventCtx.selectedTask.map((task) => (
-					<tr className={classes['hierarchy-main-item']}>
+					<tr
+						key={task.key}
+						className={classes['hierarchy-main-item']}
+					>
 						<td>{props.setStatus(task.status)}</td>
 						<td>{task.subEvents}</td>
 						<td>

@@ -1,9 +1,7 @@
-import React, { useCallback, useContext, useEffect, useRef } from 'react';
-
+import React, { useCallback, useContext, useEffect, useMemo } from 'react';
 import SubEventContext from '../../store/sub-event-context';
 import classes from './ExpandSubEvents.module.css';
-import Event from '../../types/event';
-// import HierarchyContext from '../../store/hierarchy-context';
+// import Event from '../../types/event';
 
 const ExpandSubEvents: React.FC<{
 	id: number;
@@ -22,11 +20,16 @@ const ExpandSubEvents: React.FC<{
 		setHierarchy,
 	} = subEventCtx;
 
-	// const hierarchyCtx = useContext(HierarchyContext);
-	// const {} = hierarchyCtx;
-
 	// Get id of event for when it is clicked
 	const id = React.useMemo(() => props.id, [props.id]);
+
+	let eventIds: number[] = useMemo(() => [], []);
+
+	if (hierarchy) {
+		for (const event of hierarchy) {
+			eventIds.push(event.id);
+		}
+	}
 
 	// Set CSS classes to style button if it has sub-events
 	let subEventQuantity = props.subEvents;
@@ -35,67 +38,50 @@ const ExpandSubEvents: React.FC<{
 		importedClasses = `${classes['no-sub-events']}`;
 	}
 
-	// const triggerHierarchy = useCallback(() => {
-	// 	setHierarchy((prevState) => {
-	// 		return [...prevState, ...selectedSubEvent];
-	// 	});
-	// }, [selectedSubEvent, setHierarchy]);
-
 	// Push the event to the Hierarchy display
-	// useEffect(() => {
-	// 	// const triggerHierarchy: (id: number) => void = () => {
-	// 	// const triggerHierarchy: (id: number) => void = useCallback(() => {
+	// NOTE Tried moving the setHierarchy to a separate function, but it did not make a difference
+	// const triggerHierarchy = useCallback(() => {
+	// 	if (!eventIds.includes(id))
+	// 		setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
+	// }, [eventIds, id, selectedSubEvent, setHierarchy]);
 
-	// 	// };
-	// 	// triggerHierarchy(id);
-	// }, [hierarchy, id, selectedSubEvent, setHierarchy]);
-
-	const clickHandler = useCallback(() => {
-		setSubEventParentId(id);
-		setFetchId(id);
-
-		// const containsTask = (task: Event) => task.id === id;
-
-		// const containsEvent = (hierarchy: Event[]) => {
-		// 	return hierarchy.some(containsTask);
-		// };
-
-		// if (!containsEvent(hierarchy)) {
-		// 	console.log('Yes');
-		// 	setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
-		// }
-		// FIXME This setHierarchy works, but executes before the selectedSubEVent has been updated
-		// setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
-	}, [id, setFetchId, setSubEventParentId]);
-
-	const subEventRef = useRef<Event[]>([]);
-
-	subEventRef.current = hierarchy;
-
-	useEffect(() => {
-		const containsTask = (task: Event) => task.id === id;
-
-		const containsEvent = (hierarchy: Event[]) => {
-			return hierarchy.some(containsTask);
-		};
-
-		if (!containsEvent(hierarchy)) {
-			console.log(containsTask);
-			console.log(hierarchy);
-			setHierarchy((prevState) => [...prevState, ...subEventRef.current]);
-		}
-		// setHierarchy(selectedSubEvent);
-		// setHierarchy((prevState) => {
-		// 	return [...prevState, ...selectedSubEvent];
-		// });
-	}, [selectedSubEvent, setHierarchy]);
 	// Filter the event from the subEvent array and set it to selectedSubEvent
 	useEffect(() => {
 		setSelectedSubEvent(
 			subEvents.filter((subEvent) => subEvent.id === subEventParentId)
 		);
-		// triggerHierarchy(id);
 	}, [setSelectedSubEvent, subEventParentId, subEvents]);
+
+	// Respond to subevent button click event
+	const clickHandler = useCallback(() => {
+		setSubEventParentId(id);
+		setFetchId(id);
+		// OPEN FIXME This setHierarchy works, but executes before the selectedSubEVent has been updated
+		// Furthermore, if a new subevent is selected, it checks if the NEW clicked one has been added
+		// BUT sends the OLD event still in selectedSubEvent to the hierarchy before IT has been updated
+		// meaning that the check does not stop the same event being added twice
+		if (!eventIds.includes(id))
+			setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
+		// CLOSE
+	}, [
+		eventIds,
+		id,
+		selectedSubEvent,
+		setFetchId,
+		setHierarchy,
+		setSubEventParentId,
+	]);
+
+	// NOTE Tried useRef after watching a Ben Awad video
+	// Trying to get setHierarchy to use the latest selectedSubEvent
+	// const subEventRef = useRef<Event[]>([]);
+	// subEventRef.current = hierarchy;
+
+	//NOTE Trying to setHierarchy direct;ly from its own useEffect
+	// useEffect(() => {
+	// 	if (!eventIds.includes(id))
+	// 		setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
+	// }, [eventIds, hierarchy, id, selectedSubEvent, setHierarchy]);
 
 	return (
 		<button onClick={clickHandler} className={importedClasses}>
@@ -106,11 +92,13 @@ const ExpandSubEvents: React.FC<{
 
 export default ExpandSubEvents;
 
-// const triggerHierarchy = useCallback(() => {
-// setHierarchy((prevState) => {
-// if (hierarchy.some((e) => e.id === id)) {
-// return [...prevState, ...selectedSubEvent];
-// } else {
-// return prevState;
-// }
-// });
+//OPEN .some METHOD TO CHECK IF HIERARCHY CONTAINS SELECTED TASK ALREADY
+// const containsTask = (task: Event) => task.id === id;
+
+// const containsEvent = (hierarchy: Event[]) => {
+// 	return hierarchy.some(containsTask);
+// };
+
+// if (!containsEvent(hierarchy)) {
+// 	console.log(containsTask);
+// CLOSE
