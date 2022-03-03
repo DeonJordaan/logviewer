@@ -77,11 +77,23 @@ const ExpandSubEvents: React.FC<{
 	// const subEventRef = useRef<Event[]>([]);
 	// subEventRef.current = hierarchy;
 
-	//NOTE Trying to setHierarchy direct;ly from its own useEffect
+	//NOTE Trying to setHierarchy directly from its own useEffect
 	// useEffect(() => {
 	// 	if (!eventIds.includes(id))
 	// 		setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
 	// }, [eventIds, hierarchy, id, selectedSubEvent, setHierarchy]);
+
+	// // OPEN IF HIERARCHY CHANGES, SEND NEW HIERARCHY TO DB
+	// // Update product in database
+	// useEffect(() => {
+	// 	if (hierarchy) {
+	// 		hierarchy.forEach((subEvent) => {
+	// 			setDoc(doc(db, 'hierarchy', `${subEvent.id}`), { subEvent });
+	// 		});
+	// 	} else return;
+	// }, [hierarchy]);
+
+	// CLOSE
 
 	return (
 		<button onClick={clickHandler} className={importedClasses}>
