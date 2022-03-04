@@ -38,8 +38,7 @@ const ExpandSubEvents: React.FC<{
 		importedClasses = `${classes['no-sub-events']}`;
 	}
 
-	// Push the event to the Hierarchy display
-	// NOTE Tried moving the setHierarchy to a separate function, but it did not make a difference
+	// Tried moving the setHierarchy to a separate function, but it did not make a difference
 	// const triggerHierarchy = useCallback(() => {
 	// 	if (!eventIds.includes(id))
 	// 		setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
@@ -60,40 +59,20 @@ const ExpandSubEvents: React.FC<{
 		// Furthermore, if a new subevent is selected, it checks if the NEW clicked one has been added
 		// BUT sends the OLD event still in selectedSubEvent to the hierarchy before IT has been updated
 		// meaning that the check does not stop the same event being added twice
-		if (!eventIds.includes(id))
-			setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
+		// if (!eventIds.includes(id))
+		// 	setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
 		// CLOSE
-	}, [
-		eventIds,
-		id,
-		selectedSubEvent,
-		setFetchId,
-		setHierarchy,
-		setSubEventParentId,
-	]);
+	}, [id, setFetchId, setSubEventParentId]);
 
-	// NOTE Tried useRef after watching a Ben Awad video
-	// Trying to get setHierarchy to use the latest selectedSubEvent
+	// Tried useRef to get setHierarchy to use the latest selectedSubEvent
 	// const subEventRef = useRef<Event[]>([]);
 	// subEventRef.current = hierarchy;
 
-	//NOTE Trying to setHierarchy directly from its own useEffect
-	// useEffect(() => {
-	// 	if (!eventIds.includes(id))
-	// 		setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
-	// }, [eventIds, hierarchy, id, selectedSubEvent, setHierarchy]);
-
-	// // OPEN IF HIERARCHY CHANGES, SEND NEW HIERARCHY TO DB
-	// // Update product in database
-	// useEffect(() => {
-	// 	if (hierarchy) {
-	// 		hierarchy.forEach((subEvent) => {
-	// 			setDoc(doc(db, 'hierarchy', `${subEvent.id}`), { subEvent });
-	// 		});
-	// 	} else return;
-	// }, [hierarchy]);
-
-	// CLOSE
+	// Add the selectedSubEvent to the hierarchy
+	useEffect(() => {
+		if (!eventIds.includes(id))
+			setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
+	}, [eventIds, hierarchy, id, selectedSubEvent, setHierarchy]);
 
 	return (
 		<button onClick={clickHandler} className={importedClasses}>
