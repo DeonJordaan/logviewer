@@ -49,12 +49,14 @@ const ExpandSubEvents: React.FC<{
 		setSelectedSubEvent(
 			subEvents.filter((subEvent) => subEvent.id === subEventParentId)
 		);
+		// triggerHierarchy();
 	}, [setSelectedSubEvent, subEventParentId, subEvents]);
 
 	// Respond to subevent button click event
 	const clickHandler = useCallback(() => {
 		setSubEventParentId(id);
 		setFetchId(id);
+		// setSubEvent();
 		// OPEN FIXME This setHierarchy works, but executes before the selectedSubEVent has been updated
 		// Furthermore, if a new subevent is selected, it checks if the NEW clicked one has been added
 		// BUT sends the OLD event still in selectedSubEvent to the hierarchy before IT has been updated
