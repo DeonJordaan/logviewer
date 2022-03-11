@@ -37,22 +37,6 @@ export const EventContextProvider: React.FC = (props) => {
 
 	//CMNT Fetch data, sort and set tasks
 
-	const getEvents = async () => {
-		setIsLoading(true);
-		let taskData: DataInterface[] = [];
-
-		const eventsRef = collection(db, 'events');
-
-		const querySnapshot = await getDocs(eventsRef);
-
-		querySnapshot.forEach((doc) => taskData.push(doc.get('event')));
-
-		const allTasks = taskData.map((data) => new Event(data));
-
-		setTasks(allTasks);
-		setIsLoading(false);
-	};
-
 	useEffect(() => {
 		getEvents();
 	}, []);

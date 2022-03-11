@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-import EventContext from '../../store/event-context';
 import TaskViewHeader from './TaskViewHeader';
 import TaskViewItem from './TaskViewItem';
 import classes from './TaskView.module.css';
@@ -11,8 +11,8 @@ import classes from './TaskView.module.css';
 const TaskView: React.FC<{
 	setStatus: (statusCode: number) => string;
 }> = (props) => {
-	const eventCtx = useContext(EventContext);
-	const { displayData } = eventCtx;
+	// const events = useSelector((state) => state.events);
+	const displayData = useSelector((state) => state.displayData);
 
 	let taskContent = (
 		<tbody>
@@ -53,15 +53,15 @@ const TaskView: React.FC<{
 	// 	);
 	// }
 
-	if (eventCtx.isLoading) {
-		taskContent = (
-			<tbody>
-				<tr>
-					<td>Loading...</td>
-				</tr>
-			</tbody>
-		);
-	}
+	// if (eventCtx.isLoading) {
+	// 	taskContent = (
+	// 		<tbody>
+	// 			<tr>
+	// 				<td>Loading...</td>
+	// 			</tr>
+	// 		</tbody>
+	// 	);
+	// }
 
 	// const eventStore = doc(db, 'events/{data.id}');
 	// const fbData: {
