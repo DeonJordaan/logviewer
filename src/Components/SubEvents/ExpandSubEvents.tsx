@@ -12,24 +12,30 @@ const ExpandSubEvents: React.FC<{
 	const {
 		subEvents,
 		subEventParentId,
-		selectedSubEvent,
+		// selectedSubEvent,
 		hierarchy,
 		setSubEventParentId,
 		setFetchId,
 		setSelectedSubEvent,
-		setHierarchy,
+		// setHierarchy,
+		setEventIds,
 	} = subEventCtx;
 
 	// Get id of event for when it is clicked
 	const id = React.useMemo(() => props.id, [props.id]);
 
-	let eventIds: number[] = useMemo(() => [], []);
+	// let eventIds: number[] = useMemo(() => [], []);
 
-	if (hierarchy) {
-		for (const event of hierarchy) {
-			eventIds.push(event.id);
+	useEffect(() => {
+		if (hierarchy) {
+			for (const event of hierarchy) {
+				setEventIds((prevState) => {
+					return [...prevState, event.id];
+				});
+				// eventIds.push(event.id);
+			}
 		}
-	}
+	}, [hierarchy, setEventIds]);
 
 	// Set CSS classes to style button if it has sub-events
 	let subEventQuantity = props.subEvents;
@@ -71,10 +77,12 @@ const ExpandSubEvents: React.FC<{
 	// subEventRef.current = hierarchy;
 
 	// Add the selectedSubEvent to the hierarchy
-	useEffect(() => {
-		if (!eventIds.includes(id))
-			setHierarchy((prevState) => [...prevState, ...selectedSubEvent]);
-	}, [eventIds, hierarchy, id, selectedSubEvent, setHierarchy]);
+	// useEffect(() => {
+	// 	if (!eventIds.includes(id))
+	// 		setHierarchy((prevState) => {
+	// 			return [...prevState, ...selectedSubEvent];
+	// 		});
+	// }, [eventIds, hierarchy, id, selectedSubEvent, setHierarchy]);
 
 	return (
 		<button onClick={clickHandler} className={importedClasses}>
