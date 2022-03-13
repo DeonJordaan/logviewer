@@ -1,25 +1,26 @@
 import { ActionCreatorWithoutPayload, ActionCreatorWithPayload, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { collection, getDocs } from 'firebase/firestore';
+import { AnyAction } from 'redux';
 import DataInterface from '../types/dataInterface';
 import Event from '../types/event';
 import db from './firebase';
 
-interface EventsState  {
+type EventsState = {
 	events: Event[];
 	selectedEvent: Event[];
 	displayData: Event[];
 };
-const initialEventState = {
+const initialEventState: EventsState = {
 	events: [],
 	selectedEvent: [],
 	displayData: [],
-} as EventsState;
+};
 
 const eventSlice = createSlice({
 	name: 'events',
-	initialEventState,
+	initialState: initialEventState,
 	reducers: {
-		SET_EVENTS(state=initialEventState, action: AnyAction) {
+		SET_EVENTS(state = initialEventState, action: AnyAction) {
             state.events.push()
         },
 	},
