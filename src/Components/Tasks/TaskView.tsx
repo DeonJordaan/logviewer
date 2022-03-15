@@ -12,7 +12,8 @@ const TaskView: React.FC<{
 	setStatus: (statusCode: number) => string;
 }> = (props) => {
 	// const events = useSelector((state) => state.events);
-	const displayData = useSelector((state) => state.displayData);
+	// const displayData = useSelector((state) => state.displayData);
+	const displayData = useSelector((state) => state.events);
 
 	let taskContent = (
 		<tbody>

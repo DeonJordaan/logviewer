@@ -1,5 +1,6 @@
 // import { createStore } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
+import { eventSlice } from './event-slice';
 
 // type StateObject = {
 // 	tasks: Event[];
@@ -18,20 +19,20 @@ import { configureStore } from '@reduxjs/toolkit';
 // 	subEventParentId: number;
 // };
 
-const initialState: StateObject = {
-	// isLoading: false,
-	// error: null,
-	totalRecordCount: 0,
-	totalPageCount: 0,
-	pageNumber: 1,
+// const initialState: StateObject = {
+// isLoading: false,
+// error: null,
+// 	totalRecordCount: 0,
+// 	totalPageCount: 0,
+// 	pageNumber: 1,
 
-	subEvents: [],
-	selectedSubEvent: [],
-	hierarchy: [],
-	parentId: 0,
-	fetchId: 0,
-	subEventParentId: 0,
-};
+// 	subEvents: [],
+// 	selectedSubEvent: [],
+// 	hierarchy: [],
+// 	parentId: 0,
+// 	fetchId: 0,
+// 	subEventParentId: 0,
+// };
 
 // const store = createStore(taskReducer);
 const store = configureStore({
