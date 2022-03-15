@@ -26,7 +26,7 @@ const eventSlice = createSlice({
 	},
 });
 
-const fetchEventData = () => {
+export const fetchEventData = () => {
 	return async (dispatch: (arg0: ActionCreatorWithPayload<any, string> | ActionCreatorWithoutPayload<string>) => { (arg0: { events: Event[]; }): void; new(): any; }) => {
 		const getEvents = async () => {
 			// setIsLoading(true);
@@ -50,6 +50,7 @@ const fetchEventData = () => {
                 eventSlice.actions.SET_EVENTS)({
                     events: eventsData
                 })
+				console.log(eventSlice);
         }
 	};
 };
