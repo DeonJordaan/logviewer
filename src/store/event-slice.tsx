@@ -21,7 +21,7 @@ const initialEventState: EventsState = {
 	displayData: [],
 };
 
-export const eventSlice = createSlice({
+const eventSlice = createSlice({
 	name: 'events',
 	initialState: initialEventState,
 	reducers: {
@@ -62,9 +62,13 @@ export const fetchEventData = () => {
 			});
 			console.log(eventSlice);
 		} catch (error) {
+			// TODO COmplete error handling
 			console.log(error);
 		}
 	};
 };
 
+export default eventSlice;
+
+// TODO DO I NEED THESE EXPORTS FOR MY APPLICATION?
 export const eventActions = eventSlice.actions;
