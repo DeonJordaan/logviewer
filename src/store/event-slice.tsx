@@ -15,6 +15,7 @@ type EventsState = {
 	selectedEvent: Event[];
 	displayData: Event[];
 };
+
 const initialEventState: EventsState = {
 	events: [],
 	selectedEvent: [],

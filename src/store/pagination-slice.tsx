@@ -5,7 +5,6 @@ import {
 } from '@reduxjs/toolkit';
 import { collection, getDocs } from 'firebase/firestore';
 import eventSlice from './event-slice';
-
 import db from './firebase';
 
 type PaginationState = {
