@@ -50,11 +50,11 @@ const subEventSlice = createSlice({
 	},
 });
 
-export const setSelectedTask = () => {
-	return (dispatch, getState) => {
+export const setSelectedTask = (id:number) => {
+	return (_dispatch: any, getState: () => any) => {
 		const state = getState();
 		state.selectedTask = state.tasks.filter(
-			(task: Event) => task.id === state.parentId
+			(task: Event) => task.id === id
 		);
 	};
 };

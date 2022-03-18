@@ -37,8 +37,8 @@ const ExpandEvents: React.FC<{
 
 	// FIXME NOT SURE HOW TO DO THIS
 	useEffect(() => {
-		dispatch(setSelectedTask());
-	}, [tasks, parentId, dispatch]);
+		dispatch(setSelectedTask(parentId));
+	}, [parentId, dispatch]);
 
 	// console.log(subEventCtx.selectedTask);
 
