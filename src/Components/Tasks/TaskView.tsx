@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-
 import TaskViewHeader from './TaskViewHeader';
 import TaskViewItem from './TaskViewItem';
 import classes from './TaskView.module.css';
+import Event from '../../types/event';
 
 // import { doc, setDoc } from 'firebase/firestore';
 // import db from '../../store/firebase';
@@ -26,7 +26,7 @@ const TaskView: React.FC<{
 	if (displayData) {
 		taskContent = (
 			<tbody>
-				{displayData.map((task) => (
+				{displayData.map((task: Event) => (
 					<TaskViewItem
 						key={task.key}
 						host={task.host}

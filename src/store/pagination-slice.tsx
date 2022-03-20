@@ -1,17 +1,17 @@
 import {
 	ActionCreatorWithoutPayload,
-	AnyAction,
 	createSlice,
+	PayloadAction,
 } from '@reduxjs/toolkit';
 import { collection, getDocs } from 'firebase/firestore';
-import eventSlice from './event-slice';
 import db from './firebase';
+import eventSlice from './event-slice';
 
-type PaginationState = {
+interface PaginationState {
 	totalRecordCount: number;
 	totalPageCount: number;
 	pageNumber: number;
-};
+}
 
 const initialPaginationState: PaginationState = {
 	totalRecordCount: 0,
@@ -23,7 +23,10 @@ const paginationSlice = createSlice({
 	name: 'pagination',
 	initialState: initialPaginationState,
 	reducers: {
-		SET_PAGES(state = initialPaginationState, action: AnyAction) {
+		SET_PAGES(
+			state = initialPaginationState,
+			action: PayloadAction<number>
+		) {
 			state.totalPageCount = action.payload;
 			state.totalRecordCount = action.payload;
 		},
@@ -49,7 +52,7 @@ const paginationSlice = createSlice({
 export const getPaginationData = () => {
 	return async (
 		dispatch: (arg0: ActionCreatorWithoutPayload<string>) => {
-			(arg0: { totalRecordCount: number; totalPagecount: any }): void;
+			(arg0: { totalRecordCount: number; totalPagecount: number }): void;
 			new (): any;
 		}
 	) => {

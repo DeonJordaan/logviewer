@@ -2,6 +2,7 @@ import {
 	ActionCreatorWithNonInferrablePayload,
 	ActionCreatorWithoutPayload,
 	createSlice,
+	PayloadAction,
 } from '@reduxjs/toolkit';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import DataInterface from '../types/dataInterface';
@@ -9,7 +10,7 @@ import Event from '../types/event';
 // import eventSlice from './event-slice';
 import db from './firebase';
 
-type subEventState = {
+interface subEventState {
 	subEvents: Event[];
 	selectedTask: Event[];
 	selectedSubEvent: Event[];
@@ -17,7 +18,7 @@ type subEventState = {
 	parentId: number;
 	fetchId: number;
 	subEventParentId: number;
-};
+}
 
 const initialSubEventState: subEventState = {
 	subEvents: [],
@@ -33,24 +34,58 @@ const subEventSlice = createSlice({
 	name: 'subEvents',
 	initialState: initialSubEventState,
 	reducers: {
-		SET_SUB_EVENTS(state = initialSubEventState, action) {
-			state.subEvents = action.payload.subEvents;
+		SET_SUB_EVENTS(
+			state = initialSubEventState,
+			action: PayloadAction<Event[]>
+		) {
+			state.subEvents = action.payload;
 		},
-		SET_PARENT_ID(state = initialSubEventState, action) {
-			state.parentId = action.payload.id;
+		SET_PARENT_ID(
+			state = initialSubEventState,
+			action: PayloadAction<number>
+		) {
+			state.parentId = action.payload;
 		},
-		SET_FETCH_ID(state = initialSubEventState, action) {
-			state.fetchId = action.payload.id;
+		SET_FETCH_ID(
+			state = initialSubEventState,
+			action: PayloadAction<number>
+		) {
+			state.fetchId = action.payload;
+		},
+		SET_SUB_EVENT_PARENT_ID(
+			state = initialSubEventState,
+			action: PayloadAction<number>
+		) {
+			state.subEventParentId = action.payload;
 		},
 		// SET_SELECTED_TASK(state = initialSubEventState, action) {
 		// 	state.selectedTask = state.tasks.filter(
 		// 		(task) => task.id === parentId
 		// 	);
-		},
+		// },
+		// 	SET_SELECTED_SUB_EVENT(state, action){
+		// 		subEvents.filter((subEvent) => subEvent.id === subEventParentId)
+		// 	};,
 	},
 });
 
-export const setSelectedTask = (id:number) => {
+export const setHierarchy = () => {
+	return (_dispatch, getState) => {
+		const state = getState();
+		state.hierarchy = state.hierarchy.push(state.selectedSubEvent);
+	};
+};
+
+export const setSelectedSubEvent = () => {
+	return (_dispatch: any, getState: () => any) => {
+		const state = getState();
+		state.selectedSubEvent = state.subEvents.filter(
+			(subEvent: Event) => subEvent.id === state.subEventParentId
+		);
+	};
+};
+
+export const setSelectedTask = (id: number) => {
 	return (_dispatch: any, getState: () => any) => {
 		const state = getState();
 		state.selectedTask = state.tasks.filter(
