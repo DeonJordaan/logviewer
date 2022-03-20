@@ -1,9 +1,9 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import TaskViewHeader from './TaskViewHeader';
 import TaskViewItem from './TaskViewItem';
 import classes from './TaskView.module.css';
 import Event from '../../types/event';
+import { useAppSelector } from '../../store/hooks';
 
 // import { doc, setDoc } from 'firebase/firestore';
 // import db from '../../store/firebase';
@@ -11,9 +11,9 @@ import Event from '../../types/event';
 const TaskView: React.FC<{
 	setStatus: (statusCode: number) => string;
 }> = (props) => {
-	// const events = useSelector((state) => state.events);
-	// const displayData = useSelector((state) => state.displayData);
-	const displayData = useSelector((state) => state.events);
+	const displayData = useAppSelector((state) => state.events.displayData);
+
+	console.log(displayData);
 
 	let taskContent = (
 		<tbody>

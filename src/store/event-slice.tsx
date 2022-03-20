@@ -51,6 +51,7 @@ export const fetchEventData = () => {
 			querySnapshot.forEach((doc) => taskData.push(doc.get('event')));
 
 			const allTasks = taskData.map((data) => new Event(data));
+			console.log(allTasks);
 
 			return allTasks;
 			// setIsLoading(false);
@@ -58,12 +59,13 @@ export const fetchEventData = () => {
 
 		try {
 			const eventsData = await getEvents();
-			dispatch(eventSlice.actions.SET_EVENTS)({
-				events: eventsData,
-			});
-			console.log(eventSlice);
+			dispatch(
+				eventSlice.actions.SET_EVENTS({
+					events: eventsData,
+				})
+			);
 		} catch (error) {
-			// TODO COmplete error handling
+			// TODO Complete error handling
 			console.log(error);
 		}
 	};

@@ -49,9 +49,10 @@ const ExpandSubEvents: React.FC<{
 	// TODO
 	// Add the selectedSubEvent to the hierarchy
 	useEffect(() => {
-		if (!eventIds.includes(id))
-			dispatch(setHierarchy(());
-	}, [eventIds, id]);
+		if (!eventIds.includes(id)) {
+			dispatch(setHierarchy());
+		}
+	}, [dispatch, eventIds, id]);
 
 	return (
 		<button onClick={clickHandler} className={importedClasses}>

@@ -1,16 +1,14 @@
-import { useContext } from 'react';
-
-import EventContext from '../../store/event-context';
+import { useAppSelector } from '../../store/hooks';
 
 import classes from './TotalRecordCount.module.css';
 
 const TotalRecordCount: React.FC = () => {
-	const eventCtx = useContext(EventContext);
+	const { totalRecordCount } = useAppSelector((state) => state.pagination);
 
 	return (
 		<div className={classes['total-records']}>
 			<div>Total Records Available:</div>
-			<div>{eventCtx.totalRecordCount}</div>
+			<div>{totalRecordCount}</div>
 		</div>
 	);
 };

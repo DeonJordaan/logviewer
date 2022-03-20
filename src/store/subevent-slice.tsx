@@ -1,6 +1,5 @@
 import {
-	ActionCreatorWithNonInferrablePayload,
-	ActionCreatorWithoutPayload,
+	ActionCreatorWithPayload,
 	createSlice,
 	PayloadAction,
 } from '@reduxjs/toolkit';
@@ -70,7 +69,7 @@ const subEventSlice = createSlice({
 });
 
 export const setHierarchy = () => {
-	return (_dispatch, getState) => {
+	return (_dispatch: any, getState: () => any) => {
 		const state = getState();
 		state.hierarchy = state.hierarchy.push(state.selectedSubEvent);
 	};
@@ -96,11 +95,10 @@ export const setSelectedTask = (id: number) => {
 
 export const fetchSubEventData = (fetchId: number) => {
 	return async (
-		dispatch: (
-			arg0:
-				| ActionCreatorWithNonInferrablePayload<string>
-				| ActionCreatorWithoutPayload<string>
-		) => { (arg0: { subEvents: Event[] }): void; new (): any }
+		dispatch: (arg0: ActionCreatorWithPayload<Event[]>) => {
+			(arg0: { subEvents: Event[] }): void;
+			new (): any;
+		}
 	) => {
 		const getSubEvents = async () => {
 			let subEventData: DataInterface[] = [];

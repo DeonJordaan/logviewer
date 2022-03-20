@@ -1,5 +1,5 @@
 import {
-	ActionCreatorWithoutPayload,
+	ActionCreatorWithPayload,
 	createSlice,
 	PayloadAction,
 } from '@reduxjs/toolkit';
@@ -50,8 +50,9 @@ const paginationSlice = createSlice({
 });
 
 export const getPaginationData = () => {
+	// TODO CHECK INFERRED TYPE OF dispatch BELOW
 	return async (
-		dispatch: (arg0: ActionCreatorWithoutPayload<string>) => {
+		dispatch: (arg0: ActionCreatorWithPayload<number, string>) => {
 			(arg0: { totalRecordCount: number; totalPagecount: number }): void;
 			new (): any;
 		}
@@ -90,7 +91,6 @@ export const getPaginationData = () => {
 	};
 };
 
-export default paginationSlice;
-
-// TODO DO I NEED THESE EXPORTS FOR MY APPLICATION?
 export const paginationActions = paginationSlice.actions;
+
+export default paginationSlice;

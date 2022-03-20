@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import './App.css';
 
@@ -10,11 +10,17 @@ import HierarchyView from './Components/Hierarchy/HierarchyView';
 import SubEventView from './Components/SubEvents/SubEventView';
 import Footer from './Components/UI/Footer';
 import { AppListContextProvider } from './store/app-list-context';
+import { useAppDispatch } from './store/hooks';
+import { fetchEventData } from './store/event-slice';
 // import Status from './Interfaces/statusInterface';
 // import EventContext from './store/event-context';
 
 function App() {
-	// const eventCtx = useContext(EventContext);
+	const dispatch = useAppDispatch();
+
+	useEffect(() => {
+		dispatch(fetchEventData());
+	});
 
 	//TODO => MOVE STATUS HANDLING TO A COMPONENT...???
 	function setStatusHandler(statusCode: number) {

@@ -1,14 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import SubEventContext from '../../store/sub-event-context';
 import SubEventViewHeader from './SubEventViewHeader';
 import SubEventViewItem from './SubEventViewItem';
 import classes from './SubEventView.module.css';
+import { useAppSelector } from '../../store/hooks';
 
 const SubEventView: React.FC<{
 	setStatus: (statusCode: number) => string;
 }> = (props) => {
-	const subEventCtx = useContext(SubEventContext);
+	const { subEvents } = useAppSelector((state) => state.subEvents);
 
 	let subEventContent = (
 		<tbody>
@@ -18,10 +18,10 @@ const SubEventView: React.FC<{
 		</tbody>
 	);
 
-	if (subEventCtx.subEvents) {
+	if (subEvents) {
 		subEventContent = (
 			<tbody>
-				{subEventCtx.subEvents.map((task) => (
+				{subEvents.map((task) => (
 					<SubEventViewItem
 						key={task.key}
 						status={props.setStatus(task.status)}
@@ -39,25 +39,26 @@ const SubEventView: React.FC<{
 		);
 	}
 
-	if (subEventCtx.error) {
-		subEventContent = (
-			<tbody>
-				<tr>
-					<td>{subEventCtx.error}</td>
-				</tr>
-			</tbody>
-		);
-	}
+	// TODO IMPLEMENT ERROR HANDLING STATES
+	// if (subEventCtx.error) {
+	// 	subEventContent = (
+	// 		<tbody>
+	// 			<tr>
+	// 				<td>{subEventCtx.error}</td>
+	// 			</tr>
+	// 		</tbody>
+	// 	);
+	// }
 
-	if (subEventCtx.isLoading) {
-		subEventContent = (
-			<tbody>
-				<tr>
-					<td>Loading...</td>
-				</tr>
-			</tbody>
-		);
-	}
+	// if (subEventCtx.isLoading) {
+	// 	subEventContent = (
+	// 		<tbody>
+	// 			<tr>
+	// 				<td>Loading...</td>
+	// 			</tr>
+	// 		</tbody>
+	// 	);
+	// }
 
 	return (
 		<div className={classes['sub-event-view']}>

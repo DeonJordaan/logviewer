@@ -1,23 +1,24 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import SubEventContext from '../../store/sub-event-context';
 import HierarchyViewHeader from './HierarchyViewHeader';
 import HierarchyViewItem from './HierarchyViewItem';
 import HierarchyViewMainItem from './HierarchyViewMainItem';
 import classes from './HierarchyView.module.css';
+import { useAppSelector } from '../../store/hooks';
 
 const HierarchyView: React.FC<{
 	setStatus: (statusCode: number) => string;
 }> = (props) => {
-	const subEventCtx = useContext(SubEventContext);
-	const { hierarchy } = subEventCtx;
+	const { hierarchy, selectedTask } = useAppSelector(
+		(state) => state.subEvents
+	);
 
 	let app: string | undefined = 'App';
 	let host: string | undefined = 'Host';
 
-	if (subEventCtx.selectedTask && subEventCtx.selectedTask.length > 0) {
-		app = subEventCtx.selectedTask[0].App;
-		host = subEventCtx.selectedTask[0].host;
+	if (selectedTask && selectedTask.length > 0) {
+		app = selectedTask[0].App;
+		host = selectedTask[0].host;
 	}
 
 	let hierarchyContent = (
@@ -46,25 +47,26 @@ const HierarchyView: React.FC<{
 		);
 	}
 
-	if (subEventCtx.error) {
-		hierarchyContent = (
-			<tbody>
-				<tr>
-					<td>{subEventCtx.error}</td>
-				</tr>
-			</tbody>
-		);
-	}
+	// TODO IMPLEMENT ERROR HANDLING STATES
+	// if (subEventCtx.error) {
+	// 	hierarchyContent = (
+	// 		<tbody>
+	// 			<tr>
+	// 				<td>{subEventCtx.error}</td>
+	// 			</tr>
+	// 		</tbody>
+	// 	);
+	// }
 
-	if (subEventCtx.isLoading) {
-		hierarchyContent = (
-			<tbody>
-				<tr>
-					<td>Loading...</td>
-				</tr>
-			</tbody>
-		);
-	}
+	// if (subEventCtx.isLoading) {
+	// 	hierarchyContent = (
+	// 		<tbody>
+	// 			<tr>
+	// 				<td>Loading...</td>
+	// 			</tr>
+	// 		</tbody>
+	// 	);
+	// }
 
 	return (
 		<div className={classes['hierarchy-view']}>
