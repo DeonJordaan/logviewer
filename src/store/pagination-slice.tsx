@@ -74,6 +74,7 @@ export const getPaginationData = () => {
 					totalPagecount: Math.ceil(totalRecordCount / pageSize),
 				};
 			});
+			console.log(pageData);
 			return pageData;
 		};
 

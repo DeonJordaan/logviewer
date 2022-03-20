@@ -11,15 +11,19 @@ const PaginationControl: React.FC = () => {
 	);
 
 	const goToFirstPage = () => {
+		console.log(pageNumber);
 		dispatch(paginationActions.FIRST_PAGE);
 	};
 	const getPrevPage = () => {
+		console.log(pageNumber);
 		dispatch(paginationActions.PREV_PAGE);
 	};
 	const getNextPage = () => {
+		console.log(pageNumber);
 		dispatch(paginationActions.NEXT_PAGE);
 	};
 	const goToLastPage = () => {
+		console.log(pageNumber);
 		dispatch(paginationActions.LAST_PAGE);
 	};
 

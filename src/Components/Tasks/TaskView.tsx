@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import TaskViewHeader from './TaskViewHeader';
 import TaskViewItem from './TaskViewItem';
 import classes from './TaskView.module.css';
@@ -11,7 +11,26 @@ import { useAppSelector } from '../../store/hooks';
 const TaskView: React.FC<{
 	setStatus: (statusCode: number) => string;
 }> = (props) => {
-	const displayData = useAppSelector((state) => state.events.displayData);
+	const events = useAppSelector((state) => state.events.events);
+	const { pageNumber } = useAppSelector((state) => state.pagination);
+	const [displayData, setDisplayData] = useState<Event[]>();
+
+	useEffect(() => {
+		const from: number = ((0 + 1) * pageNumber - 1) * 10;
+		// console.log(from);
+		const to: number = 10 * pageNumber;
+		// console.log(to);
+		const setDisplayPage = (data: Event[]) => {
+			setDisplayData(
+				data.slice(
+					`${from}` as unknown as number,
+					`${to}` as unknown as number
+				)
+			);
+		};
+
+		setDisplayPage(events);
+	}, [events, pageNumber]);
 
 	console.log(displayData);
 
