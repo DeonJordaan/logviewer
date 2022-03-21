@@ -6,25 +6,25 @@ import classes from './Pagination.module.css';
 
 const PaginationControl: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const { pageNumber, totalPageCount } = useAppSelector(
-		(state) => state.pagination
+	const pageNumber = useAppSelector((state) => state.pagination.pageNumber);
+	const totalPageCount = useAppSelector(
+		(state) => state.pagination.totalPageCount
 	);
+	// const { pageNumber, totalPageCount } = useAppSelector(
+	// 	(state) => state.pagination
+	// );
 
 	const goToFirstPage = () => {
-		console.log(pageNumber);
-		dispatch(paginationActions.FIRST_PAGE);
+		dispatch(paginationActions.FIRST_PAGE());
 	};
 	const getPrevPage = () => {
-		console.log(pageNumber);
-		dispatch(paginationActions.PREV_PAGE);
+		dispatch(paginationActions.PREV_PAGE());
 	};
 	const getNextPage = () => {
-		console.log(pageNumber);
-		dispatch(paginationActions.NEXT_PAGE);
+		dispatch(paginationActions.NEXT_PAGE());
 	};
 	const goToLastPage = () => {
-		console.log(pageNumber);
-		dispatch(paginationActions.LAST_PAGE);
+		dispatch(paginationActions.LAST_PAGE());
 	};
 
 	return (

@@ -18,7 +18,7 @@ const SubEventView: React.FC<{
 		</tbody>
 	);
 
-	if (subEvents) {
+	if (subEvents.length > 0) {
 		subEventContent = (
 			<tbody>
 				{subEvents.map((task) => (

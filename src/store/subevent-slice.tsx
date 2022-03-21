@@ -1,8 +1,4 @@
-import {
-	ActionCreatorWithPayload,
-	createSlice,
-	PayloadAction,
-} from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import Event from '../types/event';
 import db from './firebase';
@@ -31,28 +27,16 @@ const subEventSlice = createSlice({
 	name: 'subEvents',
 	initialState: initialSubEventState,
 	reducers: {
-		SET_SUB_EVENTS(
-			state = initialSubEventState,
-			action: PayloadAction<Event[]>
-		) {
+		SET_SUB_EVENTS(state, action: PayloadAction<Event[]>) {
 			state.subEvents = action.payload;
 		},
-		SET_PARENT_ID(
-			state = initialSubEventState,
-			action: PayloadAction<number>
-		) {
+		SET_PARENT_ID(state, action: PayloadAction<number>) {
 			state.parentId = action.payload;
 		},
-		SET_FETCH_ID(
-			state = initialSubEventState,
-			action: PayloadAction<number>
-		) {
+		SET_FETCH_ID(state, action: PayloadAction<number>) {
 			state.fetchId = action.payload;
 		},
-		SET_SUB_EVENT_PARENT_ID(
-			state = initialSubEventState,
-			action: PayloadAction<number>
-		) {
+		SET_SUB_EVENT_PARENT_ID(state, action: PayloadAction<number>) {
 			state.subEventParentId = action.payload;
 		},
 		// SET_SELECTED_TASK(state = initialSubEventState, action) {
@@ -60,27 +44,37 @@ const subEventSlice = createSlice({
 		// 		(task) => task.id === parentId
 		// 	);
 		// },
-		// 	SET_SELECTED_SUB_EVENT(state, action){
-		// 		subEvents.filter((subEvent) => subEvent.id === subEventParentId)
-		// 	};,
+		SET_SELECTED_SUB_EVENT(state) {
+			const { subEvents, subEventParentId } = state;
+			subEvents.filter((subEvent) => subEvent.id === subEventParentId);
+		},
+
+		SET_HIERARCHY(state) {
+			const oldHierarchy = state.hierarchy;
+			const newHierarchy = [...oldHierarchy, ...state.selectedSubEvent];
+			state.hierarchy = newHierarchy;
+			console.log(state.hierarchy);
+		},
 	},
 });
 
-export const setHierarchy = () => {
-	return (_dispatch: any, getState: () => any) => {
-		const state = getState();
-		state.hierarchy = state.hierarchy.push(state.selectedSubEvent);
-	};
-};
+// export const setHierarchy = () => {
+// 	return (_dispatch: any, getState: () => any) => {
+// 		const state = getState();
 
-export const setSelectedSubEvent = () => {
-	return (_dispatch: any, getState: () => any) => {
-		const state = getState();
-		state.selectedSubEvent = state.subEvents.filter(
-			(subEvent: Event) => subEvent.id === state.subEventParentId
-		);
-	};
-};
+// 		state.hierarchy.push(state.selectedSubEvent);
+// 	};
+// };
+
+// export const setSelectedSubEvent = () => {
+// 	return (_dispatch: any, getState: () => subEventState) => {
+// 		const state = getState() as subEventState;
+// 		const selected: Event[] = state.subEvents.filter(
+// 			(subEvent: Event) => subEvent.id === state.subEventParentId
+// 		);
+// 		state.selectedSubEvent = selected;
+// 	};
+// };
 
 // export const setSelectedTask = (selectedEvent: Event[]) => {
 // 	return (_dispatch: any, getState: () => any) => {
@@ -93,26 +87,9 @@ export const setSelectedSubEvent = () => {
 
 export const fetchSubEventData = (fetchId: number) => {
 	return async (
-		dispatch: (arg0: ActionCreatorWithPayload<Event[], string>) => {
-			(
-				arg0: {
-					key: number;
-					id: number;
-					App: string;
-					taskCode: string;
-					startTime: string;
-					endTime: string;
-					subEvents: number;
-					host: string;
-					message: string;
-					status: number;
-					parentId: number;
-				}[]
-			): void;
-			new (): any;
-		}
+		dispatch: (arg0: { payload: Event[]; type: string }) => void
 	) => {
-		const getSubEvents = async () => {
+		const getSubEvents = async (fetchId: number) => {
 			let subEventData: Event[] = [];
 
 			const subEventsRef = collection(db, 'subEvents');
@@ -147,10 +124,11 @@ export const fetchSubEventData = (fetchId: number) => {
 		};
 
 		try {
-			const subEventsData = await getSubEvents();
-			dispatch(subEventSlice.actions.SET_SUB_EVENTS)(subEventsData);
+			const subEventsData = await getSubEvents(fetchId);
+			dispatch(subEventSlice.actions.SET_SUB_EVENTS(subEventsData));
+			console.log(subEventsData);
 		} catch (error) {
-			// TODO COmplete error handling
+			// TODO Complete error handling
 			console.log(error);
 		}
 	};

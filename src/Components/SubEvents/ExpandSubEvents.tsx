@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 import {
-	setHierarchy,
-	setSelectedSubEvent,
+	// setHierarchy,
+	// setSelectedSubEvent,
 	subEventActions,
 } from '../../store/subevent-slice';
 import classes from './ExpandSubEvents.module.css';
@@ -13,17 +13,15 @@ const ExpandSubEvents: React.FC<{
 	subEvents: number;
 }> = React.memo((props) => {
 	const dispatch = useAppDispatch();
-	const subEvents = useAppSelector(
-		(state: { subEvents: any }) => state.subEvents
-	); //FIXME
+	const { hierarchy } = useAppSelector((state) => state.subEvents); //FIXME
 
 	// Get id of event for when it is clicked
 	const id = React.useMemo(() => props.id, [props.id]);
 
 	let eventIds: number[] = useMemo(() => [], []);
 
-	if (subEvents.hierarchy) {
-		for (const event of subEvents.hierarchy) {
+	if (hierarchy) {
+		for (const event of hierarchy) {
 			eventIds.push(event.id);
 		}
 	}
@@ -36,21 +34,23 @@ const ExpandSubEvents: React.FC<{
 	}
 
 	// Filter the event from the subEvent array and set it to selectedSubEvent
-	useEffect(() => {
-		dispatch(setSelectedSubEvent());
-	}, [dispatch]);
+	// useEffect(() => {
+	// dispatch(setSelectedSubEvent());
+	// }, [dispatch]);
 
 	// Respond to subevent button click event
 	const clickHandler = useCallback(() => {
 		dispatch(subEventActions.SET_SUB_EVENT_PARENT_ID(id));
 		dispatch(subEventActions.SET_FETCH_ID(id));
+		dispatch(subEventActions.SET_SELECTED_SUB_EVENT());
 	}, [dispatch, id]);
 
 	// TODO
 	// Add the selectedSubEvent to the hierarchy
 	useEffect(() => {
 		if (!eventIds.includes(id)) {
-			dispatch(setHierarchy());
+			dispatch(subEventActions.SET_HIERARCHY());
+			// dispatch(setHierarchy());
 		}
 	}, [dispatch, eventIds, id]);
 

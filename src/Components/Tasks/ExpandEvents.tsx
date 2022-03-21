@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import {
 	fetchSubEventData,
@@ -14,6 +14,7 @@ const ExpandEvents: React.FC<{
 	const dispatch = useAppDispatch();
 
 	// const { events } = useAppSelector((state) => state.events);
+	const { fetchId } = useAppSelector((state) => state.subEvents);
 	// const { parentId, fetchId } = useAppSelector((state) => state.subEvents);
 
 	const id = props.id;
@@ -30,9 +31,9 @@ const ExpandEvents: React.FC<{
 		dispatch(subEventActions.SET_FETCH_ID(id));
 	};
 
-	// useEffect(() => {
-	// 	dispatch(fetchSubEventData(fetchId));
-	// }, [dispatch, fetchId]);
+	useEffect(() => {
+		dispatch(fetchSubEventData(fetchId));
+	}, [dispatch, fetchId]);
 
 	// useEffect(() => {
 	// 	dispatch(setSelectedTask(events));

@@ -19,7 +19,7 @@ const eventSlice = createSlice({
 	name: 'events',
 	initialState: initialEventState,
 	reducers: {
-		SET_EVENTS(state = initialEventState, action: PayloadAction<Event[]>) {
+		SET_EVENTS(state, action: PayloadAction<Event[]>) {
 			state.events = action.payload;
 		},
 	},
@@ -63,6 +63,7 @@ export const fetchEventData = () => {
 		try {
 			const eventsData = await getEvents();
 			dispatch(eventSlice.actions.SET_EVENTS(eventsData));
+			console.log(eventsData);
 		} catch (error) {
 			// TODO Complete error handling
 			console.log(error);

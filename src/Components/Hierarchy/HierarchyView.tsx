@@ -30,6 +30,7 @@ const HierarchyView: React.FC<{
 	);
 
 	if (hierarchy.length > 0) {
+		console.log(hierarchy);
 		hierarchyContent = (
 			<tbody>
 				{hierarchy.map((task) => (
@@ -91,4 +92,4 @@ const HierarchyView: React.FC<{
 };
 
 // export default HierarchyView;
-export default React.memo(HierarchyView);
+export default HierarchyView;

@@ -10,27 +10,27 @@ import HierarchyView from './Components/Hierarchy/HierarchyView';
 import SubEventView from './Components/SubEvents/SubEventView';
 import Footer from './Components/UI/Footer';
 import { AppListContextProvider } from './store/app-list-context';
-import { useAppDispatch, useAppSelector } from './store/hooks';
+import { useAppDispatch } from './store/hooks';
 import { fetchEventData } from './store/event-slice';
-import { fetchSubEventData } from './store/subevent-slice';
+// import { fetchSubEventData } from './store/subevent-slice';
 import { getPaginationData } from './store/pagination-slice';
 // import Status from './Interfaces/statusInterface';
 
 function App() {
 	const dispatch = useAppDispatch();
-	const { subEvents, fetchId } = useAppSelector((state) => state.subEvents);
+	// const { fetchId } = useAppSelector((state) => state.subEvents);
 
 	useEffect(() => {
 		dispatch(fetchEventData());
 		dispatch(getPaginationData());
 	}, [dispatch]);
 
-	useEffect(() => {
-		// dispatch(fetchSubEventData(fetchId))
-		if (subEvents) {
-			dispatch(fetchSubEventData(fetchId));
-		}
-	}, [dispatch, fetchId, subEvents]);
+	// useCallback(() => {
+	// 	// dispatch(fetchSubEventData(fetchId))
+	// 	// if (subEvents.length > 0) {
+	// 	dispatch(fetchSubEventData(fetchId));
+	// 	// }
+	// }, [dispatch, fetchId]);
 
 	//TODO => MOVE STATUS HANDLING TO A COMPONENT...???
 	function setStatusHandler(statusCode: number) {
