@@ -42,11 +42,14 @@ const ExpandSubEvents: React.FC<{
 	const clickHandler = useCallback(() => {
 		dispatch(subEventActions.SET_SUB_EVENT_PARENT_ID(id));
 		dispatch(subEventActions.SET_FETCH_ID(id));
+		// TODO
+		// As with Hierarchy below, should I be passing the selected event to selectedSubEvent implicitly?
 		dispatch(subEventActions.SET_SELECTED_SUB_EVENT());
 	}, [dispatch, id]);
 
 	// TODO
 	// Add the selectedSubEvent to the hierarchy
+	// Should I consider a different approach where I implicitly pass the selectedSubEvent here, and not just rely on it happening when id changes? I THINK so.
 	useEffect(() => {
 		if (!eventIds.includes(id)) {
 			dispatch(subEventActions.SET_HIERARCHY());

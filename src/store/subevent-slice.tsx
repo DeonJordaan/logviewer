@@ -49,11 +49,15 @@ const subEventSlice = createSlice({
 			subEvents.filter((subEvent) => subEvent.id === subEventParentId);
 		},
 
+		// FIXME ERRORS!
 		SET_HIERARCHY(state) {
-			const oldHierarchy = state.hierarchy;
-			const newHierarchy = [...oldHierarchy, ...state.selectedSubEvent];
-			state.hierarchy = newHierarchy;
-			console.log(state.hierarchy);
+			// NOTE This throws type error I cannot resolve
+			// state.hierarchy.push(state.selectedSubEvent)
+			// NOTE Trying something else
+			return [state.hierarchy, ...state.selectedSubEvent]; // As per something spotted in the docs, haven't tested this
+			// const oldHierarchy = state.hierarchy;
+			// const newHierarchy = [...oldHierarchy, ...state.selectedSubEvent];
+			// state.hierarchy = newHierarchy;
 		},
 	},
 });
