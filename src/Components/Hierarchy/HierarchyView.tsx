@@ -9,16 +9,15 @@ import { useAppSelector } from '../../store/hooks';
 const HierarchyView: React.FC<{
 	setStatus: (statusCode: number) => string;
 }> = (props) => {
-	const { hierarchy, selectedTask } = useAppSelector(
-		(state) => state.subEvents
-	);
+	const { hierarchy } = useAppSelector((state) => state.subEvents);
+	const { selectedEvent } = useAppSelector((state) => state.events);
 
 	let app: string | undefined = 'App';
 	let host: string | undefined = 'Host';
 
-	if (selectedTask && selectedTask.length > 0) {
-		app = selectedTask[0].App;
-		host = selectedTask[0].host;
+	if (selectedEvent && selectedEvent.length > 0) {
+		app = selectedEvent[0].App;
+		host = selectedEvent[0].host;
 	}
 
 	let hierarchyContent = (
@@ -33,15 +32,15 @@ const HierarchyView: React.FC<{
 		console.log(hierarchy);
 		hierarchyContent = (
 			<tbody>
-				{hierarchy.map((task) => (
+				{hierarchy.map((event) => (
 					<HierarchyViewItem
-						key={task.key}
-						subEvents={task.subEvents}
-						status={props.setStatus(task.status)}
-						startTime={task.startTime}
-						endTime={task.endTime}
-						id={task.id}
-						message={task.message}
+						key={event.key}
+						subEvents={event.subEvents}
+						status={props.setStatus(event.status)}
+						startTime={event.startTime}
+						endTime={event.endTime}
+						id={event.id}
+						message={event.message}
 					/>
 				))}
 			</tbody>

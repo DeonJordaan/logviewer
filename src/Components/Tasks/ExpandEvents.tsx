@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { eventActions } from '../../store/event-slice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import {
 	fetchSubEventData,
@@ -35,9 +36,9 @@ const ExpandEvents: React.FC<{
 		dispatch(fetchSubEventData(fetchId));
 	}, [dispatch, fetchId]);
 
-	// useEffect(() => {
-	// 	dispatch(setSelectedTask(events));
-	// }, [parentId, dispatch, events]);
+	useEffect(() => {
+		dispatch(eventActions.SET_SELECTED_EVENT(id));
+	}, [dispatch, id]);
 
 	// console.log(subEventCtx.selectedTask);
 
@@ -48,4 +49,4 @@ const ExpandEvents: React.FC<{
 	);
 };
 
-export default React.memo(ExpandEvents);
+export default ExpandEvents;

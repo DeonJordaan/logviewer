@@ -5,7 +5,7 @@ import db from './firebase';
 
 interface subEventState {
 	subEvents: Event[];
-	selectedTask: Event[];
+	// selectedTask: Event[];
 	selectedSubEvent: Event[];
 	hierarchy: Event[];
 	parentId: number;
@@ -15,7 +15,7 @@ interface subEventState {
 
 const initialSubEventState: subEventState = {
 	subEvents: [],
-	selectedTask: [],
+	// selectedTask: [],
 	selectedSubEvent: [],
 	hierarchy: [],
 	parentId: 0,
@@ -44,17 +44,21 @@ const subEventSlice = createSlice({
 		// 		(task) => task.id === parentId
 		// 	);
 		// },
-		SET_SELECTED_SUB_EVENT(state) {
+		// FIXME THIS IS CAUSING INFINITE LOOP/RERENDER
+		SET_SELECTED_SUB_EVENT(state, action: PayloadAction<void>) {
 			const { subEvents, subEventParentId } = state;
-			subEvents.filter((subEvent) => subEvent.id === subEventParentId);
+			const item = subEvents.filter(
+				(subEvent) => subEvent.id === subEventParentId
+			);
+			state.selectedSubEvent = item;
 		},
 
-		// FIXME ERRORS!
+		// FIXME ERRORS
 		SET_HIERARCHY(state) {
 			// NOTE This throws type error I cannot resolve
-			// state.hierarchy.push(state.selectedSubEvent)
+			state.hierarchy.push(...state.selectedSubEvent);
 			// NOTE Trying something else
-			return [state.hierarchy, ...state.selectedSubEvent]; // As per something spotted in the docs, haven't tested this
+			// return [state.hierarchy, ...state.selectedSubEvent]; // As per something spotted in the docs, haven't tested this
 			// const oldHierarchy = state.hierarchy;
 			// const newHierarchy = [...oldHierarchy, ...state.selectedSubEvent];
 			// state.hierarchy = newHierarchy;
@@ -103,6 +107,7 @@ export const fetchSubEventData = (fetchId: number) => {
 				where('event.parentId', '==', fetchId)
 			);
 
+			console.log(fetchId);
 			const querySnapshot = await getDocs(subEventQuery);
 
 			querySnapshot.forEach((doc) => subEventData.push(doc.get('event')));

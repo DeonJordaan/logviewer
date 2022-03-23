@@ -13,7 +13,9 @@ const ExpandSubEvents: React.FC<{
 	subEvents: number;
 }> = React.memo((props) => {
 	const dispatch = useAppDispatch();
-	const { hierarchy } = useAppSelector((state) => state.subEvents); //FIXME
+	const { hierarchy, selectedSubEvent } = useAppSelector(
+		(state) => state.subEvents
+	); //FIXME
 
 	// Get id of event for when it is clicked
 	const id = React.useMemo(() => props.id, [props.id]);
@@ -34,9 +36,11 @@ const ExpandSubEvents: React.FC<{
 	}
 
 	// Filter the event from the subEvent array and set it to selectedSubEvent
-	// useEffect(() => {
-	// dispatch(setSelectedSubEvent());
-	// }, [dispatch]);
+	useEffect(() => {
+		if (selectedSubEvent) {
+			dispatch(subEventActions.SET_SELECTED_SUB_EVENT());
+		}
+	}, [dispatch, selectedSubEvent]);
 
 	// Respond to subevent button click event
 	const clickHandler = useCallback(() => {
@@ -44,12 +48,12 @@ const ExpandSubEvents: React.FC<{
 		dispatch(subEventActions.SET_FETCH_ID(id));
 		// TODO
 		// As with Hierarchy below, should I be passing the selected event to selectedSubEvent implicitly?
-		dispatch(subEventActions.SET_SELECTED_SUB_EVENT());
+		// dispatch(subEventActions.SET_SELECTED_SUB_EVENT());
 	}, [dispatch, id]);
 
 	// TODO
 	// Add the selectedSubEvent to the hierarchy
-	// Should I consider a different approach where I implicitly pass the selectedSubEvent here, and not just rely on it happening when id changes? I THINK so.
+	// Should I consider a different approach where I implicitly pass the selectedSubEvent here, and not just rely on it happening when ID changes? I THINK so.
 	useEffect(() => {
 		if (!eventIds.includes(id)) {
 			dispatch(subEventActions.SET_HIERARCHY());

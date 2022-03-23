@@ -6,7 +6,7 @@ import { useAppSelector } from '../../store/hooks';
 const HierarchyViewMainItem: React.FC<{
 	setStatus: (statusCode: number) => string;
 }> = (props) => {
-	const { selectedTask } = useAppSelector((state) => state.subEvents);
+	const { selectedEvent } = useAppSelector((state) => state.events);
 
 	let hierarchyViewMainItemContent = (
 		<tbody>
@@ -16,10 +16,10 @@ const HierarchyViewMainItem: React.FC<{
 		</tbody>
 	);
 
-	if (selectedTask) {
+	if (selectedEvent) {
 		hierarchyViewMainItemContent = (
 			<tbody>
-				{selectedTask.map((task) => (
+				{selectedEvent.map((task) => (
 					<tr
 						key={task.key}
 						className={classes['hierarchy-main-item']}
