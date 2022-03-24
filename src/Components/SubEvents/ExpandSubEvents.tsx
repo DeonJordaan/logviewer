@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 import {
+	fetchSubEventData,
 	// setHierarchy,
 	// setSelectedSubEvent,
 	subEventActions,
@@ -13,9 +14,7 @@ const ExpandSubEvents: React.FC<{
 	subEvents: number;
 }> = React.memo((props) => {
 	const dispatch = useAppDispatch();
-	const { hierarchy, selectedSubEvent } = useAppSelector(
-		(state) => state.subEvents
-	); //FIXME
+	const { hierarchy } = useAppSelector((state) => state.subEvents); //FIXME
 
 	// Get id of event for when it is clicked
 	const id = React.useMemo(() => props.id, [props.id]);
@@ -36,30 +35,35 @@ const ExpandSubEvents: React.FC<{
 	}
 
 	// Filter the event from the subEvent array and set it to selectedSubEvent
-	useEffect(() => {
-		if (selectedSubEvent) {
-			dispatch(subEventActions.SET_SELECTED_SUB_EVENT());
-		}
-	}, [dispatch, selectedSubEvent]);
+	// useEffect(() => {
+	// if (selectedSubEvent) {
+	// dispatch(subEventActions.SET_SELECTED_SUB_EVENT(id));
+	// }
+	// }, [dispatch, id]);
 
 	// Respond to subevent button click event
 	const clickHandler = useCallback(() => {
 		dispatch(subEventActions.SET_SUB_EVENT_PARENT_ID(id));
 		dispatch(subEventActions.SET_FETCH_ID(id));
-		// TODO
-		// As with Hierarchy below, should I be passing the selected event to selectedSubEvent implicitly?
-		// dispatch(subEventActions.SET_SELECTED_SUB_EVENT());
-	}, [dispatch, id]);
-
-	// TODO
-	// Add the selectedSubEvent to the hierarchy
-	// Should I consider a different approach where I implicitly pass the selectedSubEvent here, and not just rely on it happening when ID changes? I THINK so.
-	useEffect(() => {
+		dispatch(subEventActions.SET_SELECTED_SUB_EVENT(id));
 		if (!eventIds.includes(id)) {
 			dispatch(subEventActions.SET_HIERARCHY());
 			// dispatch(setHierarchy());
 		}
+		// TODO
+		// As with Hierarchy below, should I be passing the selected event to selectedSubEvent implicitly?
+		// dispatch(subEventActions.SET_SELECTED_SUB_EVENT());
 	}, [dispatch, eventIds, id]);
+
+	// TODO
+	// Add the selectedSubEvent to the hierarchy
+	// Should I consider a different approach where I implicitly pass the selectedSubEvent here, and not just rely on it happening when ID changes? I THINK so.
+	// useEffect(() => {
+	// 	if (!eventIds.includes(id)) {
+	// 		dispatch(subEventActions.SET_HIERARCHY());
+	// 		// dispatch(setHierarchy());
+	// 	}
+	// }, [dispatch, eventIds, id]);
 
 	return (
 		<button onClick={clickHandler} className={importedClasses}>

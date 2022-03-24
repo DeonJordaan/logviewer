@@ -32,9 +32,10 @@ const ExpandEvents: React.FC<{
 		dispatch(subEventActions.SET_FETCH_ID(id));
 	};
 
-	useEffect(() => {
-		dispatch(fetchSubEventData(fetchId));
-	}, [dispatch, fetchId]);
+	// NOTE  Moved to subEventView
+	// useEffect(() => {
+	// 	dispatch(fetchSubEventData(fetchId));
+	// }, [dispatch, fetchId]);
 
 	useEffect(() => {
 		dispatch(eventActions.SET_SELECTED_EVENT(id));

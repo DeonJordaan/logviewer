@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import SubEventViewHeader from './SubEventViewHeader';
 import SubEventViewItem from './SubEventViewItem';
 import classes from './SubEventView.module.css';
-import { useAppSelector } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { fetchSubEventData } from '../../store/subevent-slice';
 
 const SubEventView: React.FC<{
 	setStatus: (statusCode: number) => string;
 }> = (props) => {
-	const { subEvents } = useAppSelector((state) => state.subEvents);
+	const dispatch = useAppDispatch();
+
+	const { subEvents, fetchId } = useAppSelector((state) => state.subEvents);
+
+	useEffect(() => {
+		dispatch(fetchSubEventData(fetchId));
+	}, [dispatch, fetchId]);
 
 	let subEventContent = (
 		<tbody>

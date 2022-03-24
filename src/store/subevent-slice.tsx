@@ -45,10 +45,10 @@ const subEventSlice = createSlice({
 		// 	);
 		// },
 		// FIXME THIS IS CAUSING INFINITE LOOP/RERENDER
-		SET_SELECTED_SUB_EVENT(state, action: PayloadAction<void>) {
-			const { subEvents, subEventParentId } = state;
+		SET_SELECTED_SUB_EVENT(state, action: PayloadAction<number>) {
+			const { subEvents } = state;
 			const item = subEvents.filter(
-				(subEvent) => subEvent.id === subEventParentId
+				(subEvent) => subEvent.id === action.payload
 			);
 			state.selectedSubEvent = item;
 		},
