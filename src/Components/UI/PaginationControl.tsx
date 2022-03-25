@@ -15,13 +15,15 @@ const PaginationControl: React.FC = () => {
 	// 	(state) => state.pagination
 	// );
 	const reset = () => {
-		dispatch(eventActions.SET_SELECTED_EVENT([]));
+		dispatch(eventActions.EVENT_RESET());
+		// dispatch(eventActions.SET_SELECTED_EVENT([]));
 		dispatch(subEventActions.SET_SUB_EVENTS([]));
 		dispatch(subEventActions.SET_FETCH_ID(0));
 		dispatch(subEventActions.RESET_HIERARCHY());
 		dispatch(subEventActions.SET_PARENT_ID(0));
 		dispatch(subEventActions.SET_SELECTED_SUB_EVENT([]));
 		dispatch(subEventActions.SET_SUB_EVENT_PARENT_ID(0));
+		// dispatch(subEventActions.SUB_EVENT_RESET());
 	};
 
 	const goToFirstPage = () => {

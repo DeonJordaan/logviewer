@@ -41,6 +41,9 @@ const HierarchyViewItem: React.FC<{
 
 	return (
 		<tr className={classes['hierarchy-item']}>
+			<td>
+				<button>Remove</button>
+			</td>
 			<td className={setClasses(props.status)}>{props.status}</td>
 			<td>{props.subEvents}</td>
 			<td>

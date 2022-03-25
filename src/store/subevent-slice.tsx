@@ -52,9 +52,10 @@ const subEventSlice = createSlice({
 		RESET_HIERARCHY(state) {
 			state.hierarchy = [];
 		},
-		// FIXME THIS FUCKEN THING DOESN'T WORK
-		SUB_EVENT_RESET(state) {
-			return initialState;
+		// FIXME THIS THING DOESN'T WORK
+		SUB_EVENT_RESET() {
+			Object.assign(initialState);
+			// return initialState;
 		},
 	},
 });
