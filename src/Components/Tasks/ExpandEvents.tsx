@@ -1,11 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { eventActions } from '../../store/event-slice';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import {
-	fetchSubEventData,
-	// setSelectedTask,
-	subEventActions,
-} from '../../store/subevent-slice';
+import { useAppDispatch } from '../../store/hooks';
+import { subEventActions } from '../../store/subevent-slice';
 import classes from './ExpandEvents.module.css';
 
 const ExpandEvents: React.FC<{
@@ -15,7 +11,6 @@ const ExpandEvents: React.FC<{
 	const dispatch = useAppDispatch();
 
 	// const { events } = useAppSelector((state) => state.events);
-	const { fetchId } = useAppSelector((state) => state.subEvents);
 	// const { parentId, fetchId } = useAppSelector((state) => state.subEvents);
 
 	const id = props.id;
@@ -30,6 +25,7 @@ const ExpandEvents: React.FC<{
 		console.log('EXPAND EVENT');
 		dispatch(subEventActions.SET_PARENT_ID(id));
 		dispatch(subEventActions.SET_FETCH_ID(id));
+		dispatch(eventActions.SET_SELECTED_EVENT(id));
 	};
 
 	// NOTE  Moved to subEventView
@@ -37,9 +33,10 @@ const ExpandEvents: React.FC<{
 	// 	dispatch(fetchSubEventData(fetchId));
 	// }, [dispatch, fetchId]);
 
-	useEffect(() => {
-		dispatch(eventActions.SET_SELECTED_EVENT(id));
-	}, [dispatch, id]);
+	// NOTE Moved up to the clickHandler
+	// useEffect(() => {
+	// 	dispatch(eventActions.SET_SELECTED_EVENT(id));
+	// }, [dispatch, id]);
 
 	// console.log(subEventCtx.selectedTask);
 

@@ -23,10 +23,13 @@ const eventSlice = createSlice({
 			state.events = action.payload;
 		},
 		// FIXME SEE RELATING TO RERENDER IN NOTES
-		SET_SELECTED_EVENT(state, action: PayloadAction<number>) {
+		SET_SELECTED_EVENT(state, action: PayloadAction<number | []>) {
 			const { events } = state;
 			const item = events.filter((event) => event.id === action.payload);
 			state.selectedEvent = item;
+		},
+		EVENT_RESET(state) {
+			state.selectedEvent = [];
 		},
 	},
 });

@@ -13,7 +13,7 @@ interface subEventState {
 	subEventParentId: number;
 }
 
-const initialSubEventState: subEventState = {
+const initialState: subEventState = {
 	subEvents: [],
 	// selectedTask: [],
 	selectedSubEvent: [],
@@ -25,7 +25,7 @@ const initialSubEventState: subEventState = {
 
 const subEventSlice = createSlice({
 	name: 'subEvents',
-	initialState: initialSubEventState,
+	initialState,
 	reducers: {
 		SET_SUB_EVENTS(state, action: PayloadAction<Event[]>) {
 			state.subEvents = action.payload;
@@ -39,59 +39,25 @@ const subEventSlice = createSlice({
 		SET_SUB_EVENT_PARENT_ID(state, action: PayloadAction<number>) {
 			state.subEventParentId = action.payload;
 		},
-		// SET_SELECTED_TASK(state = initialSubEventState, action) {
-		// 	state.selectedTask = state.tasks.filter(
-		// 		(task) => task.id === parentId
-		// 	);
-		// },
-		// FIXME THIS IS CAUSING INFINITE LOOP/RERENDER
-		SET_SELECTED_SUB_EVENT(state, action: PayloadAction<number>) {
+		SET_SELECTED_SUB_EVENT(state, action: PayloadAction<number | []>) {
 			const { subEvents } = state;
 			const item = subEvents.filter(
 				(subEvent) => subEvent.id === action.payload
 			);
 			state.selectedSubEvent = item;
 		},
-
-		// FIXME ERRORS
 		SET_HIERARCHY(state) {
-			// NOTE This throws type error I cannot resolve
 			state.hierarchy.push(...state.selectedSubEvent);
-			// NOTE Trying something else
-			// return [state.hierarchy, ...state.selectedSubEvent]; // As per something spotted in the docs, haven't tested this
-			// const oldHierarchy = state.hierarchy;
-			// const newHierarchy = [...oldHierarchy, ...state.selectedSubEvent];
-			// state.hierarchy = newHierarchy;
+		},
+		RESET_HIERARCHY(state) {
+			state.hierarchy = [];
+		},
+		// FIXME THIS FUCKEN THING DOESN'T WORK
+		SUB_EVENT_RESET(state) {
+			return initialState;
 		},
 	},
 });
-
-// export const setHierarchy = () => {
-// 	return (_dispatch: any, getState: () => any) => {
-// 		const state = getState();
-
-// 		state.hierarchy.push(state.selectedSubEvent);
-// 	};
-// };
-
-// export const setSelectedSubEvent = () => {
-// 	return (_dispatch: any, getState: () => subEventState) => {
-// 		const state = getState() as subEventState;
-// 		const selected: Event[] = state.subEvents.filter(
-// 			(subEvent: Event) => subEvent.id === state.subEventParentId
-// 		);
-// 		state.selectedSubEvent = selected;
-// 	};
-// };
-
-// export const setSelectedTask = (selectedEvent: Event[]) => {
-// 	return (_dispatch: any, getState: () => any) => {
-// 		const state = getState();
-// 		state.selectedTask = events.filter(
-// 			(task: Event) => task.id === state.parentId
-// 		);
-// 	};
-// };
 
 export const fetchSubEventData = (fetchId: number) => {
 	return async (
@@ -146,3 +112,30 @@ export const fetchSubEventData = (fetchId: number) => {
 export const subEventActions = subEventSlice.actions;
 
 export default subEventSlice;
+
+// export const setHierarchy = () => {
+// 	return (_dispatch: any, getState: () => any) => {
+// 		const state = getState();
+
+// 		state.hierarchy.push(state.selectedSubEvent);
+// 	};
+// };
+
+// export const setSelectedSubEvent = () => {
+// 	return (_dispatch: any, getState: () => subEventState) => {
+// 		const state = getState() as subEventState;
+// 		const selected: Event[] = state.subEvents.filter(
+// 			(subEvent: Event) => subEvent.id === state.subEventParentId
+// 		);
+// 		state.selectedSubEvent = selected;
+// 	};
+// };
+
+// export const setSelectedTask = (selectedEvent: Event[]) => {
+// 	return (_dispatch: any, getState: () => any) => {
+// 		const state = getState();
+// 		state.selectedTask = events.filter(
+// 			(task: Event) => task.id === state.parentId
+// 		);
+// 	};
+// };
