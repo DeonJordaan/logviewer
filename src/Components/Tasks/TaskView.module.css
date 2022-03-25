@@ -63,6 +63,7 @@ th {
 
 	tr {
 		margin: 0 0 1rem 0;
+		position: relative;
 	}
 
 	/* tr:nth-child(odd) {
@@ -73,8 +74,10 @@ th {
 		/* Behave  like a "row" */
 		border: none;
 		border-bottom: 1px solid #eee;
-		position: relative;
+		position: absolute;
 		padding-left: 50%;
+		/* FIXME Sort out column width below */
+		width: min-content;
 	}
 
 	td:before {
