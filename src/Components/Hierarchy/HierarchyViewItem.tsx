@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../ButtonBar/Button';
 
 import TaskTime from '../Tasks/TaskTime';
 
@@ -39,10 +40,14 @@ const HierarchyViewItem: React.FC<{
 		return taskClass;
 	}
 
+	const click = () => {
+		console.log('click');
+	};
+
 	return (
 		<tr className={classes['hierarchy-item']}>
 			<td>
-				<button>Remove</button>
+				<Button onClick={click} className={'upArrow'} />
 			</td>
 			<td className={setClasses(props.status)}>{props.status}</td>
 			<td>{props.subEvents}</td>

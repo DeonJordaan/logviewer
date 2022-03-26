@@ -14,6 +14,7 @@ const Button: React.FC<{
 		leftArrow: classes.leftArrow,
 		rightArrow: classes.rightArrow,
 		doubleRightArrow: classes.doubleRightArrow,
+		upArrow: classes.upArrow,
 	};
 
 	return (
