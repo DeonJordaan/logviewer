@@ -49,6 +49,9 @@ const subEventSlice = createSlice({
 		SET_HIERARCHY(state) {
 			state.hierarchy.push(...state.selectedSubEvent);
 		},
+		LEVELUP_HIERARCHY(state) {
+			state.hierarchy.splice(-1);
+		},
 		RESET_HIERARCHY(state) {
 			state.hierarchy = [];
 		},

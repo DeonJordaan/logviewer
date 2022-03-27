@@ -34,7 +34,7 @@
 	color: rgb(206, 64, 32);
 }
 
-.arrow-button {
+/* .upArrow {
 	width: 80px;
 	height: 30px;
 	display: inline-block;
@@ -51,22 +51,22 @@
 	-moz-appearance: none;
 }
 
-.arrow-button:hover,
-.arrow-button:focus {
+.upArrow:hover,
+.upArrow:focus {
 	background-color: #d1cfcf;
 }
 
-.arrow-button:focus {
+.upArrow:focus {
 	outline: 1px solid #fff;
 	outline-offset: -4px;
 }
 
-.arrow-button:active {
+.upArrow:active {
 	transform: scale(0.99);
-}
+} */
 
-.upArrow {
+/* .upArrow {
 	background: url('../svg/leftArrow.svg');
 	background-size: 80px 30px;
 	background-color: #ededed;
-}
+} */

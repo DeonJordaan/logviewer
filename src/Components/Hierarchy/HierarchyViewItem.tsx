@@ -1,9 +1,13 @@
 import React from 'react';
-import Button from '../ButtonBar/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleUp } from '@fortawesome/free-solid-svg-icons';
 
 import TaskTime from '../Tasks/TaskTime';
 
 import classes from './HierarchyViewItem.module.css';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { subEventActions } from '../../store/subevent-slice';
+import { useAppDispatch } from '../../store/hooks';
 
 const HierarchyViewItem: React.FC<{
 	subEvents: number;
@@ -13,6 +17,9 @@ const HierarchyViewItem: React.FC<{
 	id: number;
 	message: string;
 }> = (props) => {
+	const dispatch = useAppDispatch();
+	const upArrow = faAngleUp as IconProp;
+
 	function setClasses(taskStatus: string) {
 		let taskClass = '';
 		switch (taskStatus) {
@@ -40,14 +47,16 @@ const HierarchyViewItem: React.FC<{
 		return taskClass;
 	}
 
-	const click = () => {
-		console.log('click');
+	const levelUp = () => {
+		dispatch(subEventActions.LEVELUP_HIERARCHY());
 	};
 
 	return (
 		<tr className={classes['hierarchy-item']}>
 			<td>
-				<Button onClick={click} className={'upArrow'} />
+				<button type="button" onClick={levelUp} className="upArrow">
+					<FontAwesomeIcon icon={upArrow} />
+				</button>
 			</td>
 			<td className={setClasses(props.status)}>{props.status}</td>
 			<td>{props.subEvents}</td>
