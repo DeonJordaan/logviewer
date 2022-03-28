@@ -9,7 +9,7 @@
 
 .display {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	max-width: 100vw;
 }
 

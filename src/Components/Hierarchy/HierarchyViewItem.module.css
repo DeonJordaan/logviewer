@@ -34,6 +34,10 @@
 	color: rgb(206, 64, 32);
 }
 
+/* .upArrow button {
+	cursor: pointer;
+} */
+
 /* .upArrow {
 	width: 80px;
 	height: 30px;
@@ -49,7 +53,9 @@
 	transition: background 250ms ease-in-out, transform 150ms ease;
 	-webkit-appearance: none;
 	-moz-appearance: none;
-}
+} */
+
+/*
 
 .upArrow:hover,
 .upArrow:focus {

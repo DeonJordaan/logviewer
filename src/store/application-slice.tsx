@@ -32,16 +32,16 @@ export const fetchAppData = () => {
 
 			const querySnapshot = await getDocs(appsRef);
 
-			querySnapshot.forEach((doc) => appData.push(doc.get('event')));
+			querySnapshot.forEach((doc) =>
+				appData.push(doc.get('application'))
+			);
+			console.log(appData);
 
-			const allApps = appData.map((data) => {
-				return {
-					appName: data.appName,
-				};
-			});
+			const allApps = appData.map((app) => app.appName as unknown as Application);
 			console.log(allApps);
 
 			return allApps;
+			// return appData;
 		};
 
 		try {

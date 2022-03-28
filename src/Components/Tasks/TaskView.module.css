@@ -1,7 +1,7 @@
 .task-view {
 	margin: 0;
 	padding: 0 1.5rem 0 1.5rem;
-	max-width: 85vw;
+	width: 95vw;
 	min-height: 22rem;
 }
 
@@ -15,7 +15,7 @@
 }
 
 table {
-	width: 100%;
+	width: 95vw;
 	background-color: rgb(221, 218, 218);
 	border-radius: 3px;
 	table-layout: fixed;

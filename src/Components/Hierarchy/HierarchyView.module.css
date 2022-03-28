@@ -2,7 +2,7 @@
 	justify-content: center;
 	margin: 0;
 	padding: 0 1.5rem 0 1.5rem;
-	max-width: 85vw;
+	max-width: 95vw;
 }
 
 .hierarchy-header {
@@ -12,7 +12,7 @@
 	background-color: #ededed;
 	border: 0.1rem solid lightgray;
 	border-radius: 3px;
-	max-width: 85vw;
+	width: 95vw;
 }
 
 .box {

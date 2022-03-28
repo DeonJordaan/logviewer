@@ -3,36 +3,27 @@ import React, { useEffect } from 'react';
 import './App.css';
 
 import Header from './Components/UI/Header';
-import FilterBoard from './Components/Filter/FilterBoard';
 import PaginationControl from './Components/UI/PaginationControl';
 import TaskView from './Components/Tasks/TaskView';
 import HierarchyView from './Components/Hierarchy/HierarchyView';
 import SubEventView from './Components/SubEvents/SubEventView';
 import Footer from './Components/UI/Footer';
-import { AppListContextProvider } from './store/app-list-context';
 import { useAppDispatch } from './store/hooks';
 import { fetchEventData } from './store/event-slice';
 // import { fetchSubEventData } from './store/subevent-slice';
 import { getPaginationData } from './store/pagination-slice';
 import { fetchAppData } from './store/application-slice';
+import SearchBar from './Components/SearchBar/SearchBar';
 // import Status from './Interfaces/statusInterface';
 
 function App() {
 	const dispatch = useAppDispatch();
-	// const { fetchId } = useAppSelector((state) => state.subEvents);
 
 	useEffect(() => {
 		dispatch(fetchEventData());
 		dispatch(getPaginationData());
 		dispatch(fetchAppData());
 	}, [dispatch]);
-
-	// useCallback(() => {
-	// 	// dispatch(fetchSubEventData(fetchId))
-	// 	// if (subEvents.length > 0) {
-	// 	dispatch(fetchSubEventData(fetchId));
-	// 	// }
-	// }, [dispatch, fetchId]);
 
 	//TODO => MOVE STATUS HANDLING TO A COMPONENT...???
 	function setStatusHandler(statusCode: number) {
@@ -68,9 +59,7 @@ function App() {
 		<div className="App">
 			<Header />
 			<div className="display">
-				<AppListContextProvider>
-					<FilterBoard />
-				</AppListContextProvider>
+				<SearchBar />
 				<div className={'main-task-display'}>
 					<TaskView setStatus={setStatusHandler} />
 					<PaginationControl />

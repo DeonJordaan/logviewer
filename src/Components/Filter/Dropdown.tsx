@@ -22,7 +22,7 @@ const Dropdown: React.FC<{
 
 	return (
 		<Fragment>
-			<label>Select a Product Code</label>
+			<label>Select an Application</label>
 			<select
 				// name={props.name}
 				className={classes.select}
