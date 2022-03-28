@@ -7,8 +7,7 @@ const TotalRecordCount: React.FC = () => {
 
 	return (
 		<div className={classes['total-records']}>
-			<div>Total Records Available:</div>
-			<div>{totalRecordCount}</div>
+			<div>Total Records Available: {totalRecordCount}</div>
 		</div>
 	);
 };

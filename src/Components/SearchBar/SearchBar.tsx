@@ -10,7 +10,7 @@ const SearchBar: React.FC = () => {
 	const appNames = applications.map((app) => app as unknown as string);
 
 	return (
-		<div className={classes.searchbar}>
+		<div className={classes.search__bar}>
 			<Dropdown
 				names={appNames}
 				value={appNames || ''}

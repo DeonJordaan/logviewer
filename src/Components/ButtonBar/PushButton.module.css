@@ -48,7 +48,7 @@
 .front {
 	display: block;
 	position: relative;
-	padding: 0.5rem 1rem;
+	padding: 0.25rem 1rem;
 	border-radius: var(--border-radius);
 	font-size: 1.2em;
 	color: #fff;
