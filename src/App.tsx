@@ -14,6 +14,7 @@ import { useAppDispatch } from './store/hooks';
 import { fetchEventData } from './store/event-slice';
 // import { fetchSubEventData } from './store/subevent-slice';
 import { getPaginationData } from './store/pagination-slice';
+import { fetchAppData } from './store/application-slice';
 // import Status from './Interfaces/statusInterface';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
 	useEffect(() => {
 		dispatch(fetchEventData());
 		dispatch(getPaginationData());
+		dispatch(fetchAppData());
 	}, [dispatch]);
 
 	// useCallback(() => {

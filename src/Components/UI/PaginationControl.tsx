@@ -5,9 +5,9 @@ import { paginationActions } from '../../store/pagination-slice';
 import { subEventActions } from '../../store/subevent-slice';
 import Button from '../ButtonBar/Button';
 import classes from './Pagination.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAnglesRight } from '@fortawesome/free-solid-svg-icons';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faAnglesRight } from '@fortawesome/free-solid-svg-icons';
+// import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 const PaginationControl: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -48,11 +48,8 @@ const PaginationControl: React.FC = () => {
 
 	return (
 		<div className={classes['button-bar']}>
-			<Button
-				onClick={goToFirstPage}
-				className={'doubleLeftArrow'}
-			>
-				<FontAwesomeIcon icon={faAnglesRight}/>
+			<Button onClick={goToFirstPage} className={'doubleLeftArrow'}>
+				{/* <FontAwesomeIcon icon={faAnglesRight}/> */}
 			</Button>
 			<Button onClick={getPrevPage} className={'leftArrow'} />
 			<div className={classes['current-page']}>

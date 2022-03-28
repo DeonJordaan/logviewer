@@ -1,20 +1,19 @@
-// import { useContext } from 'react';
-// import AppListContext from '../../store/app-list-context';
+// import { useAppSelector } from '../../store/hooks';
 // import Dropdown from '../Filter/Dropdown';
 import classes from './SearchInput.module.css';
 
 const SearchInput: React.FC = () => {
-	// const appListCtx = useContext(AppListContext);
+	// const { applications } = useAppSelector((state) => state.applications);
 
-	// const appNames = appListCtx.apps;
+	// const { appName } = applications;
 
 	return (
 		<div className={classes['search-wrapper']}>
 			{/* <div>
 				<Dropdown
-					names={appNames}
+					names={appName}
 					// name={appName}
-					value={appNames || ''}
+					value={appName || ''}
 					// onChange={productNameChangeHandler}
 				/>
 			</div> */}
