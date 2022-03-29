@@ -19,6 +19,7 @@ const HierarchyViewItem: React.FC<{
 }> = (props) => {
 	const dispatch = useAppDispatch();
 	const upArrow = faAngleUp as IconProp;
+	const id = props.id;
 
 	function setClasses(taskStatus: string) {
 		let taskClass = '';
@@ -48,7 +49,7 @@ const HierarchyViewItem: React.FC<{
 	}
 
 	const levelUp = () => {
-		dispatch(subEventActions.LEVELUP_HIERARCHY());
+		dispatch(subEventActions.LEVELUP_HIERARCHY(id));
 	};
 
 	return (
@@ -66,7 +67,7 @@ const HierarchyViewItem: React.FC<{
 			<td>
 				<TaskTime time={props.endTime} />
 			</td>
-			<td>{props.id}</td>
+			<td>{id}</td>
 			<td>{props.message}</td>
 		</tr>
 	);

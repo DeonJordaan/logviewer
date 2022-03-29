@@ -49,8 +49,18 @@ const subEventSlice = createSlice({
 		SET_HIERARCHY(state) {
 			state.hierarchy.push(...state.selectedSubEvent);
 		},
-		LEVELUP_HIERARCHY(state) {
-			state.hierarchy.splice(-1);
+		LEVELUP_HIERARCHY(state, action: PayloadAction<number>) {
+			const clickedEvent = state.hierarchy.filter(
+				(event) => event.id === action.payload
+			);
+			const eventIndex = state.hierarchy.indexOf(clickedEvent[0]);
+
+			state.hierarchy.splice(eventIndex);
+			const newFetchId = state.hierarchy.at(-1)!.id;
+			state.fetchId = newFetchId;
+
+			// NOTE Removing the last event in hierarchy
+			// state.hierarchy.splice(-1);
 		},
 		RESET_HIERARCHY(state) {
 			state.hierarchy = [];
