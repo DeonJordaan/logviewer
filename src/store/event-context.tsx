@@ -2,7 +2,8 @@ import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import DataInterface from '../types/dataInterface';
 import Event from '../types/event';
 import db from './firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, doc, getDocs, setDoc } from 'firebase/firestore';
+// import { usePapaParse } from 'react-papaparse';
 
 type EventContextObject = {
 	tasks: Event[];
@@ -89,12 +90,48 @@ export const EventContextProvider: React.FC = (props) => {
 	// 	setDisplayPage(tasks);
 	// }, [pageNumber, tasks]);
 
-	// OPEN REVISED METHOD USING setDoc TO WRITE EVENTS TO FIRESTORE COLLECTION
+	// FIXMEFIXMEFIXME;
+	// const eventURL =
+	// 'C:/Users/Deon/Documents/GitHub/logViewer/logviewer/public/maineventdata.csv';
+	// const eventURL = '../public/maineventdata.csv';
+
 	// useEffect(() => {
-	// 	tasks.forEach((event) => {
-	// 		setDoc(doc(db, 'events', `${event.id}`), { event });
+	// 	const ReadRemoteFile = () => {
+	// 		const { readRemoteFile } = usePapaParse();
+
+	// 		const handleReadRemoteFile = () => {
+	// 			readRemoteFile(eventURL, {
+	// 				complete: (results) => {
+	// 					console.log('---------------------------');
+	// 					console.log('Results:', results);
+	// 					console.log('---------------------------');
+	// 				},
+	// 				download: true,
+	// 				header: true,
+	// 			});
+	// 		};
+	// 		handleReadRemoteFile();
+	// 	};
+	// 	ReadRemoteFile();
+	// }, []);
+	//FIXMEFIXMEFIXME
+
+	let events = require('./subevents.json');
+	console.log(events);
+
+	// OPEN REVISED METHOD USING setDoc TO WRITE EVENTS TO FIRESTORE COLLECTION
+	useEffect(() => {
+		events.forEach((event: Event) => {
+			setDoc(doc(db, 'subEvents', `${event.Id}`), { event });
+			// console.log(event.Id);
+		});
+	}, [events]);
+
+	// useEffect(() => {
+	// 	subEvents.forEach((event) => {
+	// 		setDoc(doc(db, 'subEvents', `${event.id}`), { event });
 	// 	});
-	// }, [tasks]);
+	// }, [subEvents]);
 	// CLOSE
 
 	//FIXMETODO

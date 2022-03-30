@@ -28,7 +28,7 @@ const SubEventView: React.FC<{
 						subEvents={task.subEvents}
 						startTime={task.startTime}
 						endTime={task.endTime}
-						id={task.id}
+						id={task.Id}
 						message={task.message}
 						host={task.host}
 						app={task.App}

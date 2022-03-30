@@ -38,7 +38,7 @@ const HierarchyView: React.FC<{
 						status={props.setStatus(task.status)}
 						startTime={task.startTime}
 						endTime={task.endTime}
-						id={task.id}
+						id={task.Id}
 						message={task.message}
 					/>
 				))}

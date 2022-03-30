@@ -1,0 +1,40 @@
+Id;Host;AppName;EventName;EventLevelId;StatusId;StartTime;EndTime;Message;ParentEventId;EventCount
+7762;HostCPT00001;MasterSync.Prop;Synchroniser;2;2;2021-07-27 17:02:17.9371721;2021-07-27 17:02:22.5439249;Starting Synchroniser;;2
+7763;HostCPT00001;MasterSync.Prop;Processor.Validation;2;2;2021-07-27 17:02:18.2862385;2021-07-27 17:02:22.5439249;Starting MasterSync.Prop.PropSynchroniser Synchroniser 2021-07-27 05:02:18;;
+7766;HostCPT00001;MasterSync.Prop;Processor.SearchDataRetrieval;2;2;2021-07-27 17:02:19.2506588;2021-07-27 17:02:23.2549190;Retrieved 0 Search records;;
+7994;HostCPT00001;App.BillingGenerator;App.SubscriptionBilling;2;3;2021-07-27 17:11:16.2570970;2021-07-27 17:12:11.5061007;Processing App active subscriptions;;16
+8010;HostCPT00001;App.BillingGenerator;Subscription.Validation;4;3;2021-07-27 17:11:29.0437597;2021-07-27 17:12:16.0540144;"	Subscription for Group: App - Product Owner has some configuration problems.";;
+8062;HostCPT00001;MasterSync.Agent;Synchroniser;2;2;2021-07-27 17:17:23.7710732;2021-07-27 17:17:29.5700741;Starting Synchroniser;;2
+8063;HostCPT00001;MasterSync.Agent;Processor.Validation;2;2;2021-07-27 17:17:24.1712647;2021-07-27 17:17:29.5700741;Starting MasterSync.Agent.AgentSynchroniser Synchroniser 2021-07-27 05:17:24;;
+8065;HostCPT00001;MasterSync.Agent;Processor.SearchDataRetrieval;2;2;2021-07-27 17:17:24.5871926;2021-07-27 17:17:29.9158789;Retrieved 0 Search records;;
+8069;HostCPT00001;MasterSync.Prop;Synchroniser;2;2;2021-07-27 17:17:32.7419591;2021-07-27 17:17:37.6557535;Starting Synchroniser;;2
+8070;HostCPT00001;MasterSync.Prop;Processor.Validation;2;2;2021-07-27 17:17:33.0341910;2021-07-27 17:17:37.6557535;Starting MasterSync.Prop.PropSynchroniser Synchroniser 2021-07-27 05:17:33;;
+8072;HostCPT00001;MasterSync.Prop;Processor.SearchDataRetrieval;2;2;2021-07-27 17:17:33.4218022;2021-07-27 17:17:38.0002643;Retrieved 0 Search records;;
+8084;HostCPT00001;MasterSync.Agent;Synchroniser;2;2;2021-07-27 17:18:07.5039166;2021-07-27 17:18:13.1668556;Starting Synchroniser;;2
+8085;HostCPT00001;MasterSync.Agent;Processor.Validation;2;2;2021-07-27 17:18:07.9100997;2021-07-27 17:18:13.1668556;Starting MasterSync.Agent.AgentSynchroniser Synchroniser 2021-07-27 05:18:07;;
+8087;HostCPT00001;MasterSync.Agent;Processor.SearchDataRetrieval;2;2;2021-07-27 17:18:08.3071605;2021-07-27 17:18:13.6047645;Retrieved 0 Search records;;
+8091;HostCPT00001;MasterSync.Prop;Synchroniser;2;2;2021-07-27 17:18:16.5827683;2021-07-27 17:18:21.6650558;Starting Synchroniser;;2
+8092;HostCPT00001;MasterSync.Prop;Processor.Validation;2;2;2021-07-27 17:18:16.8911912;2021-07-27 17:18:21.6650558;Starting MasterSync.Prop.PropSynchroniser Synchroniser 2021-07-27 05:18:16;;
+8094;HostCPT00001;MasterSync.Prop;Processor.SearchDataRetrieval;2;2;2021-07-27 17:18:17.2827612;2021-07-27 17:18:22.0086906;Retrieved 0 Search records;;
+8336;HostCPT00001;MasterSync.Agent;Synchroniser;2;2;2021-07-28 10:37:00.4903895;2021-07-28 10:37:06.0861832;Starting Synchroniser;;2
+8337;HostCPT00001;MasterSync.Agent;Processor.Validation;2;2;2021-07-28 10:37:00.8964661;2021-07-28 10:37:06.0861832;Starting MasterSync.Agent.AgentSynchroniser Synchroniser 2021-07-28 10:37:00;;
+8339;HostCPT00001;MasterSync.Agent;Processor.SearchDataRetrieval;2;2;2021-07-28 10:37:01.2769975;2021-07-28 10:37:06.4332690;Retrieved 0 Search records;;
+8644;HostCPT00001;MasterSync.Agent;Synchroniser;2;2;2021-07-28 13:53:03.3057856;2021-07-28 13:53:09.1402891;Starting Synchroniser;;2
+8645;HostCPT00001;MasterSync.Agent;Processor.Validation;2;2;2021-07-28 13:53:03.7075390;2021-07-28 13:53:09.1402891;Starting MasterSync.Agent.AgentSynchroniser Synchroniser 2021-07-28 01:53:03;;
+8647;HostCPT00001;MasterSync.Agent;Processor.SearchDataRetrieval;2;2;2021-07-28 13:53:04.1000177;2021-07-28 13:53:09.4962263;Retrieved 0 Search records;;
+8651;HostCPT00001;MasterSync.Prop;Synchroniser;2;2;2021-07-28 13:53:12.1818071;2021-07-28 13:53:17.0758774;Starting Synchroniser;;2
+8652;HostCPT00001;MasterSync.Prop;Processor.Validation;2;2;2021-07-28 13:53:12.4862396;2021-07-28 13:53:17.0758774;Starting MasterSync.Prop.PropSynchroniser Synchroniser 2021-07-28 01:53:12;;
+8654;HostCPT00001;MasterSync.Prop;Processor.SearchDataRetrieval;2;2;2021-07-28 13:53:12.8827843;2021-07-28 13:53:17.4159140;Retrieved 0 Search records;;
+8717;HostCPT00001;App.BillingGenerator;App.SubscriptionBilling;2;3;2021-07-28 16:51:02.5912755;2021-07-28 16:52:03.9628845;Processing App active subscriptions;;16
+8733;HostCPT00001;App.BillingGenerator;Subscription.Validation;4;3;2021-07-28 16:51:17.5610523;2021-07-28 16:52:08.5875990;"	Subscription for Group: App - Product Owner has some configuration problems.";;
+8785;HostCPT00001;SalesActivityReport;SalesActivityReport;2;2;2021-07-28 16:52:40.7358254;2021-07-28 16:56:49.7124399;Starting Sales Activity Report Task;;91
+15000;HostCPTDEV01;App.SQL Processing;App.Scheduled.Processing;2;2;2021-08-02 16:33:44.0200000;2021-08-02 16:42:02.2466667;Completed App.Scheduled.Processing;;3
+17530;HostCPTDEV01;App.SQL Processing;App.Scheduled.Processing;2;2;2021-08-04 09:29:00.6666667;2021-08-04 09:37:44.3000000;Completed App.Scheduled.Processing;;3
+18798;HostCPTDEV01;App.SQL Processing;Delete.Moved.Properties;2;2;2021-08-05 12:35:10.8033333;2021-08-05 12:35:11.0800000;Completed Delete.Moved.Properties;;0
+18799;HostCPTDEV01;App.SQL Processing;Refresh.Located.Chart;2;2;2021-08-05 12:35:11.3833333;2021-08-05 12:35:11.4233333;Completed Refresh.Located.Chart;;0
+18800;HostCPTDEV01;App.SQL Processing;Refresh.PropertyType.Chart;2;2;2021-08-05 12:35:11.5533333;2021-08-05 12:35:11.6866667;Completed Refresh.PropertyType.Chart;;0
+18801;HostCPTDEV01;App.SQL Processing;Refresh.Township.Chart;2;2;2021-08-05 12:35:11.8533333;2021-08-05 12:35:12.0466667;Completed Refresh.Township.Chart;;0
+18802;HostCPTDEV01;App.SQL Processing;Delete.Moved.Properties;2;2;2021-08-05 12:36:54.7433333;2021-08-05 12:36:55.9500000;Completed Delete.Moved.Properties;;0
+18803;HostCPTDEV01;App.SQL Processing;Refresh.Located.Chart;2;2;2021-08-05 12:36:56.1866667;2021-08-05 12:36:56.2333333;Completed Refresh.Located.Chart;;0
+18804;HostCPTDEV01;App.SQL Processing;Refresh.PropertyType.Chart;2;2;2021-08-05 12:36:56.3900000;2021-08-05 12:36:56.7800000;Completed Refresh.PropertyType.Chart;;0
+18805;HostCPTDEV01;App.SQL Processing;Refresh.Township.Chart;2;2;2021-08-05 12:36:56.9000000;2021-08-05 12:36:57.1966667;Completed Refresh.Township.Chart;;0

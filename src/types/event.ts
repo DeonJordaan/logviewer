@@ -3,7 +3,7 @@ import DataInterface from './dataInterface';
 // FIXME When the only thing a class does is hold a list of values, then a class is overkill. Can JUST use the Interface
 class Event {
 	key: number;
-	id: number;
+	Id: number;
 	App: string;
 	taskCode: string;
 	startTime: string;
@@ -33,8 +33,8 @@ class Event {
 	// }
 
 	constructor(data: DataInterface) {
-		this.key = data.id;
-		this.id = data.id;
+		this.key = data.Id;
+		this.Id = data.Id;
 		this.App = data.App;
 		this.taskCode = data.taskCode;
 		this.startTime = data.startTime;

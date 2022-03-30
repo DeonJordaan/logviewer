@@ -29,7 +29,7 @@ const TaskView: React.FC<{
 					<TaskViewItem
 						key={task.key}
 						host={task.host}
-						id={task.id}
+						id={task.Id}
 						app={task.App}
 						subEvents={task.subEvents}
 						taskCode={task.taskCode}

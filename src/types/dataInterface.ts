@@ -3,7 +3,7 @@ interface DataInterface {
 	taskCode: string;
 	endTime: string;
 	host: string;
-	id: number;
+	Id: number;
 	Level: number;
 	message: string;
 	parentId: number;

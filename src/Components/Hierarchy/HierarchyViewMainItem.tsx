@@ -34,7 +34,7 @@ const HierarchyViewMainItem: React.FC<{
 						<td>
 							<TaskTime time={task.endTime} />
 						</td>
-						<td>{task.id}</td>
+						<td>{task.Id}</td>
 						<td>{task.message}</td>
 					</tr>
 				))}
