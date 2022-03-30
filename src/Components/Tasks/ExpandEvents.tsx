@@ -36,9 +36,10 @@ const ExpandEvents: React.FC<{
 		// setHierarchy([]);
 	}, [id, setFetchId, setParentId]);
 
-	useEffect(() => {
-		setSelectedTask(tasks.filter((task) => task.id === parentId));
-	}, [tasks, setSelectedTask, parentId]);
+	//FIXMETODO
+	// useEffect(() => {
+	// 	setSelectedTask(tasks.filter((task) => task.id === parentId));
+	// }, [tasks, setSelectedTask, parentId]);
 
 	// console.log(subEventCtx.selectedTask);
 

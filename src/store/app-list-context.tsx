@@ -27,27 +27,29 @@ export const AppListContextProvider: React.FC = (props) => {
 
 	const { isLoading, error, sendRequest: fetchApps } = useFetch();
 
-	useEffect(() => {
-		const transformData = (appData: Application[]) => {
-			// const allApps = appData.map((app) => app.Name);
-			const allApps = appData.map((app) => {
-				return {
-					Name: 'Application',
-					Host: 'Host',
-					Id: app.Id,
-				};
-			});
+	//FIXMETODO
+	// useEffect(() => {
+	// 	const transformData = (appData: Application[]) => {
+	// 		// const allApps = appData.map((app) => app.Name);
+	// 		const allApps = appData.map((app) => {
+	// 			return {
+	// 				Name: 'Application',
+	// 				Host: 'Host',
+	// 				Id: app.Id,
+	// 			};
+	// 		});
 
-			setAppList(allApps);
-		};
+	// 		setAppList(allApps);
+	// 	};
 
-		fetchApps(
-			{
-				url: `http://logviewer.jordaan/api/LogData/GetApplicationList`,
-			},
-			transformData
-		);
-	}, [fetchApps]);
+	// 	fetchApps(
+	// 		{
+	// 			url: `http://logviewer.jordaan/api/LogData/GetApplicationList`,
+	// 		},
+	// 		transformData
+	// 	);
+	// }, [fetchApps]);
+	//FIXMETODO
 
 	return (
 		<AppListContext.Provider

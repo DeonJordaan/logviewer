@@ -75,48 +75,53 @@ export const SubEventContextProvider: React.FC = (props) => {
 	// const { isLoading, error, sendRequest: fetchTasks } = useFetch();
 
 	// FETCHING DATA FROM FIRESTORE
-	useEffect(() => {
-		const getSubEvents = async () => {
-			let subEventData: DataInterface[] = [];
-			const subEventsRef = collection(db, 'subEvents');
-			const subEventQuery = query(
-				subEventsRef,
-				where('event.parentId', '==', fetchId)
-			);
+	//FIXMETODO
+	// useEffect(() => {
+	// 	const getSubEvents = async () => {
+	// 		let subEventData: DataInterface[] = [];
+	// 		const subEventsRef = collection(db, 'subEvents');
+	// 		const subEventQuery = query(
+	// 			subEventsRef,
+	// 			where('event.parentId', '==', fetchId)
+	// 		);
 
-			const querySnapshot = await getDocs(subEventQuery);
-			querySnapshot.forEach((doc) => subEventData.push(doc.get('event')));
-			const allSubEvents = subEventData.map((data) => new Event(data));
-			setSubEvents(allSubEvents);
-		};
-		getSubEvents();
-	}, [fetchId]);
+	// 		const querySnapshot = await getDocs(subEventQuery);
+	// 		querySnapshot.forEach((doc) => subEventData.push(doc.get('event')));
+	// 		const allSubEvents = subEventData.map((data) => new Event(data));
+	// 		setSubEvents(allSubEvents);
+	// 	};
+	// 	getSubEvents();
+	// }, [fetchId]);
+	//FIXMETODO
 
 	// WATCH PAGENUMBER AND CLEAR STATES WHEN IT CHANGES
 	const eventCtx = useContext(EventContext);
 	const { pageNumber } = eventCtx;
 
-	useEffect(() => {
-		setSubEvents([]);
-		setParentId(0);
-		setSubEventParentId(0);
-		setSelectedTask([]);
-		setSelectedSubEvent([]);
-		setHierarchy([]);
-	}, [pageNumber]);
+	//FIXMETODO
+	// useEffect(() => {
+	// 	setSubEvents([]);
+	// 	setParentId(0);
+	// 	setSubEventParentId(0);
+	// 	setSelectedTask([]);
+	// 	setSelectedSubEvent([]);
+	// 	setHierarchy([]);
+	// }, [pageNumber]);
 
-	useEffect(() => {
-		setSubEventParentId(0);
-		setSelectedSubEvent([]);
-		setHierarchy([]);
-	}, [selectedTask]);
+	//FIXMETODO
+	// useEffect(() => {
+	// 	setSubEventParentId(0);
+	// 	setSelectedSubEvent([]);
+	// 	setHierarchy([]);
+	// }, [selectedTask]);
 
-	useEffect(() => {
-		if (!eventIds.includes(subEventParentId))
-			setHierarchy((prevState) => {
-				return [...prevState, ...selectedSubEvent];
-			});
-	}, [eventIds, hierarchy, selectedSubEvent, setHierarchy, subEventParentId]);
+	//FIXMETODO
+	// useEffect(() => {
+	// 	if (!eventIds.includes(subEventParentId))
+	// 		setHierarchy((prevState) => {
+	// 			return [...prevState, ...selectedSubEvent];
+	// 		});
+	// }, [eventIds, hierarchy, selectedSubEvent, setHierarchy, subEventParentId]);
 
 	return (
 		<SubEventContext.Provider

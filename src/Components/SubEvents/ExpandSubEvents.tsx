@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useMemo } from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 import SubEventContext from '../../store/sub-event-context';
 import classes from './ExpandSubEvents.module.css';
 // import Event from '../../types/event';
@@ -26,16 +26,17 @@ const ExpandSubEvents: React.FC<{
 
 	// let eventIds: number[] = useMemo(() => [], []);
 
-	useEffect(() => {
-		if (hierarchy) {
-			for (const event of hierarchy) {
-				setEventIds((prevState) => {
-					return [...prevState, event.id];
-				});
-				// eventIds.push(event.id);
-			}
-		}
-	}, [hierarchy, setEventIds]);
+	//FIXMETODO
+	// useEffect(() => {
+	// 	if (hierarchy) {
+	// 		for (const event of hierarchy) {
+	// 			setEventIds((prevState) => {
+	// 				return [...prevState, event.id];
+	// 			});
+	// 			// eventIds.push(event.id);
+	// 		}
+	// 	}
+	// }, [hierarchy, setEventIds]);
 
 	// Set CSS classes to style button if it has sub-events
 	let subEventQuantity = props.subEvents;
@@ -51,12 +52,14 @@ const ExpandSubEvents: React.FC<{
 	// }, [eventIds, id, selectedSubEvent, setHierarchy]);
 
 	// Filter the event from the subEvent array and set it to selectedSubEvent
-	useEffect(() => {
-		setSelectedSubEvent(
-			subEvents.filter((subEvent) => subEvent.id === subEventParentId)
-		);
-		// triggerHierarchy();
-	}, [setSelectedSubEvent, subEventParentId, subEvents]);
+
+	//FIXMETODO
+	// useEffect(() => {
+	// 	setSelectedSubEvent(
+	// 		subEvents.filter((subEvent) => subEvent.id === subEventParentId)
+	// 	);
+	// 	// triggerHierarchy();
+	// }, [setSelectedSubEvent, subEventParentId, subEvents]);
 
 	// Respond to subevent button click event
 	const clickHandler = useCallback(() => {

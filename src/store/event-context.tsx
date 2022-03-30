@@ -53,9 +53,10 @@ export const EventContextProvider: React.FC = (props) => {
 		setIsLoading(false);
 	};
 
-	useEffect(() => {
-		getEvents();
-	}, []);
+	//FIXMETODO
+	// useEffect(() => {
+	// 	getEvents();
+	// }, []);
 
 	const getPagination = async () => {
 		const paginationRef = collection(db, 'pagination');
@@ -70,22 +71,23 @@ export const EventContextProvider: React.FC = (props) => {
 	};
 	getPagination();
 
-	useEffect(() => {
-		const from: number = ((0 + 1) * pageNumber - 1) * 10;
-		// console.log(from);
-		const to: number = 10 * pageNumber;
-		// console.log(to);
-		const setDisplayPage = (data: Event[]) => {
-			setDisplayData(
-				data.slice(
-					`${from}` as unknown as number,
-					`${to}` as unknown as number
-				)
-			);
-		};
+	//FIXMETODO
+	// useEffect(() => {
+	// 	const from: number = ((0 + 1) * pageNumber - 1) * 10;
+	// 	// console.log(from);
+	// 	const to: number = 10 * pageNumber;
+	// 	// console.log(to);
+	// 	const setDisplayPage = (data: Event[]) => {
+	// 		setDisplayData(
+	// 			data.slice(
+	// 				`${from}` as unknown as number,
+	// 				`${to}` as unknown as number
+	// 			)
+	// 		);
+	// 	};
 
-		setDisplayPage(tasks);
-	}, [pageNumber, tasks]);
+	// 	setDisplayPage(tasks);
+	// }, [pageNumber, tasks]);
 
 	// OPEN REVISED METHOD USING setDoc TO WRITE EVENTS TO FIRESTORE COLLECTION
 	// useEffect(() => {
@@ -95,9 +97,10 @@ export const EventContextProvider: React.FC = (props) => {
 	// }, [tasks]);
 	// CLOSE
 
-	useEffect(() => {
-		setTotalPageCount(Math.ceil(totalRecordCount / 10));
-	}, [totalRecordCount]);
+	//FIXMETODO
+	// useEffect(() => {
+	// 	setTotalPageCount(Math.ceil(totalRecordCount / 10));
+	// }, [totalRecordCount]);
 
 	// TODO Try and get the context value to work to use in the EventContext.Provider value
 	// const contextValue: EventContextObject = {

@@ -1,7 +1,5 @@
 import React from 'react';
-
 import './App.css';
-
 import Header from './Components/UI/Header';
 import FilterBoard from './Components/Filter/FilterBoard';
 import PaginationControl from './Components/UI/PaginationControl';
