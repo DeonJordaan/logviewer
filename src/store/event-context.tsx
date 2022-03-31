@@ -116,16 +116,25 @@ export const EventContextProvider: React.FC = (props) => {
 	// }, []);
 	//FIXMEFIXMEFIXME
 
-	let events = require('./subevents.json');
-	console.log(events);
+	// NOTE PULL UPDATED EVENTS/SUBEVENTS DATA FROM JSON FILES AND PUSH THEM INTO FIREBASE
+	// let events = require('./events.json');
+	// let subevents = require('./subevents.json');
+	// console.log(events);
 
-	// OPEN REVISED METHOD USING setDoc TO WRITE EVENTS TO FIRESTORE COLLECTION
-	useEffect(() => {
-		events.forEach((event: Event) => {
-			setDoc(doc(db, 'subEvents', `${event.Id}`), { event });
-			// console.log(event.Id);
-		});
-	}, [events]);
+	// // OPEN REVISED METHOD USING setDoc TO WRITE EVENTS TO FIRESTORE COLLECTION
+	// useEffect(() => {
+	// 	events.forEach((event: Event) => {
+	// 		setDoc(doc(db, 'events', `${event.Id}`), { event });
+	// 		// console.log(event.Id);
+	// 	});
+	// }, [events]);
+
+	// useEffect(() => {
+	// 	subevents.forEach((event: Event) => {
+	// 		setDoc(doc(db, 'subEvents', `${event.Id}`), { event });
+	// 		// console.log(event.Id);
+	// 	});
+	// }, [subevents]);
 
 	// useEffect(() => {
 	// 	subEvents.forEach((event) => {
