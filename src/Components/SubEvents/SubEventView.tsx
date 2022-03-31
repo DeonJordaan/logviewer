@@ -30,16 +30,16 @@ const SubEventView: React.FC<{
 			<tbody>
 				{subEvents.map((task) => (
 					<SubEventViewItem
-						key={task.key}
-						status={props.setStatus(task.status)}
-						subEvents={task.subEvents}
-						startTime={task.startTime}
-						endTime={task.endTime}
-						id={task.id}
-						message={task.message}
-						host={task.host}
-						app={task.App}
-						taskCode={task.taskCode}
+						key={task.Key}
+						status={props.setStatus(+task.StatusId)}
+						subEvents={task.EventCount}
+						startTime={task.StartTime}
+						endTime={task.EndTime}
+						id={task.Id}
+						message={task.Message}
+						host={task.Host}
+						app={task.AppName}
+						taskCode={task.EventName}
 					/>
 				))}
 			</tbody>

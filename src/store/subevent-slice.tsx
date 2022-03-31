@@ -42,7 +42,7 @@ const subEventSlice = createSlice({
 		SET_SELECTED_SUB_EVENT(state, action: PayloadAction<number | []>) {
 			const { subEvents } = state;
 			const item = subEvents.filter(
-				(subEvent) => subEvent.id === action.payload
+				(subEvent) => subEvent.Id === action.payload
 			);
 			state.selectedSubEvent = item;
 		},
@@ -51,12 +51,12 @@ const subEventSlice = createSlice({
 		},
 		LEVELUP_HIERARCHY(state, action: PayloadAction<number>) {
 			const clickedEvent = state.hierarchy.filter(
-				(event) => event.id === action.payload
+				(event) => event.Id === action.payload
 			);
 			const eventIndex = state.hierarchy.indexOf(clickedEvent[0]);
 
 			state.hierarchy.splice(eventIndex);
-			const newFetchId = state.hierarchy.at(-1)!.id;
+			const newFetchId = state.hierarchy.at(-1)!.Id;
 			state.fetchId = newFetchId;
 
 			// NOTE Removing the last event in hierarchy
@@ -84,7 +84,7 @@ export const fetchSubEventData = (fetchId: number) => {
 
 			const subEventQuery = query(
 				subEventsRef,
-				where('event.parentId', '==', fetchId)
+				where('event.ParentEventId', '==', fetchId)
 			);
 
 			console.log(fetchId);
@@ -94,17 +94,17 @@ export const fetchSubEventData = (fetchId: number) => {
 
 			const allSubEvents = subEventData.map((data) => {
 				return {
-					key: data.key,
-					id: data.id,
-					App: data.App,
-					taskCode: data.taskCode,
-					startTime: data.startTime,
-					endTime: data.endTime,
-					subEvents: data.subEvents,
-					host: data.host,
-					message: data.message,
-					status: data.status,
-					parentId: data.parentId,
+					Key: data.Id,
+					Id: data.Id,
+					AppName: data.AppName,
+					EventName: data.EventName,
+					StartTime: data.StartTime,
+					EndTime: data.EndTime,
+					EventCount: data.EventCount,
+					Host: data.Host,
+					Message: data.Message,
+					StatusId: data.StatusId,
+					ParentEventId: data.ParentEventId,
 				};
 			});
 			console.log(allSubEvents);

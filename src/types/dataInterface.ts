@@ -1,15 +1,18 @@
 interface DataInterface {
-	App: string;
-	taskCode: string;
-	endTime: string;
-	host: string;
-	id: number;
-	Level: number;
-	message: string;
-	parentId: number;
-	startTime: string;
-	status: number;
-	subEvents: number;
+	AppName: string;
+	EndTime: string;
+	EventCount: number;
+	EventLevelId: number;
+	EventName: string;
+	Host: string;
+	Id: number;
+	Message: string;
+	ParentEventId: number;
+	StartTime: string;
+	StatusId: number;
+	// taskCode: string;
+	// Level: number;
+	// subEvents: number;
 	// subEvents: [];
 }
 

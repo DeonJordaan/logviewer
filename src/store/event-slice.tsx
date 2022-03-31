@@ -25,7 +25,7 @@ const eventSlice = createSlice({
 		// FIXME SEE RELATING TO RERENDER IN NOTES
 		SET_SELECTED_EVENT(state, action: PayloadAction<number | []>) {
 			const { events } = state;
-			const item = events.filter((event) => event.id === action.payload);
+			const item = events.filter((event) => event.Id === action.payload);
 			state.selectedEvent = item;
 		},
 		EVENT_RESET(state) {
@@ -50,19 +50,20 @@ export const fetchEventData = () => {
 
 			const allTasks = taskData.map((data) => {
 				return {
-					key: data.key,
-					id: data.id,
-					App: data.App,
-					taskCode: data.taskCode,
-					startTime: data.startTime,
-					endTime: data.endTime,
-					subEvents: data.subEvents,
-					host: data.host,
-					message: data.message,
-					status: data.status,
-					parentId: data.parentId,
+					Key: data.Id,
+					Id: data.Id,
+					AppName: data.AppName,
+					EventName: data.EventName,
+					StartTime: data.StartTime,
+					EndTime: data.EndTime,
+					EventCount: data.EventCount,
+					Host: data.Host,
+					Message: data.Message,
+					StatusId: data.StatusId,
+					ParentEventId: data.ParentEventId,
 				};
 			});
+			console.log(taskData);
 			console.log(allTasks);
 
 			return allTasks;

@@ -19,7 +19,7 @@ const ExpandSubEvents: React.FC<{
 
 	if (hierarchy) {
 		for (const event of hierarchy) {
-			eventIds.push(event.id);
+			eventIds.push(event.Id);
 		}
 	}
 

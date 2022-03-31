@@ -21,20 +21,20 @@ const HierarchyViewMainItem: React.FC<{
 			<tbody>
 				{selectedEvent.map((task) => (
 					<tr
-						key={task.key}
+						key={task.Key}
 						className={classes['hierarchy-main-item']}
 					>
 						<td>Level</td>
-						<td>{props.setStatus(task.status)}</td>
-						<td>{task.subEvents}</td>
+						<td>{props.setStatus(+task.StatusId)}</td>
+						<td>{task.EventCount}</td>
 						<td>
-							<TaskTime time={task.startTime} />
+							<TaskTime time={task.StartTime} />
 						</td>
 						<td>
-							<TaskTime time={task.endTime} />
+							<TaskTime time={task.EndTime} />
 						</td>
-						<td>{task.id}</td>
-						<td>{task.message}</td>
+						<td>{task.Id}</td>
+						<td>{task.Message}</td>
 					</tr>
 				))}
 			</tbody>

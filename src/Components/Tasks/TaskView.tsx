@@ -47,16 +47,16 @@ const TaskView: React.FC<{
 			<tbody>
 				{displayData.map((task: Event) => (
 					<TaskViewItem
-						key={task.key}
-						host={task.host}
-						id={task.id}
-						app={task.App}
-						subEvents={task.subEvents}
-						taskCode={task.taskCode}
-						startTime={task.startTime}
-						endTime={task.endTime}
-						message={task.message}
-						status={props.setStatus(task.status)}
+						key={task.Key}
+						host={task.Host}
+						id={task.Id}
+						app={task.AppName}
+						subEvents={task.EventCount}
+						taskCode={task.EventName}
+						startTime={task.StartTime}
+						endTime={task.EndTime}
+						message={task.Message}
+						status={props.setStatus(+task.StatusId)}
 					/>
 				))}
 			</tbody>

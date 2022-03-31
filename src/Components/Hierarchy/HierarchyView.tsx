@@ -16,8 +16,8 @@ const HierarchyView: React.FC<{
 	let host: string | undefined = 'Host';
 
 	if (selectedEvent && selectedEvent.length > 0) {
-		app = selectedEvent[0].App;
-		host = selectedEvent[0].host;
+		app = selectedEvent[0].AppName;
+		host = selectedEvent[0].Host;
 	}
 
 	let hierarchyContent = (
@@ -34,13 +34,13 @@ const HierarchyView: React.FC<{
 			<tbody>
 				{hierarchy.map((event) => (
 					<HierarchyViewItem
-						key={event.key}
-						subEvents={event.subEvents}
-						status={props.setStatus(event.status)}
-						startTime={event.startTime}
-						endTime={event.endTime}
-						id={event.id}
-						message={event.message}
+						key={event.Key}
+						subEvents={event.EventCount}
+						status={props.setStatus(+event.StatusId)}
+						startTime={event.StartTime}
+						endTime={event.EndTime}
+						id={event.Id}
+						message={event.Message}
 					/>
 				))}
 			</tbody>
