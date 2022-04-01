@@ -35,10 +35,12 @@ export const fetchAppData = () => {
 			querySnapshot.forEach((doc) =>
 				appData.push(doc.get('application'))
 			);
-			console.log(appData);
+			// console.log(appData);
 
-			const allApps = appData.map((app) => app.appName as unknown as Application);
-			console.log(allApps);
+			const allApps = appData.map(
+				(app) => app.appName as unknown as Application
+			);
+			// console.log(allApps);
 
 			return allApps;
 			// return appData;

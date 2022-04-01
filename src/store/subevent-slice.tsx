@@ -87,7 +87,7 @@ export const fetchSubEventData = (fetchId: number) => {
 				where('event.ParentEventId', '==', fetchId)
 			);
 
-			console.log(fetchId);
+			// console.log(fetchId);
 			const querySnapshot = await getDocs(subEventQuery);
 
 			querySnapshot.forEach((doc) => subEventData.push(doc.get('event')));
@@ -107,7 +107,7 @@ export const fetchSubEventData = (fetchId: number) => {
 					ParentEventId: data.ParentEventId,
 				};
 			});
-			console.log(allSubEvents);
+			// console.log(allSubEvents);
 
 			return allSubEvents;
 		};
@@ -115,7 +115,7 @@ export const fetchSubEventData = (fetchId: number) => {
 		try {
 			const subEventsData = await getSubEvents(fetchId);
 			dispatch(subEventSlice.actions.SET_SUB_EVENTS(subEventsData));
-			console.log(subEventsData);
+			// console.log(subEventsData);
 		} catch (error) {
 			// TODO Complete error handling
 			console.log(error);

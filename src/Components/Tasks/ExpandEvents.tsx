@@ -15,17 +15,21 @@ const ExpandEvents: React.FC<{
 
 	const id = props.id;
 
-	let subEventQuantity = props.subEvents;
-	let importedClasses = `${classes['sub-event-button']}`;
-	if (subEventQuantity === 0) {
-		importedClasses = `${classes['no-sub-events']}`;
+	console.log(props.subEvents);
+
+	let buttonClasses;
+	if (props.subEvents > 0) {
+		buttonClasses = `${classes['sub-event-button']}`;
+	} else {
+		buttonClasses = `${classes['no-sub-events']}`;
 	}
 
 	const clickHandler = () => {
-		console.log('EXPAND EVENT');
+		// console.log('EXPAND EVENT');
 		dispatch(subEventActions.SET_PARENT_ID(id));
 		dispatch(subEventActions.SET_FETCH_ID(id));
 		dispatch(eventActions.SET_SELECTED_EVENT(id));
+		dispatch(subEventActions.RESET_HIERARCHY());
 	};
 
 	// NOTE  Moved to subEventView
@@ -41,8 +45,8 @@ const ExpandEvents: React.FC<{
 	// console.log(subEventCtx.selectedTask);
 
 	return (
-		<button onClick={clickHandler} className={importedClasses}>
-			{subEventQuantity}
+		<button onClick={clickHandler} className={buttonClasses}>
+			{props.subEvents}
 		</button>
 	);
 };

@@ -59,11 +59,11 @@ export const getPaginationData = () => {
 
 			paginationSnapshot.forEach((doc) => {
 				const totalRecordCount = doc.get('totalRecordCount');
-				console.log(totalRecordCount);
+				// console.log(totalRecordCount);
 				const pageSize = doc.get('pageSize');
-				console.log(pageSize);
+				// console.log(pageSize);
 				const pageNumber = doc.get('pageNumber');
-				console.log(pageNumber);
+				// console.log(pageNumber);
 
 				pageData = {
 					pageNumber: pageNumber,
@@ -71,7 +71,7 @@ export const getPaginationData = () => {
 					totalPageCount: Math.ceil(totalRecordCount / pageSize),
 				};
 			});
-			console.log(pageData);
+			// console.log(pageData);
 			return pageData;
 		};
 

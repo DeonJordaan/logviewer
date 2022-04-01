@@ -32,7 +32,7 @@ const TaskView: React.FC<{
 		setDisplayPage(events);
 	}, [events, pageNumber]);
 
-	console.log(displayData);
+	// console.log(displayData);
 
 	let taskContent = (
 		<tbody>

@@ -63,8 +63,8 @@ export const fetchEventData = () => {
 					ParentEventId: data.ParentEventId,
 				};
 			});
-			console.log(taskData);
-			console.log(allTasks);
+			// console.log(taskData);
+			// console.log(allTasks);
 
 			return allTasks;
 			// setIsLoading(false);
@@ -73,7 +73,7 @@ export const fetchEventData = () => {
 		try {
 			const eventsData = await getEvents();
 			dispatch(eventSlice.actions.SET_EVENTS(eventsData));
-			console.log(eventsData);
+			// console.log(eventsData);
 		} catch (error) {
 			// TODO Complete error handling
 			console.log(error);

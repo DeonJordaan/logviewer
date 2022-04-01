@@ -24,10 +24,11 @@ const ExpandSubEvents: React.FC<{
 	}
 
 	// Set CSS classes to style button if it has sub-events
-	let subEventQuantity = props.subEvents;
-	let importedClasses = `${classes['sub-event-button']}`;
-	if (subEventQuantity === 0) {
-		importedClasses = `${classes['no-sub-events']}`;
+	let buttonClasses;
+	if (props.subEvents > 0) {
+		buttonClasses = `${classes['sub-event-button']}`;
+	} else {
+		buttonClasses = `${classes['no-sub-events']}`;
 	}
 
 	// Respond to subevent button click event
@@ -44,8 +45,8 @@ const ExpandSubEvents: React.FC<{
 	// Should I consider a different approach where I implicitly pass the selectedSubEvent to SET_HIERARCHY, and not just rely on it happening when ID changes? I THINK so.
 
 	return (
-		<button onClick={clickHandler} className={importedClasses}>
-			{subEventQuantity}
+		<button onClick={clickHandler} className={buttonClasses}>
+			{props.subEvents}
 		</button>
 	);
 });
