@@ -1,4 +1,6 @@
 import React, { Fragment } from 'react';
+import { fetchSelectAppData } from '../../store/event-slice';
+import { useAppDispatch } from '../../store/hooks';
 import classes from './Dropdown.module.css';
 
 const Dropdown: React.FC<{
@@ -6,6 +8,8 @@ const Dropdown: React.FC<{
 	value: string[] | '';
 	// onChange: (event: React.FormEvent) => void;
 }> = (props) => {
+	const dispatch = useAppDispatch();
+
 	let dropdownItems = props.names;
 
 	// Render product names to dropdown select options
@@ -20,6 +24,11 @@ const Dropdown: React.FC<{
 			));
 	}
 
+	const selectChangeHandler = (event: { target: { value: any } }) => {
+		console.log(event.target.value);
+		dispatch(fetchSelectAppData(event.target.value));
+	};
+
 	return (
 		<Fragment>
 			<label>Select an Application</label>
@@ -27,7 +36,7 @@ const Dropdown: React.FC<{
 				// name={props.name}
 				className={classes.select}
 				// value={props.value}
-				// onChange={props.onChange}
+				onChange={selectChangeHandler}
 			>
 				<option value="Select">--Select--</option>
 

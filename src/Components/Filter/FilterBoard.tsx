@@ -1,6 +1,6 @@
 import SearchBar from '../SearchBar/SearchBar';
-import PushButton from '../ButtonBar/PushButton';
-import TotalRecordCount from './TotalRecordCount';
+// import PushButton from '../ButtonBar/PushButton';
+// import TotalRecordCount from './TotalRecordCount';
 // import FilterMenuBar from './FilterMenuBar';
 
 import classes from './Filterboard.module.css';

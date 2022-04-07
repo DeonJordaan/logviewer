@@ -20,6 +20,7 @@ table {
 	border-radius: 3px;
 	table-layout: fixed;
 	word-wrap: break-word;
+	/* height: 20rem; */
 }
 
 th {

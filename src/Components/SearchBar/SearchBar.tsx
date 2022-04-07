@@ -9,12 +9,18 @@ const SearchBar: React.FC = () => {
 
 	const appNames = applications.map((app) => app as unknown as string);
 
+	//FIXME event type declaration
+	// const selectChangeHandler = (event: FormEvent<Element>) => {
+	// const selectChangeHandler = (event: { target: { value: any; }; }) => {
+	// 	console.log(event.target.value);
+	// };
+
 	return (
 		<div className={classes.search__bar}>
 			<Dropdown
 				names={appNames}
 				value={appNames || ''}
-				// onChange={productNameChangeHandler}
+				// onChange={selectChangeHandler}
 			/>
 
 			<div className={classes['search-input']}>

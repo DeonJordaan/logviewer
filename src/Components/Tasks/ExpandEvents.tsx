@@ -15,8 +15,6 @@ const ExpandEvents: React.FC<{
 
 	const id = props.id;
 
-	console.log(props.subEvents);
-
 	let buttonClasses;
 	if (props.subEvents > 0) {
 		buttonClasses = `${classes['sub-event-button']}`;

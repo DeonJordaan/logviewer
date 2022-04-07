@@ -10,7 +10,6 @@ import SubEventView from './Components/SubEvents/SubEventView';
 import Footer from './Components/UI/Footer';
 import { useAppDispatch } from './store/hooks';
 import { fetchEventData } from './store/event-slice';
-// import { fetchSubEventData } from './store/subevent-slice';
 import { getPaginationData } from './store/pagination-slice';
 import { fetchAppData } from './store/application-slice';
 import SearchBar from './Components/SearchBar/SearchBar';

@@ -45,6 +45,14 @@ const HierarchyView: React.FC<{
 				))}
 			</tbody>
 		);
+	} else {
+		hierarchyContent = (
+			<tbody>
+				<tr>
+					<td>No event selected</td>
+				</tr>
+			</tbody>
+		);
 	}
 
 	// TODO IMPLEMENT ERROR HANDLING STATES

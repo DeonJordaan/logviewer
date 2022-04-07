@@ -56,8 +56,13 @@ const subEventSlice = createSlice({
 			const eventIndex = state.hierarchy.indexOf(clickedEvent[0]);
 
 			state.hierarchy.splice(eventIndex);
-			const newFetchId = state.hierarchy.at(-1)!.Id;
-			state.fetchId = newFetchId;
+
+			if (state.hierarchy.length > 0) {
+				const newFetchId = state.hierarchy.at(-1)!.Id;
+				state.fetchId = newFetchId;
+			} else if (state.hierarchy.length <= 0) {
+				state.fetchId = state.parentId;
+			}
 
 			// NOTE Removing the last event in hierarchy
 			// state.hierarchy.splice(-1);
