@@ -3,15 +3,17 @@ import { collection, getDocs } from 'firebase/firestore';
 import db from './firebase';
 
 interface PaginationState {
-	totalRecordCount: number;
-	totalPageCount: number;
+	// totalRecordCount: number;
+	// totalPageCount: number;
 	pageNumber: number;
+	pageSize: number;
 }
 
 const initialPaginationState: PaginationState = {
-	totalRecordCount: 0,
-	totalPageCount: 0,
+	// totalRecordCount: 0,
+	// totalPageCount: 0,
 	pageNumber: 0,
+	pageSize: 0,
 };
 
 const paginationSlice = createSlice({
@@ -20,11 +22,11 @@ const paginationSlice = createSlice({
 	reducers: {
 		SET_PAGES(state, action: PayloadAction<PaginationState>) {
 			state.pageNumber = action.payload.pageNumber;
-			state.totalPageCount = action.payload.totalPageCount;
-			state.totalRecordCount = action.payload.totalRecordCount;
+			// state.totalPageCount = action.payload.totalPageCount;
+			// state.totalRecordCount = action.payload.totalRecordCount;
 		},
-		NEXT_PAGE(state) {
-			if (state.pageNumber < state.totalPageCount) {
+		NEXT_PAGE(state, action) {
+			if (state.pageNumber < action.payload) {
 				state.pageNumber++;
 			}
 		},
@@ -36,8 +38,8 @@ const paginationSlice = createSlice({
 		FIRST_PAGE(state) {
 			state.pageNumber = 1;
 		},
-		LAST_PAGE(state) {
-			state.pageNumber = state.totalPageCount;
+		LAST_PAGE(state, action) {
+			state.pageNumber = action.payload;
 		},
 	},
 });
@@ -51,14 +53,15 @@ export const getPaginationData = () => {
 		const getPagination = async () => {
 			let pageData = {
 				pageNumber: 0,
-				totalRecordCount: 0,
-				totalPageCount: 0,
+				// totalRecordCount: 0,
+				// totalPageCount: 0,
+				pageSize: 0,
 			};
 			const paginationRef = collection(db, 'pagination');
 			const paginationSnapshot = await getDocs(paginationRef);
 
 			paginationSnapshot.forEach((doc) => {
-				const totalRecordCount = doc.get('totalRecordCount');
+				// const totalRecordCount = doc.get('totalRecordCount');
 				// console.log(totalRecordCount);
 				const pageSize = doc.get('pageSize');
 				// console.log(pageSize);
@@ -67,8 +70,9 @@ export const getPaginationData = () => {
 
 				pageData = {
 					pageNumber: pageNumber,
-					totalRecordCount: totalRecordCount,
-					totalPageCount: Math.ceil(totalRecordCount / pageSize),
+					// totalRecordCount: totalRecordCount,
+					// totalPageCount: Math.ceil(totalRecordCount / pageSize),
+					pageSize: pageSize,
 				};
 			});
 			// console.log(pageData);

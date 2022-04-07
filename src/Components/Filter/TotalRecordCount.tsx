@@ -3,7 +3,7 @@ import { useAppSelector } from '../../store/hooks';
 import classes from './TotalRecordCount.module.css';
 
 const TotalRecordCount: React.FC = () => {
-	const { totalRecordCount } = useAppSelector((state) => state.pagination);
+	const { totalRecordCount } = useAppSelector((state) => state.events);
 
 	return (
 		<div className={classes['total-records']}>

@@ -11,12 +11,15 @@ import classes from './Pagination.module.css';
 
 const PaginationControl: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const { pageNumber, totalPageCount } = useAppSelector(
+	const { pageNumber, pageSize } = useAppSelector(
 		(state) => state.pagination
 	);
+	const { totalRecordCount } = useAppSelector((state) => state.events);
 	// const { pageNumber, totalPageCount } = useAppSelector(
 	// 	(state) => state.pagination
 	// );
+	const totalPageCount = totalRecordCount / pageSize;
+
 	const reset = () => {
 		dispatch(eventActions.EVENT_RESET());
 		// dispatch(eventActions.SET_SELECTED_EVENT([]));
@@ -38,11 +41,11 @@ const PaginationControl: React.FC = () => {
 		reset();
 	};
 	const getNextPage = () => {
-		dispatch(paginationActions.NEXT_PAGE());
+		dispatch(paginationActions.NEXT_PAGE(totalPageCount));
 		reset();
 	};
 	const goToLastPage = () => {
-		dispatch(paginationActions.LAST_PAGE());
+		dispatch(paginationActions.LAST_PAGE(totalPageCount));
 		reset();
 	};
 

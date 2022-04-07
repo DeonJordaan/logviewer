@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
-import { fetchSelectAppData } from '../../store/event-slice';
+import { eventActions, fetchSelectAppData } from '../../store/event-slice';
 import { useAppDispatch } from '../../store/hooks';
+import { subEventActions } from '../../store/subevent-slice';
 import classes from './Dropdown.module.css';
 
 const Dropdown: React.FC<{
@@ -24,9 +25,21 @@ const Dropdown: React.FC<{
 			));
 	}
 
+	const reset = () => {
+		dispatch(eventActions.EVENT_RESET());
+		// dispatch(eventActions.SET_SELECTED_EVENT([]));
+		dispatch(subEventActions.SET_SUB_EVENTS([]));
+		dispatch(subEventActions.SET_FETCH_ID(0));
+		dispatch(subEventActions.RESET_HIERARCHY());
+		dispatch(subEventActions.SET_PARENT_ID(0));
+		dispatch(subEventActions.SET_SELECTED_SUB_EVENT([]));
+		dispatch(subEventActions.SET_SUB_EVENT_PARENT_ID(0));
+		// dispatch(subEventActions.SUB_EVENT_RESET());
+	};
+
 	const selectChangeHandler = (event: { target: { value: any } }) => {
-		console.log(event.target.value);
 		dispatch(fetchSelectAppData(event.target.value));
+		reset();
 	};
 
 	return (

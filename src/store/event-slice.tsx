@@ -7,12 +7,14 @@ interface EventsState {
 	events: Event[];
 	selectedEvent: Event[];
 	displayData: Event[];
+	totalRecordCount: number;
 }
 
 const initialEventState: EventsState = {
 	events: [],
 	selectedEvent: [],
 	displayData: [],
+	totalRecordCount: 0,
 };
 
 const eventSlice = createSlice({
@@ -30,6 +32,11 @@ const eventSlice = createSlice({
 		},
 		EVENT_RESET(state) {
 			state.selectedEvent = [];
+		},
+		SET_TOTAL_RECORD_COUNT(state, action) {
+			// if (state.events) {
+			state.totalRecordCount = action.payload;
+			// }
 		},
 	},
 });
@@ -73,7 +80,10 @@ export const fetchEventData = () => {
 		try {
 			const eventsData = await getEvents();
 			dispatch(eventSlice.actions.SET_EVENTS(eventsData));
-			// console.log(eventsData);
+			dispatch(
+				eventSlice.actions.SET_TOTAL_RECORD_COUNT(eventsData.length)
+			);
+			console.log(eventsData.length);
 		} catch (error) {
 			// TODO Complete error handling
 			console.log(error);
