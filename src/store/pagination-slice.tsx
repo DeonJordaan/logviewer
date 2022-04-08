@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { collection, getDocs } from 'firebase/firestore';
 import db from './firebase';
 
@@ -13,15 +13,15 @@ const initialPaginationState: PaginationState = {
 	// totalRecordCount: 0,
 	// totalPageCount: 0,
 	pageNumber: 0,
-	pageSize: 0,
+	pageSize: 10,
 };
 
 const paginationSlice = createSlice({
 	name: 'pagination',
 	initialState: initialPaginationState,
 	reducers: {
-		SET_PAGES(state, action: PayloadAction<PaginationState>) {
-			state.pageNumber = action.payload.pageNumber;
+		SET_PAGES(state, action) {
+			state.pageNumber = action.payload;
 			// state.totalPageCount = action.payload.totalPageCount;
 			// state.totalRecordCount = action.payload.totalRecordCount;
 		},
@@ -48,14 +48,14 @@ export const getPaginationData = () => {
 	// TODO CHECK INFERRED TYPE OF dispatch BELOW
 
 	return async (
-		dispatch: (arg0: { payload: PaginationState; type: string }) => void
+		dispatch: (arg0: { payload: number; type: string }) => void
 	) => {
 		const getPagination = async () => {
 			let pageData = {
 				pageNumber: 0,
 				// totalRecordCount: 0,
 				// totalPageCount: 0,
-				pageSize: 0,
+				// pageSize: 0,
 			};
 			const paginationRef = collection(db, 'pagination');
 			const paginationSnapshot = await getDocs(paginationRef);
@@ -63,17 +63,12 @@ export const getPaginationData = () => {
 			paginationSnapshot.forEach((doc) => {
 				// const totalRecordCount = doc.get('totalRecordCount');
 				// console.log(totalRecordCount);
-				const pageSize = doc.get('pageSize');
+				// const pageSize = doc.get('pageSize');
 				// console.log(pageSize);
 				const pageNumber = doc.get('pageNumber');
 				// console.log(pageNumber);
 
-				pageData = {
-					pageNumber: pageNumber,
-					// totalRecordCount: totalRecordCount,
-					// totalPageCount: Math.ceil(totalRecordCount / pageSize),
-					pageSize: pageSize,
-				};
+				pageData = pageNumber;
 			});
 			// console.log(pageData);
 			return pageData;

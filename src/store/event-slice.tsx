@@ -8,6 +8,7 @@ interface EventsState {
 	selectedEvent: Event[];
 	displayData: Event[];
 	totalRecordCount: number;
+	// pageNumber: number
 }
 
 const initialEventState: EventsState = {
@@ -15,6 +16,7 @@ const initialEventState: EventsState = {
 	selectedEvent: [],
 	displayData: [],
 	totalRecordCount: 0,
+	// pageNumber: 10
 };
 
 const eventSlice = createSlice({
@@ -80,8 +82,9 @@ export const fetchEventData = () => {
 		try {
 			const eventsData = await getEvents();
 			dispatch(eventSlice.actions.SET_EVENTS(eventsData));
+			const eventsDataLength = eventsData.length;
 			dispatch(
-				eventSlice.actions.SET_TOTAL_RECORD_COUNT(eventsData.length)
+				eventSlice.actions.SET_TOTAL_RECORD_COUNT(eventsDataLength)
 			);
 			console.log(eventsData.length);
 		} catch (error) {
