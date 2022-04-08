@@ -1,13 +1,13 @@
-import { useAppSelector } from '../../store/hooks';
+// import { useAppSelector } from '../../store/hooks';
 import PushButton from '../ButtonBar/PushButton';
 import Dropdown from '../Filter/Dropdown';
 import TotalRecordCount from '../Filter/TotalRecordCount';
 import classes from './SearchBar.module.css';
 
 const SearchBar: React.FC = () => {
-	const { applications } = useAppSelector((state) => state.applications);
+	// const { applications } = useAppSelector((state) => state.applications);
 
-	const appNames = applications.map((app) => app as unknown as string);
+	// const appNames = applications.map((app) => app as unknown as string);
 
 	//FIXME event type declaration
 	// const selectChangeHandler = (event: FormEvent<Element>) => {
@@ -18,8 +18,8 @@ const SearchBar: React.FC = () => {
 	return (
 		<div className={classes.search__bar}>
 			<Dropdown
-				names={appNames}
-				value={appNames || ''}
+				// names={appNames}
+				// value={appNames || ''}
 				// onChange={selectChangeHandler}
 			/>
 

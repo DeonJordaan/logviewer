@@ -15,9 +15,7 @@ const PaginationControl: React.FC = () => {
 		(state) => state.pagination
 	);
 	const { totalRecordCount } = useAppSelector((state) => state.events);
-	// const { pageNumber, totalPageCount } = useAppSelector(
-	// 	(state) => state.pagination
-	// );
+
 	const totalPageCount: number = Math.ceil(totalRecordCount / pageSize);
 	console.log(pageSize);
 	console.log(totalRecordCount);

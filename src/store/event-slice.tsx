@@ -1,5 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import {
+	collection,
+	DocumentData,
+	getDocs,
+	Query,
+	query,
+	where,
+} from 'firebase/firestore';
 import Event from '../types/event';
 import db from './firebase';
 
@@ -8,7 +15,6 @@ interface EventsState {
 	selectedEvent: Event[];
 	displayData: Event[];
 	totalRecordCount: number;
-	// pageNumber: number
 }
 
 const initialEventState: EventsState = {
@@ -16,7 +22,6 @@ const initialEventState: EventsState = {
 	selectedEvent: [],
 	displayData: [],
 	totalRecordCount: 0,
-	// pageNumber: 10
 };
 
 const eventSlice = createSlice({
@@ -36,9 +41,7 @@ const eventSlice = createSlice({
 			state.selectedEvent = [];
 		},
 		SET_TOTAL_RECORD_COUNT(state, action) {
-			// if (state.events) {
 			state.totalRecordCount = action.payload;
-			// }
 		},
 	},
 });
@@ -72,8 +75,6 @@ export const fetchEventData = () => {
 					ParentEventId: data.ParentEventId,
 				};
 			});
-			// console.log(taskData);
-			// console.log(allTasks);
 
 			return allTasks;
 			// setIsLoading(false);
@@ -94,23 +95,6 @@ export const fetchEventData = () => {
 	};
 };
 
-export default eventSlice;
-
-export const eventActions = eventSlice.actions;
-
-// .collection("subEvents")
-// .where("event.appName", "==", "App.SQL Processing")
-
-// .collection("events")
-// .where("event.AppName", "==", "App.SQL Processing")
-
-// Create a reference to the cities collection
-// import { collection, query, where } from "firebase/firestore";
-// const citiesRef = collection(db, "cities");
-
-// Create a query against the collection.
-// const q = query(citiesRef, where("state", "==", "CA"));
-
 export const fetchSelectAppData = (selectedApp: string) => {
 	return async (
 		dispatch: (arg0: { payload: Event[]; type: string }) => void
@@ -118,14 +102,21 @@ export const fetchSelectAppData = (selectedApp: string) => {
 		const getEvents = async () => {
 			// setIsLoading(true);
 			const app: string = selectedApp;
+
 			let taskData: Event[] = [];
 
 			const selectAppRef = collection(db, 'events');
 
-			const selectQuery = query(
-				selectAppRef,
-				where('event.AppName', '==', app)
-			);
+			let selectQuery: Query<DocumentData>;
+
+			if (selectedApp === 'Select') {
+				selectQuery = selectAppRef;
+			} else {
+				selectQuery = query(
+					selectAppRef,
+					where('event.AppName', '==', app)
+				);
+			}
 
 			const querySnapshot = await getDocs(selectQuery);
 
@@ -157,10 +148,16 @@ export const fetchSelectAppData = (selectedApp: string) => {
 		try {
 			const appData = await getEvents();
 			dispatch(eventSlice.actions.SET_EVENTS(appData));
-			console.log(appData);
+			const appDataLength = appData.length;
+			dispatch(eventSlice.actions.SET_TOTAL_RECORD_COUNT(appDataLength));
+			// console.log(appData);
 		} catch (error) {
 			// TODO Complete error handling
 			console.log(error);
 		}
 	};
 };
+
+export default eventSlice;
+
+export const eventActions = eventSlice.actions;

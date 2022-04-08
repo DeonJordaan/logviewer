@@ -11,7 +11,7 @@ import { useAppSelector } from '../../store/hooks';
 const TaskView: React.FC<{
 	setStatus: (statusCode: number) => string;
 }> = (props) => {
-	const events = useAppSelector((state) => state.events.events);
+	const { events } = useAppSelector((state) => state.events);
 	const { pageNumber } = useAppSelector((state) => state.pagination);
 	const [displayData, setDisplayData] = useState<Event[]>();
 
