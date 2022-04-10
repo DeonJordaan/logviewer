@@ -157,6 +157,68 @@ export const fetchSelectAppData = (selectedApp: string) => {
 		}
 	};
 };
+export const fetchSelectHostData = (selectedHost: string) => {
+	return async (
+		dispatch: (arg0: { payload: Event[]; type: string }) => void
+	) => {
+		const getEvents = async () => {
+			// setIsLoading(true);
+			const host: string = selectedHost;
+
+			let taskData: Event[] = [];
+
+			const selectHostRef = collection(db, 'events');
+
+			let selectQuery: Query<DocumentData>;
+
+			if (selectedHost === 'Select') {
+				selectQuery = selectHostRef;
+			} else {
+				selectQuery = query(
+					selectHostRef,
+					where('event.Host', '==', host)
+				);
+			}
+
+			const querySnapshot = await getDocs(selectQuery);
+
+			querySnapshot.forEach((doc) => taskData.push(doc.get('event')));
+
+			const allTasks = taskData.map((data) => {
+				return {
+					Key: data.Id,
+					Id: data.Id,
+					AppName: data.AppName,
+					EventName: data.EventName,
+					StartTime: data.StartTime,
+					EndTime: data.EndTime,
+					EventCount: data.EventCount,
+					Host: data.Host,
+					Message: data.Message,
+					StatusId: data.StatusId,
+					ParentEventId: data.ParentEventId,
+				};
+			});
+
+			console.log(taskData);
+			console.log(host);
+
+			return allTasks;
+			// setIsLoading(false);
+		};
+
+		try {
+			const hostData = await getEvents();
+			dispatch(eventSlice.actions.SET_EVENTS(hostData));
+			const hostDataLength = hostData.length;
+			dispatch(eventSlice.actions.SET_TOTAL_RECORD_COUNT(hostDataLength));
+			// console.log(appData);
+		} catch (error) {
+			// TODO Complete error handling
+			console.log(error);
+		}
+	};
+};
 
 export default eventSlice;
 
