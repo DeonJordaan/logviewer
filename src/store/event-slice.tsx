@@ -109,7 +109,7 @@ export const fetchSelectAppData = (selectedApp: string) => {
 
 			let selectQuery: Query<DocumentData>;
 
-			if (selectedApp === 'Select') {
+			if (selectedApp === 'All') {
 				selectQuery = selectAppRef;
 			} else {
 				selectQuery = query(
@@ -171,7 +171,7 @@ export const fetchSelectHostData = (selectedHost: string) => {
 
 			let selectQuery: Query<DocumentData>;
 
-			if (selectedHost === 'Select') {
+			if (selectedHost === 'All') {
 				selectQuery = selectHostRef;
 			} else {
 				selectQuery = query(

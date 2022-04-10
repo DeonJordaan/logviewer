@@ -71,7 +71,7 @@ const Dropdown: React.FC<{
 		<Fragment>
 			<label>{label}</label>
 			<select className={classes.select} onChange={selectChangeHandler}>
-				<option value="Select">--Select--</option>
+				<option value="All">--All--</option>
 				{dropdownMenu}
 			</select>
 		</Fragment>
