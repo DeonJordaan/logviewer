@@ -15,6 +15,7 @@ interface EventsState {
 	selectedEvent: Event[];
 	displayData: Event[];
 	totalRecordCount: number;
+	date: Date;
 }
 
 const initialEventState: EventsState = {
@@ -22,6 +23,7 @@ const initialEventState: EventsState = {
 	selectedEvent: [],
 	displayData: [],
 	totalRecordCount: 0,
+	date: new Date(),
 };
 
 const eventSlice = createSlice({
@@ -42,6 +44,9 @@ const eventSlice = createSlice({
 		},
 		SET_TOTAL_RECORD_COUNT(state, action) {
 			state.totalRecordCount = action.payload;
+		},
+		SET_DATE(state, action) {
+			state.date = action.payload;
 		},
 	},
 });

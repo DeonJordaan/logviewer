@@ -11,7 +11,7 @@ import { useAppSelector } from '../../store/hooks';
 const TaskView: React.FC<{
 	setStatus: (statusCode: number) => string;
 }> = (props) => {
-	const { events } = useAppSelector((state) => state.events);
+	const { events, date } = useAppSelector((state) => state.events);
 	const { pageNumber } = useAppSelector((state) => state.pagination);
 	const [displayData, setDisplayData] = useState<Event[]>();
 
@@ -22,15 +22,17 @@ const TaskView: React.FC<{
 		// console.log(to);
 		const setDisplayPage = (data: Event[]) => {
 			setDisplayData(
-				data.slice(
-					`${from}` as unknown as number,
-					`${to}` as unknown as number
-				)
+				data
+					.slice(
+						`${from}` as unknown as number,
+						`${to}` as unknown as number
+					)
+					.filter((event) => new Date(event.EndTime) < date)
 			);
 		};
 
 		setDisplayPage(events);
-	}, [events, pageNumber]);
+	}, [date, events, pageNumber]);
 
 	// console.log(displayData);
 

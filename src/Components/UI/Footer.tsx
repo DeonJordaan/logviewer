@@ -5,7 +5,7 @@ import classes from './Footer.module.css';
 const Footer: React.FC = () => {
 	return (
 		<footer className={classes.footer}>
-			&copy; 2021 by Deon Jordaan -&nbsp;
+			&copy; 2022 by Deon Jordaan -&nbsp;
 			<a href="http://deon.dev">www.deon.dev</a>
 		</footer>
 	);
