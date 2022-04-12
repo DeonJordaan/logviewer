@@ -15,7 +15,8 @@ interface EventsState {
 	selectedEvent: Event[];
 	displayData: Event[];
 	totalRecordCount: number;
-	date: Date;
+	date: number;
+	eventsByDate: Event[];
 }
 
 const initialEventState: EventsState = {
@@ -23,7 +24,8 @@ const initialEventState: EventsState = {
 	selectedEvent: [],
 	displayData: [],
 	totalRecordCount: 0,
-	date: new Date(),
+	date: Date.now(),
+	eventsByDate: [],
 };
 
 const eventSlice = createSlice({
@@ -162,6 +164,7 @@ export const fetchSelectAppData = (selectedApp: string) => {
 		}
 	};
 };
+
 export const fetchSelectHostData = (selectedHost: string) => {
 	return async (
 		dispatch: (arg0: { payload: Event[]; type: string }) => void
@@ -228,3 +231,19 @@ export const fetchSelectHostData = (selectedHost: string) => {
 export default eventSlice;
 
 export const eventActions = eventSlice.actions;
+
+// const [eventsByDate, setEventsByDate] = useState<Event[]>();
+
+// export const filterDataByDate = (data: Event[]) => {
+// 	const parseDate = (date: string | number) => {
+// 		const dateToParse = new Date(date);
+// 		const parsedDate = dateToParse.getTime();
+// 		return parsedDate;
+// 	};
+
+// 	const setEventsByDate = () => {
+// 		state.eventsByDate = data.filter((event) => parseDate(event.EndTime) < parseDate(state.date));
+// 	};
+// 	setEventsByDate
+// };
+// filterDataByDate(events);

@@ -3,7 +3,8 @@ import TaskViewHeader from './TaskViewHeader';
 import TaskViewItem from './TaskViewItem';
 import classes from './TaskView.module.css';
 import Event from '../../types/event';
-import { useAppSelector } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import eventSlice from '../../store/event-slice';
 
 // import { doc, setDoc } from 'firebase/firestore';
 // import db from '../../store/firebase';
@@ -11,30 +12,61 @@ import { useAppSelector } from '../../store/hooks';
 const TaskView: React.FC<{
 	setStatus: (statusCode: number) => string;
 }> = (props) => {
+	const dispatch = useAppDispatch();
+
 	const { events, date } = useAppSelector((state) => state.events);
 	const { pageNumber } = useAppSelector((state) => state.pagination);
+
+	const [eventsByDate, setEventsByDate] = useState<Event[]>();
 	const [displayData, setDisplayData] = useState<Event[]>();
+
+	const parseDate = (date: string | number) => {
+		const dateToParse = new Date(date);
+		const parsedDate = dateToParse.getTime();
+		return parsedDate;
+	};
+
+	useEffect(() => {
+		const filterDataByDate = (data: Event[]) => {
+			if (data) {
+				setEventsByDate(
+					data.filter(
+						(event) => parseDate(event.EndTime) <= parseDate(date)
+					)
+				);
+			}
+		};
+		filterDataByDate(events);
+	}, [date, events]);
+
+	useEffect(() => {
+		if (eventsByDate && eventsByDate.length > 0) {
+			const eventsDataLength = eventsByDate!.length;
+			dispatch(
+				eventSlice.actions.SET_TOTAL_RECORD_COUNT(eventsDataLength)
+			);
+		}
+	}, [dispatch, eventsByDate]);
 
 	useEffect(() => {
 		const from: number = ((0 + 1) * pageNumber - 1) * 10;
 		// console.log(from);
 		const to: number = 10 * pageNumber;
 		// console.log(to);
-		const setDisplayPage = (data: Event[]) => {
-			setDisplayData(
-				data
-					.slice(
+		const setDisplayPage = (data: Event[] | undefined) => {
+			if (data) {
+				setDisplayData(
+					data.slice(
 						`${from}` as unknown as number,
 						`${to}` as unknown as number
 					)
-					.filter((event) => new Date(event.EndTime) < date)
-			);
+				);
+			}
 		};
 
-		setDisplayPage(events);
-	}, [date, events, pageNumber]);
-
-	// console.log(displayData);
+		setDisplayPage(eventsByDate);
+		// setDisplayPage(events);
+	}, [events, eventsByDate, pageNumber]);
 
 	let taskContent = (
 		<tbody>

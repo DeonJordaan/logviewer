@@ -11,6 +11,7 @@ const SearchBar: React.FC = () => {
 	const dateChangeHandler = (event: { target: { value: any } }) => {
 		dispatch(eventActions.SET_DATE(event.target.value));
 	};
+
 	return (
 		<div className={classes.search__bar}>
 			<Dropdown label="Application" />
