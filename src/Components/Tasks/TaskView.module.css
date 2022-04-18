@@ -1,7 +1,7 @@
 .task-view {
 	margin: 0;
 	padding: 0 1.5rem 0 1.5rem;
-	max-width: 85vw;
+	width: 95vw;
 	min-height: 22rem;
 }
 
@@ -12,14 +12,15 @@
 	background-color: #ededed;
 	border: 0.1rem solid lightgray;
 	border-radius: 3px;
-	/* width: 100%; */
 }
 
 table {
-	width: 100%;
-	/* border-collapse: collapse; */
+	width: 95vw;
 	background-color: rgb(221, 218, 218);
 	border-radius: 3px;
+	table-layout: fixed;
+	word-wrap: break-word;
+	/* height: 20rem; */
 }
 
 th {
@@ -28,16 +29,41 @@ th {
 
 tr {
 	border-radius: 3px;
-	/* margin: 3px 3px; */
-	/* border: 0.1rem solid lightgray; */
 }
 
 td,
 th {
-	/* border: 0.1rem solid lightgray; */
 	border-spacing: 0 0.05rem;
-	padding: 6px 10px;
+	padding: 3px 5px;
 }
+
+/* th .host {
+	max-width: 5%;
+}
+th .application {
+	max-width: 5%;
+}
+th .status {
+	max-width: 5%;
+}
+th .taskcode {
+	max-width: 5%;
+}
+th .started {
+	max-width: 5%;
+}
+th .completed {
+	max-width: 5%;
+}
+th .subevents {
+	max-width: 5%;
+}
+th .id {
+	max-width: 5%;
+}
+th .message {
+	max-width: 5%;
+} */
 
 /*
 	Max width before this PARTICULAR table gets nasty. This query will take effect for any screen smaller than 760px and also iPads specifically.
@@ -63,6 +89,7 @@ th {
 
 	tr {
 		margin: 0 0 1rem 0;
+		position: relative;
 	}
 
 	/* tr:nth-child(odd) {
@@ -73,7 +100,7 @@ th {
 		/* Behave  like a "row" */
 		border: none;
 		border-bottom: 1px solid #eee;
-		position: relative;
+		position: absolute;
 		padding-left: 50%;
 	}
 

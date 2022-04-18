@@ -1,7 +1,7 @@
 .arrow-button {
 	width: 80px;
 	height: 30px;
-	display: inline-block;
+	/* display: inline-block; */
 	border: none;
 	outline: slategrey solid 1px;
 	border-radius: 3px;
