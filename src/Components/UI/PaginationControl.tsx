@@ -15,9 +15,6 @@ const PaginationControl: React.FC = () => {
 	const { totalRecordCount } = useAppSelector((state) => state.events);
 
 	const totalPageCount: number = Math.ceil(totalRecordCount / pageSize);
-	console.log(pageSize);
-	console.log(totalRecordCount);
-	console.log(totalPageCount);
 
 	const reset = () => {
 		dispatch(eventActions.EVENT_RESET());

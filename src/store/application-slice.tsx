@@ -35,7 +35,6 @@ export const fetchAppData = () => {
 			querySnapshot.forEach((doc) =>
 				appData.push(doc.get('application'))
 			);
-			console.log(appData);
 
 			const allApps = appData.map((app) => {
 				return {
@@ -43,7 +42,6 @@ export const fetchAppData = () => {
 					Id: app.Id,
 				};
 			});
-			console.log(allApps);
 
 			return allApps;
 		};

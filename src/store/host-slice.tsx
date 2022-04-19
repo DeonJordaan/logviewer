@@ -33,7 +33,6 @@ export const fetchHostData = () => {
 			const querySnapshot = await getDocs(hostRef);
 
 			querySnapshot.forEach((doc) => hostData.push(doc.get('host')));
-			console.log(hostData);
 
 			const allHosts = hostData.map((host) => {
 				return {
