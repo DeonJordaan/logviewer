@@ -1,9 +1,5 @@
 .hierarchy-item {
 	font-size: 0.75rem;
-	/* display: grid;
-	grid-template-columns: 8rem 5rem 12rem 12rem 30rem;
-	grid-template-rows: 1.2rem;
-	gap: 0.5rem; */
 	margin: 0.25rem auto;
 	padding: 0.25rem 0 0.25rem 0;
 	background-color: #ededed;
@@ -33,46 +29,3 @@
 .Failed {
 	color: rgb(206, 64, 32);
 }
-
-/* .upArrow button {
-	cursor: pointer;
-} */
-
-/* .upArrow {
-	width: 80px;
-	height: 30px;
-	display: inline-block;
-	border: none;
-	outline: slategrey solid 1px;
-	border-radius: 3px;
-	padding: 0.5rem 2rem;
-	margin: 0 0.25rem;
-	text-decoration: none;
-	cursor: pointer;
-	text-align: center;
-	transition: background 250ms ease-in-out, transform 150ms ease;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-} */
-
-/*
-
-.upArrow:hover,
-.upArrow:focus {
-	background-color: #d1cfcf;
-}
-
-.upArrow:focus {
-	outline: 1px solid #fff;
-	outline-offset: -4px;
-}
-
-.upArrow:active {
-	transform: scale(0.99);
-} */
-
-/* .upArrow {
-	background: url('../svg/leftArrow.svg');
-	background-size: 80px 30px;
-	background-color: #ededed;
-} */

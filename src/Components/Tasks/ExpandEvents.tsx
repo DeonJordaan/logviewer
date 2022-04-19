@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { eventActions } from '../../store/event-slice';
 import { useAppDispatch } from '../../store/hooks';
 import { subEventActions } from '../../store/subevent-slice';
@@ -10,9 +11,6 @@ const ExpandEvents: React.FC<{
 }> = (props) => {
 	const dispatch = useAppDispatch();
 
-	// const { events } = useAppSelector((state) => state.events);
-	// const { parentId, fetchId } = useAppSelector((state) => state.subEvents);
-
 	const id = props.id;
 
 	let buttonClasses;
@@ -23,24 +21,11 @@ const ExpandEvents: React.FC<{
 	}
 
 	const clickHandler = () => {
-		// console.log('EXPAND EVENT');
 		dispatch(subEventActions.SET_PARENT_ID(id));
 		dispatch(subEventActions.SET_FETCH_ID(id));
 		dispatch(eventActions.SET_SELECTED_EVENT(id));
 		dispatch(subEventActions.RESET_HIERARCHY());
 	};
-
-	// NOTE  Moved to subEventView
-	// useEffect(() => {
-	// 	dispatch(fetchSubEventData(fetchId));
-	// }, [dispatch, fetchId]);
-
-	// NOTE Moved up to the clickHandler
-	// useEffect(() => {
-	// 	dispatch(eventActions.SET_SELECTED_EVENT(id));
-	// }, [dispatch, id]);
-
-	// console.log(subEventCtx.selectedTask);
 
 	return (
 		<button onClick={clickHandler} className={buttonClasses}>
@@ -50,3 +35,13 @@ const ExpandEvents: React.FC<{
 };
 
 export default ExpandEvents;
+
+// NOTE  Moved to subEventView
+// useEffect(() => {
+// 	dispatch(fetchSubEventData(fetchId));
+// }, [dispatch, fetchId]);
+
+// NOTE Moved up to the clickHandler
+// useEffect(() => {
+// 	dispatch(eventActions.SET_SELECTED_EVENT(id));
+// }, [dispatch, id]);

@@ -1,8 +1,7 @@
-// import PushButton from '../ButtonBar/PushButton';
 import { eventActions } from '../../store/event-slice';
 import { useAppDispatch } from '../../store/hooks';
-import Dropdown from '../Filter/Dropdown';
-import TotalRecordCount from '../Filter/TotalRecordCount';
+import Dropdown from './Dropdown';
+import TotalRecordCount from './TotalRecordCount';
 import classes from './SearchBar.module.css';
 
 const SearchBar: React.FC = () => {
@@ -20,7 +19,6 @@ const SearchBar: React.FC = () => {
 				<label>Minimum Date</label>
 				<input onChange={dateChangeHandler} type="date"></input>
 			</div>
-			{/* <PushButton className={classes['push-button']} /> */}
 			<TotalRecordCount />
 		</div>
 	);

@@ -46,7 +46,6 @@ export const fetchAppData = () => {
 			console.log(allApps);
 
 			return allApps;
-			// return appData;
 		};
 
 		try {

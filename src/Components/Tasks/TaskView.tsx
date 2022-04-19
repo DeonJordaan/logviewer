@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
+
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import TaskViewHeader from './TaskViewHeader';
 import TaskViewItem from './TaskViewItem';
-import classes from './TaskView.module.css';
 import Event from '../../types/event';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import eventSlice from '../../store/event-slice';
-
-// import { doc, setDoc } from 'firebase/firestore';
-// import db from '../../store/firebase';
+import classes from './TaskView.module.css';
 
 const TaskView: React.FC<{
 	setStatus: (statusCode: number) => string;
@@ -50,9 +48,7 @@ const TaskView: React.FC<{
 
 	useEffect(() => {
 		const from: number = ((0 + 1) * pageNumber - 1) * 10;
-		// console.log(from);
 		const to: number = 10 * pageNumber;
-		// console.log(to);
 		const setDisplayPage = (data: Event[] | undefined) => {
 			if (data) {
 				setDisplayData(
@@ -65,7 +61,6 @@ const TaskView: React.FC<{
 		};
 
 		setDisplayPage(eventsByDate);
-		// setDisplayPage(events);
 	}, [events, eventsByDate, pageNumber]);
 
 	let taskContent = (
@@ -97,6 +92,7 @@ const TaskView: React.FC<{
 		);
 	}
 
+	// TODO IMPLEMENT ERROR HANDLING STATES
 	// if (eventCtx.error) {
 	// 	taskContent = (
 	// 		<tbody>
@@ -116,44 +112,6 @@ const TaskView: React.FC<{
 	// 		</tbody>
 	// 	);
 	// }
-
-	// const eventStore = doc(db, 'events/{data.id}');
-	// const fbData: {
-	// 	key: data.id;
-	// 	id: data.id;
-	// 	App: data.App;
-	// 	taskCode: data.taskCode;
-	// 	startTime: data.startTime;
-	// 	endTime: data.endTime;
-	// 	subEvents: data.subEvents;
-	// 	host: data.host;
-	// 	message: data.message;
-	// 	status: data.status;
-	// } = [];
-	// const fbase = () => {
-	// 	fbData.push(
-	// 		eventCtx.tasks.map((data) => {
-	// 			return {
-	// 				key: data.id,
-	// 				id: data.id,
-	// 				App: data.App,
-	// 				taskCode: data.taskCode,
-	// 				startTime: data.startTime,
-	// 				endTime: data.endTime,
-	// 				subEvents: data.subEvents,
-	// 				host: data.host,
-	// 				message: data.message,
-	// 				status: data.status,
-	// 			};
-	// 		})
-	// 	);
-	// };
-	// fbase();
-
-	// const writeEvents = () => {
-	// 	setDoc(eventStore, fbData);
-	// };
-	// writeEvents();
 
 	return (
 		<div className={classes['task-view']}>

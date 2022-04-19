@@ -2,7 +2,6 @@ import React from 'react';
 
 import ExpandEvents from './ExpandEvents';
 import TaskTime from './TaskTime';
-
 import classes from './TaskViewItem.module.css';
 
 const TaskViewItem: React.FC<{
@@ -51,7 +50,6 @@ const TaskViewItem: React.FC<{
 		<tr className={classes['task-item']}>
 			<td>{props.host}</td>
 			<td>{props.app}</td>
-			{/* <td className={classes.Aborted}>{props.status}</td> */}
 			<td className={statusClass}>{props.status}</td>
 			<td>{props.taskCode}</td>
 			<td>

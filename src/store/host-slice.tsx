@@ -41,10 +41,8 @@ export const fetchHostData = () => {
 					Id: host.Id,
 				};
 			});
-			console.log(allHosts);
 
 			return allHosts;
-			// return appData;
 		};
 
 		try {

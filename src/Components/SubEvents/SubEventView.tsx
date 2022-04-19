@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 
 import SubEventViewHeader from './SubEventViewHeader';
 import SubEventViewItem from './SubEventViewItem';
-import classes from './SubEventView.module.css';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { fetchSubEventData } from '../../store/subevent-slice';
+import classes from './SubEventView.module.css';
 
 const SubEventView: React.FC<{
 	setStatus: (statusCode: number) => string;

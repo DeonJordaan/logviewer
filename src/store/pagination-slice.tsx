@@ -37,7 +37,7 @@ export const paginationActions = paginationSlice.actions;
 
 export default paginationSlice;
 
-// Function to get pagination data from Firebase
+// Function to get pagination data from Firebase. Refactored to calculate in the client.
 // export const getPaginationData = () => {
 // 	// TODO CHECK INFERRED TYPE OF dispatch BELOW
 
@@ -56,15 +56,11 @@ export default paginationSlice;
 
 // 			paginationSnapshot.forEach((doc) => {
 // 				// const totalRecordCount = doc.get('totalRecordCount');
-// 				// console.log(totalRecordCount);
 // 				// const pageSize = doc.get('pageSize');
-// 				// console.log(pageSize);
 // 				const pageNumber = doc.get('pageNumber');
-// 				// console.log(pageNumber);
 
 // 				pageData = pageNumber;
 // 			});
-// 			// console.log(pageData);
 // 			return pageData;
 // 		};
 

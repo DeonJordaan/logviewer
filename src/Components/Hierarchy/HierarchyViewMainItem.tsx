@@ -1,7 +1,8 @@
 import React from 'react';
-import classes from './HierarchyViewMainItem.module.css';
+
 import TaskTime from '../Tasks/TaskTime';
 import { useAppSelector } from '../../store/hooks';
+import classes from './HierarchyViewMainItem.module.css';
 
 const HierarchyViewMainItem: React.FC<{
 	setStatus: (statusCode: number) => string;

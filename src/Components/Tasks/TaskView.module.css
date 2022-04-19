@@ -20,7 +20,6 @@ table {
 	border-radius: 3px;
 	table-layout: fixed;
 	word-wrap: break-word;
-	/* height: 20rem; */
 }
 
 th {
@@ -36,34 +35,6 @@ th {
 	border-spacing: 0 0.05rem;
 	padding: 3px 5px;
 }
-
-/* th .host {
-	max-width: 5%;
-}
-th .application {
-	max-width: 5%;
-}
-th .status {
-	max-width: 5%;
-}
-th .taskcode {
-	max-width: 5%;
-}
-th .started {
-	max-width: 5%;
-}
-th .completed {
-	max-width: 5%;
-}
-th .subevents {
-	max-width: 5%;
-}
-th .id {
-	max-width: 5%;
-}
-th .message {
-	max-width: 5%;
-} */
 
 /*
 	Max width before this PARTICULAR table gets nasty. This query will take effect for any screen smaller than 760px and also iPads specifically.

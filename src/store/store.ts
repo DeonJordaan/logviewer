@@ -1,4 +1,3 @@
-// import { createStore } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
 import eventSlice from './event-slice';
 import paginationSlice from './pagination-slice';

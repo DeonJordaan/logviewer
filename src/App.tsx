@@ -14,7 +14,6 @@ import { useAppDispatch } from './store/hooks';
 import { fetchEventData } from './store/event-slice';
 import { fetchAppData } from './store/application-slice';
 import { fetchHostData } from './store/host-slice';
-// import Status from './Interfaces/statusInterface';
 
 function App() {
 	const dispatch = useAppDispatch();

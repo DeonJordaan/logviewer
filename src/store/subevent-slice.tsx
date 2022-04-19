@@ -5,7 +5,6 @@ import db from './firebase';
 
 interface subEventState {
 	subEvents: Event[];
-	// selectedTask: Event[];
 	selectedSubEvent: Event[];
 	hierarchy: Event[];
 	parentId: number;
@@ -15,7 +14,6 @@ interface subEventState {
 
 const initialState: subEventState = {
 	subEvents: [],
-	// selectedTask: [],
 	selectedSubEvent: [],
 	hierarchy: [],
 	parentId: 0,
@@ -64,13 +62,13 @@ const subEventSlice = createSlice({
 				state.fetchId = state.parentId;
 			}
 
-			// NOTE Removing the last event in hierarchy
+			// NOTE Removing only the last event in hierarchy
 			// state.hierarchy.splice(-1);
 		},
 		RESET_HIERARCHY(state) {
 			state.hierarchy = [];
 		},
-		// FIXME THIS THING DOESN'T WORK
+		// FIXME THIS THING DOESN'T WORK, BUT I REALLY SHOULD GET IT TO
 		SUB_EVENT_RESET() {
 			Object.assign(initialState);
 			// return initialState;
@@ -128,30 +126,3 @@ export const fetchSubEventData = (fetchId: number) => {
 export const subEventActions = subEventSlice.actions;
 
 export default subEventSlice;
-
-// export const setHierarchy = () => {
-// 	return (_dispatch: any, getState: () => any) => {
-// 		const state = getState();
-
-// 		state.hierarchy.push(state.selectedSubEvent);
-// 	};
-// };
-
-// export const setSelectedSubEvent = () => {
-// 	return (_dispatch: any, getState: () => subEventState) => {
-// 		const state = getState() as subEventState;
-// 		const selected: Event[] = state.subEvents.filter(
-// 			(subEvent: Event) => subEvent.id === state.subEventParentId
-// 		);
-// 		state.selectedSubEvent = selected;
-// 	};
-// };
-
-// export const setSelectedTask = (selectedEvent: Event[]) => {
-// 	return (_dispatch: any, getState: () => any) => {
-// 		const state = getState();
-// 		state.selectedTask = events.filter(
-// 			(task: Event) => task.id === state.parentId
-// 		);
-// 	};
-// };

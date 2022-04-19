@@ -98,5 +98,4 @@ const HierarchyView: React.FC<{
 	);
 };
 
-// export default HierarchyView;
 export default HierarchyView;

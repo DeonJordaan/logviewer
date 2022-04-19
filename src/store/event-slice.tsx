@@ -35,7 +35,6 @@ const eventSlice = createSlice({
 		SET_EVENTS(state, action: PayloadAction<Event[]>) {
 			state.events = action.payload;
 		},
-		// FIXME SEE RELATING TO RERENDER IN NOTES
 		SET_SELECTED_EVENT(state, action: PayloadAction<number | []>) {
 			const { events } = state;
 			const item = events.filter((event) => event.Id === action.payload);
@@ -94,7 +93,6 @@ export const fetchEventData = () => {
 			dispatch(
 				eventSlice.actions.SET_TOTAL_RECORD_COUNT(eventsDataLength)
 			);
-			console.log(eventsData.length);
 		} catch (error) {
 			// TODO Complete error handling
 			console.log(error);
@@ -145,9 +143,6 @@ export const fetchSelectAppData = (selectedApp: string) => {
 				};
 			});
 
-			console.log(taskData);
-			console.log(app);
-
 			return allTasks;
 			// setIsLoading(false);
 		};
@@ -157,7 +152,6 @@ export const fetchSelectAppData = (selectedApp: string) => {
 			dispatch(eventSlice.actions.SET_EVENTS(appData));
 			const appDataLength = appData.length;
 			dispatch(eventSlice.actions.SET_TOTAL_RECORD_COUNT(appDataLength));
-			// console.log(appData);
 		} catch (error) {
 			// TODO Complete error handling
 			console.log(error);
@@ -208,9 +202,6 @@ export const fetchSelectHostData = (selectedHost: string) => {
 				};
 			});
 
-			console.log(taskData);
-			console.log(host);
-
 			return allTasks;
 			// setIsLoading(false);
 		};
@@ -220,7 +211,6 @@ export const fetchSelectHostData = (selectedHost: string) => {
 			dispatch(eventSlice.actions.SET_EVENTS(hostData));
 			const hostDataLength = hostData.length;
 			dispatch(eventSlice.actions.SET_TOTAL_RECORD_COUNT(hostDataLength));
-			// console.log(appData);
 		} catch (error) {
 			// TODO Complete error handling
 			console.log(error);
@@ -231,19 +221,3 @@ export const fetchSelectHostData = (selectedHost: string) => {
 export default eventSlice;
 
 export const eventActions = eventSlice.actions;
-
-// const [eventsByDate, setEventsByDate] = useState<Event[]>();
-
-// export const filterDataByDate = (data: Event[]) => {
-// 	const parseDate = (date: string | number) => {
-// 		const dateToParse = new Date(date);
-// 		const parsedDate = dateToParse.getTime();
-// 		return parsedDate;
-// 	};
-
-// 	const setEventsByDate = () => {
-// 		state.eventsByDate = data.filter((event) => parseDate(event.EndTime) < parseDate(state.date));
-// 	};
-// 	setEventsByDate
-// };
-// filterDataByDate(events);

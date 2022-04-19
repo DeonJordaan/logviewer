@@ -1,13 +1,8 @@
 .hierarchy-column-header {
 	font-size: 0.9rem;
-	/* display: grid; */
-	/* grid-template-columns: 8rem 5rem 12rem 12rem 30rem; */
-	/* grid-template-columns: 10fr 8fr 15fr 15fr 52fr; */
-	/* gap: 0.5rem; */
 	margin: 0.25rem 0 0.25rem 0;
 	padding: 0.25rem 0 0.25rem 0;
 	background-color: #ededed;
 	border: 0.1rem solid lightgray;
 	border-radius: 3px;
-	/* width: 100%; */
 }

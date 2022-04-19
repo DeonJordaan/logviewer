@@ -1,13 +1,12 @@
 import React from 'react';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleUp } from '@fortawesome/free-solid-svg-icons';
-
-import TaskTime from '../Tasks/TaskTime';
-
-import classes from './HierarchyViewItem.module.css';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import TaskTime from '../Tasks/TaskTime';
 import { subEventActions } from '../../store/subevent-slice';
 import { useAppDispatch } from '../../store/hooks';
+import classes from './HierarchyViewItem.module.css';
 
 const HierarchyViewItem: React.FC<{
 	subEvents: number;
@@ -83,21 +82,3 @@ export default React.memo(HierarchyViewItem);
 // 	Aborted: classes.Aborted,
 // 	Failed: classes.Failed,
 // };
-
-//NOTE
-// const subEventCtx = useContext(SubEventContext);
-// console.log(subEventCtx);
-
-// let status = '-';
-// let subEvents = '0';
-// let startTime = '0000-00-00T00:00:00.00';
-// let endTime = '0000-00-00T00:00:00.00';
-// let message = '-';
-
-// if (subEventCtx.hierarchy.length > 0) {
-// 	status = props.setStatus(subEventCtx.hierarchy[0].status);
-// 	subEvents = subEventCtx.hierarchy[0].subEvents;
-// 	startTime = subEventCtx.hierarchy[0].startTime;
-// 	endTime = subEventCtx.hierarchy[0].endTime;
-// 	message = subEventCtx.hierarchy[0].message;
-// }

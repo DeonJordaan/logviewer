@@ -1,4 +1,5 @@
 import React from 'react';
+
 import ExpandSubEvents from './ExpandSubEvents';
 import TaskTime from '../Tasks/TaskTime';
 import classes from './SubEventViewItem.module.css';
