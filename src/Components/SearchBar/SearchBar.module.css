@@ -11,11 +11,14 @@
 }
 
 .search__bar label {
-	padding: 0 0.25rem 0 1.5rem;
+	padding: 0 0.25rem 0 0.5rem;
 }
 
 .search-input {
 	margin: 0 0.25rem;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
 .search-input label {
@@ -25,4 +28,16 @@
 .search-input input {
 	height: 1.5rem;
 	width: 12rem;
+}
+
+@media only screen and (max-width: 760px) {
+	.search__bar,
+	.search-input {
+		flex-direction: column;
+	}
+
+	.search__bar label,
+	.search-input label {
+		padding: 0.25rem 0.25rem;
+	}
 }
