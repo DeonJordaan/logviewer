@@ -19,8 +19,8 @@ table {
 	width: 95vw;
 	background-color: rgb(221, 218, 218);
 	border-radius: 3px;
-	table-layout: fixed;
-	word-wrap: break-word;
+	/* table-layout: fixed; */
+	/* word-wrap: break-word; */
 }
 
 th {
