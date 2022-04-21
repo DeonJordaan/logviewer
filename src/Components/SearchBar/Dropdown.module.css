@@ -36,3 +36,9 @@
 .select option {
 	font-weight: normal;
 }
+
+@media only screen and (max-width: 920px) {
+	.select {
+		width: 9rem;
+	}
+}

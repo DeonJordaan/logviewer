@@ -22,6 +22,12 @@ table {
 	width: 100%;
 }
 
+@media only screen and (max-width: 760px) {
+	table {
+		display: block;
+	}
+}
+
 th {
 	background-color: #ededed;
 	height: 2.5rem;
@@ -30,6 +36,10 @@ th {
 tr {
 	border-radius: 3px;
 	height: 2rem;
+}
+
+tr:hover {
+	background-color: rgb(192, 191, 191);
 }
 
 td,

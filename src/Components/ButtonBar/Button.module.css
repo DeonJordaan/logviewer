@@ -1,5 +1,5 @@
 .arrow-button {
-	width: 80px;
+	max-width: 80px;
 	height: 30px;
 	/* display: inline-block; */
 	border: none;
@@ -9,7 +9,8 @@
 	margin: 0 0.25rem;
 	text-decoration: none;
 	cursor: pointer;
-	text-align: center;
+	align-content: center;
+	/* text-align: center; */
 	transition: background 250ms ease-in-out, transform 150ms ease;
 	-webkit-appearance: none;
 	-moz-appearance: none;

@@ -8,9 +8,20 @@
 
 .logo {
 	object-fit: contain;
-	max-width: 15vw;
+	height: 2rem;
+	width: auto;
 }
 
 p {
-	font-size: 1.6rem;
+	font-size: 1.5rem;
+}
+
+@media only screen and (max-width: 420px) {
+	.header {
+		flex-direction: column;
+	}
+
+	p {
+		font-size: 1.2rem;
+	}
 }

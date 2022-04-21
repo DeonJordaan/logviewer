@@ -1,4 +1,5 @@
 .search__bar {
+	font-size: 1rem;
 	background-color: #ededed;
 	border: 0.1rem solid lightgray;
 	border-radius: 3px;
@@ -8,10 +9,12 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	flex-wrap: no-wrap;
 }
 
 .search__bar label {
-	padding: 0 0.25rem 0 0.5rem;
+	margin: 0 0 0 0.25rem;
+	padding: 0 0 0 0.5rem;
 }
 
 .search-input {
@@ -30,10 +33,23 @@
 	width: 12rem;
 }
 
+@media only screen and (max-width: 920px) {
+	.search__bar {
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	.search__bar label,
+	.search-input label {
+		padding: 0.5rem;
+	}
+}
+
 @media only screen and (max-width: 760px) {
 	.search__bar,
 	.search-input {
 		flex-direction: column;
+		flex-wrap: no-wrap;
 	}
 
 	.search__bar label,
