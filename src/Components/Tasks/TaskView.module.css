@@ -16,19 +16,20 @@
 }
 
 table {
-	width: 95vw;
 	background-color: rgb(221, 218, 218);
 	border-radius: 3px;
-	/* table-layout: fixed; */
-	/* word-wrap: break-word; */
+	table-layout: auto;
+	width: 100%;
 }
 
 th {
 	background-color: #ededed;
+	height: 2.5rem;
 }
 
 tr {
 	border-radius: 3px;
+	height: 2rem;
 }
 
 td,
