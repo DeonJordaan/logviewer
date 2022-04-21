@@ -1,7 +1,7 @@
 .task-view {
 	margin: 0;
 	padding: 0 1.5rem 0 1.5rem;
-	width: 95vw;
+	/* width: 95vw; */
 	min-height: 22rem;
 	overflow-x: auto;
 }
