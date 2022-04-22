@@ -1,8 +1,13 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLightbulb } from '@fortawesome/free-regular-svg-icons';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import classes from './Header.module.css';
 
 const Header: React.FC<{
 	switchTheme: () => void;
 }> = (props) => {
+	const lightBulb = faLightbulb as IconProp;
+
 	return (
 		<header className={classes.header}>
 			<img
@@ -10,8 +15,16 @@ const Header: React.FC<{
 				className={classes.logo}
 				alt="logo"
 			/>
-			<button onClick={props.switchTheme}>Theme</button>
-			<p>Log Viewer</p>
+			<div className={classes['header-right']}>
+				<p>Log Viewer</p>
+				<span>
+					<FontAwesomeIcon
+						onClick={props.switchTheme}
+						icon={lightBulb}
+						// size="2x"
+					/>
+				</span>
+			</div>
 		</header>
 	);
 };

@@ -46,6 +46,7 @@ tr:hover {
 
 td,
 th {
+	background-color: var(--table-background);
 	border-color: var(--table-border);
 	border-spacing: 0 0.05rem;
 	padding: 3px 5px;

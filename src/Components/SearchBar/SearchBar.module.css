@@ -30,8 +30,12 @@
 }
 
 .search-input input {
+	color: var(--text-primary);
+	background-color: var(--table-background);
 	height: 1.5rem;
 	width: 12rem;
+	border: 0.1rem solid var(--text-primary);
+	border-radius: 3px;
 }
 
 @media only screen and (max-width: 920px) {

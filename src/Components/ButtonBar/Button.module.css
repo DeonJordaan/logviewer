@@ -36,7 +36,6 @@
 
 .leftArrow {
 	background: url('../svg/leftArrow.svg');
-	fill: #fff;
 	background-size: 80px 30px;
 	background-color: var(--table-background);
 }

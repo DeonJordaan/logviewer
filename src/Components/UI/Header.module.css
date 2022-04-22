@@ -10,10 +10,23 @@
 	object-fit: contain;
 	height: 2rem;
 	width: auto;
+	border-radius: 3px;
+}
+
+.header-right {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
 p {
 	font-size: 1.5rem;
+	color: var(--text-primary);
+	padding-right: 1rem;
+}
+
+svg {
+	font-size: x-large;
 	color: var(--text-primary);
 }
 

@@ -9,6 +9,12 @@
 	width: 100%;
 }
 
+td button {
+	background-color: var(--table-background);
+	border: 0.1rem solid var(--table-border);
+	border-radius: 3px;
+}
+
 /* Styling to be applied to the status element based on the task status */
 .NotSet {
 	color: rgb(36, 193, 228);

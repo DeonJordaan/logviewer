@@ -47,16 +47,21 @@ const PaginationControl: React.FC = () => {
 
 	return (
 		<div className={classes['button-bar']}>
-			<Button
-				onClick={goToFirstPage}
-				className={'doubleLeftArrow'}
-			></Button>
-			<Button onClick={getPrevPage} className={'leftArrow'} />
+			<Button onClick={goToFirstPage} className={'doubleLeftArrow'}>
+				{/* <FontAwesomeIcon icon={} /> */}
+			</Button>
+			<Button onClick={getPrevPage} className={'leftArrow'}>
+				{/* <FontAwesomeIcon icon={} /> */}
+			</Button>
 			<div className={classes['current-page']}>
 				Page {pageNumber} of {totalPageCount}
 			</div>
-			<Button onClick={getNextPage} className={'rightArrow'} />
-			<Button onClick={goToLastPage} className={'doubleRightArrow'} />
+			<Button onClick={getNextPage} className={'rightArrow'}>
+				{/* <FontAwesomeIcon icon={} /> */}
+			</Button>
+			<Button onClick={goToLastPage} className={'doubleRightArrow'}>
+				{/* <FontAwesomeIcon icon={} /> */}
+			</Button>
 		</div>
 	);
 };
