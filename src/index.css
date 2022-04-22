@@ -11,3 +11,17 @@ body {
 p {
 	margin: 0;
 }
+
+:root {
+	--background: #ededed;
+	--text-primary: black;
+	/* --text-secondary: royalblue; */
+	/* --accent: purple; */
+}
+
+[data-theme='dark'] {
+	--background: black;
+	--text-primary: #ededed;
+	/* --text-secondary: grey; */
+	/* --accent: darkred; */
+}

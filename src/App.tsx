@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 
+import useLocalStorage from 'use-local-storage';
+
 import './App.css';
 
 import Header from './Components/UI/Header';
@@ -16,6 +18,14 @@ import { fetchAppData } from './store/application-slice';
 import { fetchHostData } from './store/host-slice';
 
 function App() {
+	const defaultDark = window.matchMedia(
+		'(prefers-color-scheme: dark)'
+	).matches;
+	const [theme, setTheme] = useLocalStorage(
+		'theme',
+		defaultDark ? 'dark' : 'light'
+	);
+
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
@@ -54,9 +64,15 @@ function App() {
 		return status;
 	}
 
+	const switchTheme = () => {
+		const newTheme = theme === 'light' ? 'dark' : 'light';
+		setTheme(newTheme);
+		console.log(theme);
+	};
+
 	return (
-		<div className="App">
-			<Header />
+		<div className="App" data-theme={theme}>
+			<Header switchTheme={switchTheme} />
 			<div className="display">
 				<SearchBar />
 				<div className={'main-task-display'}>
