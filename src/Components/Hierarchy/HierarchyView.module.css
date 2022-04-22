@@ -4,26 +4,27 @@
 	padding: 0 1.5rem 0 1.5rem;
 	/* width: 95vw; */
 	overflow-x: auto;
+	color: var(--text-primary);
 }
 
 .hierarchy-header {
 	text-align: start;
 	margin: 0 0 0.25rem 0;
 	padding: 0.25rem 0 0.25rem 1.5rem;
-	background-color: #ededed;
-	border: 0.1rem solid lightgray;
+	background-color: var(--table-background);
+	border: 0.1rem solid var(--table-border);
 	border-radius: 3px;
 }
 
 .box {
 	display: inline-block;
-	border: 0.1rem solid lightgray;
+	border: 0.1rem solid var(--table-border);
 	padding: 0.25rem 0.75rem;
 	margin: 0 0.75rem;
 	border-radius: 5px;
 	text-decoration: none;
-	background: #ffffff;
-	color: black;
+	background: var(--table-background);
+	color: var(--text-primary);
 	font-family: inherit;
 	text-align: center;
 }

@@ -1,7 +1,7 @@
-.task-header {
+.task-view-header {
 	font-size: 0.95rem;
-	background-color: #ededed;
-	border: 0.1rem solid lightgray;
+	background-color: var(--table-background);
+	border: 0.1rem solid var(--table-border);
 	border-radius: 3px;
 	align-items: center;
 }

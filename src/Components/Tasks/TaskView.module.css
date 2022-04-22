@@ -4,22 +4,24 @@
 	/* width: 95vw; */
 	min-height: 22rem;
 	overflow-x: auto;
+	color: var(--text-primary);
 }
 
 .task-header {
 	text-align: start;
 	margin: 0 0 0.25rem 0;
 	padding: 0.25rem 0 0.25rem 1.5rem;
-	background-color: #ededed;
-	border: 0.1rem solid lightgray;
+	background-color: var(--table-background);
+	border: 0.1rem solid var(--table-border);
 	border-radius: 3px;
 }
 
 table {
-	background-color: rgb(221, 218, 218);
+	background-color: var(--table-border);
 	border-radius: 3px;
 	table-layout: auto;
 	width: 100%;
+	border-color: var(--table-border);
 }
 
 @media only screen and (max-width: 760px) {
@@ -29,7 +31,7 @@ table {
 }
 
 th {
-	background-color: #ededed;
+	background-color: var(--table-background);
 	height: 2.5rem;
 }
 
@@ -39,11 +41,12 @@ tr {
 }
 
 tr:hover {
-	background-color: rgb(192, 191, 191);
+	background-color: var(--table-hover);
 }
 
 td,
 th {
+	border-color: var(--table-border);
 	border-spacing: 0 0.05rem;
 	padding: 3px 5px;
 }

@@ -4,13 +4,14 @@
 	padding: 0 1.5rem 0 1.5rem;
 	/* width: 95vw; */
 	overflow-x: auto;
+	color: var(--text-primary);
 }
 
 .sub-event-header {
 	text-align: start;
 	margin: 2rem 0 0.25rem 0;
 	padding: 0.25rem 0 0.25rem 1.5rem;
-	background-color: #ededed;
-	border: 0.1rem solid lightgray;
+	background-color: var(--table-background);
+	border: 0.1rem solid var(--table-border);
 	border-radius: 3px;
 }

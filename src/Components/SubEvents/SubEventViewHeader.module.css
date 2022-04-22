@@ -2,8 +2,8 @@
 	font-size: 0.9rem;
 	margin: 0.25rem 0 0.25rem 0;
 	padding: 0.25rem 0 0.25rem 0;
-	background-color: #ededed;
-	border: 0.1rem solid lightgray;
+	background-color: var(--table-background);
+	border: 0.1rem solid var(--table-border);
 	border-radius: 3px;
 	align-items: center;
 }

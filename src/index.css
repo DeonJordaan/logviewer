@@ -12,16 +12,22 @@ p {
 	margin: 0;
 }
 
-:root {
-	--background: #ededed;
+html {
+	--background: white;
+	--table-background: #ededed;
+	--table-border: lightgray;
 	--text-primary: black;
+	--table-hover: rgb(192, 191, 191);
 	/* --text-secondary: royalblue; */
 	/* --accent: purple; */
 }
 
 [data-theme='dark'] {
-	--background: black;
-	--text-primary: #ededed;
+	--background: #22272e;
+	--table-background: #2d333b;
+	--table-border: #768390;
+	--text-primary: #adbac7;
+	--table-hover: #4a5460;
 	/* --text-secondary: grey; */
 	/* --accent: darkred; */
 }

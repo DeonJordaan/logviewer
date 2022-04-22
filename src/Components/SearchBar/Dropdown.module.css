@@ -3,7 +3,7 @@
 	display: block;
 	font-size: inherit;
 	font-family: inherit;
-	color: black;
+	color: var(--text-primary);
 	padding: 0.25rem 0.5rem 0.25rem 0.5rem;
 	height: fit-content;
 	width: 12rem;

@@ -16,9 +16,13 @@
 	-moz-appearance: none;
 }
 
+/* button {
+	color: #fff;
+} */
+
 .arrow-button:hover,
 .arrow-button:focus {
-	background-color: #d1cfcf;
+	background-color: var(--table-hover);
 }
 
 .arrow-button:focus {
@@ -31,22 +35,23 @@
 }
 
 .leftArrow {
-	background: url('../svg/leftArrow.svg') left top no-repeat;
+	background: url('../svg/leftArrow.svg');
+	fill: #fff;
 	background-size: 80px 30px;
-	background-color: #ededed;
+	background-color: var(--table-background);
 }
 .rightArrow {
 	background: url('../svg/rightArrow.svg');
 	background-size: 80px 30px;
-	background-color: #ededed;
+	background-color: var(--table-background);
 }
 .doubleLeftArrow {
 	background: url('../svg/dblLeftArrow.svg');
 	background-size: 80px 30px;
-	background-color: #ededed;
+	background-color: var(--table-background);
 }
 .doubleRightArrow {
 	background: url('../svg/dblRightArrow.svg');
 	background-size: 80px 30px;
-	background-color: #ededed;
+	background-color: var(--table-background);
 }
