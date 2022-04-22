@@ -1,10 +1,17 @@
 import React from 'react';
 
+import {
+	CaretDoubleLeft,
+	CaretDoubleRight,
+	CaretLeft,
+	CaretRight,
+} from 'phosphor-react';
+
 import { eventActions } from '../../store/event-slice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { paginationActions } from '../../store/pagination-slice';
 import { subEventActions } from '../../store/subevent-slice';
-import Button from '../ButtonBar/Button';
+// import Button from '../ButtonBar/Button';
 import classes from './Pagination.module.css';
 
 const PaginationControl: React.FC = () => {
@@ -47,21 +54,21 @@ const PaginationControl: React.FC = () => {
 
 	return (
 		<div className={classes['button-bar']}>
-			<Button onClick={goToFirstPage} className={'doubleLeftArrow'}>
-				{/* <FontAwesomeIcon icon={} /> */}
-			</Button>
-			<Button onClick={getPrevPage} className={'leftArrow'}>
-				{/* <FontAwesomeIcon icon={} /> */}
-			</Button>
+			<button className={classes['arrow-button']} onClick={goToFirstPage}>
+				<CaretDoubleLeft />
+			</button>
+			<button className={classes['arrow-button']} onClick={getPrevPage}>
+				<CaretLeft />
+			</button>
 			<div className={classes['current-page']}>
 				Page {pageNumber} of {totalPageCount}
 			</div>
-			<Button onClick={getNextPage} className={'rightArrow'}>
-				{/* <FontAwesomeIcon icon={} /> */}
-			</Button>
-			<Button onClick={goToLastPage} className={'doubleRightArrow'}>
-				{/* <FontAwesomeIcon icon={} /> */}
-			</Button>
+			<button className={classes['arrow-button']} onClick={getNextPage}>
+				<CaretRight />
+			</button>
+			<button className={classes['arrow-button']} onClick={goToLastPage}>
+				<CaretDoubleRight />
+			</button>
 		</div>
 	);
 };

@@ -31,3 +31,37 @@
 		padding: 0;
 	}
 }
+
+.arrow-button {
+	/* max-width: 80px; */
+	/* height: 30px; */
+	background-color: var(--table-background);
+	color: var(--text-primary);
+	/* display: inline-block; */
+	border: none;
+	outline: slategrey solid 1px;
+	border-radius: 3px;
+	padding: 0 0.75rem;
+	margin: 0 0.25rem;
+	text-decoration: none;
+	cursor: pointer;
+	/* align-content: center; */
+	/* text-align: center; */
+	transition: background 250ms ease-in-out, transform 150ms ease;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+
+.arrow-button:hover,
+.arrow-button:focus {
+	background-color: var(--table-hover);
+}
+
+.arrow-button:focus {
+	outline: 1px solid #fff;
+	outline-offset: -4px;
+}
+
+.arrow-button:active {
+	transform: scale(0.99);
+}

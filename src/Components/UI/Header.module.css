@@ -19,16 +19,21 @@
 	align-items: center;
 }
 
+.lightbulb {
+	color: var(--text-primary);
+	cursor: pointer;
+}
+
 p {
 	font-size: 1.5rem;
 	color: var(--text-primary);
 	padding-right: 1rem;
 }
 
-svg {
+/* svg {
 	font-size: x-large;
 	color: var(--text-primary);
-}
+} */
 
 @media only screen and (max-width: 420px) {
 	.header {

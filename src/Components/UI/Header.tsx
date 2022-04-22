@@ -1,12 +1,11 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLightbulb } from '@fortawesome/free-regular-svg-icons';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { LightbulbFilament } from 'phosphor-react';
+
 import classes from './Header.module.css';
 
 const Header: React.FC<{
 	switchTheme: () => void;
 }> = (props) => {
-	const lightBulb = faLightbulb as IconProp;
+	// const lightBulb = faLightbulb as IconProp;FIXME
 
 	return (
 		<header className={classes.header}>
@@ -17,12 +16,8 @@ const Header: React.FC<{
 			/>
 			<div className={classes['header-right']}>
 				<p>Log Viewer</p>
-				<span>
-					<FontAwesomeIcon
-						onClick={props.switchTheme}
-						icon={lightBulb}
-						// size="2x"
-					/>
+				<span className={classes.lightbulb}>
+					<LightbulbFilament onClick={props.switchTheme} size={28} />
 				</span>
 			</div>
 		</header>

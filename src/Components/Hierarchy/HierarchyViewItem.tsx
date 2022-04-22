@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleUp } from '@fortawesome/free-solid-svg-icons';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { CaretCircleUp } from 'phosphor-react';
+
 import TaskTime from '../Tasks/TaskTime';
 import { subEventActions } from '../../store/subevent-slice';
 import { useAppDispatch } from '../../store/hooks';
@@ -17,7 +16,7 @@ const HierarchyViewItem: React.FC<{
 	message: string;
 }> = (props) => {
 	const dispatch = useAppDispatch();
-	const upArrow = faAngleUp as IconProp;
+	// const upArrow = faAngleUp as IconProp;FIXME
 	const id = props.id;
 
 	function setClasses(taskStatus: string) {
@@ -54,8 +53,12 @@ const HierarchyViewItem: React.FC<{
 	return (
 		<tr className={classes['hierarchy-item']}>
 			<td>
-				<button type="button" onClick={levelUp} className="upArrow">
-					<FontAwesomeIcon icon={upArrow} />
+				<button
+					type="button"
+					onClick={levelUp}
+					className={classes.upArrow}
+				>
+					<CaretCircleUp />
 				</button>
 			</td>
 			<td className={setClasses(props.status)}>{props.status}</td>

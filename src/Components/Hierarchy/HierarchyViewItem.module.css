@@ -11,8 +11,14 @@
 
 td button {
 	background-color: var(--table-background);
-	border: 0.1rem solid var(--table-border);
-	border-radius: 3px;
+	border: none;
+	/* border: 0.1rem solid var(--table-border); */
+	/* border-radius: 3px; */
+}
+
+.upArrow {
+	color: var(--text-primary);
+	cursor: pointer;
 }
 
 /* Styling to be applied to the status element based on the task status */

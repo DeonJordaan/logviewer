@@ -6,11 +6,19 @@ import store from './store/store';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { IconContext } from 'phosphor-react';
 
 ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
-			<App />
+			<IconContext.Provider
+				value={{
+					size: 24,
+					weight: 'light',
+				}}
+			>
+				<App />
+			</IconContext.Provider>
 		</Provider>
 	</React.StrictMode>,
 	document.getElementById('root')
