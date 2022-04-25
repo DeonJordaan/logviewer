@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 
-import SubEventViewHeader from './SubEventViewHeader';
-import SubEventViewItem from './SubEventViewItem';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { fetchSubEventData } from '../../store/subevent-slice';
+
+import SubEventViewHeader from './SubEventViewHeader';
+import SubEventViewItem from './SubEventViewItem';
+
 import classes from './SubEventView.module.css';
 
 const SubEventView: React.FC<{

@@ -12,14 +12,13 @@ p {
 	margin: 0;
 }
 
+/* Theme variables */
 html {
 	--background: white;
 	--table-background: #ededed;
 	--table-border: lightgray;
 	--text-primary: black;
 	--table-hover: rgb(192, 191, 191);
-	/* --text-secondary: royalblue; */
-	/* --accent: purple; */
 }
 
 [data-theme='dark'] {
@@ -28,6 +27,4 @@ html {
 	--table-border: #768390;
 	--text-primary: #adbac7;
 	--table-hover: #4a5460;
-	/* --text-secondary: grey; */
-	/* --accent: darkred; */
 }

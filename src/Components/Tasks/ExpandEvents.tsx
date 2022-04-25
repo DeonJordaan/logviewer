@@ -1,8 +1,9 @@
 import React from 'react';
 
-import { eventActions } from '../../store/event-slice';
 import { useAppDispatch } from '../../store/hooks';
+import { eventActions } from '../../store/event-slice';
 import { subEventActions } from '../../store/subevent-slice';
+
 import classes from './ExpandEvents.module.css';
 
 const ExpandEvents: React.FC<{

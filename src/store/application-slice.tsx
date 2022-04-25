@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { collection, getDocs } from 'firebase/firestore';
-import Application from '../types/application';
 import db from './firebase';
+import Application from '../types/application';
 
 interface AppState {
 	applications: Application[];

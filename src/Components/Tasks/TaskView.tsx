@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import eventSlice from '../../store/event-slice';
+
+import Event from '../../types/event';
 import TaskViewHeader from './TaskViewHeader';
 import TaskViewItem from './TaskViewItem';
-import Event from '../../types/event';
-import eventSlice from '../../store/event-slice';
+
 import classes from './TaskView.module.css';
 
 const TaskView: React.FC<{

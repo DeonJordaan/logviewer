@@ -1,7 +1,9 @@
-import { eventActions } from '../../store/event-slice';
 import { useAppDispatch } from '../../store/hooks';
+import { eventActions } from '../../store/event-slice';
+
 import Dropdown from './Dropdown';
 import TotalRecordCount from './TotalRecordCount';
+
 import classes from './SearchBar.module.css';
 
 const SearchBar: React.FC = () => {

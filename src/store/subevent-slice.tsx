@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { collection, getDocs, query, where } from 'firebase/firestore';
-import Event from '../types/event';
 import db from './firebase';
+import Event from '../types/event';
 
 interface subEventState {
 	subEvents: Event[];
@@ -68,7 +68,7 @@ const subEventSlice = createSlice({
 		RESET_HIERARCHY(state) {
 			state.hierarchy = [];
 		},
-		// FIXME THIS THING DOESN'T WORK, BUT I REALLY SHOULD GET IT TO
+		// FIXME NOT WORKING FOR SOME REASON
 		SUB_EVENT_RESET() {
 			Object.assign(initialState);
 			// return initialState;

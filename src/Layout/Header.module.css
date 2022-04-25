@@ -30,14 +30,14 @@ p {
 	padding-right: 1rem;
 }
 
-/* svg {
-	font-size: x-large;
-	color: var(--text-primary);
-} */
-
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 520px) {
 	.header {
 		flex-direction: column;
+		align-items: center;
+	}
+
+	.header-right {
+		padding-top: 1rem;
 	}
 
 	p {

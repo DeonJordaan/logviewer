@@ -1,4 +1,5 @@
 import { useAppSelector } from '../../store/hooks';
+
 import classes from './TotalRecordCount.module.css';
 
 const TotalRecordCount: React.FC = () => {

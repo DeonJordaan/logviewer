@@ -1,14 +1,14 @@
 import React, { Fragment } from 'react';
 
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import {
 	eventActions,
 	fetchSelectAppData,
 	fetchSelectHostData,
 } from '../../store/event-slice';
-
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { paginationActions } from '../../store/pagination-slice';
 import { subEventActions } from '../../store/subevent-slice';
+
 import classes from './Dropdown.module.css';
 
 const Dropdown: React.FC<{

@@ -5,8 +5,6 @@ import classes from './Header.module.css';
 const Header: React.FC<{
 	switchTheme: () => void;
 }> = (props) => {
-	// const lightBulb = faLightbulb as IconProp;FIXME
-
 	return (
 		<header className={classes.header}>
 			<img

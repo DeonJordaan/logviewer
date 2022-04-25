@@ -3,11 +3,9 @@
 	justify-content: center;
 	align-items: top;
 	margin: 0.5rem 0 1.5rem 0;
-	/* max-width: 100vw; */
 }
 
 .current-page {
-	/* height: 30px; */
 	width: 150px;
 	outline: slategrey solid 1px;
 	border-radius: 3px;
@@ -33,11 +31,8 @@
 }
 
 .arrow-button {
-	/* max-width: 80px; */
-	/* height: 30px; */
 	background-color: var(--table-background);
 	color: var(--text-primary);
-	/* display: inline-block; */
 	border: none;
 	outline: slategrey solid 1px;
 	border-radius: 3px;
@@ -45,8 +40,6 @@
 	margin: 0 0.25rem;
 	text-decoration: none;
 	cursor: pointer;
-	/* align-content: center; */
-	/* text-align: center; */
 	transition: background 250ms ease-in-out, transform 150ms ease;
 	-webkit-appearance: none;
 	-moz-appearance: none;

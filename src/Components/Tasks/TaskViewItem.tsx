@@ -2,6 +2,7 @@ import React from 'react';
 
 import ExpandEvents from './ExpandEvents';
 import TaskTime from './TaskTime';
+
 import classes from './TaskViewItem.module.css';
 
 const TaskViewItem: React.FC<{

@@ -1,5 +1,10 @@
 import React from 'react';
 
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { eventActions } from '../../store/event-slice';
+import { paginationActions } from '../../store/pagination-slice';
+import { subEventActions } from '../../store/subevent-slice';
+
 import {
 	CaretDoubleLeft,
 	CaretDoubleRight,
@@ -7,11 +12,6 @@ import {
 	CaretRight,
 } from 'phosphor-react';
 
-import { eventActions } from '../../store/event-slice';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { paginationActions } from '../../store/pagination-slice';
-import { subEventActions } from '../../store/subevent-slice';
-// import Button from '../ButtonBar/Button';
 import classes from './Pagination.module.css';
 
 const PaginationControl: React.FC = () => {
@@ -25,7 +25,6 @@ const PaginationControl: React.FC = () => {
 
 	const reset = () => {
 		dispatch(eventActions.EVENT_RESET());
-		// dispatch(eventActions.SET_SELECTED_EVENT([]));
 		dispatch(subEventActions.SET_SUB_EVENTS([]));
 		dispatch(subEventActions.SET_FETCH_ID(0));
 		dispatch(subEventActions.RESET_HIERARCHY());

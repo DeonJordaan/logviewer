@@ -1,10 +1,12 @@
 import React from 'react';
 
+import { useAppSelector } from '../../store/hooks';
+
 import HierarchyViewHeader from './HierarchyViewHeader';
 import HierarchyViewItem from './HierarchyViewItem';
 import HierarchyViewMainItem from './HierarchyViewMainItem';
+
 import classes from './HierarchyView.module.css';
-import { useAppSelector } from '../../store/hooks';
 
 const HierarchyView: React.FC<{
 	setStatus: (statusCode: number) => string;

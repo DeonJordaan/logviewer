@@ -2,6 +2,7 @@ import React, { useCallback, useMemo } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { subEventActions } from '../../store/subevent-slice';
+
 import classes from './ExpandSubEvents.module.css';
 
 const ExpandSubEvents: React.FC<{

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { collection, getDocs } from 'firebase/firestore';
-import Host from '../types/host';
 import db from './firebase';
+import Host from '../types/host';
 
 interface HostState {
 	hosts: Host[];

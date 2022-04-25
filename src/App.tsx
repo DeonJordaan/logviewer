@@ -2,20 +2,20 @@ import React, { useEffect } from 'react';
 
 import useLocalStorage from 'use-local-storage';
 
-import './App.css';
-
-import Header from './Components/UI/Header';
-import SearchBar from './Components/SearchBar/SearchBar';
-import PaginationControl from './Components/UI/PaginationControl';
-import TaskView from './Components/Tasks/TaskView';
-import HierarchyView from './Components/Hierarchy/HierarchyView';
-import SubEventView from './Components/SubEvents/SubEventView';
-import Footer from './Components/UI/Footer';
-
 import { useAppDispatch } from './store/hooks';
 import { fetchEventData } from './store/event-slice';
 import { fetchAppData } from './store/application-slice';
 import { fetchHostData } from './store/host-slice';
+
+import Header from './Layout/Header';
+import SearchBar from './Components/SearchBar/SearchBar';
+import TaskView from './Components/Tasks/TaskView';
+import PaginationControl from './Components/Pagination/PaginationControl';
+import HierarchyView from './Components/Hierarchy/HierarchyView';
+import SubEventView from './Components/SubEvents/SubEventView';
+import Footer from './Layout/Footer';
+
+import './App.css';
 
 function App() {
 	const defaultDark = window.matchMedia(

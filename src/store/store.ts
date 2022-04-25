@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import eventSlice from './event-slice';
-import paginationSlice from './pagination-slice';
 import subEventSlice from './subevent-slice';
 import appSlice from './application-slice';
 import hostSlice from './host-slice';
+import paginationSlice from './pagination-slice';
 
 const store = configureStore({
 	reducer: {

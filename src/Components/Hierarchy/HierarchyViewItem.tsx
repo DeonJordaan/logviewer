@@ -1,11 +1,12 @@
 import React from 'react';
 
-import { CaretCircleUp } from 'phosphor-react';
+import { useAppDispatch } from '../../store/hooks';
+import { subEventActions } from '../../store/subevent-slice';
 
 import TaskTime from '../Tasks/TaskTime';
-import { subEventActions } from '../../store/subevent-slice';
-import { useAppDispatch } from '../../store/hooks';
+
 import classes from './HierarchyViewItem.module.css';
+import { CaretCircleUp } from 'phosphor-react';
 
 const HierarchyViewItem: React.FC<{
 	subEvents: number;
@@ -16,7 +17,6 @@ const HierarchyViewItem: React.FC<{
 	message: string;
 }> = (props) => {
 	const dispatch = useAppDispatch();
-	// const upArrow = faAngleUp as IconProp;FIXME
 	const id = props.id;
 
 	function setClasses(taskStatus: string) {

@@ -4,7 +4,6 @@
 	border: 0.1rem solid var(--table-border);
 	border-radius: 3px;
 	align-items: center;
-	/* width: 100%; */
 }
 
 /* If any item within the task-item is focused, apply these styles to the element to highlight the selected task*/

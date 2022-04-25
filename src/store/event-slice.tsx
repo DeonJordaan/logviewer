@@ -7,8 +7,8 @@ import {
 	query,
 	where,
 } from 'firebase/firestore';
-import Event from '../types/event';
 import db from './firebase';
+import Event from '../types/event';
 
 interface EventsState {
 	events: Event[];

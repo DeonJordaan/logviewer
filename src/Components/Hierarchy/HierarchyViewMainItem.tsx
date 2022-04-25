@@ -1,7 +1,9 @@
 import React from 'react';
 
-import TaskTime from '../Tasks/TaskTime';
 import { useAppSelector } from '../../store/hooks';
+
+import TaskTime from '../Tasks/TaskTime';
+
 import classes from './HierarchyViewMainItem.module.css';
 
 const HierarchyViewMainItem: React.FC<{
