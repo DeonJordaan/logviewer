@@ -10,7 +10,8 @@
 	text-decoration: none;
 	cursor: pointer;
 	align-content: center;
-	transition: background 250ms ease-in-out, transform 150ms ease;
+	transition: all 250ms;
+	/* transition: background 250ms ease-in-out, transform 150ms ease; */
 	-webkit-appearance: none;
 	-moz-appearance: none;
 }
@@ -18,6 +19,7 @@
 .arrow-button:hover,
 .arrow-button:focus {
 	background-color: var(--table-hover);
+	transition: all 250ms;
 }
 
 .arrow-button:focus {

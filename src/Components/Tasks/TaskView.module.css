@@ -4,6 +4,7 @@
 	min-height: 22rem;
 	overflow-x: auto;
 	color: var(--text-primary);
+	transition: all 250ms;
 }
 
 .task-header {
@@ -13,6 +14,7 @@
 	background-color: var(--table-background);
 	border: 0.1rem solid var(--table-border);
 	border-radius: 3px;
+	transition: all 250ms;
 }
 
 table {
@@ -21,6 +23,7 @@ table {
 	table-layout: auto;
 	width: 100%;
 	border-color: var(--table-border);
+	transition: all 250ms;
 }
 
 @media only screen and (max-width: 760px) {
@@ -32,6 +35,7 @@ table {
 th {
 	background-color: var(--table-background);
 	height: 2.5rem;
+	transition: all 250ms;
 }
 
 tr {
@@ -40,6 +44,7 @@ tr {
 
 tr:hover {
 	background-color: var(--table-hover);
+	transition: all 250ms;
 }
 
 td,

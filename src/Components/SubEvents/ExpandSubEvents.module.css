@@ -13,7 +13,8 @@
 	font-size: 0.75rem;
 	cursor: pointer;
 	text-align: center;
-	transition: background 250ms ease-in-out, transform 150ms ease;
+	transition: all 250ms;
+	/* transition: background 250ms ease-in-out, transform 150ms ease; */
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	width: 100%;
@@ -39,4 +40,5 @@
 	text-align: center;
 	-webkit-appearance: none;
 	-moz-appearance: none;
+	transition: all 250ms;
 }

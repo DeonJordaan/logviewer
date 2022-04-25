@@ -4,6 +4,7 @@
 	padding: 0 1.5rem 0 1.5rem;
 	overflow-x: auto;
 	color: var(--text-primary);
+	transition: all 250ms;
 }
 
 .hierarchy-header {
@@ -13,6 +14,7 @@
 	background-color: var(--table-background);
 	border: 0.1rem solid var(--table-border);
 	border-radius: 3px;
+	transition: all 250ms;
 }
 
 .box {
@@ -22,8 +24,9 @@
 	margin: 0 0.75rem;
 	border-radius: 5px;
 	text-decoration: none;
-	background: var(--table-background);
+	background: var(--background);
 	color: var(--text-primary);
 	font-family: inherit;
 	text-align: center;
+	transition: all 250ms;
 }

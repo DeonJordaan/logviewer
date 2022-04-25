@@ -4,6 +4,7 @@
 	padding: 0 1.5rem 0 1.5rem;
 	overflow-x: auto;
 	color: var(--text-primary);
+	transition: all 250ms;
 }
 
 .sub-event-header {
@@ -13,4 +14,5 @@
 	background-color: var(--table-background);
 	border: 0.1rem solid var(--table-border);
 	border-radius: 3px;
+	transition: all 250ms;
 }

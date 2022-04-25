@@ -7,16 +7,19 @@
 	border-radius: 3px;
 	align-items: center;
 	width: 100%;
+	transition: all 250ms;
 }
 
 td button {
 	background-color: var(--table-background);
 	border: none;
+	transition: all 250ms;
 }
 
 .upArrow {
 	color: var(--text-primary);
 	cursor: pointer;
+	transition: all 250ms;
 }
 
 /* Styling to be applied to the status element based on the task status */

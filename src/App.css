@@ -4,6 +4,7 @@
 	margin: 0 auto;
 	position: absolute;
 	width: 100%;
+	transition: all 250ms;
 }
 
 .display {

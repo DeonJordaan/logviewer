@@ -67,12 +67,11 @@ function App() {
 	const switchTheme = () => {
 		const newTheme = theme === 'light' ? 'dark' : 'light';
 		setTheme(newTheme);
-		console.log(theme);
 	};
 
 	return (
 		<div className="App" data-theme={theme}>
-			<Header switchTheme={switchTheme} />
+			<Header theme={theme} switchTheme={switchTheme} />
 			<div className="display">
 				<SearchBar />
 				<div className={'main-task-display'}>

@@ -4,12 +4,14 @@
 	border: 0.1rem solid var(--table-border);
 	border-radius: 3px;
 	align-items: center;
+	transition: all 250ms;
 }
 
 /* If any item within the task-item is focused, apply these styles to the element to highlight the selected task*/
 .task-item:focus-within {
 	border: 1px solid black;
 	background-color: var(--focus-within-color);
+	transition: all 250ms;
 }
 
 /* Styling to be applied to the status element based on the task status */

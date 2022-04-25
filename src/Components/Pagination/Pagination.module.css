@@ -14,6 +14,7 @@
 	text-decoration: none;
 	line-height: 30px;
 	color: var(--text-primary);
+	transition: all 250ms;
 }
 
 @media only screen and (max-width: 960px) {
@@ -43,11 +44,13 @@
 	transition: background 250ms ease-in-out, transform 150ms ease;
 	-webkit-appearance: none;
 	-moz-appearance: none;
+	transition: all 250ms;
 }
 
 .arrow-button:hover,
 .arrow-button:focus {
 	background-color: var(--table-hover);
+	transition: all 250ms;
 }
 
 .arrow-button:focus {

@@ -1,10 +1,18 @@
-import { LightbulbFilament } from 'phosphor-react';
+import { LightbulbFilament, Moon, SunDim } from 'phosphor-react';
 
 import classes from './Header.module.css';
 
 const Header: React.FC<{
+	theme: string;
 	switchTheme: () => void;
 }> = (props) => {
+	const theme = props.theme;
+	let themeContent = <SunDim onClick={props.switchTheme} size={28} />;
+
+	if (theme === 'light') {
+		themeContent = <Moon onClick={props.switchTheme} size={28} />;
+	}
+
 	return (
 		<header className={classes.header}>
 			<img
@@ -15,7 +23,8 @@ const Header: React.FC<{
 			<div className={classes['header-right']}>
 				<p>Log Viewer</p>
 				<span className={classes.lightbulb}>
-					<LightbulbFilament onClick={props.switchTheme} size={28} />
+					{themeContent}
+					{/* <LightbulbFilament onClick={props.switchTheme} size={28} /> */}
 				</span>
 			</div>
 		</header>

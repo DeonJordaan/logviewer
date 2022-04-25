@@ -31,7 +31,6 @@ const HierarchyView: React.FC<{
 	);
 
 	if (hierarchy.length > 0) {
-		console.log(hierarchy);
 		hierarchyContent = (
 			<tbody>
 				{hierarchy.map((event) => (
