@@ -34,9 +34,9 @@ const subEventSlice = createSlice({
 		SET_FETCH_ID(state, action: PayloadAction<number>) {
 			state.fetchId = action.payload;
 		},
-		SET_SUB_EVENT_PARENT_ID(state, action: PayloadAction<number>) {
-			state.subEventParentId = action.payload;
-		},
+		// SET_SUB_EVENT_PARENT_ID(state, action: PayloadAction<number>) {
+		// 	state.subEventParentId = action.payload;
+		// },
 		SET_SELECTED_SUB_EVENT(state, action: PayloadAction<number | []>) {
 			const { subEvents } = state;
 			const item = subEvents.filter(

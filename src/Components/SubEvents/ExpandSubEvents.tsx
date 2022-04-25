@@ -33,7 +33,7 @@ const ExpandSubEvents: React.FC<{
 
 	// Respond to subevent button click event
 	const clickHandler = useCallback(() => {
-		dispatch(subEventActions.SET_SUB_EVENT_PARENT_ID(id));
+		// dispatch(subEventActions.SET_SUB_EVENT_PARENT_ID(id));
 		dispatch(subEventActions.SET_FETCH_ID(id));
 		dispatch(subEventActions.SET_SELECTED_SUB_EVENT(id));
 		if (!eventIds.includes(id)) {

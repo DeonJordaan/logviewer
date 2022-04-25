@@ -19,6 +19,7 @@ html {
 	--table-border: lightgray;
 	--text-primary: black;
 	--table-hover: rgb(192, 191, 191);
+	--focus-within-color: lightgray;
 }
 
 [data-theme='dark'] {
@@ -27,4 +28,5 @@ html {
 	--table-border: #768390;
 	--text-primary: #adbac7;
 	--table-hover: #4a5460;
+	--focus-within-color: #626d7b;
 }

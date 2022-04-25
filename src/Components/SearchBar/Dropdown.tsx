@@ -65,7 +65,7 @@ const Dropdown: React.FC<{
 		dispatch(subEventActions.RESET_HIERARCHY());
 		dispatch(subEventActions.SET_PARENT_ID(0));
 		dispatch(subEventActions.SET_SELECTED_SUB_EVENT([]));
-		dispatch(subEventActions.SET_SUB_EVENT_PARENT_ID(0));
+		// dispatch(subEventActions.SET_SUB_EVENT_PARENT_ID(0));
 		dispatch(paginationActions.FIRST_PAGE());
 	};
 
