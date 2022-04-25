@@ -1,4 +1,4 @@
-import { LightbulbFilament, Moon, SunDim } from 'phosphor-react';
+import { Moon, SunDim } from 'phosphor-react';
 
 import classes from './Header.module.css';
 
