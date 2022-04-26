@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import eventSlice from '../../store/event-slice';
 
+import { Table, Thead, Tbody, Tr, Td } from 'react-super-responsive-table';
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
+
 import Event from '../../types/event';
 import TaskViewHeader from './TaskViewHeader';
 import TaskViewItem from './TaskViewItem';
@@ -66,16 +69,16 @@ const TaskView: React.FC<{
 	}, [events, eventsByDate, pageNumber]);
 
 	let taskContent = (
-		<tbody>
-			<tr>
-				<td>No event selected</td>
-			</tr>
-		</tbody>
+		<Tbody>
+			<Tr>
+				<Td>No event selected</Td>
+			</Tr>
+		</Tbody>
 	);
 
 	if (displayData) {
 		taskContent = (
-			<tbody>
+			<Tbody>
 				{displayData.map((task: Event) => (
 					<TaskViewItem
 						key={task.Key}
@@ -90,7 +93,7 @@ const TaskView: React.FC<{
 						status={props.setStatus(+task.StatusId)}
 					/>
 				))}
-			</tbody>
+			</Tbody>
 		);
 	}
 
@@ -118,12 +121,12 @@ const TaskView: React.FC<{
 	return (
 		<div className={classes['task-view']}>
 			<h3 className={classes['task-header']}>Event Data</h3>
-			<table>
-				<thead>
+			<Table>
+				<Thead>
 					<TaskViewHeader />
-				</thead>
+				</Thead>
 				<>{taskContent}</>
-			</table>
+			</Table>
 		</div>
 	);
 };
