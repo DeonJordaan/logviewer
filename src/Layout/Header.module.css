@@ -28,7 +28,7 @@
 p {
 	font-size: 1.5rem;
 	color: var(--text-primary);
-	padding-right: 1rem;
+	padding-right: 2rem;
 	transition: all 250ms;
 }
 
