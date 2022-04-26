@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import eventSlice from '../../store/event-slice';
 
-import { Table, Thead, Tbody, Tr, Td } from 'react-super-responsive-table';
+import { Table, Thead, Tbody, Tr, Td, Th } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 
 import Event from '../../types/event';
-import TaskViewHeader from './TaskViewHeader';
+// import TaskViewHeader from './TaskViewHeader';
 import TaskViewItem from './TaskViewItem';
 
 import classes from './TaskView.module.css';
@@ -123,7 +123,18 @@ const TaskView: React.FC<{
 			<h3 className={classes['task-header']}>Event Data</h3>
 			<Table>
 				<Thead>
-					<TaskViewHeader />
+					<Tr className={classes['task-view-header']}>
+						<Th>Host</Th>
+						<Th>Application</Th>
+						<Th>Status</Th>
+						<Th>Task Code</Th>
+						<Th>Started</Th>
+						<Th>Completed</Th>
+						<Th>Sub-Events</Th>
+						<Th>ID</Th>
+						<Th>Message</Th>
+					</Tr>
+					{/* <TaskViewHeader /> */}
 				</Thead>
 				<>{taskContent}</>
 			</Table>
