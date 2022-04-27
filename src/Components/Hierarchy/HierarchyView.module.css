@@ -24,7 +24,12 @@
 	margin: 0 0.75rem;
 	border-radius: 5px;
 	text-decoration: none;
-	background: var(--background);
+	background: linear-gradient(
+		to bottom,
+		var(--table-background) 0%,
+		var(--background) 100%
+	);
+	/* background: var(--background); */
 	color: var(--text-primary);
 	font-family: inherit;
 	text-align: center;

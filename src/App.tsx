@@ -71,9 +71,9 @@ function App() {
 
 	return (
 		<div className="App" data-theme={theme}>
-			<Header theme={theme} switchTheme={switchTheme} />
+			<Header />
 			<div className="display">
-				<SearchBar />
+				<SearchBar theme={theme} switchTheme={switchTheme} />
 				<div className={'main-task-display'}>
 					<TaskView setStatus={setStatusHandler} />
 					<PaginationControl />
