@@ -2,11 +2,11 @@ import React from 'react';
 
 import { useAppDispatch } from '../../store/hooks';
 import { subEventActions } from '../../store/subevent-slice';
+import { CaretCircleUp } from 'phosphor-react';
 
 import TaskTime from '../Tasks/TaskTime';
 
 import classes from './HierarchyViewItem.module.css';
-import { CaretCircleUp } from 'phosphor-react';
 
 const HierarchyViewItem: React.FC<{
 	subEvents: number;

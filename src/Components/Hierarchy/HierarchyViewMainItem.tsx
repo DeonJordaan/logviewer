@@ -27,7 +27,7 @@ const HierarchyViewMainItem: React.FC<{
 						key={task.Key}
 						className={classes['hierarchy-main-item']}
 					>
-						<td>Level</td>
+						<td>Selected Event&nbsp;&#062;&#062;&#062;</td>
 						<td>{props.setStatus(+task.StatusId)}</td>
 						<td>{task.EventCount}</td>
 						<td>

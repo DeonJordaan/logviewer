@@ -40,15 +40,13 @@ const SearchBar: React.FC<{
 			<div className={classes['search__inputs']}>
 				<Dropdown label="Application" />
 				<Dropdown label="Host" />
-				<div className={classes['search-input']}>
+				<div className={classes['search__date']}>
 					<label>Minimum Date</label>
 					<input onChange={dateChangeHandler} type="date"></input>
 				</div>
 				<TotalRecordCount />
 			</div>
-			<div className="theme__switch">
-				<span className={classes.lightbulb}>{themeContent}</span>
-			</div>
+			<>{themeContent}</>
 		</div>
 	);
 };

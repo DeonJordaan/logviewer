@@ -21,17 +21,20 @@
 	align-items: center;
 }
 
-.search-input {
+.search__date {
 	margin: 0 0.25rem;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
-.search-input label {
+.search__date label {
 	margin: 0.25rem 0.25rem;
 }
 
-.search-input input {
+.search__date input {
 	color: var(--text-primary);
-	background-color: linear-gradient(
+	background-image: linear-gradient(
 		to bottom,
 		var(--table-background) 0%,
 		var(--background) 100%
@@ -44,40 +47,6 @@
 	padding: 0.09rem 0;
 }
 
-@media only screen and (max-width: 920px) {
-	.search__bar {
-		flex-wrap: wrap;
-		justify-content: center;
-	}
-
-	.search__bar label,
-	.search-input label {
-		padding: 0.5rem;
-	}
-}
-
-@media only screen and (max-width: 760px) {
-	.search__bar,
-	.search-input {
-		flex-direction: column;
-		flex-wrap: no-wrap;
-	}
-
-	.search__bar label,
-	.search-input label {
-		padding: 0.25rem 0.25rem;
-	}
-}
-
-.lightbulb {
-	/* position: absolute; */
-	/* top: 7.5rem; */
-	/* top: 0.75rem; */
-	/* right: 2.25rem; */
-	/* right: 0.75rem; */
-	color: var(--text-primary);
-}
-
 .theme {
 	display: flex;
 	flex-direction: column;
@@ -85,5 +54,34 @@
 	font-size: 0.5rem;
 	cursor: pointer;
 	transition: all 250ms;
-	padding-right: 0.65rem;
+	padding: 0.65rem 0.65rem;
+	width: min-content;
+}
+
+@media only screen and (max-width: 920px) {
+	.search__inputs,
+	.search__bar,
+	.search__date {
+		flex-direction: column;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+
+	.search__bar label,
+	.search__date label {
+		padding: 0.5rem;
+	}
+}
+
+@media only screen and (max-width: 760px) {
+	.search__inputs,
+	.search__date {
+		flex-direction: column;
+		flex-wrap: no-wrap;
+	}
+
+	.search__bar label,
+	.search__date label {
+		padding: 0.25rem 0.25rem;
+	}
 }
