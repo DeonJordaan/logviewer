@@ -88,13 +88,15 @@ const HierarchyView: React.FC<{
 				<span>running on Host:</span>
 				<span className={classes.box}>{host}</span>
 			</h4>
-			<table>
-				<thead>
-					<HierarchyViewHeader />
-				</thead>
-				<HierarchyViewMainItem setStatus={props.setStatus} />
-				<>{hierarchyContent}</>
-			</table>
+			<div className={classes['table-container']}>
+				<table>
+					<thead>
+						<HierarchyViewHeader />
+					</thead>
+					<HierarchyViewMainItem setStatus={props.setStatus} />
+					<>{hierarchyContent}</>
+				</table>
+			</div>
 		</div>
 	);
 };

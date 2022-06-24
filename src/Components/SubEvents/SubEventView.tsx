@@ -72,12 +72,14 @@ const SubEventView: React.FC<{
 	return (
 		<div className={classes['sub-event-view']}>
 			<h3 className={classes['sub-event-header']}>Event Details</h3>
-			<table>
-				<thead>
-					<SubEventViewHeader />
-				</thead>
-				<>{subEventContent}</>
-			</table>
+			<div className={classes['table-container']}>
+				<table>
+					<thead>
+						<SubEventViewHeader />
+					</thead>
+					<>{subEventContent}</>
+				</table>
+			</div>
 		</div>
 	);
 };

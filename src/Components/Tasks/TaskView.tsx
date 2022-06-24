@@ -118,12 +118,14 @@ const TaskView: React.FC<{
 	return (
 		<div className={classes['task-view']}>
 			<h3 className={classes['task-header']}>Event Data</h3>
-			<table>
-				<thead>
-					<TaskViewHeader />
-				</thead>
-				<>{taskContent}</>
-			</table>
+			<div className={classes['table-container']}>
+				<table>
+					<thead>
+						<TaskViewHeader />
+					</thead>
+					<>{taskContent}</>
+				</table>
+			</div>
 		</div>
 	);
 };

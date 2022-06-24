@@ -16,3 +16,9 @@
 	border-radius: 3px;
 	transition: all 250ms;
 }
+
+.table-container {
+	width: 100%;
+	overflow-x: scroll;
+	overflow-y: hidden;
+}

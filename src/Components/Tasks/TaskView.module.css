@@ -2,7 +2,7 @@
 	margin: 0;
 	padding: 0 1.5rem 0 1.5rem;
 	min-height: 22rem;
-	overflow-x: auto;
+	/* overflow-x: auto; */
 	color: var(--text-primary);
 	transition: all 250ms;
 }
@@ -15,6 +15,12 @@
 	border: 0.1rem solid var(--table-border);
 	border-radius: 3px;
 	transition: all 250ms;
+}
+
+.table-container {
+	width: 100%;
+	overflow-x: scroll;
+	overflow-y: hidden;
 }
 
 table {
