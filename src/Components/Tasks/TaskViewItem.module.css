@@ -1,8 +1,6 @@
 .task-item {
 	font-size: 0.75rem;
 	background-color: var(--table-background);
-	border: 0.1rem solid var(--table-border);
-	border-radius: 3px;
 	align-items: center;
 	transition: all 250ms;
 }

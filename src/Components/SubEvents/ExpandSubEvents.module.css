@@ -3,7 +3,7 @@
 	padding: 0.15rem 0;
 	margin: 0;
 	height: 1.4rem;
-	border-radius: 3px;
+	border-radius: var(--btn-border-radius);
 	border: none;
 	text-decoration: none;
 	background: rgba(17, 153, 17, 0.75);
@@ -31,7 +31,7 @@
 	margin: 0;
 	width: 100%;
 	height: 1.4rem;
-	border-radius: 3px;
+	border-radius: var(--btn-border-radiusborder-radius);
 	text-decoration: none;
 	background: var(--table-background);
 	color: var(--text-primary);

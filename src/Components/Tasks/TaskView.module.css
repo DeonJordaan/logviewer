@@ -2,7 +2,6 @@
 	margin: 0;
 	padding: 0 1.5rem 0 1.5rem;
 	min-height: 22rem;
-	/* overflow-x: auto; */
 	color: var(--text-primary);
 	transition: all 250ms;
 }
@@ -13,22 +12,24 @@
 	padding: 0.25rem 0 0.25rem 1.5rem;
 	background-color: var(--table-background);
 	border: 0.1rem solid var(--table-border);
-	border-radius: 3px;
+	border-radius: var(--border-radius);
 	transition: all 250ms;
 }
 
 .table-container {
+	box-sizing: border-box;
 	width: 100%;
-	overflow-x: scroll;
+	overflow-x: auto;
 	overflow-y: hidden;
+	border: 1px solid var(--table-border);
+	border-radius: var(--border-radius);
 }
 
 table {
 	background-color: var(--table-border);
-	border-radius: 3px;
 	table-layout: auto;
 	width: 100%;
-	border-color: var(--table-border);
+	border-collapse: collapse;
 	transition: all 250ms;
 }
 
@@ -45,6 +46,8 @@ th {
 }
 
 tr {
+	border-color: var(--table-border);
+	background-color: var(--table-background);
 	height: 2rem;
 }
 
@@ -56,6 +59,6 @@ tr:hover {
 td,
 th {
 	border-color: var(--table-border);
-	border-spacing: 0 0.05rem;
 	padding: 3px 5px;
+	border: 1px solid var(--table-border);
 }

@@ -21,6 +21,8 @@ html {
 	--text-primary: black;
 	--table-hover: rgb(192, 191, 191);
 	--focus-within-color: lightgray;
+	--border-radius: 1px;
+	--btn-border-radius: 3px;
 }
 
 [data-theme='dark'] {

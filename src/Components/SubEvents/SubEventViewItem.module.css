@@ -2,8 +2,6 @@
 	font-size: 0.75rem;
 	padding: 0.25rem 0 0.25rem 0;
 	background-color: var(--table-background);
-	border: 0.1rem solid var(--table-border);
-	border-radius: 3px;
 	align-items: center;
 	transition: all 250ms;
 }

@@ -10,7 +10,7 @@
 	object-fit: contain;
 	height: 2rem;
 	width: auto;
-	border-radius: 3px;
+	border-radius: var(--border-radius);
 }
 
 p {

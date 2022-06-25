@@ -4,7 +4,7 @@
 	background-color: var(--table-background);
 	border: none;
 	outline: slategrey solid 1px;
-	border-radius: 3px;
+	border-radius: var(--btn-border-radius);
 	padding: 0.5rem 2rem;
 	margin: 0 0.25rem;
 	text-decoration: none;
