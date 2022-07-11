@@ -80,6 +80,10 @@
 		flex-wrap: no-wrap;
 	}
 
+	.search__bar {
+		padding: 0;
+	}
+
 	.search__bar label,
 	.search__date label {
 		padding: 0.25rem 0.25rem;
